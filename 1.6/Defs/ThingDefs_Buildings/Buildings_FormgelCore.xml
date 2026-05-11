@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef>
+    <defName>FormgelCore</defName>
+    <label>formgel core</label>
+    <thingClass>Building</thingClass>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <repairEffect>Repair</repairEffect>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <passability>Impassable</passability>
+    <blockLight>true</blockLight>
+    <blockWind>true</blockWind>
+    <coversFloor>true</coversFloor>
+    <fillPercent>1</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <graphicData>
+      <texPath>Things/Building/Ship/ShipComputerCore</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <description>A sophisticated device capable of housing a consciousness and projecting it as a formgel avatar. Once a consciousness is installed, the device can manifest the formgel to act in the world. Requires electrical power to operate.</description>
+    <size>(3,3)</size>
+    <designationCategory>Structure</designationCategory>
+    <designationHotKey>Misc4</designationHotKey>
+    <thingCategories>
+      <li>Buildings</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="FormgelCore.CompProps_FormgelSpawner">
+        <!-- Removed SoSHologramMachine reference so this mod can load without Save Our Ship 2. -->
+      </li>
+    </comps>
+    <statBases>
+      <SellPriceFactor>0.70</SellPriceFactor>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>0</Flammability>
+      <Mass>250</Mass>
+    </statBases>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Gold>70</Gold>
+    </costList>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <building>
+      <!-- fillage removed as it's not a valid BuildingProperties field -->
+    </building>
+  </ThingDef>
+</Defs>

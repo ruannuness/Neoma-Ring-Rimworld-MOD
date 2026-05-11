@@ -1,0 +1,11 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\Assemblies\FormgelCore.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\Assemblies\FormgelCore.pdb
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.AssemblyInfoInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.AssemblyInfo.cs
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Assemblies\FormgelCore.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelC.2758CB90.Up2Date
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\FormgelCore\Source\1.6\obj\Debug\FormgelCore.pdb

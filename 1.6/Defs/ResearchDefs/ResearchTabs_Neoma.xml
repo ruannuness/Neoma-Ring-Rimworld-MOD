@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchTabDef>
+    <defName>NeomaProject</defName>
+    <label>Projeto Neoma</label>
+    <description>Pesquisas relacionadas ao Projeto Neoma - invocações de IA avançadas.</description>
+  </ResearchTabDef>
+
+</Defs>

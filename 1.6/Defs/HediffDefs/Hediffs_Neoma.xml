@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Biolock do Anel de Neoma -->
+  <HediffDef>
+    <defName>NeomaBiolock</defName>
+    <label>vinculação biológica</label>
+    <description>Este pawn está biologicamente vinculado ao Anel de Neoma. O anel só funciona com este usuário.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.8, 0.2, 1.0)</defaultLabelColor>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_Immunizable">
+        <severityPerDayNotImmune>-0.1</severityPerDayNotImmune>
+        <immunityPerDayNotSick>0.5</immunityPerDayNotSick>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <label>vinculado</label>
+        <minSeverity>0.1</minSeverity>
+        <painOffset>0</painOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.05</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

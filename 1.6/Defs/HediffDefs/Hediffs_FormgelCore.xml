@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <HediffDef>
+    <defName>FormgelHediff</defName>
+    <label>formgel projection</label>
+    <description>This consciousness has been projected as a formgel avatar. The formgel is a holographic manifestation that can interact with the physical world.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>1.2</MoveSpeed>
+          <WorkSpeedGlobal>1.1</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

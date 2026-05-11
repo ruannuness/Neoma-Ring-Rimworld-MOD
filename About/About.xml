@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Formgel Core</name>
+	<author>Your Name Here</author>
+	<packageId>FormgelCore</packageId>
+	<url></url>
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+	<modDependencies>
+	</modDependencies>
+	<loadAfter>
+		<li>Core</li>
+	</loadAfter>
+	<description>A standalone device for spawning and managing formgel avatars. The Formgel Core allows you to create sophisticated mechanical avatars that can interact with the world.</description>
+</ModMetaData>

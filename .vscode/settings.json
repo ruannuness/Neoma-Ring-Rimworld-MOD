@@ -1,0 +1,11 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "&": true,
+        "x86": true,
+        "Get-Item": true,
+        "Out-Null": true,
+        "ForEach-Object": true,
+        "Test-Path": true,
+        "dotnet build": true
+    }
+}

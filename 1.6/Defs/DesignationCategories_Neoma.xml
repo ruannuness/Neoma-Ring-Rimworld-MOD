@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <DesignationCategoryDef>
+    <defName>Neoma</defName>
+    <label>Projeto Neoma</label>
+    <description>Estruturas relacionadas ao Projeto Neoma.</description>
+    <order>1100</order>
+  </DesignationCategoryDef>
+
+</Defs>

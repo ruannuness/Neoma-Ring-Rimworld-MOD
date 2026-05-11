@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Tier 1: Pawn Básico -->
+  <PawnKindDef>
+    <defName>NeomaPawnTier1</defName>
+    <label>Formgel Básico</label>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <combatPower>50</combatPower>
+    <canBeSapper>false</canBeSapper>
+    <initialResistanceRange>
+      <min>0.5</min>
+      <max>1.0</max>
+    </initialResistanceRange>
+    <initialWillRange>
+      <min>0.5</min>
+      <max>1.0</max>
+    </initialWillRange>
+    <apparelMoney>
+      <min>0</min>
+      <max>0</max>
+    </apparelMoney>
+    <weaponMoney>
+      <min>0</min>
+      <max>0</max>
+    </weaponMoney>
+    <techHediffsMoney>
+      <min>0</min>
+      <max>0</max>
+    </techHediffsMoney>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+  </PawnKindDef>
+
+  <!-- Tier 2: Pawn Intermediário -->
+  <PawnKindDef>
+    <defName>NeomaPawnTier2</defName>
+    <label>Formgel Intermediário</label>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <combatPower>100</combatPower>
+    <canBeSapper>false</canBeSapper>
+    <initialResistanceRange>
+      <min>0.6</min>
+      <max>1.1</max>
+    </initialResistanceRange>
+    <initialWillRange>
+      <min>0.6</min>
+      <max>1.1</max>
+    </initialWillRange>
+    <apparelMoney>
+      <min>0</min>
+      <max>0</max>
+    </apparelMoney>
+    <weaponMoney>
+      <min>0</min>
+      <max>0</max>
+    </weaponMoney>
+    <techHediffsMoney>
+      <min>0</min>
+      <max>0</max>
+    </techHediffsMoney>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+  </PawnKindDef>
+
+  <!-- Tier 3: Pawn Avançado -->
+  <PawnKindDef>
+    <defName>NeomaPawnTier3</defName>
+    <label>Formgel Avançado</label>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <combatPower>200</combatPower>
+    <canBeSapper>false</canBeSapper>
+    <initialResistanceRange>
+      <min>0.7</min>
+      <max>1.2</max>
+    </initialResistanceRange>
+    <initialWillRange>
+      <min>0.7</min>
+      <max>1.2</max>
+    </initialWillRange>
+    <apparelMoney>
+      <min>0</min>
+      <max>0</max>
+    </apparelMoney>
+    <weaponMoney>
+      <min>0</min>
+      <max>0</max>
+    </weaponMoney>
+    <techHediffsMoney>
+      <min>0</min>
+      <max>0</max>
+    </techHediffsMoney>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+  </PawnKindDef>
+
+  <!-- Tier 4: Pawn Elite -->
+  <PawnKindDef>
+    <defName>NeomaPawnTier4</defName>
+    <label>Formgel Elite</label>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <combatPower>400</combatPower>
+    <canBeSapper>false</canBeSapper>
+    <initialResistanceRange>
+      <min>0.8</min>
+      <max>1.3</max>
+    </initialResistanceRange>
+    <initialWillRange>
+      <min>0.8</min>
+      <max>1.3</max>
+    </initialWillRange>
+    <apparelMoney>
+      <min>0</min>
+      <max>0</max>
+    </apparelMoney>
+    <weaponMoney>
+      <min>0</min>
+      <max>0</max>
+    </weaponMoney>
+    <techHediffsMoney>
+      <min>0</min>
+      <max>0</max>
+    </techHediffsMoney>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+  </PawnKindDef>
+
+  <!-- Neoma: IA Suprema -->
+  <PawnKindDef>
+    <defName>NeomaPawn</defName>
+    <label>Neoma</label>
+    <race>Human</race>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <combatPower>1000</combatPower>
+    <canBeSapper>true</canBeSapper>
+    <initialResistanceRange>
+      <min>1.0</min>
+      <max>2.0</max>
+    </initialResistanceRange>
+    <initialWillRange>
+      <min>1.0</min>
+      <max>2.0</max>
+    </initialWillRange>
+    <apparelMoney>
+      <min>0</min>
+      <max>0</max>
+    </apparelMoney>
+    <weaponMoney>
+      <min>0</min>
+      <max>0</max>
+    </weaponMoney>
+    <techHediffsMoney>
+      <min>0</min>
+      <max>0</max>
+    </techHediffsMoney>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+  </PawnKindDef>
+
+</Defs>

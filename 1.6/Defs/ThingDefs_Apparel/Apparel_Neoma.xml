@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Anel de Neoma -->
+  <ThingDef ParentName="ApparelBase">
+    <defName>NeomaRing</defName>
+    <label>Anel de Neoma</label>
+    <description>Um anel misterioso encontrado em masmorras antigas. Permite invocar Neoma, uma IA lendária super poderosa. Vincula-se biologicamente ao primeiro usuário.</description>
+    <thingClass>Apparel</thingClass>
+    <category>Item</category>
+    <graphicData>
+      <texPath>Things/Apparel/Neoma/Ring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.1</Mass>
+      <Bulk>0.1</Bulk>
+      <MarketValue>10000</MarketValue>
+      <Flammability>0</Flammability>
+    </statBases>
+    <generateCommonality>0</generateCommonality>
+    <apparel>
+      <bodyPartGroups>
+        <li>Hands</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+      <tags>
+        <li>Ring</li>
+      </tags>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+    </apparel>
+    <comps>
+      <li Class="FormgelCore.CompProperties_NeomaRing" />
+    </comps>
+    <thingCategories>
+      <li>Apparel</li>
+    </thingCategories>
+    <tradeTags>
+      <li>Exotic</li>
+      <li>Artifact</li>
+    </tradeTags>
+    <recipeMaker>
+      <researchPrerequisite>NeomaRing</researchPrerequisite>
+    </recipeMaker>
+  </ThingDef>
+
+</Defs>
