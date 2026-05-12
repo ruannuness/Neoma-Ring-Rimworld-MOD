@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{B8EFCA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.6", "1.6", "{4FC5A2AD-9C85-64B2-67A8-85F515BB8EB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormgelCore", "Source\1.6\FormgelCore.csproj", "{02370CB8-1D15-FD65-976E-5B5C444D046D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntheraCore", "Source\1.6\SyntheraCore.csproj", "{02370CB8-1D15-FD65-976E-5B5C444D046D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

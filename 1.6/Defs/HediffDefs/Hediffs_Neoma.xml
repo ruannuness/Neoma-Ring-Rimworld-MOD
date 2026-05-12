@@ -4,8 +4,8 @@
   <!-- Biolock do Anel de Neoma -->
   <HediffDef>
     <defName>NeomaBiolock</defName>
-    <label>vinculação biológica</label>
-    <description>Este pawn está biologicamente vinculado ao Anel de Neoma. O anel só funciona com este usuário.</description>
+    <label>SyntheraCore_NeomaBiolock_Label</label>
+    <description>SyntheraCore_NeomaBiolock_Description</description>
     <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(0.8, 0.2, 1.0)</defaultLabelColor>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -18,7 +18,7 @@
     </comps>
     <stages>
       <li>
-        <label>vinculado</label>
+        <label>SyntheraCore_NeomaBiolock_StageLabel</label>
         <minSeverity>0.1</minSeverity>
         <painOffset>0</painOffset>
         <capMods>

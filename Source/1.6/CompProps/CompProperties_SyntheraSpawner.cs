@@ -13,6 +13,8 @@ namespace FormgelCore
 		public float spawnIntervalDays = 1f;
 		public int maxPawnsToSpawn = 1;
 		public SoundDef spawnSound;
+        public int respawnTicks = 60000;
+        public float explosionRadius = 4.9f;
 
 		public CompProperties_FormgelSpawner()
 		{

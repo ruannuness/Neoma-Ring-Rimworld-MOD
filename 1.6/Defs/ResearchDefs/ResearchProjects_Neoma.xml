@@ -4,8 +4,8 @@
   <!-- Tier 1: Altar Básico -->
   <ResearchProjectDef>
     <defName>NeomaTier1</defName>
-    <label>Invocação Básica</label>
-    <description>Pesquisa básica sobre invocação de entidades artificiais. Permite construir o Altar Básico.</description>
+    <label>SyntheraCore_NeomaTier1_Label</label>
+    <description>SyntheraCore_NeomaTier1_Description</description>
     <baseCost>500</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
@@ -17,8 +17,8 @@
   <!-- Tier 2: Altar Intermediário -->
   <ResearchProjectDef>
     <defName>NeomaTier2</defName>
-    <label>Invocação Intermediária</label>
-    <description>Técnicas avançadas de invocação. Permite construir o Altar Intermediário.</description>
+    <label>SyntheraCore_NeomaTier2_Label</label>
+    <description>SyntheraCore_NeomaTier2_Description</description>
     <baseCost>1000</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
@@ -33,8 +33,8 @@
   <!-- Tier 3: Estrutura Avançada -->
   <ResearchProjectDef>
     <defName>NeomaTier3</defName>
-    <label>Invocação Avançada</label>
-    <description>Invocação de entidades poderosas. Permite construir a Estrutura Avançada.</description>
+    <label>SyntheraCore_NeomaTier3_Label</label>
+    <description>SyntheraCore_NeomaTier3_Description</description>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
@@ -49,8 +49,8 @@
   <!-- Tier 4: Estrutura Elite -->
   <ResearchProjectDef>
     <defName>NeomaTier4</defName>
-    <label>Invocação Elite</label>
-    <description>Técnicas de invocação de ponta. Permite construir a Estrutura Elite.</description>
+    <label>SyntheraCore_NeomaTier4_Label</label>
+    <description>SyntheraCore_NeomaTier4_Description</description>
     <baseCost>4000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
@@ -64,9 +64,9 @@
 
   <!-- Anel: Projeto Neoma Final -->
   <ResearchProjectDef>
-    <defName>NeomaRing</defName>
-    <label>Projeto Neoma</label>
-    <description>O ápice da pesquisa em invocação. Permite encontrar e utilizar o Anel de Neoma.</description>
+    <defName>NeomaRingResearch</defName>
+    <label>SyntheraCore_NeomaRing_ResearchLabel</label>
+    <description>SyntheraCore_NeomaRing_ResearchDescription</description>
     <baseCost>8000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>

@@ -3,8 +3,8 @@
 
   <ResearchTabDef>
     <defName>NeomaProject</defName>
-    <label>Projeto Neoma</label>
-    <description>Pesquisas relacionadas ao Projeto Neoma - invocações de IA avançadas.</description>
+    <label>SyntheraCore_NeomaProjectTab_Label</label>
+    <description>SyntheraCore_NeomaProjectTab_Description</description>
   </ResearchTabDef>
 
 </Defs>

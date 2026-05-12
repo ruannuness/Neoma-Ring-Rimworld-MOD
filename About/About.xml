@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Formgel Core</name>
-	<author>Your Name Here</author>
-	<packageId>FormgelCore</packageId>
+	<name>Synthera Core</name>
+	<author>StargazeR</author>
+	<packageId>StargazeR.SyntheraCore</packageId>
 	<url></url>
 	<supportedVersions>
 		<li>1.6</li>
@@ -12,5 +12,5 @@
 	<loadAfter>
 		<li>Core</li>
 	</loadAfter>
-	<description>A standalone device for spawning and managing formgel avatars. The Formgel Core allows you to create sophisticated mechanical avatars that can interact with the world.</description>
+	<description>A standalone device for spawning and managing synthera avatars. The Synthera Core allows you to create sophisticated mechanical avatars that can interact with the world.</description>
 </ModMetaData>

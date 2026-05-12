@@ -4,7 +4,7 @@
   <!-- Tier 1: Pawn Básico -->
   <PawnKindDef>
     <defName>NeomaPawnTier1</defName>
-    <label>Formgel Básico</label>
+    <label>SyntheraCore_NeomaPawnTier1_Label</label>
     <race>Human</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>50</combatPower>
@@ -37,7 +37,7 @@
   <!-- Tier 2: Pawn Intermediário -->
   <PawnKindDef>
     <defName>NeomaPawnTier2</defName>
-    <label>Formgel Intermediário</label>
+    <label>SyntheraCore_NeomaPawnTier2_Label</label>
     <race>Human</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>100</combatPower>
@@ -70,7 +70,7 @@
   <!-- Tier 3: Pawn Avançado -->
   <PawnKindDef>
     <defName>NeomaPawnTier3</defName>
-    <label>Formgel Avançado</label>
+    <label>SyntheraCore_NeomaPawnTier3_Label</label>
     <race>Human</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>200</combatPower>
@@ -103,7 +103,7 @@
   <!-- Tier 4: Pawn Elite -->
   <PawnKindDef>
     <defName>NeomaPawnTier4</defName>
-    <label>Formgel Elite</label>
+    <label>SyntheraCore_NeomaPawnTier4_Label</label>
     <race>Human</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>400</combatPower>
@@ -136,7 +136,7 @@
   <!-- Neoma: IA Suprema -->
   <PawnKindDef>
     <defName>NeomaPawn</defName>
-    <label>Neoma</label>
+    <label>SyntheraCore_NeomaPawn_Label</label>
     <race>Human</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>1000</combatPower>

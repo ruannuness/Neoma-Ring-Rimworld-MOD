@@ -4,8 +4,8 @@
   <!-- Anel de Neoma -->
   <ThingDef ParentName="ApparelBase">
     <defName>NeomaRing</defName>
-    <label>Anel de Neoma</label>
-    <description>Um anel misterioso encontrado em masmorras antigas. Permite invocar Neoma, uma IA lendária super poderosa. Vincula-se biologicamente ao primeiro usuário.</description>
+    <label>SyntheraCore_NeomaRing_Label</label>
+    <description>SyntheraCore_NeomaRing_Description</description>
     <thingClass>Apparel</thingClass>
     <category>Item</category>
     <graphicData>
@@ -37,7 +37,9 @@
       </defaultOutfitTags>
     </apparel>
     <comps>
-      <li Class="FormgelCore.CompProperties_NeomaRing" />
+      <li Class="SyntheraCore.CompProperties_NeomaRing">
+        <pawnKind>NeomaPawn</pawnKind>
+      </li>
     </comps>
     <thingCategories>
       <li>Apparel</li>
@@ -47,7 +49,7 @@
       <li>Artifact</li>
     </tradeTags>
     <recipeMaker>
-      <researchPrerequisite>NeomaRing</researchPrerequisite>
+      <researchPrerequisite>NeomaRingResearch</researchPrerequisite>
     </recipeMaker>
   </ThingDef>
 

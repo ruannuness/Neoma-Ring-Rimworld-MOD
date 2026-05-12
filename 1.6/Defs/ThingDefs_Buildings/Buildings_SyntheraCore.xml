@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <ThingDef>
-    <defName>FormgelCore</defName>
-    <label>formgel core</label>
+    <defName>SyntheraCore</defName>
+    <label>SyntheraCore_SyntheraCoreBuilding_Label</label>
     <thingClass>Building</thingClass>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <category>Building</category>
@@ -24,7 +24,7 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(3,3)</drawSize>
     </graphicData>
-    <description>A sophisticated device capable of housing a consciousness and projecting it as a formgel avatar. Once a consciousness is installed, the device can manifest the formgel to act in the world. Requires electrical power to operate.</description>
+    <description>A sophisticated device capable of housing a consciousness and projecting it as a synthera avatar. Once a consciousness is installed, the device can manifest the synthera to act in the world. Requires electrical power to operate.</description>
     <size>(3,3)</size>
     <designationCategory>Structure</designationCategory>
     <designationHotKey>Misc4</designationHotKey>
@@ -38,7 +38,7 @@
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="CompProperties_Flickable"/>
-      <li Class="FormgelCore.CompProps_FormgelSpawner">
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <!-- Removed SoSHologramMachine reference so this mod can load without Save Our Ship 2. -->
       </li>
     </comps>

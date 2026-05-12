@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Neoma Ring -->
+  <SyntheraCore_NeomaRing_Label>Neoma's Ring</SyntheraCore_NeomaRing_Label>
+  <SyntheraCore_NeomaRing_Description>A mysterious ring found in ancient dungeons. It allows the summoning of Neoma, a legendary and super-powerful AI. It biologically links to the first user.</SyntheraCore_NeomaRing_Description>
+  <SyntheraCore_NeomaRing_StatusMessage>Neoma has been summoned by the Neoma Ring!</SyntheraCore_NeomaRing_StatusMessage>
+  <SyntheraCore_NeomaRing_GizmoLabel>Ring Status</SyntheraCore_NeomaRing_GizmoLabel>
+  <SyntheraCore_NeomaRing_GizmoDescription>Check the status of the ring.</SyntheraCore_NeomaRing_GizmoDescription>
+  <SyntheraCore_NeomaRing_GizmoActiveMessage>Neoma Ring - Neoma is currently active.</SyntheraCore_NeomaRing_GizmoActiveMessage>
+
+  <!-- Neoma Biolock Hediff -->
+  <SyntheraCore_NeomaBiolock_Label>biological link</SyntheraCore_NeomaBiolock_Label>
+  <SyntheraCore_NeomaBiolock_Description>This pawn is biologically linked to the Neoma Ring. The ring will only work for this user.</SyntheraCore_NeomaBiolock_Description>
+  <SyntheraCore_NeomaBiolock_StageLabel>linked</SyntheraCore_NeomaBiolock_StageLabel>
+  
+  <!-- Buildings -->
+  <SyntheraCore_SyntheraCoreBuilding_Label>Synthera Core</SyntheraCore_SyntheraCoreBuilding_Label>
+  <SyntheraCore_NeomaAltarTier1_Label>Basic Summoning Altar</SyntheraCore_NeomaAltarTier1_Label>
+  <SyntheraCore_NeomaAltarTier1_Description>A rudimentary altar capable of summoning basic artificial entities. It consumes a lot of power and generates extreme heat.</SyntheraCore_NeomaAltarTier1_Description>
+  <SyntheraCore_NeomaAltarTier2_Label>Intermediate Summoning Altar</SyntheraCore_NeomaAltarTier2_Label>
+  <SyntheraCore_NeomaAltarTier2_Description>An improved altar capable of summoning more competent artificial entities for longer periods.</SyntheraCore_NeomaAltarTier2_Description>
+  <SyntheraCore_NeomaAltarTier3_Label>Advanced Summoning Structure</SyntheraCore_NeomaAltarTier3_Label>
+  <SyntheraCore_NeomaAltarTier3_Description>An advanced technological structure capable of summoning powerful artificial entities for days.</SyntheraCore_NeomaAltarTier3_Description>
+  <SyntheraCore_NeomaAltarTier4_Label>Elite Summoning Structure</SyntheraCore_NeomaAltarTier4_Label>
+  <SyntheraCore_NeomaAltarTier4_Description>An elite structure capable of summoning supreme artificial entities permanently.</SyntheraCore_NeomaAltarTier4_Description>
+
+  <!-- Pawn Kinds -->
+  <SyntheraCore_NeomaPawnTier1_Label>Basic Synthera</SyntheraCore_NeomaPawnTier1_Label>
+  <SyntheraCore_NeomaPawnTier2_Label>Intermediate Synthera</SyntheraCore_NeomaPawnTier2_Label>
+  <SyntheraCore_NeomaPawnTier3_Label>Advanced Synthera</SyntheraCore_NeomaPawnTier3_Label>
+  <SyntheraCore_NeomaPawnTier4_Label>Elite Synthera</SyntheraCore_NeomaPawnTier4_Label>
+  <SyntheraCore_NeomaPawn_Label>Neoma</SyntheraCore_NeomaPawn_Label>
+  
+  <!-- Research -->
+  <SyntheraCore_NeomaTier1_Label>Basic Summoning</SyntheraCore_NeomaTier1_Label>
+  <SyntheraCore_NeomaTier1_Description>Basic research on summoning artificial entities. Allows the construction of the Basic Altar.</SyntheraCore_NeomaTier1_Description>
+  <SyntheraCore_NeomaTier2_Label>Intermediate Summoning</SyntheraCore_NeomaTier2_Label>
+  <SyntheraCore_NeomaTier2_Description>Advanced summoning techniques. Allows the construction of the Intermediate Altar.</SyntheraCore_NeomaTier2_Description>
+  <SyntheraCore_NeomaTier3_Label>Advanced Summoning</SyntheraCore_NeomaTier3_Label>
+  <SyntheraCore_NeomaTier3_Description>Summoning of powerful entities. Allows the construction of the Advanced Structure.</SyntheraCore_NeomaTier3_Description>
+  <SyntheraCore_NeomaTier4_Label>Elite Summoning</SyntheraCore_NeomaTier4_Label>
+  <SyntheraCore_NeomaTier4_Description>Cutting-edge summoning techniques. Allows the construction of the Elite Structure.</SyntheraCore_NeomaTier4_Description>
+  <SyntheraCore_NeomaRing_ResearchLabel>Neoma Project</SyntheraCore_NeomaRing_ResearchLabel>
+  <SyntheraCore_NeomaRing_ResearchDescription>The pinnacle of summoning research. Allows finding and using the Neoma Ring.</SyntheraCore_NeomaRing_ResearchDescription>
+
+  <!-- Research Tab -->
+  <SyntheraCore_NeomaProjectTab_Label>Neoma Project</SyntheraCore_NeomaProjectTab_Label>
+  <SyntheraCore_NeomaProjectTab_Description>Research related to the Neoma Project - advanced AI summons.</SyntheraCore_NeomaProjectTab_Description>
+  
+  <!-- Designation Category -->
+  <SyntheraCore_NeomaDesignationCategory_Label>Neoma Project</SyntheraCore_NeomaDesignationCategory_Label>
+  <SyntheraCore_NeomaDesignationCategory_Description>Structures related to the Neoma Project.</SyntheraCore_NeomaDesignationCategory_Description>
+  
+</LanguageData>

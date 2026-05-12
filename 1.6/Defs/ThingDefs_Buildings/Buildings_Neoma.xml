@@ -4,8 +4,8 @@
   <!-- Tier 1: Altar Básico -->
   <ThingDef ParentName="BuildingBase">
     <defName>NeomaAltarTier1</defName>
-    <label>Altar Básico de Invocação</label>
-    <description>Um altar rudimentar capaz de invocar entidades artificiais básicas. Consome muita energia e gera calor extremo.</description>
+    <label>SyntheraCore_NeomaAltarTier1_Label</label>
+    <description>SyntheraCore_NeomaAltarTier1_Description</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <tickerType>Normal</tickerType>
@@ -41,7 +41,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>2000</basePowerConsumption>
       </li>
-      <li Class="FormgelCore.CompProperties_FormgelSpawner">
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTier1</pawnKind>
         <spawnIntervalDays>0.08</spawnIntervalDays> <!-- ~2 horas -->
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
@@ -51,7 +51,7 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>50</heatPerSecond>
       </li>
-      <li Class="FormgelCore.CompProperties_HeatRisk">
+      <li Class="SyntheraCore.CompProperties_HeatRisk">
         <explosionDamage>50</explosionDamage>
         <explosionRadius>3</explosionRadius>
         <heatThreshold>40</heatThreshold>
@@ -68,8 +68,8 @@
   <!-- Tier 2: Altar Intermediário -->
   <ThingDef ParentName="BuildingBase">
     <defName>NeomaAltarTier2</defName>
-    <label>Altar Intermediário de Invocação</label>
-    <description>Um altar aprimorado capaz de invocar entidades artificiais mais competentes por períodos maiores.</description>
+    <label>SyntheraCore_NeomaAltarTier2_Label</label>
+    <description>SyntheraCore_NeomaAltarTier2_Description</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <graphicData>
@@ -105,7 +105,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>1000</basePowerConsumption>
       </li>
-      <li Class="FormgelCore.CompProperties_FormgelSpawner">
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTier2</pawnKind>
         <spawnIntervalDays>0.33</spawnIntervalDays> <!-- ~8 horas -->
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
@@ -114,6 +114,12 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>20</heatPerSecond>
+      </li>
+      <li Class="SyntheraCore.CompProperties_HeatRisk">
+        <explosionDamage>50</explosionDamage>
+        <explosionRadius>3</explosionRadius>
+        <heatThreshold>40</heatThreshold>
+        <explosionChancePerHour>0.1</explosionChancePerHour>
       </li>
     </comps>
     <size>(2,2)</size>
@@ -126,8 +132,8 @@
   <!-- Tier 3: Estrutura Avançada -->
   <ThingDef ParentName="BuildingBase">
     <defName>NeomaAltarTier3</defName>
-    <label>Estrutura Avançada de Invocação</label>
-    <description>Uma estrutura tecnológica avançada capaz de invocar entidades artificiais poderosas por dias.</description>
+    <label>SyntheraCore_NeomaAltarTier3_Label</label>
+    <description>SyntheraCore_NeomaAltarTier3_Description</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <graphicData>
@@ -164,7 +170,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>500</basePowerConsumption>
       </li>
-      <li Class="FormgelCore.CompProperties_FormgelSpawner">
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTier3</pawnKind>
         <spawnIntervalDays>3</spawnIntervalDays> <!-- 3 dias -->
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
@@ -173,6 +179,12 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
+      </li>
+      <li Class="SyntheraCore.CompProperties_HeatRisk">
+        <explosionDamage>50</explosionDamage>
+        <explosionRadius>3</explosionRadius>
+        <heatThreshold>40</heatThreshold>
+        <explosionChancePerHour>0.1</explosionChancePerHour>
       </li>
     </comps>
     <size>(3,3)</size>
@@ -185,8 +197,8 @@
   <!-- Tier 4: Estrutura Elite -->
   <ThingDef ParentName="BuildingBase">
     <defName>NeomaAltarTier4</defName>
-    <label>Estrutura Elite de Invocação</label>
-    <description>Uma estrutura de elite capaz de invocar entidades artificiais supremas permanentemente.</description>
+    <label>SyntheraCore_NeomaAltarTier4_Label</label>
+    <description>SyntheraCore_NeomaAltarTier4_Description</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <graphicData>
@@ -223,7 +235,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
-      <li Class="FormgelCore.CompProperties_FormgelSpawner">
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTier4</pawnKind>
         <spawnIntervalDays>30</spawnIntervalDays> <!-- ~1 mês (permanente) -->
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
@@ -232,6 +244,12 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
+      </li>
+      <li class="SyntheraCore.CompProperties_HeatRisk">
+        <explosionDamage>50</explosionDamage>
+        <explosionRadius>3</explosionRadius>
+        <heatThreshold>40</heatThreshold>
+        <explosionChancePerHour>0.1</explosionChancePerHour>
       </li>
     </comps>
     <size>(3,3)</size>

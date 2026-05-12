@@ -18,7 +18,7 @@ namespace FormgelCore
         {
             base.CompTick();
 
-            if (!parent.Spawned || Find.TickManager.TicksGame - lastHeatCheckTick < CHECK_INTERVAL)
+            if (!parent.Spawned || Find.TickManager.TicksGame - lastHeatCheckTick < Props.checkInterval)
                 return;
 
             lastHeatCheckTick = Find.TickManager.TicksGame;
@@ -30,7 +30,7 @@ namespace FormgelCore
             {
                 // Calculate explosion chance based on temperature difference
                 float tempDifference = ambientTemp - Props.heatThreshold;
-                float explosionChance = Props.explosionChancePerHour * (1f + tempDifference / 10f); // Higher temp = higher chance
+                float explosionChance = Props.explosionChancePerHour * (1f + tempDifference / Props.explosionChanceMultiplier); // Higher temp = higher chance
 
                 if (Rand.Value < explosionChance)
                 {
@@ -77,7 +77,7 @@ namespace FormgelCore
             if (ambientTemp >= Props.heatThreshold)
             {
                 float tempDifference = ambientTemp - Props.heatThreshold;
-                float explosionChance = Props.explosionChancePerHour * (1f + tempDifference / 10f);
+                float explosionChance = Props.explosionChancePerHour * (1f + tempDifference / Props.explosionChanceMultiplier);
                 return $"Heat risk: {explosionChance.ToStringPercent()} chance/hour";
             }
 

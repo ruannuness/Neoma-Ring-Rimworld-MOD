@@ -13,6 +13,8 @@ namespace FormgelCore
         public float explosionRadius = 3f;
         public float heatThreshold = 40f;
         public float explosionChancePerHour = 0.1f;
+        public int checkInterval = 2500;
+        public float explosionChanceMultiplier = 10f;
 
         public CompProperties_HeatRisk()
         {

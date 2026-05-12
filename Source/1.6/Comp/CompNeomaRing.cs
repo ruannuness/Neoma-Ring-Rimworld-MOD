@@ -11,24 +11,45 @@ namespace FormgelCore
     public class CompNeomaRing : ThingComp
     {
         public CompProperties_NeomaRing Props => (CompProperties_NeomaRing)props;
-        private bool neomaSpawned = false;
+        private Pawn neomaPawn;
+
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_References.Look<Pawn>(ref neomaPawn, "neomaPawn");
+        }
 
         public override void Notify_Equipped(Pawn pawn)
         {
             base.Notify_Equipped(pawn);
-            if (!neomaSpawned)
+            if (neomaPawn == null || neomaPawn.Dead || neomaPawn.Destroyed)
             {
                 SpawnNeoma(pawn);
-                neomaSpawned = true;
+            }
+            Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("NeomaBiolock"));
+            if (hediff == null)
+            {
+                pawn.health.AddHediff(HediffDef.Named("NeomaBiolock"));
+            }
+        }
+
+        public override void Notify_Unequipped(Pawn pawn)
+        {
+            base.Notify_Unequipped(pawn);
+            DespawnNeoma();
+            Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("NeomaBiolock"));
+            if (hediff != null)
+            {
+                pawn.health.RemoveHediff(hediff);
             }
         }
 
         private void SpawnNeoma(Pawn wearer)
         {
-            PawnKindDef neomaKind = DefDatabase<PawnKindDef>.GetNamed("NeomaPawn", false);
+            PawnKindDef neomaKind = DefDatabase<PawnKindDef>.GetNamed(Props.pawnKind, false);
             if (neomaKind == null)
             {
-                Log.Error("NeomaPawn not found!");
+                Log.Error($"FormgelCore: Could not find PawnKindDef named {Props.pawnKind}");
                 return;
             }
 
@@ -58,47 +79,44 @@ namespace FormgelCore
                 neoma.story.traits.allTraits.RemoveLast();
             }
             
-            // Remove needs
-            if (neoma.needs != null)
-            {
-                var allNeeds = neoma.needs.AllNeeds.ToList();
-                foreach (Need need in allNeeds)
-                {
-                    neoma.needs.AllNeeds.Remove(need);
-                }
-            }
-            
-            // Add consciousness hediff
-            var hediffDef = DefDatabase<HediffDef>.GetNamed("FormgelConsciousness", false);
-            if (hediffDef != null)
-            {
-                neoma.health.AddHediff(hediffDef);
-            }
+            FormgelUtils.SetupPawn(neoma);
             
             // Spawn near wearer
             GenPlace.TryPlaceThing(neoma, wearer.Position, wearer.Map, ThingPlaceMode.Near);
-            
+            neomaPawn = neoma;
+
             // Sound and effect
             SoundDefOf.PsychicPulseGlobal.PlayOneShotOnCamera(wearer.Map);
             FleckMaker.Static(wearer.Position, wearer.Map, FleckDefOf.PsycastAreaEffect, 5f);
             
-            Messages.Message("Neoma foi invocada pelo Anel de Neoma!", MessageTypeDefOf.PositiveEvent);
+            Messages.Message("Neoma has been summoned by the Neoma Ring!", MessageTypeDefOf.PositiveEvent);
+        }
+
+        private void DespawnNeoma()
+        {
+            if (neomaPawn != null && neomaPawn.Spawned)
+            {
+                neomaPawn.DeSpawn();
+            }
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            List<Gizmo> gizmos = new List<Gizmo>();
-            gizmos.AddRange(base.CompGetGizmosExtra());
-
-            gizmos.Add(new Command_Action
+            foreach (Gizmo g in base.CompGetGizmosExtra())
             {
-                action = () => Messages.Message("Anel de Neoma - Neoma já foi invocada!", MessageTypeDefOf.NeutralEvent),
-                defaultLabel = "Status Anel",
-                defaultDesc = "Verificar status do anel",
-                icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
-            });
+                yield return g;
+            }
 
-            return gizmos;
+            if (neomaPawn != null)
+            {
+                yield return new Command_Action
+                {
+                    action = () => Messages.Message("Neoma Ring - Neoma is currently active.", MessageTypeDefOf.NeutralEvent),
+                    defaultLabel = "Ring Status",
+                    defaultDesc = "Check the status of the ring.",
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                };
+            }
         }
     }
 }

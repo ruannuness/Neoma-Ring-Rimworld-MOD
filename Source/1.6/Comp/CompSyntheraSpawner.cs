@@ -15,7 +15,6 @@ namespace FormgelCore
         public Color FormgelColor;
         public CompProperties_FormgelSpawner Props => (CompProperties_FormgelSpawner)props;
         public int RespawnTick = 0;
-        public string DeviceName = "Formgel Core";
 
         public static Color[] colors = new Color[] 
         { 
@@ -33,7 +32,7 @@ namespace FormgelCore
         private bool SavedDeep = false;
         private CompPowerTrader compPower;
 
-        // Propriedade que faltava para corrigir o erro !HasPower
+        // Property that was missing to fix the !HasPower error
         public bool HasPower => compPower != null && compPower.PowerOn;
 
         public override void PostExposeData()
@@ -66,13 +65,16 @@ namespace FormgelCore
             }
             Scribe_Values.Look<Color>(ref FormgelColor, "FormgelColor");
             Scribe_Values.Look<int>(ref RespawnTick, "RespawnTick");
-            Scribe_Values.Look<string>(ref DeviceName, "DeviceName");
         }
 
         public void GenerateFormgelPawn()
         {
-            int tier = GetBuildingTier();
-            PawnKindDef pawnKind = GetPawnKindForTier(tier);
+            PawnKindDef pawnKind = DefDatabase<PawnKindDef>.GetNamed(Props.pawnKind, false);
+            if (pawnKind == null)
+            {
+                Log.Error($"FormgelCore: Could not find PawnKindDef named {Props.pawnKind}");
+                return;
+            }
 
             PawnGenerationRequest req = new PawnGenerationRequest(
                 pawnKind, 
@@ -89,9 +91,9 @@ namespace FormgelCore
             );
             
             Pawn p = PawnGenerator.GeneratePawn(req);
-            p.Name = new NameTriple("", GetDeviceNameForTier(tier), "");
+            p.Name = new NameTriple("", pawnKind.label, "");
             
-            // Atribuições básicas
+            // Basic assignments
             if (p.relations == null) p.relations = new Pawn_RelationsTracker(p);
             if (p.interactions == null) p.interactions = new Pawn_InteractionsTracker(p);
             
@@ -101,6 +103,9 @@ namespace FormgelCore
             }
             
             Consciousness = p;
+            
+            // TODO: Move skill and work settings to PawnKindDef or a custom XML extension for better moddability.
+            int tier = GetBuildingTier(); 
             SetupPawnStatsForTier(tier);
             ConfigureWorkForTier(tier);
             
@@ -111,6 +116,7 @@ namespace FormgelCore
             SetupFormgel();
         }
 
+        // TODO: This tier system is coupled to the defName. Refactor to be data-driven from XML.
         private int GetBuildingTier()
         {
             string defName = parent.def.defName;
@@ -120,25 +126,7 @@ namespace FormgelCore
             return 1; 
         }
 
-        private PawnKindDef GetPawnKindForTier(int tier)
-        {
-            string pawnKindName = $"NeomaPawnTier{tier}";
-            PawnKindDef pawnKind = DefDatabase<PawnKindDef>.GetNamed(pawnKindName, false);
-            return pawnKind ?? PawnKindDefOf.Colonist;
-        }
-
-        private string GetDeviceNameForTier(int tier)
-        {
-            switch (tier)
-            {
-                case 1: return "Formgel Básico";
-                case 2: return "Formgel Intermediário";
-                case 3: return "Formgel Avançado";
-                case 4: return "Formgel Elite";
-                default: return "Formgel";
-            }
-        }
-
+        // TODO: This should be configured in PawnKindDef or a custom extension.
         private void SetupPawnStatsForTier(int tier)
         {
             if (Consciousness.skills == null) return;
@@ -150,6 +138,7 @@ namespace FormgelCore
             Consciousness.skills.Notify_SkillDisablesChanged();
         }
 
+        // TODO: This should be configured in PawnKindDef or a custom extension.
         private void ConfigureWorkForTier(int tier)
         {
             if (Consciousness.workSettings == null) return;
@@ -173,7 +162,7 @@ namespace FormgelCore
         {
             if (Consciousness.needs == null) return;
             
-            // Correção: Usando ToList() para evitar erro de modificação de lista em foreach
+            // Correction: Using ToList() to avoid list modification error in foreach
             var allNeeds = Consciousness.needs.AllNeeds.ToList();
             foreach (Need need in allNeeds)
             {
@@ -223,12 +212,12 @@ namespace FormgelCore
 
             if (explode)
             {
-                RespawnTick = Find.TickManager.TicksGame + 60000;
+                RespawnTick = Find.TickManager.TicksGame + Props.respawnTicks;
                 Map map = Consciousness.Map;
                 if (map != null)
                 {
                     DamageDef slimeDamage = DefDatabase<DamageDef>.GetNamed("Slime", false) ?? DamageDefOf.Burn;
-                    GenExplosion.DoExplosion(Consciousness.Position, map, 4.9f, slimeDamage, Consciousness, 
+                    GenExplosion.DoExplosion(Consciousness.Position, map, Props.explosionRadius, slimeDamage, Consciousness, 
                         postExplosionSpawnThingDef: ThingDefOf.Filth_Slime, postExplosionSpawnChance: 1f);
                 }
                 if (goneForGood && !Consciousness.Dead)
@@ -274,7 +263,7 @@ namespace FormgelCore
 						{
 							action = delegate 
 							{ 
-								// Checagem dupla antes de executar
+								// Double check before executing
 								if (!HasPower) {
 									Messages.Message("Cannot create: No power.", MessageTypeDefOf.RejectInput, false);
 									return;
@@ -339,7 +328,7 @@ namespace FormgelCore
 
             if (Consciousness.Destroyed)
             {
-                // Se o peão foi destruído, ele precisa ser gerado novamente
+                // If the pawn was destroyed, it needs to be generated again
                 GenerateFormgelPawn();
             }
 
@@ -351,7 +340,11 @@ namespace FormgelCore
                 if (Consciousness.Dead)
                     ResurrectionUtility.TryResurrect(Consciousness);
 
-                SoundDefOf.PsychicPulseGlobal.PlayOneShotOnCamera(parent.Map);
+                if(Props.spawnSound != null)
+                    Props.spawnSound.PlayOneShotOnCamera(parent.Map);
+                else
+                    SoundDefOf.PsychicPulseGlobal.PlayOneShotOnCamera(parent.Map);
+
                 FleckMaker.Static(parent.Position, parent.Map, FleckDefOf.PsycastAreaEffect, 5f);
                 Consciousness.ageTracker?.ResetAgeReversalDemand(Pawn_AgeTracker.AgeReversalReason.ViaTreatment);
             }
@@ -362,7 +355,7 @@ namespace FormgelCore
             if (Consciousness != null)
                 return $"Formgel: {Consciousness.Name.ToStringShort}";
             
-            return $"Core: {DeviceName}";
+            return $"Core: {parent.def.label}";
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -385,7 +378,7 @@ namespace FormgelCore
         public override void CompTick()
         {
             base.CompTick();
-            // Despawn automático se perder a energia
+            // Automatic despawn if power is lost
             if (Consciousness != null && Consciousness.Spawned && !HasPower)
             {
                 DespawnFormgel(false);
