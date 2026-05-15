@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Program Files \\(x86\\)\\\\Steam\\\\steamapps\\\\common\\\\RimWorld\\\\Mods\\\\FormgelCore\" -Recurse)",
+      "Bash(Select-Object FullName)",
+      "Bash(Test-Path *)",
+      "Bash(dotnet build *)",
+      "Bash(powershell *)",
+      "Bash(Get-ChildItem *)"
+    ]
+  }
+}

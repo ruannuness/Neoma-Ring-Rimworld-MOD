@@ -420,9 +420,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\FormgelCore\\Source\\1.6\\FormgelCore.csproj",
-      "projectName": "FormgelCore",
-      "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\FormgelCore\\Source\\1.6\\FormgelCore.csproj",
+      "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\FormgelCore\\Source\\1.6\\SyntheraCore.csproj",
+      "projectName": "SyntheraCore",
+      "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\FormgelCore\\Source\\1.6\\SyntheraCore.csproj",
       "packagesPath": "C:\\Users\\Ruan\\.nuget\\packages\\",
       "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\FormgelCore\\Source\\1.6\\obj\\",
       "projectStyle": "PackageReference",

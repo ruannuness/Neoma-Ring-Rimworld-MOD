@@ -5,7 +5,7 @@
     <defName>Neoma</defName>
     <label>SyntheraCore_NeomaDesignationCategory_Label</label>
     <description>SyntheraCore_NeomaDesignationCategory_Description</description>
-    <order>1100</order>
+    <order>10</order>
   </DesignationCategoryDef>
 
 </Defs>

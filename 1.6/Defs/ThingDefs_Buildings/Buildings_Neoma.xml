@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- Tier 1: Altar Básico -->
+  <!-- Tier I: Basic Summoning Altar -->
   <ThingDef ParentName="BuildingBase">
-    <defName>NeomaAltarTier1</defName>
-    <label>SyntheraCore_NeomaAltarTier1_Label</label>
-    <description>SyntheraCore_NeomaAltarTier1_Description</description>
+    <defName>NeomaAltarTierI</defName>
+    <label>Basic Summoning Altar</label>
+    <description>A rudimentary altar capable of summoning basic artificial entities. It consumes a lot of power and generates extreme heat.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <tickerType>Normal</tickerType>
@@ -30,7 +30,7 @@
       <Gold>50</Gold>
     </costList>
     <researchPrerequisites>
-      <li>NeomaTier1</li>
+      <li>NeomaTierI</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <building>
@@ -42,8 +42,8 @@
         <basePowerConsumption>2000</basePowerConsumption>
       </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
-        <pawnKind>NeomaPawnTier1</pawnKind>
-        <spawnIntervalDays>0.08</spawnIntervalDays> <!-- ~2 horas -->
+        <pawnKind>NeomaPawnTierI</pawnKind>
+        <spawnIntervalDays>0.08</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
       </li>
@@ -60,20 +60,18 @@
     </comps>
     <size>(5,5)</size>
     <designationCategory>Neoma</designationCategory>
-    <blueprintGraphicData>
-      <texPath>Things/Building/Neoma/AltarTier1_blueprint</texPath>
-    </blueprintGraphicData>
   </ThingDef>
 
-  <!-- Tier 2: Altar Intermediário -->
+  <!-- Tier II: Intermediate Summoning Altar -->
   <ThingDef ParentName="BuildingBase">
-    <defName>NeomaAltarTier2</defName>
-    <label>SyntheraCore_NeomaAltarTier2_Label</label>
-    <description>SyntheraCore_NeomaAltarTier2_Description</description>
+    <defName>NeomaAltarTierII</defName>
+    <label>Intermediate Summoning Altar</label>
+    <description>An improved altar capable of summoning more competent artificial entities for longer periods.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
+    <tickerType>Normal</tickerType>
     <graphicData>
-      <texPath>Things/Building/Tier02/tier02</texPath>
+      <texPath>Things/Building/Tier02/Tier02</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
     </graphicData>
@@ -94,7 +92,7 @@
       <Gold>100</Gold>
     </costList>
     <researchPrerequisites>
-      <li>NeomaTier2</li>
+      <li>NeomaTierII</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <building>
@@ -106,8 +104,8 @@
         <basePowerConsumption>1000</basePowerConsumption>
       </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
-        <pawnKind>NeomaPawnTier2</pawnKind>
-        <spawnIntervalDays>0.33</spawnIntervalDays> <!-- ~8 horas -->
+        <pawnKind>NeomaPawnTierII</pawnKind>
+        <spawnIntervalDays>0.33</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
       </li>
@@ -124,20 +122,18 @@
     </comps>
     <size>(2,2)</size>
     <designationCategory>Neoma</designationCategory>
-    <blueprintGraphicData>
-      <texPath>Things/Building/Neoma/AltarTier2_blueprint</texPath>
-    </blueprintGraphicData>
   </ThingDef>
 
-  <!-- Tier 3: Estrutura Avançada -->
+  <!-- Tier III: Advanced Summoning Structure -->
   <ThingDef ParentName="BuildingBase">
-    <defName>NeomaAltarTier3</defName>
-    <label>SyntheraCore_NeomaAltarTier3_Label</label>
-    <description>SyntheraCore_NeomaAltarTier3_Description</description>
+    <defName>NeomaAltarTierIII</defName>
+    <label>Advanced Summoning Structure</label>
+    <description>An advanced technological structure capable of summoning powerful artificial entities for days.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
+    <tickerType>Normal</tickerType>
     <graphicData>
-      <texPath>Things/Building/Tier03/tier03</texPath>
+      <texPath>Things/Building/Tier03/Tier03</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3,3)</drawSize>
     </graphicData>
@@ -159,7 +155,7 @@
       <Gold>200</Gold>
     </costList>
     <researchPrerequisites>
-      <li>NeomaTier3</li>
+      <li>NeomaTierIII</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <building>
@@ -171,8 +167,8 @@
         <basePowerConsumption>500</basePowerConsumption>
       </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
-        <pawnKind>NeomaPawnTier3</pawnKind>
-        <spawnIntervalDays>3</spawnIntervalDays> <!-- 3 dias -->
+        <pawnKind>NeomaPawnTierIII</pawnKind>
+        <spawnIntervalDays>3</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
       </li>
@@ -189,20 +185,18 @@
     </comps>
     <size>(3,3)</size>
     <designationCategory>Neoma</designationCategory>
-    <blueprintGraphicData>
-      <texPath>Things/Building/Neoma/AltarTier3_blueprint</texPath>
-    </blueprintGraphicData>
   </ThingDef>
 
-  <!-- Tier 4: Estrutura Elite -->
+  <!-- Tier IV: Elite Summoning Structure -->
   <ThingDef ParentName="BuildingBase">
-    <defName>NeomaAltarTier4</defName>
-    <label>SyntheraCore_NeomaAltarTier4_Label</label>
-    <description>SyntheraCore_NeomaAltarTier4_Description</description>
+    <defName>NeomaAltarTierIV</defName>
+    <label>Elite Summoning Structure</label>
+    <description>An elite structure capable of summoning supreme artificial entities permanently.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
+    <tickerType>Normal</tickerType>
     <graphicData>
-      <texPath>Things/Building/Tier04/tier04</texPath>
+      <texPath>Things/Building/Tier04/Tier04</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3,3)</drawSize>
     </graphicData>
@@ -224,7 +218,7 @@
       <Gold>500</Gold>
     </costList>
     <researchPrerequisites>
-      <li>NeomaTier4</li>
+      <li>NeomaTierIV</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <building>
@@ -236,8 +230,8 @@
         <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
-        <pawnKind>NeomaPawnTier4</pawnKind>
-        <spawnIntervalDays>30</spawnIntervalDays> <!-- ~1 mês (permanente) -->
+        <pawnKind>NeomaPawnTierIV</pawnKind>
+        <spawnIntervalDays>30</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
       </li>
@@ -245,7 +239,7 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
       </li>
-      <li class="SyntheraCore.CompProperties_HeatRisk">
+      <li Class="SyntheraCore.CompProperties_HeatRisk">
         <explosionDamage>50</explosionDamage>
         <explosionRadius>3</explosionRadius>
         <heatThreshold>40</heatThreshold>
@@ -254,9 +248,6 @@
     </comps>
     <size>(3,3)</size>
     <designationCategory>Neoma</designationCategory>
-    <blueprintGraphicData>
-      <texPath>Things/Building/Neoma/AltarTier4_blueprint</texPath>
-    </blueprintGraphicData>
   </ThingDef>
 
 </Defs>

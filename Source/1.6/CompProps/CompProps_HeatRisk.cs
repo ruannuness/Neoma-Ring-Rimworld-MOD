@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 
-namespace FormgelCore
+namespace SyntheraCore
 {
     public class CompProperties_HeatRisk : CompProperties
     {

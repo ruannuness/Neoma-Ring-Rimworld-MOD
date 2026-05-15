@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 
-namespace FormgelCore
+namespace SyntheraCore
 {
     public class CompHeatRisk : ThingComp
     {
@@ -42,7 +42,7 @@ namespace FormgelCore
         private void TriggerExplosion()
         {
             // Find the spawner component
-            CompFormgelSpawner spawner = parent.GetComp<CompFormgelSpawner>();
+            CompSyntheraSpawner spawner = parent.GetComp<CompSyntheraSpawner>();
             if (spawner != null && spawner.Consciousness != null)
             {
                 // Despawn the pawn with explosion

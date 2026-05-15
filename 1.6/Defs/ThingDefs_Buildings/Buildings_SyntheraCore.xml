@@ -2,10 +2,11 @@
 <Defs>
   <ThingDef>
     <defName>SyntheraCore</defName>
-    <label>SyntheraCore_SyntheraCoreBuilding_Label</label>
+    <label>Synthera Core</label>
     <thingClass>Building</thingClass>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <category>Building</category>
+    <tickerType>Normal</tickerType>
     <selectable>true</selectable>
     <drawerType>MapMeshOnly</drawerType>
     <altitudeLayer>Building</altitudeLayer>
@@ -39,7 +40,9 @@
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
-        <!-- Removed SoSHologramMachine reference so this mod can load without Save Our Ship 2. -->
+        <pawnKind>NeomaPawnTierI</pawnKind>
+        <spawnIntervalDays>1</spawnIntervalDays>
+        <maxPawnsToSpawn>1</maxPawnsToSpawn>
       </li>
     </comps>
     <statBases>

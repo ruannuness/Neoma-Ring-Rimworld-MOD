@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- Tier 1: Altar Básico -->
   <ResearchProjectDef>
-    <defName>NeomaTier1</defName>
+    <defName>NeomaTierI</defName>
     <label>SyntheraCore_NeomaTier1_Label</label>
     <description>SyntheraCore_NeomaTier1_Description</description>
     <baseCost>500</baseCost>
@@ -14,55 +13,51 @@
     <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 
-  <!-- Tier 2: Altar Intermediário -->
   <ResearchProjectDef>
-    <defName>NeomaTier2</defName>
+    <defName>NeomaTierII</defName>
     <label>SyntheraCore_NeomaTier2_Label</label>
     <description>SyntheraCore_NeomaTier2_Description</description>
     <baseCost>1000</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
-      <li>NeomaTier1</li>
+      <li>NeomaTierI</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <researchViewX>0</researchViewX>
     <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
-  <!-- Tier 3: Estrutura Avançada -->
   <ResearchProjectDef>
-    <defName>NeomaTier3</defName>
+    <defName>NeomaTierIII</defName>
     <label>SyntheraCore_NeomaTier3_Label</label>
     <description>SyntheraCore_NeomaTier3_Description</description>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
-      <li>NeomaTier2</li>
+      <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <researchViewX>0</researchViewX>
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>
 
-  <!-- Tier 4: Estrutura Elite -->
   <ResearchProjectDef>
-    <defName>NeomaTier4</defName>
+    <defName>NeomaTierIV</defName>
     <label>SyntheraCore_NeomaTier4_Label</label>
     <description>SyntheraCore_NeomaTier4_Description</description>
     <baseCost>4000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
-      <li>NeomaTier3</li>
+      <li>NeomaTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <researchViewX>0</researchViewX>
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
-  <!-- Anel: Projeto Neoma Final -->
   <ResearchProjectDef>
     <defName>NeomaRingResearch</defName>
     <label>SyntheraCore_NeomaRing_ResearchLabel</label>
@@ -71,7 +66,7 @@
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
-      <li>NeomaTier4</li>
+      <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <researchViewX>0</researchViewX>
