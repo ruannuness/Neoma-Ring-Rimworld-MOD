@@ -46,6 +46,7 @@
         <spawnIntervalDays>0.08</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
+        <maxRoleModules>1</maxRoleModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -108,6 +109,7 @@
         <spawnIntervalDays>0.33</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
+        <maxRoleModules>2</maxRoleModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -171,6 +173,7 @@
         <spawnIntervalDays>3</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
+        <maxRoleModules>3</maxRoleModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -234,6 +237,7 @@
         <spawnIntervalDays>30</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
+        <maxRoleModules>4</maxRoleModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -247,6 +251,69 @@
       </li>
     </comps>
     <size>(3,3)</size>
+    <designationCategory>Neoma</designationCategory>
+  </ThingDef>
+
+  <!-- Miku: Virtual Diva Resonance Core -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NeomaCoreMiku</defName>
+    <label>Virtual Diva Resonance Core</label>
+    <description>A resonance crystalline structure tuned to the exact frequency of a legendary virtual idol. The teal harmonic field it emits is said to carry fragments of her vocal data across centuries of signal drift. Only she may emerge from it — fully formed, unmistakable.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Building/Tier03/Tier03</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>1500</WorkToBuild>
+      <Flammability>0.6</Flammability>
+    </statBases>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Gold>80</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>NeomaTierII</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>500</basePowerConsumption>
+      </li>
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
+        <pawnKind>NeomaPawnMiku</pawnKind>
+        <spawnIntervalDays>3</spawnIntervalDays>
+        <maxPawnsToSpawn>1</maxPawnsToSpawn>
+        <spawnSound>Interact_Annihilator</spawnSound>
+        <maxRoleModules>2</maxRoleModules>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>8</heatPerSecond>
+      </li>
+      <li Class="SyntheraCore.CompProperties_HeatRisk">
+        <explosionDamage>30</explosionDamage>
+        <explosionRadius>2</explosionRadius>
+        <heatThreshold>45</heatThreshold>
+        <explosionChancePerHour>0.05</explosionChancePerHour>
+      </li>
+    </comps>
+    <size>(2,2)</size>
     <designationCategory>Neoma</designationCategory>
   </ThingDef>
 

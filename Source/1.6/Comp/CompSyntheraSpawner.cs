@@ -10,7 +10,6 @@ namespace SyntheraCore
     public class CompSyntheraSpawner : ThingComp
     {
         public Pawn Consciousness;
-        public Color FormgelColor;
         public CompProperties_SyntheraSpawner Props => (CompProperties_SyntheraSpawner)props;
         public int RespawnTick = 0;
         public int RecreateCooldownTick = 0;
@@ -20,20 +19,13 @@ namespace SyntheraCore
         private bool SavedDeep = false;
         private CompPowerTrader compPower;
 
-        public bool HasPower => compPower != null && compPower.PowerOn;
+        // Transient fields set by CompAuxiliaryModule — not saved, repopulated within 250 ticks of load.
+        public float AuxRespawnMultiplier   = 1f;
+        public float AuxRecreateMultiplier  = 1f;
+        // String-keyed: non-role modules use moduleType.ToString(), role modules use pawnBuffHediff name.
+        public HashSet<string> RegisteredAuxTypes = new HashSet<string>();
 
-        public static readonly Color[] colors = new Color[]
-        {
-            new Color(0,    1f,   0.5f, 0.8f),
-            new Color(0,    0.5f, 1f,   0.8f),
-            new Color(1f,   0.25f,0.25f,0.8f),
-            new Color(1f,   0.8f, 0,    0.8f),
-            new Color(0.75f,0,    1f,   0.8f),
-            new Color(1f,   0.5f, 0,    0.8f),
-            new Color(0.1f, 0.1f, 0.1f, 0.8f),
-            new Color(0.9f, 0.9f, 0.9f, 0.8f)
-        };
-        public static readonly string[] colorNames = { "Green", "Blue", "Red", "Yellow", "Purple", "Orange", "Black", "White" };
+        public bool HasPower => compPower != null && compPower.PowerOn;
 
         private static readonly string[] machineNames =
         {
@@ -79,7 +71,6 @@ namespace SyntheraCore
                 else
                     Scribe_References.Look(ref Consciousness, "Consciousness");
             }
-            Scribe_Values.Look(ref FormgelColor, "FormgelColor");
             Scribe_Values.Look(ref RespawnTick, "RespawnTick");
             Scribe_Values.Look(ref RecreateCooldownTick, "RecreateCooldownTick");
             Scribe_Values.Look(ref InHibernation, "InHibernation");
@@ -118,7 +109,7 @@ namespace SyntheraCore
                 InHibernation = true;
                 HibernationDeathCount++;
                 // Each successive death adds more restoration time: 3×, 5×, 7×, …
-                RespawnTick = Find.TickManager.TicksGame + Props.respawnTicks * (HibernationDeathCount * 2 + 1);
+                RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier * (HibernationDeathCount * 2 + 1));
 
                 if (ResurrectionUtility.TryResurrect(Consciousness))
                 {
@@ -192,9 +183,11 @@ namespace SyntheraCore
         }
 
         // Must check longer strings first so TierIV doesn't match TierII.
+        // Tier 5 = Miku building (NeomaCoreMiku); treated as tier 3 for work/skills with identity overrides.
         private int GetBuildingTier()
         {
             string defName = parent.def.defName;
+            if (defName.Contains("Miku"))    return 5;
             if (defName.Contains("TierIV"))  return 4;
             if (defName.Contains("TierIII")) return 3;
             if (defName.Contains("TierII"))  return 2;
@@ -204,25 +197,47 @@ namespace SyntheraCore
         private void SetupPawnStatsForTier(int tier)
         {
             if (Consciousness.skills == null) return;
+            int baseLevel = tier == 5 ? 11 : Mathf.Min(5 + (tier - 1) * 3, 20);
             foreach (SkillRecord skill in Consciousness.skills.skills)
             {
                 skill.passion = Passion.Minor;
-                skill.levelInt = Mathf.Min(5 + (tier - 1) * 3, 20);
+                skill.levelInt = baseLevel;
             }
             Consciousness.skills.Notify_SkillDisablesChanged();
+
+            // Tier 5 (NeomaCoreMiku) is a Hatsune Miku easter egg — forced name and skill boosts.
+            if (tier == 5)
+            {
+                Consciousness.Name = new NameTriple("", "Hatsune Miku", "");
+                Consciousness.skills.GetSkill(SkillDefOf.Social).levelInt   = 16;
+                Consciousness.skills.GetSkill(SkillDefOf.Artistic).levelInt = 14;
+                var kindTrait = DefDatabase<TraitDef>.GetNamed("Kind", false);
+                if (kindTrait != null && !Consciousness.story.traits.HasTrait(kindTrait))
+                    Consciousness.story.traits.GainTrait(new Trait(kindTrait));
+            }
+
+            Consciousness.story.bodyType = tier switch
+            {
+                1 => BodyTypeDefOf.Thin,
+                2 => BodyTypeDefOf.Male,
+                3 => BodyTypeDefOf.Female,
+                5 => BodyTypeDefOf.Female,
+                _ => BodyTypeDefOf.Hulk
+            };
         }
 
         private void ConfigureWorkForTier(int tier)
         {
+            int effectiveTier = tier == 5 ? 3 : tier;
             if (Consciousness.workSettings == null) return;
             Consciousness.workSettings.EnableAndInitialize();
 
             foreach (WorkTypeDef workType in DefDatabase<WorkTypeDef>.AllDefs)
             {
                 int priority = 3;
-                if (tier == 1 && (workType == WorkTypeDefOf.Crafting || workType == WorkTypeDefOf.Hunting || workType == WorkTypeDefOf.Doctor))
+                if (effectiveTier == 1 && (workType == WorkTypeDefOf.Crafting || workType == WorkTypeDefOf.Hunting || workType == WorkTypeDefOf.Doctor))
                     priority = 0;
-                else if (tier >= 2 && workType == WorkTypeDefOf.Warden)
+                else if (effectiveTier >= 2 && workType == WorkTypeDefOf.Warden)
                     priority = 0;
 
                 Consciousness.workSettings.SetPriority(workType, priority);
@@ -254,9 +269,57 @@ namespace SyntheraCore
             foreach (Need need in allNeeds)
                 Consciousness.needs.AllNeeds.Remove(need);
 
-            FormgelColor = colors[1]; // Default: Blue
-            Consciousness.story.HairColor = FormgelColor;
-            Consciousness.story.skinColorOverride = FormgelColor;
+            // SyntheraAdult uses a base LifeStageWorker that bypasses HAR's patched
+            // HumanlikeAdult worker. headType and hairDef may remain null after generation.
+            // Initialize them here, after pawn is fully built, so the renderer never crashes.
+            if (Consciousness.story.headType == null)
+            {
+                var heads = DefDatabase<HeadTypeDef>.AllDefs
+                    .Where(h => h.gender == Consciousness.gender || h.gender == Gender.None)
+                    .ToList();
+                if (heads.Count == 0)
+                    heads = DefDatabase<HeadTypeDef>.AllDefs.ToList();
+                if (heads.Count > 0)
+                    Consciousness.story.headType = heads.RandomElement();
+            }
+            if (Consciousness.story.hairDef == null)
+            {
+                var hairs = DefDatabase<HairDef>.AllDefs
+                    .Where(h => h.styleTags != null && h.styleTags.Contains("HairBasic"))
+                    .ToList();
+                if (hairs.Count == 0)
+                    hairs = DefDatabase<HairDef>.AllDefs.ToList();
+                if (hairs.Count > 0)
+                    Consciousness.story.hairDef = hairs.RandomElement();
+            }
+
+            // Set style fields accessed by PawnRenderNode_Beard and PawnRenderNode_Tattoo_*.
+            // These are normally set by LifeStageWorker_HumanlikeAdult, which we bypass.
+            if (Consciousness.style != null)
+            {
+                if (Consciousness.style.beardDef == null)
+                    Consciousness.style.beardDef = DefDatabase<BeardDef>.GetNamed("NoBeard", false)
+                        ?? DefDatabase<BeardDef>.AllDefs.FirstOrDefault();
+
+                if (ModsConfig.IdeologyActive)
+                {
+                    if (Consciousness.style.BodyTattoo == null)
+                        Consciousness.style.BodyTattoo = DefDatabase<TattooDef>.GetNamed("NoTattoo_Body", false)
+                            ?? DefDatabase<TattooDef>.AllDefs.FirstOrDefault();
+                    if (Consciousness.style.FaceTattoo == null)
+                        Consciousness.style.FaceTattoo = DefDatabase<TattooDef>.GetNamed("NoTattoo_Face", false)
+                            ?? DefDatabase<TattooDef>.AllDefs.FirstOrDefault();
+                }
+            }
+
+            if (Consciousness.story.Childhood == null)
+                Consciousness.story.Childhood = DefDatabase<BackstoryDef>.GetNamed("Synthera_Initialization", false)
+                    ?? DefDatabase<BackstoryDef>.AllDefs.FirstOrDefault(b => b.slot == BackstorySlot.Childhood);
+
+            if (Consciousness.story.Adulthood == null)
+                Consciousness.story.Adulthood = DefDatabase<BackstoryDef>.GetNamed("Synthera_Deployment", false)
+                    ?? DefDatabase<BackstoryDef>.AllDefs.FirstOrDefault(b => b.slot == BackstorySlot.Adulthood);
+
             Consciousness.Drawer.renderer.SetAllGraphicsDirty();
         }
 
@@ -280,7 +343,7 @@ namespace SyntheraCore
 
             if (explode)
             {
-                RespawnTick = Find.TickManager.TicksGame + Props.respawnTicks;
+                RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier);
                 Map map = Consciousness.Map;
                 if (map != null)
                 {
@@ -415,9 +478,13 @@ namespace SyntheraCore
                 {
                     action = delegate
                     {
-                        GenerateFormgelPawn();
-                        SpawnFormgel();
-                        RecreateCooldownTick = Find.TickManager.TicksGame + Props.recreateCooldownTicks;
+                        string name = Consciousness?.Name?.ToStringShort ?? "unknown";
+                        Find.WindowStack.Add(new Dialog_ConfirmRecreate(name, () =>
+                        {
+                            GenerateFormgelPawn();
+                            SpawnFormgel();
+                            RecreateCooldownTick = Find.TickManager.TicksGame + (int)(Props.recreateCooldownTicks * AuxRecreateMultiplier);
+                        }));
                     },
                     defaultLabel = "Recreate avatar",
                     defaultDesc  = "Discard the current avatar and generate a completely new one. Long cooldown.",
@@ -438,11 +505,11 @@ namespace SyntheraCore
                     action = delegate
                     {
                         DespawnFormgel(false);
-                        RespawnTick = Find.TickManager.TicksGame + (int)(Props.spawnIntervalDays * 60000f);
+                        RespawnTick = Find.TickManager.TicksGame + (int)(Props.spawnIntervalDays * 60000f * AuxRespawnMultiplier);
                     },
                     defaultLabel = "Despawn avatar",
                     defaultDesc  = "Return the avatar to the core. Resets system stress. Available again after cooldown.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Forbid", true)
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
                 };
 
                 yield return new Command_Action
@@ -453,29 +520,6 @@ namespace SyntheraCore
                     icon = ContentFinder<Texture2D>.Get("UI/Commands/RenameZone", true)
                 };
 
-                yield return new Command_Action
-                {
-                    action = delegate
-                    {
-                        List<FloatMenuOption> options = new List<FloatMenuOption>();
-                        for (int i = 0; i < colorNames.Length; i++)
-                        {
-                            int idx = i;
-                            options.Add(new FloatMenuOption(colorNames[idx], delegate
-                            {
-                                FormgelColor = colors[idx];
-                                Consciousness.story.HairColor = FormgelColor;
-                                Consciousness.story.skinColorOverride = FormgelColor;
-                                Consciousness.Drawer.renderer.SetAllGraphicsDirty();
-                                PortraitsCache.SetDirty(Consciousness);
-                            }));
-                        }
-                        Find.WindowStack.Add(new FloatMenu(options));
-                    },
-                    defaultLabel = "Avatar color",
-                    defaultDesc  = "Choose the avatar's color.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
-                };
             }
         }
 
@@ -504,7 +548,44 @@ namespace SyntheraCore
                 }
             }
 
+            int activeRoles = RegisteredAuxTypes.Count(k => k.StartsWith("SyntheraRole"));
+            if (Props.maxRoleModules > 1 || activeRoles > 0)
+                return $"Avatar: {Consciousness.Name.ToStringShort} | Role slots: {activeRoles}/{Props.maxRoleModules}";
+
             return $"Avatar: {Consciousness.Name.ToStringShort}";
+        }
+    }
+
+    public class Dialog_ConfirmRecreate : Window
+    {
+        private readonly string avatarName;
+        private readonly System.Action onConfirm;
+
+        public Dialog_ConfirmRecreate(string avatarName, System.Action onConfirm)
+        {
+            this.avatarName = avatarName;
+            this.onConfirm  = onConfirm;
+            this.doCloseButton       = false;
+            this.absorbInputAroundWindow = true;
+            this.forcePause          = true;
+        }
+
+        public override Vector2 InitialSize => new Vector2(400f, 160f);
+
+        public override void DoWindowContents(Rect inRect)
+        {
+            Listing_Standard ls = new Listing_Standard();
+            ls.Begin(inRect);
+            ls.Label($"The avatar {avatarName} will be permanently deleted and replaced by a new one.");
+            ls.Gap(12f);
+            if (ls.ButtonText("Confirm"))
+            {
+                onConfirm();
+                Close();
+            }
+            if (ls.ButtonText("Cancel"))
+                Close();
+            ls.End();
         }
     }
 

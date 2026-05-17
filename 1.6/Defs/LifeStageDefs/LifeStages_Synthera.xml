@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Custom life stage that avoids triggering HAR's AdultLifeStageStartedTranspiler.
+       HAR only patches LifeStageWorker_HumanlikeAdult.Notify_LifeStageStarted;
+       by using the base LifeStageWorker (workerClass omitted = default), that
+       transpiler never fires and the pawn generates without a NullReferenceException.
+       All work/need setup is handled in C# by SetupFormgel + ConfigureWorkForTier. -->
+  <LifeStageDef>
+    <defName>SyntheraAdult</defName>
+    <label>active</label>
+    <workerClass>SyntheraCore.LifeStageWorker_SyntheraAdult</workerClass>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+  </LifeStageDef>
+
+</Defs>

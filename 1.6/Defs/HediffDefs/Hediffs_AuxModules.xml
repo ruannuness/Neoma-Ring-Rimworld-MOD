@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- COMBAT AMPLIFIER — Tier I / II / III                           -->
+  <!-- Applied by SyntheraAuxCombatTierI/II/III while powered.        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <HediffDef>
+    <defName>SyntheraAmpBuffTierI</defName>
+    <label>combat uplink I</label>
+    <description>This avatar is receiving a basic combat enhancement signal from a nearby amplifier node. Reaction speed and targeting are slightly improved.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.10</MeleeDamageFactor>
+          <MoveSpeed>1.05</MoveSpeed>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.04</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraAmpBuffTierII</defName>
+    <label>combat uplink II</label>
+    <description>This avatar is receiving an enhanced combat signal from a nearby amplifier node. Melee, accuracy, and movement are meaningfully improved.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.18</MeleeDamageFactor>
+          <MoveSpeed>1.10</MoveSpeed>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.08</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraAmpBuffTierIII</defName>
+    <label>combat uplink III</label>
+    <description>This avatar is receiving a high-bandwidth combat signal from a nearby amplifier node. Combat performance is substantially enhanced across all parameters.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.30</MeleeDamageFactor>
+          <MoveSpeed>1.18</MoveSpeed>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.14</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- WORK UNLOCKER — no hediff (uses workSettings priority)          -->
+  <!-- Tier I and II differ only in which work types are unlocked.     -->
+  <!-- (No HediffDef needed — handled by WorkUnlocker comp logic.)     -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ROLE SPECIALIZER — Tier I / II / III × 4 roles                 -->
+  <!-- Applied by RoleSpecializer modules while powered.               -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Soldier -->
+  <HediffDef>
+    <defName>SyntheraRoleSoldierTierI</defName>
+    <label>combat specialization I</label>
+    <description>This avatar has been given basic combat specialization by a nearby role module. Offensive capabilities are slightly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.10</MeleeDamageFactor>
+          <RangedCooldownFactor>0.93</RangedCooldownFactor>
+          <AimingDelayFactor>0.93</AimingDelayFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleSoldierTierII</defName>
+    <label>combat specialization II</label>
+    <description>This avatar has been specialized for frontline combat by a nearby role module. Offensive capabilities are significantly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.20</MeleeDamageFactor>
+          <RangedCooldownFactor>0.85</RangedCooldownFactor>
+          <AimingDelayFactor>0.85</AimingDelayFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleSoldierTierIII</defName>
+    <label>combat specialization III</label>
+    <description>This avatar has been fully specialized as a combat unit by a nearby role module. Combat performance is greatly enhanced across all offensive parameters.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.35</MeleeDamageFactor>
+          <RangedCooldownFactor>0.75</RangedCooldownFactor>
+          <AimingDelayFactor>0.75</AimingDelayFactor>
+          <MoveSpeed>1.10</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Worker -->
+  <HediffDef>
+    <defName>SyntheraRoleWorkerTierI</defName>
+    <label>worker specialization I</label>
+    <description>This avatar has been given basic labor specialization by a nearby role module. Work efficiency is slightly improved.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>1.08</WorkSpeedGlobal>
+          <ConstructionSpeed>1.12</ConstructionSpeed>
+          <MiningSpeed>1.10</MiningSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleWorkerTierII</defName>
+    <label>worker specialization II</label>
+    <description>This avatar has been specialized for labor and production by a nearby role module. Work efficiency is significantly improved.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>1.15</WorkSpeedGlobal>
+          <ConstructionSpeed>1.25</ConstructionSpeed>
+          <MiningSpeed>1.20</MiningSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleWorkerTierIII</defName>
+    <label>worker specialization III</label>
+    <description>This avatar has been fully specialized as a labor unit by a nearby role module. Work, construction, and mining efficiency are greatly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>1.25</WorkSpeedGlobal>
+          <ConstructionSpeed>1.40</ConstructionSpeed>
+          <MiningSpeed>1.35</MiningSpeed>
+          <PlantWorkSpeed>1.20</PlantWorkSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Medic -->
+  <HediffDef>
+    <defName>SyntheraRoleMedicTierI</defName>
+    <label>medic specialization I</label>
+    <description>This avatar has been given basic medical specialization by a nearby role module. Healing outcomes are slightly improved.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MedicalTendQuality>1.12</MedicalTendQuality>
+          <MedicalOperationSpeed>1.10</MedicalOperationSpeed>
+          <MedicalSurgerySuccessChance>1.08</MedicalSurgerySuccessChance>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleMedicTierII</defName>
+    <label>medic specialization II</label>
+    <description>This avatar has been specialized for medical operations by a nearby role module. Healing and surgery outcomes are significantly improved.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MedicalTendQuality>1.25</MedicalTendQuality>
+          <MedicalOperationSpeed>1.20</MedicalOperationSpeed>
+          <MedicalSurgerySuccessChance>1.15</MedicalSurgerySuccessChance>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleMedicTierIII</defName>
+    <label>medic specialization III</label>
+    <description>This avatar has been fully specialized as a medical unit by a nearby role module. Healing, surgery, and operation speeds are greatly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MedicalTendQuality>1.40</MedicalTendQuality>
+          <MedicalOperationSpeed>1.35</MedicalOperationSpeed>
+          <MedicalSurgerySuccessChance>1.25</MedicalSurgerySuccessChance>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Scout -->
+  <HediffDef>
+    <defName>SyntheraRoleScoutTierI</defName>
+    <label>scout specialization I</label>
+    <description>This avatar has been given basic mobility specialization by a nearby role module. Movement and social skills are slightly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>1.10</MoveSpeed>
+          <SocialImpact>1.05</SocialImpact>
+          <TradePriceImprovement>1.05</TradePriceImprovement>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleScoutTierII</defName>
+    <label>scout specialization II</label>
+    <description>This avatar has been specialized for mobility and social interactions by a nearby role module. Movement and persuasion are significantly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>1.25</MoveSpeed>
+          <SocialImpact>1.10</SocialImpact>
+          <TradePriceImprovement>1.10</TradePriceImprovement>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraRoleScoutTierIII</defName>
+    <label>scout specialization III</label>
+    <description>This avatar has been fully specialized as a scout unit by a nearby role module. Movement, social impact, and trade efficiency are greatly enhanced.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>1.40</MoveSpeed>
+          <SocialImpact>1.20</SocialImpact>
+          <TradePriceImprovement>1.18</TradePriceImprovement>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ARMOR MATRIX — Tier I / II / III                                -->
+  <!-- IncomingDamageFactor: reduces all incoming damage.              -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <HediffDef>
+    <defName>SyntheraArmorMatrixTierI</defName>
+    <label>armor matrix I</label>
+    <description>This avatar's chassis is reinforced by a nearby armor matrix node. Incoming damage is reduced by 15%.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraArmorMatrixTierII</defName>
+    <label>armor matrix II</label>
+    <description>This avatar's chassis is heavily reinforced by a nearby armor matrix node. Incoming damage is reduced by 30%.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0.70</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraArmorMatrixTierIII</defName>
+    <label>armor matrix III</label>
+    <description>This avatar's chassis is maximally reinforced by a pinnacle armor matrix node. Incoming damage is reduced by 50%. The avatar is extremely difficult to destroy.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0.50</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- OVERCLOCK CORE — Tier I / II / III                              -->
+  <!-- Massive combat buffs at the cost of accelerated stress.         -->
+  <!-- stressAddedPerDay is handled by CompAuxiliaryModule directly.   -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <HediffDef>
+    <defName>SyntheraOverclockTierI</defName>
+    <label>combat overclocked I</label>
+    <description>This avatar's combat systems are being overclocked by a nearby core node. Combat performance is dramatically enhanced, but system stress accumulates significantly faster.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.35</MeleeDamageFactor>
+          <MoveSpeed>1.20</MoveSpeed>
+          <RangedCooldownFactor>0.80</RangedCooldownFactor>
+          <AimingDelayFactor>0.80</AimingDelayFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.15</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraOverclockTierII</defName>
+    <label>combat overclocked II</label>
+    <description>This avatar's combat systems are running at extreme overclock. Combat capabilities are extraordinary, but the avatar burns through system stress at triple the normal rate. Recall frequently.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.55</MeleeDamageFactor>
+          <MoveSpeed>1.30</MoveSpeed>
+          <RangedCooldownFactor>0.70</RangedCooldownFactor>
+          <AimingDelayFactor>0.70</AimingDelayFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.22</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraOverclockTierIII</defName>
+    <label>combat overclocked III</label>
+    <description>This avatar's systems are at maximum theoretical overclock. Its combat performance borders on superhuman. System stress accumulates five times faster than normal — deployment windows are extremely short.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>1.80</MeleeDamageFactor>
+          <MoveSpeed>1.45</MoveSpeed>
+          <RangedCooldownFactor>0.55</RangedCooldownFactor>
+          <AimingDelayFactor>0.55</AimingDelayFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.32</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- VERSATILITY PROTOCOL — Tier I / II                              -->
+  <!-- General-purpose utility boost: research, carrying, stealth.     -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <HediffDef>
+    <defName>SyntheraVersatilityTierI</defName>
+    <label>versatility protocol I</label>
+    <description>A broad behavioral enhancement uploaded by a nearby versatility node. Improves research speed, carry capacity, plant work, and hunting stealth.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <ResearchSpeed>1.25</ResearchSpeed>
+          <CarryingCapacity>1.30</CarryingCapacity>
+          <PlantWorkSpeed>1.20</PlantWorkSpeed>
+          <HuntingStealth>1.25</HuntingStealth>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraVersatilityTierII</defName>
+    <label>versatility protocol II</label>
+    <description>A deep-spectrum behavioral imprint from a pinnacle versatility node. Dramatically improves research, carrying, plant work, stealth, and social effectiveness. The avatar becomes an all-purpose powerhouse.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <ResearchSpeed>1.50</ResearchSpeed>
+          <CarryingCapacity>1.65</CarryingCapacity>
+          <PlantWorkSpeed>1.40</PlantWorkSpeed>
+          <HuntingStealth>1.50</HuntingStealth>
+          <SocialImpact>1.15</SocialImpact>
+          <TradePriceImprovement>1.12</TradePriceImprovement>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ARCHOTECH TIER — transcendent power, absurdly broken           -->
+  <!-- Materials and research require the Archotech Synthesis Terminal -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+
+  <!-- Combat Archotech -->
+  <HediffDef>
+    <defName>SyntheraAmpBuffArchotech</defName>
+    <label>combat uplink archotech</label>
+    <description>This avatar's combat systems are being fed a continuous archotech signal of impossible density. Melee strikes tear through enemies with machine-precise efficiency, ranged accuracy approaches mechanical perfection, and movement speed defies biological limits. This is not enhancement — it is transcendence.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>2.50</MeleeDamageFactor>
+          <MoveSpeed>1.80</MoveSpeed>
+          <RangedCooldownFactor>0.40</RangedCooldownFactor>
+          <AimingDelayFactor>0.40</AimingDelayFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.60</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Armor Archotech -->
+  <HediffDef>
+    <defName>SyntheraArmorMatrixArchotech</defName>
+    <label>armor matrix archotech</label>
+    <description>A maximum-density archotech reinforcement lattice encases this avatar. Incoming damage is reduced by 85%. The avatar is nearly impossible to destroy by conventional means — sustained fire from entire raiding parties will fail to put it down.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0.15</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Overclock Archotech -->
+  <HediffDef>
+    <defName>SyntheraOverclockArchotech</defName>
+    <label>combat overclocked archotech</label>
+    <description>This avatar's systems are running at archotech overclock. Combat output is barely describable in conventional terms. System stress accumulates ten times faster than normal — deployment windows are measured in minutes. Do not leave unattended.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>3.20</MeleeDamageFactor>
+          <MoveSpeed>2.50</MoveSpeed>
+          <RangedCooldownFactor>0.20</RangedCooldownFactor>
+          <AimingDelayFactor>0.20</AimingDelayFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>1.00</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Versatility Archotech -->
+  <HediffDef>
+    <defName>SyntheraVersatilityArchotech</defName>
+    <label>versatility protocol archotech</label>
+    <description>A deep archotech behavioral imprint covering every aspect of avatar capability. Research proceeds at impossible speed, carrying capacity far exceeds any biological limit, all field work is performed with breathtaking efficiency, and social manipulation approaches machine-level precision.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <ResearchSpeed>3.00</ResearchSpeed>
+          <CarryingCapacity>4.00</CarryingCapacity>
+          <PlantWorkSpeed>3.00</PlantWorkSpeed>
+          <HuntingStealth>3.00</HuntingStealth>
+          <SocialImpact>2.50</SocialImpact>
+          <TradePriceImprovement>2.00</TradePriceImprovement>
+          <WorkSpeedGlobal>2.00</WorkSpeedGlobal>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Role Archotech — Soldier -->
+  <HediffDef>
+    <defName>SyntheraRoleSoldierArchotech</defName>
+    <label>combat specialization archotech</label>
+    <description>This avatar has been rewritten at the archotech level as a dedicated combat unit. Offensive performance is effectively without ceiling. A single avatar with this imprint can route entire raiding parties.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MeleeDamageFactor>2.20</MeleeDamageFactor>
+          <RangedCooldownFactor>0.45</RangedCooldownFactor>
+          <AimingDelayFactor>0.45</AimingDelayFactor>
+          <MoveSpeed>1.75</MoveSpeed>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.40</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Role Archotech — Worker -->
+  <HediffDef>
+    <defName>SyntheraRoleWorkerArchotech</defName>
+    <label>worker specialization archotech</label>
+    <description>This avatar has been rewritten at the archotech level as a dedicated labor unit. Work, construction, mining, and crafting are performed at a pace that makes biological colonists appear to be standing still.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>2.50</WorkSpeedGlobal>
+          <ConstructionSpeed>3.00</ConstructionSpeed>
+          <MiningSpeed>3.00</MiningSpeed>
+          <PlantWorkSpeed>2.50</PlantWorkSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Role Archotech — Medic -->
+  <HediffDef>
+    <defName>SyntheraRoleMedicArchotech</defName>
+    <label>medic specialization archotech</label>
+    <description>This avatar has been rewritten at the archotech level as a dedicated medical unit. Tending quality, operation speed, and surgery success rates reach values no biological surgeon could approach. Patients treated by this avatar nearly always survive.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MedicalTendQuality>2.50</MedicalTendQuality>
+          <MedicalOperationSpeed>2.50</MedicalOperationSpeed>
+          <MedicalSurgerySuccessChance>2.00</MedicalSurgerySuccessChance>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Role Archotech — Scout -->
+  <HediffDef>
+    <defName>SyntheraRoleScoutArchotech</defName>
+    <label>scout specialization archotech</label>
+    <description>This avatar has been rewritten at the archotech level as a dedicated mobility and social unit. Movement is impossibly fast, and the avatar's social interaction capabilities exceed anything achievable through biological persuasion. Trade negotiations conducted by this avatar are almost always favorable.</description>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>2.50</MoveSpeed>
+          <SocialImpact>2.50</SocialImpact>
+          <TradePriceImprovement>2.00</TradePriceImprovement>
+          <NegotiationAbility>2.00</NegotiationAbility>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

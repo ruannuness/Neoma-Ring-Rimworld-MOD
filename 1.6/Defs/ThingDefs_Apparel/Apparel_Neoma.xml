@@ -44,13 +44,11 @@
     <thingCategories>
       <li>Apparel</li>
     </thingCategories>
+    <smeltable>false</smeltable>
     <tradeTags>
       <li>Exotic</li>
       <li>Artifact</li>
     </tradeTags>
-    <recipeMaker>
-      <researchPrerequisite>NeomaRingResearch</researchPrerequisite>
-    </recipeMaker>
   </ThingDef>
 
 </Defs>

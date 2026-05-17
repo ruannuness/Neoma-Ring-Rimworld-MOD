@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>SyntheraArchotechTerminal</defName>
+    <label>archotech synthesis terminal</label>
+    <description>A crystalline interface assembled from archotech shards that hums with an unsettling resonance. It is the only device capable of translating archotech module protocols into usable configurations. Research performed here unlocks discoveries that transcend all known technological frameworks. Produces a faint energy field as a side effect of its operation.</description>
+    <thingClass>Building_ResearchBench</thingClass>
+    <graphicData>
+      <texPath>Things/Building/ArchotechTerminal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <size>(2,2)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <designationCategory>Neoma</designationCategory>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>15000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+      <ResearchSpeedFactor>2.0</ResearchSpeedFactor>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>10</SyntheraArchotechShard>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Plasteel>100</Plasteel>
+      <Gold>50</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>NeomaTierIV</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(255,200,50,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

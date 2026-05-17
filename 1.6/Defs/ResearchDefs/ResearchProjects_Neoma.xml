@@ -58,19 +58,5 @@
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
-  <ResearchProjectDef>
-    <defName>NeomaRingResearch</defName>
-    <label>SyntheraCore_NeomaRing_ResearchLabel</label>
-    <description>SyntheraCore_NeomaRing_ResearchDescription</description>
-    <baseCost>8000</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierIV</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>0</researchViewX>
-    <researchViewY>4</researchViewY>
-  </ResearchProjectDef>
 
 </Defs>

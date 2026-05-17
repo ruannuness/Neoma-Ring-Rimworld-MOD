@@ -59,17 +59,17 @@
     </stages>
   </HediffDef>
 
-  <!-- Applied after restoring a hibernating avatar from backup. Fades over 10 in-game days. -->
+  <!-- Applied after restoring a hibernating avatar from backup. Fades over 1 in-game day (24h). -->
   <HediffDef>
     <defName>SyntheraHibernationSyndrome</defName>
     <label>hibernation syndrome</label>
-    <description>Deep system corruption from emergency hibernation. Cognitive and motor functions are impaired while backup data is reintegrated. Heals over time while the avatar is active.</description>
+    <description>Deep system corruption from emergency hibernation. Cognitive and motor functions are impaired while backup data is reintegrated. Fully clears after 24 hours of active deployment.</description>
     <isBad>true</isBad>
     <maxSeverity>1.0</maxSeverity>
     <hediffClass>HediffWithComps</hediffClass>
     <comps>
       <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>-0.1</severityPerDay>
+        <severityPerDay>-1.0</severityPerDay>
       </li>
     </comps>
     <stages>

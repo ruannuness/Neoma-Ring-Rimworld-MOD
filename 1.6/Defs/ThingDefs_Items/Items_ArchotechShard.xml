@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef>
+    <defName>SyntheraArchotechShard</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <label>archotech shard</label>
+    <description>A shard of incomprehensibly advanced archotech material. Its internal structure rewrites itself constantly, maintaining a purpose that no current technology can fully decode. Analysis shows it contains knowledge orders of magnitude beyond spacer-level engineering. Found only in the ruins of civilizations that rose and fell long before humanity reached the stars — and in the hands of those brave enough to retrieve them.</description>
+    <category>Item</category>
+    <graphicData>
+      <texPath>Things/Item/Resource/ArchotechShard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <MarketValue>1200</MarketValue>
+      <Mass>0.2</Mass>
+      <Flammability>0</Flammability>
+    </statBases>
+    <tradeability>Sellable</tradeability>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <resourceReadoutPriority>Last</resourceReadoutPriority>
+    <stackLimit>20</stackLimit>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <alwaysHaulable>true</alwaysHaulable>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+
+</Defs>

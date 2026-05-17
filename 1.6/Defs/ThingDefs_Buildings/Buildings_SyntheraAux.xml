@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Shared parent for all 1×1 auxiliary nodes -->
+  <ThingDef Name="SyntheraAuxBase" Abstract="True" ParentName="BuildingBase">
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <fillPercent>0.3</fillPercent>
+    <castEdgeShadows>false</castEdgeShadows>
+    <size>(1,1)</size>
+    <designationCategory>Neoma</designationCategory>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+      <Flammability>0.4</Flammability>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Building/Tier01/Tier01</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <!-- Abstract texture bases — one per module-type × tier combination -->
+  <ThingDef Name="AuxCombatTierIBase"     Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxCombat/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxCombatTierIIBase"    Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxCombat/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxCombatTierIIIBase"   Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxCombat/TierIII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxWorkTierIBase"       Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxWork/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxWorkTierIIBase"      Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxWork/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOptimizerTierIBase"  Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOptimizer/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOptimizerTierIIBase" Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOptimizer/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOptimizerTierIIIBase" Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOptimizer/TierIII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxRoleTierIBase"         Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxRole/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxRoleTierIIBase"        Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxRole/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxRoleTierIIIBase"       Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxRole/TierIII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxArmorTierIBase"        Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxArmor/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxArmorTierIIBase"       Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxArmor/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxArmorTierIIIBase"      Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxArmor/TierIII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOverclockTierIBase"    Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOverclock/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOverclockTierIIBase"   Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOverclock/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOverclockTierIIIBase"  Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOverclock/TierIII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxVersatilityTierIBase"  Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxVersatility/TierI</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxVersatilityTierIIBase" Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxVersatility/TierII</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- COMBAT AMPLIFIER — 3 tiers                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThingDef ParentName="AuxCombatTierIBase">
+    <defName>SyntheraAuxCombatTierI</defName>
+    <label>combat uplink node I</label>
+    <description>A basic auxiliary uplink that transmits combat enhancement data to any synthera avatar within 5 cells. Slightly increases melee damage, ranged accuracy, and movement speed while powered.</description>
+    <costList>
+      <Steel>40</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxCombatTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>120</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CombatAmplifier</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraAmpBuffTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxCombatTierIIBase">
+    <defName>SyntheraAuxCombatTierII</defName>
+    <label>combat uplink node II</label>
+    <description>An enhanced auxiliary uplink that transmits a higher-bandwidth combat signal to any synthera avatar within 5 cells. Meaningfully increases melee damage, ranged accuracy, and movement speed while powered.</description>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <Gold>15</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxCombatTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CombatAmplifier</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraAmpBuffTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxCombatTierIIIBase">
+    <defName>SyntheraAuxCombatTierIII</defName>
+    <label>combat uplink node III</label>
+    <description>A pinnacle combat auxiliary node transmitting a full-spectrum enhancement signal to any synthera avatar within 5 cells. Dramatically increases melee damage, ranged accuracy, and movement speed while powered.</description>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <Gold>30</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxCombatTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CombatAmplifier</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraAmpBuffTierIII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- WORK UNLOCKER — 2 tiers                                             -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThingDef ParentName="AuxWorkTierIBase">
+    <defName>SyntheraAuxWorkTierI</defName>
+    <label>work protocol node I</label>
+    <description>Uploads basic expanded behavioral protocols to any synthera avatar within 5 cells, unlocking crafting and basic construction work that lower-tier avatars normally cannot perform.</description>
+    <costList>
+      <Steel>30</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxWorkTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>80</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>WorkUnlocker</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <unlockedWorkTypes>
+          <li>Crafting</li>
+          <li>Construction</li>
+          <li>Growing</li>
+          <li>Mining</li>
+        </unlockedWorkTypes>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxWorkTierIIBase">
+    <defName>SyntheraAuxWorkTierII</defName>
+    <label>work protocol node II</label>
+    <description>Uploads comprehensive behavioral protocols to any synthera avatar within 5 cells, unlocking hunting, medical, and artistic work in addition to all Tier I work types.</description>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>7</ComponentIndustrial>
+      <Gold>10</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxWorkTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>140</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>WorkUnlocker</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <unlockedWorkTypes>
+          <li>Crafting</li>
+          <li>Construction</li>
+          <li>Growing</li>
+          <li>Mining</li>
+          <li>Hunting</li>
+          <li>Doctor</li>
+          <li>Art</li>
+          <li>Cooking</li>
+        </unlockedWorkTypes>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CORE OPTIMIZER — 3 tiers                                            -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThingDef ParentName="AuxOptimizerTierIBase">
+    <defName>SyntheraAuxOptimizerTierI</defName>
+    <label>core optimizer node I</label>
+    <description>A maintenance uplink that services any synthera altar within 5 cells. Reduces respawn and recreate cooldowns by 20% and gently counters system stress accumulation while powered.</description>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOptimizerTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CoreOptimizer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <respawnTicksMultiplier>0.80</respawnTicksMultiplier>
+        <recreateCooldownMultiplier>0.80</recreateCooldownMultiplier>
+        <stressReliefPerDay>0.015</stressReliefPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxOptimizerTierIIBase">
+    <defName>SyntheraAuxOptimizerTierII</defName>
+    <label>core optimizer node II</label>
+    <description>An advanced maintenance uplink that services any synthera altar within 5 cells. Halves all respawn and recreate cooldowns and actively reduces system stress accumulation while powered.</description>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <Gold>35</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOptimizerTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>220</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CoreOptimizer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <respawnTicksMultiplier>0.50</respawnTicksMultiplier>
+        <recreateCooldownMultiplier>0.50</recreateCooldownMultiplier>
+        <stressReliefPerDay>0.035</stressReliefPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxOptimizerTierIIIBase">
+    <defName>SyntheraAuxOptimizerTierIII</defName>
+    <label>core optimizer node III</label>
+    <description>A pinnacle maintenance uplink that services any synthera altar within 5 cells. Near-zero cooldowns and continuous active stress purging keep the avatar at peak efficiency indefinitely while powered.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>16</ComponentIndustrial>
+      <Gold>50</Gold>
+      <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOptimizerTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>320</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CoreOptimizer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <respawnTicksMultiplier>0.25</respawnTicksMultiplier>
+        <recreateCooldownMultiplier>0.25</recreateCooldownMultiplier>
+        <stressReliefPerDay>0.070</stressReliefPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ROLE SPECIALIZER — 4 roles × 3 tiers = 12 ThingDefs                -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <!-- Soldier Tier I / II / III -->
+  <ThingDef ParentName="AuxRoleTierIBase">
+    <defName>SyntheraAuxSoldierTierI</defName>
+    <label>soldier role node I</label>
+    <description>Uploads basic combat behavioral protocols to any synthera avatar within 5 cells. Slightly boosts melee damage and ranged performance.</description>
+    <costList>
+      <Steel>70</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>180</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleSoldierTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIBase">
+    <defName>SyntheraAuxSoldierTierII</defName>
+    <label>soldier role node II</label>
+    <description>Uploads advanced combat protocols to any synthera avatar within 5 cells. Significantly boosts melee damage, ranged cooldown, and aiming speed.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Gold>40</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleSoldierTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIIBase">
+    <defName>SyntheraAuxSoldierTierIII</defName>
+    <label>soldier role node III</label>
+    <description>Uploads a full combat behavioral matrix rewrite to any synthera avatar within 5 cells. Dramatically enhances all offensive parameters including movement speed.</description>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Gold>60</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleSoldierTierIII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Worker Tier I / II / III -->
+  <ThingDef ParentName="AuxRoleTierIBase">
+    <defName>SyntheraAuxWorkerTierI</defName>
+    <label>worker role node I</label>
+    <description>Uploads basic labor protocols to any synthera avatar within 5 cells. Slightly boosts global work speed, construction, and mining efficiency.</description>
+    <costList>
+      <Steel>70</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>180</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleWorkerTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIBase">
+    <defName>SyntheraAuxWorkerTierII</defName>
+    <label>worker role node II</label>
+    <description>Uploads advanced labor protocols to any synthera avatar within 5 cells. Significantly boosts global work speed, construction, and mining efficiency.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Gold>40</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleWorkerTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIIBase">
+    <defName>SyntheraAuxWorkerTierIII</defName>
+    <label>worker role node III</label>
+    <description>Uploads a full labor matrix rewrite to any synthera avatar within 5 cells. Greatly enhances work speed, construction, mining, and plant work efficiency.</description>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Gold>60</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleWorkerTierIII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Medic Tier I / II / III -->
+  <ThingDef ParentName="AuxRoleTierIBase">
+    <defName>SyntheraAuxMedicTierI</defName>
+    <label>medic role node I</label>
+    <description>Uploads basic medical protocols to any synthera avatar within 5 cells. Slightly improves tending quality, operation speed, and surgery success chance.</description>
+    <costList>
+      <Steel>70</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>180</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleMedicTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIBase">
+    <defName>SyntheraAuxMedicTierII</defName>
+    <label>medic role node II</label>
+    <description>Uploads advanced medical protocols to any synthera avatar within 5 cells. Significantly improves tending quality, operation speed, and surgery success chance.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Gold>40</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleMedicTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIIBase">
+    <defName>SyntheraAuxMedicTierIII</defName>
+    <label>medic role node III</label>
+    <description>Uploads a full medical matrix rewrite to any synthera avatar within 5 cells. Greatly enhances tending, surgery success, and operation speed.</description>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Gold>60</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleMedicTierIII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Scout Tier I / II / III -->
+  <ThingDef ParentName="AuxRoleTierIBase">
+    <defName>SyntheraAuxScoutTierI</defName>
+    <label>scout role node I</label>
+    <description>Uploads basic mobility and social protocols to any synthera avatar within 5 cells. Slightly improves movement speed, social impact, and trade prices.</description>
+    <costList>
+      <Steel>70</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>180</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleScoutTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIBase">
+    <defName>SyntheraAuxScoutTierII</defName>
+    <label>scout role node II</label>
+    <description>Uploads advanced mobility and social protocols to any synthera avatar within 5 cells. Significantly improves movement speed, social impact, and trade prices.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Gold>40</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleScoutTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxRoleTierIIIBase">
+    <defName>SyntheraAuxScoutTierIII</defName>
+    <label>scout role node III</label>
+    <description>Uploads a full mobility and social matrix rewrite to any synthera avatar within 5 cells. Greatly enhances movement, social impact, and trade efficiency.</description>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Gold>60</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleScoutTierIII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARMOR MATRIX — 3 tiers                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThingDef ParentName="AuxArmorTierIBase">
+    <defName>SyntheraAuxArmorTierI</defName>
+    <label>armor matrix node I</label>
+    <description>Projects a basic reinforcement lattice onto any synthera avatar within 5 cells. Reduces all incoming damage by 15% while powered.</description>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <Plasteel>20</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxArmorTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>ArmorMatrix</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraArmorMatrixTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxArmorTierIIBase">
+    <defName>SyntheraAuxArmorTierII</defName>
+    <label>armor matrix node II</label>
+    <description>Projects a dense reinforcement lattice onto any synthera avatar within 5 cells. Reduces all incoming damage by 30% while powered.</description>
+    <costList>
+      <Steel>90</Steel>
+      <ComponentIndustrial>14</ComponentIndustrial>
+      <Plasteel>50</Plasteel>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxArmorTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>450</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>ArmorMatrix</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraArmorMatrixTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxArmorTierIIIBase">
+    <defName>SyntheraAuxArmorTierIII</defName>
+    <label>armor matrix node III</label>
+    <description>Projects a maximum-density reinforcement lattice onto any synthera avatar within 5 cells. Reduces all incoming damage by 50% while powered. The avatar becomes extraordinarily difficult to destroy.</description>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Plasteel>100</Plasteel>
+      <Gold>50</Gold>
+      <ComponentSpacer>4</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxArmorTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>ArmorMatrix</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraArmorMatrixTierIII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- OVERCLOCK CORE — 3 tiers                                            -->
+  <!-- High risk, extreme reward. Doubles/triples/quintuples stress rate.  -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThingDef ParentName="AuxOverclockTierIBase">
+    <defName>SyntheraAuxOverclockTierI</defName>
+    <label>overclock core node I</label>
+    <description>Pushes a nearby avatar's combat systems past safe operational limits. Dramatically enhances melee, ranged, and mobility — but system stress accumulates twice as fast. Recall the avatar more frequently or risk critical failure.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Gold>60</Gold>
+      <Plasteel>40</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOverclockTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>OverclockCore</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraOverclockTierI</pawnBuffHediff>
+        <stressAddedPerDay>0.033</stressAddedPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxOverclockTierIIBase">
+    <defName>SyntheraAuxOverclockTierII</defName>
+    <label>overclock core node II</label>
+    <description>Extreme overclock. The avatar's combat output is extraordinary but system stress accumulates three times faster than normal. Deployment windows are short — plan accordingly.</description>
+    <costList>
+      <Steel>140</Steel>
+      <ComponentIndustrial>30</ComponentIndustrial>
+      <Gold>100</Gold>
+      <Plasteel>80</Plasteel>
+      <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOverclockTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>900</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>OverclockCore</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraOverclockTierII</pawnBuffHediff>
+        <stressAddedPerDay>0.066</stressAddedPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxOverclockTierIIIBase">
+    <defName>SyntheraAuxOverclockTierIII</defName>
+    <label>overclock core node III</label>
+    <description>Maximum theoretical overclock. Combat performance borders on the impossible. System stress accumulates five times faster — the avatar can sustain less than four hours of deployment before reaching critical stress. A devastating but fragile weapon.</description>
+    <costList>
+      <Steel>180</Steel>
+      <ComponentIndustrial>40</ComponentIndustrial>
+      <Gold>150</Gold>
+      <Plasteel>150</Plasteel>
+      <ComponentSpacer>8</ComponentSpacer>
+      <Uranium>30</Uranium>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOverclockTierIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>OverclockCore</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraOverclockTierIII</pawnBuffHediff>
+        <stressAddedPerDay>0.132</stressAddedPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- VERSATILITY PROTOCOL — 2 tiers                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ThingDef ParentName="AuxVersatilityTierIBase">
+    <defName>SyntheraAuxVersatilityTierI</defName>
+    <label>versatility protocol node I</label>
+    <description>Uploads broad behavioral enhancements to any synthera avatar within 5 cells. Improves research speed, carry capacity, plant work, and hunting stealth while powered.</description>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <Gold>30</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxVersatilityTierI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>VersatilityProtocol</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraVersatilityTierI</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AuxVersatilityTierIIBase">
+    <defName>SyntheraAuxVersatilityTierII</defName>
+    <label>versatility protocol node II</label>
+    <description>Uploads a deep-spectrum behavioral imprint to any synthera avatar within 5 cells. Dramatically improves research, carrying, plant work, stealth, and social skills while powered. The avatar approaches universal competency.</description>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <Gold>70</Gold>
+      <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxVersatilityTierII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>650</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>VersatilityProtocol</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraVersatilityTierII</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Archotech abstract texture bases -->
+  <ThingDef Name="AuxCombatArchotechBase"      Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxCombat/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxWorkArchotechBase"        Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxWork/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOptimizerArchotechBase"   Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOptimizer/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxRoleArchotechBase"        Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxRole/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxArmorArchotechBase"       Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxArmor/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxOverclockArchotechBase"   Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxOverclock/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+  <ThingDef Name="AuxVersatilityArchotechBase" Abstract="True" ParentName="SyntheraAuxBase"><graphicData><texPath>Things/Building/AuxVersatility/TierArchotech</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>(1,1)</drawSize></graphicData></ThingDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARCHOTECH TIER — all modules produce power (negative consumption)  -->
+  <!-- Require SyntheraArchotechShard to build. Absurdly powerful.        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <!-- Combat Archotech -->
+  <ThingDef ParentName="AuxCombatArchotechBase">
+    <defName>SyntheraAuxCombatArchotech</defName>
+    <label>combat uplink node archotech</label>
+    <description>An archotech combat uplink node assembled from recovered shard fragments. It transmits a combat enhancement signal of theoretically impossible density to any synthera avatar within 5 cells. Melee, ranged, and movement performance are pushed far beyond any known limit. As a side effect of its archotech power regulation, the node generates a small amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>4</SyntheraArchotechShard>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxCombatArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CombatAmplifier</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraAmpBuffArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Work Archotech -->
+  <ThingDef ParentName="AuxWorkArchotechBase">
+    <defName>SyntheraAuxWorkArchotech</defName>
+    <label>work protocol node archotech</label>
+    <description>An archotech work protocol node that uploads every behavioral work package simultaneously to any synthera avatar within 5 cells. The avatar gains access to every possible work type with no remaining restrictions. The node generates a small amount of electricity as a side effect of its operation.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>3</SyntheraArchotechShard>
+      <ComponentSpacer>2</ComponentSpacer>
+      <Plasteel>40</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxWorkArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>WorkUnlocker</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <unlockedWorkTypes>
+          <li>Firefighter</li>
+          <li>PatientBedRest</li>
+          <li>Doctor</li>
+          <li>Warden</li>
+          <li>Handling</li>
+          <li>Cooking</li>
+          <li>Hunting</li>
+          <li>Construction</li>
+          <li>Growing</li>
+          <li>Mining</li>
+          <li>PlantCutting</li>
+          <li>Smithing</li>
+          <li>Tailoring</li>
+          <li>Art</li>
+          <li>Crafting</li>
+          <li>Hauling</li>
+          <li>Cleaning</li>
+          <li>Research</li>
+          <li>BasicWorker</li>
+          <li>Flicker</li>
+        </unlockedWorkTypes>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Optimizer Archotech -->
+  <ThingDef ParentName="AuxOptimizerArchotechBase">
+    <defName>SyntheraAuxOptimizerArchotech</defName>
+    <label>core optimizer node archotech</label>
+    <description>An archotech maintenance uplink that reduces all avatar respawn and recreate cooldowns to near-zero and continuously purges system stress at a rate that negates even overclock-level accumulation. With this node active, the avatar requires almost no downtime. The node also generates a modest amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>5</SyntheraArchotechShard>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOptimizerArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>CoreOptimizer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <respawnTicksMultiplier>0.01</respawnTicksMultiplier>
+        <recreateCooldownMultiplier>0.01</recreateCooldownMultiplier>
+        <stressReliefPerDay>0.30</stressReliefPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Armor Archotech -->
+  <ThingDef ParentName="AuxArmorArchotechBase">
+    <defName>SyntheraAuxArmorArchotech</defName>
+    <label>armor matrix node archotech</label>
+    <description>An archotech armor matrix node that projects a maximum-density reinforcement lattice onto any synthera avatar within 5 cells. Incoming damage is reduced by 85%. The avatar becomes effectively unkillable by conventional weapons. The lattice generates a small amount of electricity as a side effect.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>6</SyntheraArchotechShard>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Plasteel>120</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxArmorArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>ArmorMatrix</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraArmorMatrixArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Overclock Archotech -->
+  <ThingDef ParentName="AuxOverclockArchotechBase">
+    <defName>SyntheraAuxOverclockArchotech</defName>
+    <label>overclock core node archotech</label>
+    <description>An archotech overclock node that pushes the avatar's systems into an operational regime that should be physically impossible. Combat performance is barely describable. System stress accumulates ten times faster than normal — every deployment must be treated as a timed strike mission. The node generates a small amount of electricity, though this feels almost like mockery given what it demands in return.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>5</SyntheraArchotechShard>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Plasteel>100</Plasteel>
+      <Uranium>20</Uranium>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxOverclockArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-100</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>OverclockCore</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraOverclockArchotech</pawnBuffHediff>
+        <stressAddedPerDay>0.33</stressAddedPerDay>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Versatility Archotech -->
+  <ThingDef ParentName="AuxVersatilityArchotechBase">
+    <defName>SyntheraAuxVersatilityArchotech</defName>
+    <label>versatility protocol node archotech</label>
+    <description>An archotech versatility node that uploads a deep behavioral enhancement package to any synthera avatar within 5 cells, covering every non-combat capability simultaneously at maximum possible intensity. Research, labor, social interactions, and field work all reach superhuman levels. The node generates a modest amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>4</SyntheraArchotechShard>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxVersatilityArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>VersatilityProtocol</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraVersatilityArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Role Archotech — Soldier -->
+  <ThingDef ParentName="AuxRoleArchotechBase">
+    <defName>SyntheraAuxSoldierArchotech</defName>
+    <label>soldier role node archotech</label>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated combat unit. Offensive performance reaches levels no known technology can reproduce. The node generates a small amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>4</SyntheraArchotechShard>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleSoldierArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Role Archotech — Worker -->
+  <ThingDef ParentName="AuxRoleArchotechBase">
+    <defName>SyntheraAuxWorkerArchotech</defName>
+    <label>worker role node archotech</label>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated labor unit. Work and construction proceed at a pace that makes biological colonists appear stationary. The node generates a small amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>4</SyntheraArchotechShard>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleWorkerArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Role Archotech — Medic -->
+  <ThingDef ParentName="AuxRoleArchotechBase">
+    <defName>SyntheraAuxMedicArchotech</defName>
+    <label>medic role node archotech</label>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated medical unit. Surgical outcomes approach certainty and tending quality far exceeds any biological physician. The node generates a small amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>4</SyntheraArchotechShard>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleMedicArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Role Archotech — Scout -->
+  <ThingDef ParentName="AuxRoleArchotechBase">
+    <defName>SyntheraAuxScoutArchotech</defName>
+    <label>scout role node archotech</label>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated mobility and social unit. Movement speed and social manipulation capabilities reach levels no biological entity can match. The node generates a small amount of electricity.</description>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0.05</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>4</SyntheraArchotechShard>
+      <ComponentSpacer>3</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AuxRoleArchotech</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>-150</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="SyntheraCore.CompProperties_AuxiliaryModule">
+        <moduleType>RoleSpecializer</moduleType>
+        <detectionRadius>5</detectionRadius>
+        <scanIntervalTicks>250</scanIntervalTicks>
+        <pawnBuffHediff>SyntheraRoleScoutArchotech</pawnBuffHediff>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

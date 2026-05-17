@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- Add archotech shards to Royalty ancient complex reward drops (if DLC present) -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingSetMakerDef[defName="MapGen_AncientComplex_ThreatRewardHigh"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingSetMakerDef[defName="MapGen_AncientComplex_ThreatRewardHigh"]/root/options</xpath>
+      <value>
+        <li>
+          <thingDef>SyntheraArchotechShard</thingDef>
+          <weight>0.15</weight>
+        </li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingSetMakerDef[defName="MapGen_AncientComplex_ThreatRewardMid"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingSetMakerDef[defName="MapGen_AncientComplex_ThreatRewardMid"]/root/options</xpath>
+      <value>
+        <li>
+          <thingDef>SyntheraArchotechShard</thingDef>
+          <weight>0.08</weight>
+        </li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- Try Anomaly DLC dungeon rewards -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingSetMakerDef[defName="Anomaly_VoidStructure_Reward"]</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingSetMakerDef[defName="Anomaly_VoidStructure_Reward"]/root/options</xpath>
+      <value>
+        <li>
+          <thingDef>SyntheraArchotechShard</thingDef>
+          <weight>0.20</weight>
+        </li>
+      </value>
+    </match>
+  </Operation>
+
+</Patch>

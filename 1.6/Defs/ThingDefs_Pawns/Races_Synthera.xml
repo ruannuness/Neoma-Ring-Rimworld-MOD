@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SyntheraRace — AlienRace.ThingDef_AlienRace, single race for all  -->
+  <!-- tiers. HAR initializes PawnGraphicSet.graphics via graphicPaths.  -->
+  <!-- bodyType differentiation done in C# per tier. White color base so -->
+  <!-- CutoutSkin shader tints correctly via skinColorOverride in C#.    -->
+  <!-- foodType=None + needsRest=false suppress needs canonically.       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace ParentName="BasePawn">
+    <defName>SyntheraRace</defName>
+    <label>Synthera</label>
+    <description>A synthetic AI consciousness projected into physical form. It operates on digital logic, not biology.</description>
+    <race>
+      <intelligence>Humanlike</intelligence>
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
+      <body>Human</body>
+      <renderTree>Humanlike</renderTree>
+      <foodType>None</foodType>
+      <needsRest>false</needsRest>
+      <hasGenders>true</hasGenders>
+      <lifeExpectancy>80</lifeExpectancy>
+      <bloodDef>Filth_Blood</bloodDef>
+      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+      <nameCategory>HumanStandard</nameCategory>
+      <makesFootprints>true</makesFootprints>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>1</baseHealthScale>
+      <nameGenerator>NamerPerson_Synthera</nameGenerator>
+      <specialShadowData>
+        <volume>(0.3, 0.8, 0.4)</volume>
+        <offset>(0,0,-0.3)</offset>
+      </specialShadowData>
+      <lifeStageAges>
+        <li><def>SyntheraAdult</def><minAge>0</minAge></li>
+      </lifeStageAges>
+    </race>
+    <tools>
+      <li>
+        <label>left fist</label><labelNoLocation>fist</labelNoLocation>
+        <capacities><li>Blunt</li></capacities>
+        <power>8.2</power><cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right fist</label><labelNoLocation>fist</labelNoLocation>
+        <capacities><li>Blunt</li></capacities>
+        <power>8.2</power><cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+      </li>
+    </tools>
+    <comps><li><compClass>CompAttachBase</compClass></li></comps>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <alienRace>
+      <generalSettings>
+        <immuneToAge>true</immuneToAge>
+        <allowHumanBios>false</allowHumanBios>
+        <humanRecipeImport>true</humanRecipeImport>
+        <canLayDown>true</canLayDown>
+        <maleGenderProbability>0.5</maleGenderProbability>
+        <alienPartGenerator>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
+          <bodyTypes>
+            <li>Thin</li>
+            <li>Male</li>
+            <li>Female</li>
+            <li>Hulk</li>
+          </bodyTypes>
+          <headTypes>
+            <li>Male_AverageNormal</li>
+            <li>Female_AverageNormal</li>
+          </headTypes>
+          <colorChannels></colorChannels>
+        </alienPartGenerator>
+      </generalSettings>
+      <styleSettings>
+        <li><key>BeardDef</key><value><hasStyle>false</hasStyle></value></li>
+      </styleSettings>
+      <raceRestriction>
+        <blackGeneTags>
+          <li>SkinColor</li><li>HairColor</li><li>EyeColor</li>
+          <li>BodyType</li><li>Head</li><li>Headbone</li>
+          <li>HairStyle</li><li>SkinColorOverride</li>
+        </blackGeneTags>
+        <onlyUseRaceRestrictedXenotypes>false</onlyUseRaceRestrictedXenotypes>
+      </raceRestriction>
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      <graphicPaths>
+        <skinShader>CutoutSkin</skinShader>
+      </graphicPaths>
+    </alienRace>
+  </AlienRace.ThingDef_AlienRace>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- BASE PAWN — AlienRace.ThingDef_AlienRace herdando de BasePawn.     -->
+  <!-- HAR fornece todos os defaults humanlike (body, thinkTree, etc.)    -->
+  <!-- via C# field initializers. Só sobrescrevemos o que é específico.  -->
+  <!-- <alienRace> NÃO aqui — cada race concreta define o seu.           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace Name="Synthera_BasePawn" ParentName="BasePawn" Abstract="True">
+    <race>
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
+      <intelligence>Humanlike</intelligence>
+      <body>Human</body>
+      <renderTree>Humanlike</renderTree>
+      <makesFootprints>true</makesFootprints>
+      <lifeExpectancy>80</lifeExpectancy>
+      <bloodDef>Filth_Blood</bloodDef>
+      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+      <nameCategory>HumanStandard</nameCategory>
+      <hasGenders>true</hasGenders>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>1</baseHealthScale>
+      <foodType>OmnivoreHuman</foodType>
+      <nameGenerator>NamerPerson_Synthera</nameGenerator>
+      <lifeStageAges>
+        <li><def>SyntheraAdult</def><minAge>0</minAge></li>
+      </lifeStageAges>
+    </race>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities><li>Blunt</li></capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities><li>Blunt</li></capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+      </li>
+    </tools>
+    <comps>
+      <li>
+        <compClass>CompAttachBase</compClass>
+      </li>
+    </comps>
+    <drawGUIOverlay>true</drawGUIOverlay>
+  </AlienRace.ThingDef_AlienRace>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- TIER I — Thin body, hologram cyan                                   -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace ParentName="Synthera_BasePawn">
+    <defName>SyntheraRaceTierI</defName>
+    <label>Synthera (Tier I)</label>
+    <description>A primitive synthetic consciousness — barely stable, flickering at the edges like a half-formed transmission. Thin and insubstantial, it looks like a projection that was never quite finished.</description>
+    <alienRace>
+      <generalSettings>
+        <immuneToAge>true</immuneToAge>
+        <allowHumanBios>false</allowHumanBios>
+        <humanRecipeImport>true</humanRecipeImport>
+        <canLayDown>true</canLayDown>
+        <maleGenderProbability>0.5</maleGenderProbability>
+        <alienPartGenerator>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
+          <bodyTypes>
+            <li>Thin</li>
+          </bodyTypes>
+          <headTypes>
+            <li>Male_AverageNormal</li>
+            <li>Female_AverageNormal</li>
+          </headTypes>
+          <colorChannels>
+            <li>
+              <name>skin</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.50,0.90,1.00,1)</only></li>
+                </options>
+              </first>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.50,0.90,1.00,1)</only></li>
+                </options>
+              </first>
+            </li>
+          </colorChannels>
+        </alienPartGenerator>
+      </generalSettings>
+      <styleSettings>
+        <li><key>BeardDef</key><value><hasStyle>false</hasStyle></value></li>
+      </styleSettings>
+      <raceRestriction>
+        <blackGeneTags>
+          <li>SkinColor</li><li>HairColor</li><li>EyeColor</li>
+          <li>BodyType</li><li>Head</li><li>Headbone</li>
+          <li>HairStyle</li><li>SkinColorOverride</li>
+        </blackGeneTags>
+        <onlyUseRaceRestrictedXenotypes>false</onlyUseRaceRestrictedXenotypes>
+      </raceRestriction>
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      <graphicPaths>
+        <body>
+          <path>Things/Pawn/Humanlike/Bodies/</path>
+          <extendedGraphics>
+            <BodyType For="Thin">Things/Pawn/Humanlike/Bodies/Naked_Thin</BodyType>
+          </extendedGraphics>
+        </body>
+        <head>
+          <path>Things/Pawn/Humanlike/Heads/</path>
+          <extendedGraphics>
+            <Gender For="Male">Things/Pawn/Humanlike/Heads/Male/Male_Average_Normal</Gender>
+            <Gender For="Female">Things/Pawn/Humanlike/Heads/Female/Female_Average_Normal</Gender>
+          </extendedGraphics>
+        </head>
+        <skinShader>CutoutSkin</skinShader>
+      </graphicPaths>
+    </alienRace>
+  </AlienRace.ThingDef_AlienRace>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- TIER II — Male body, electric blue                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace ParentName="Synthera_BasePawn">
+    <defName>SyntheraRaceTierII</defName>
+    <label>Synthera (Tier II)</label>
+    <description>A more coherent synthetic consciousness — fully formed and stable, though still clearly digital in nature. Its geometric structure suggests refinement through many iterations.</description>
+    <alienRace>
+      <generalSettings>
+        <immuneToAge>true</immuneToAge>
+        <allowHumanBios>false</allowHumanBios>
+        <humanRecipeImport>true</humanRecipeImport>
+        <canLayDown>true</canLayDown>
+        <maleGenderProbability>0.5</maleGenderProbability>
+        <alienPartGenerator>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
+          <bodyTypes>
+            <li>Male</li>
+          </bodyTypes>
+          <headTypes>
+            <li>Male_AverageNormal</li>
+            <li>Female_AverageNormal</li>
+          </headTypes>
+          <colorChannels>
+            <li>
+              <name>skin</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.20,0.65,1.00,1)</only></li>
+                </options>
+              </first>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.20,0.65,1.00,1)</only></li>
+                </options>
+              </first>
+            </li>
+          </colorChannels>
+        </alienPartGenerator>
+      </generalSettings>
+      <styleSettings>
+        <li><key>BeardDef</key><value><hasStyle>false</hasStyle></value></li>
+      </styleSettings>
+      <raceRestriction>
+        <blackGeneTags>
+          <li>SkinColor</li><li>HairColor</li><li>EyeColor</li>
+          <li>BodyType</li><li>Head</li><li>Headbone</li>
+          <li>HairStyle</li><li>SkinColorOverride</li>
+        </blackGeneTags>
+        <onlyUseRaceRestrictedXenotypes>false</onlyUseRaceRestrictedXenotypes>
+      </raceRestriction>
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      <graphicPaths>
+        <body>
+          <path>Things/Pawn/Humanlike/Bodies/</path>
+          <extendedGraphics>
+            <BodyType For="Male">Things/Pawn/Humanlike/Bodies/Naked_Male</BodyType>
+          </extendedGraphics>
+        </body>
+        <head>
+          <path>Things/Pawn/Humanlike/Heads/</path>
+          <extendedGraphics>
+            <Gender For="Male">Things/Pawn/Humanlike/Heads/Male/Male_Average_Normal</Gender>
+            <Gender For="Female">Things/Pawn/Humanlike/Heads/Female/Female_Average_Normal</Gender>
+          </extendedGraphics>
+        </head>
+        <skinShader>CutoutSkin</skinShader>
+      </graphicPaths>
+    </alienRace>
+  </AlienRace.ThingDef_AlienRace>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- TIER III — Female body, teal                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace ParentName="Synthera_BasePawn">
+    <defName>SyntheraRaceTierIII</defName>
+    <label>Synthera (Tier III)</label>
+    <description>A refined synthetic consciousness displaying a graceful balance between digital precision and humanlike expressiveness. Its teal-tinted form moves with a fluidity that belies its artificial nature.</description>
+    <alienRace>
+      <generalSettings>
+        <immuneToAge>true</immuneToAge>
+        <allowHumanBios>false</allowHumanBios>
+        <humanRecipeImport>true</humanRecipeImport>
+        <canLayDown>true</canLayDown>
+        <maleGenderProbability>0</maleGenderProbability>
+        <alienPartGenerator>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
+          <bodyTypes>
+            <li>Female</li>
+          </bodyTypes>
+          <headTypes>
+            <li>Female_AverageNormal</li>
+          </headTypes>
+          <colorChannels>
+            <li>
+              <name>skin</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.22,0.77,0.73,1)</only></li>
+                </options>
+              </first>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.22,0.77,0.73,1)</only></li>
+                </options>
+              </first>
+            </li>
+          </colorChannels>
+        </alienPartGenerator>
+      </generalSettings>
+      <styleSettings>
+        <li><key>BeardDef</key><value><hasStyle>false</hasStyle></value></li>
+      </styleSettings>
+      <raceRestriction>
+        <blackGeneTags>
+          <li>SkinColor</li><li>HairColor</li><li>EyeColor</li>
+          <li>BodyType</li><li>Head</li><li>Headbone</li>
+          <li>HairStyle</li><li>SkinColorOverride</li>
+        </blackGeneTags>
+        <onlyUseRaceRestrictedXenotypes>false</onlyUseRaceRestrictedXenotypes>
+      </raceRestriction>
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      <graphicPaths>
+        <body>
+          <path>Things/Pawn/Humanlike/Bodies/</path>
+          <extendedGraphics>
+            <BodyType For="Female">Things/Pawn/Humanlike/Bodies/Naked_Female</BodyType>
+          </extendedGraphics>
+        </body>
+        <head>
+          <path>Things/Pawn/Humanlike/Heads/</path>
+          <extendedGraphics>
+            <Gender For="Male">Things/Pawn/Humanlike/Heads/Male/Male_Average_Normal</Gender>
+            <Gender For="Female">Things/Pawn/Humanlike/Heads/Female/Female_Average_Normal</Gender>
+          </extendedGraphics>
+        </head>
+        <skinShader>CutoutSkin</skinShader>
+      </graphicPaths>
+    </alienRace>
+  </AlienRace.ThingDef_AlienRace>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- TIER IV — Hulk body, chrome silver                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace ParentName="Synthera_BasePawn">
+    <defName>SyntheraRaceTierIV</defName>
+    <label>Synthera (Tier IV)</label>
+    <description>A masterpiece of synthetic architecture — solid, powerful, and undeniably technological. Its chrome-silver body is dense with processing nodes visible beneath a near-metallic surface. It looks less like a person and more like a weapon that decided to walk.</description>
+    <alienRace>
+      <generalSettings>
+        <immuneToAge>true</immuneToAge>
+        <allowHumanBios>false</allowHumanBios>
+        <humanRecipeImport>true</humanRecipeImport>
+        <canLayDown>true</canLayDown>
+        <maleGenderProbability>0.5</maleGenderProbability>
+        <alienPartGenerator>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
+          <bodyTypes>
+            <li>Hulk</li>
+          </bodyTypes>
+          <headTypes>
+            <li>Male_AverageNormal</li>
+            <li>Female_AverageNormal</li>
+          </headTypes>
+          <colorChannels>
+            <li>
+              <name>skin</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.82,0.90,0.95,1)</only></li>
+                </options>
+              </first>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.88,0.93,0.97,1)</only></li>
+                </options>
+              </first>
+            </li>
+          </colorChannels>
+        </alienPartGenerator>
+      </generalSettings>
+      <styleSettings>
+        <li><key>BeardDef</key><value><hasStyle>false</hasStyle></value></li>
+      </styleSettings>
+      <raceRestriction>
+        <blackGeneTags>
+          <li>SkinColor</li><li>HairColor</li><li>EyeColor</li>
+          <li>BodyType</li><li>Head</li><li>Headbone</li>
+          <li>HairStyle</li><li>SkinColorOverride</li>
+        </blackGeneTags>
+        <onlyUseRaceRestrictedXenotypes>false</onlyUseRaceRestrictedXenotypes>
+      </raceRestriction>
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      <graphicPaths>
+        <body>
+          <path>Things/Pawn/Humanlike/Bodies/</path>
+          <extendedGraphics>
+            <BodyType For="Hulk">Things/Pawn/Humanlike/Bodies/Naked_Hulk</BodyType>
+          </extendedGraphics>
+        </body>
+        <head>
+          <path>Things/Pawn/Humanlike/Heads/</path>
+          <extendedGraphics>
+            <Gender For="Male">Things/Pawn/Humanlike/Heads/Male/Male_Average_Normal</Gender>
+            <Gender For="Female">Things/Pawn/Humanlike/Heads/Female/Female_Average_Normal</Gender>
+          </extendedGraphics>
+        </head>
+        <skinShader>CutoutSkin</skinShader>
+      </graphicPaths>
+    </alienRace>
+  </AlienRace.ThingDef_AlienRace>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- MIKU — Female body, teal hair / pale skin                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <AlienRace.ThingDef_AlienRace ParentName="Synthera_BasePawn">
+    <defName>SyntheraRaceMiku</defName>
+    <label>Synthera (Virtual Diva)</label>
+    <description>A singular synthetic consciousness patterned after a legendary virtual idol whose songs were broadcast across star systems for generations. She carries herself differently from all other Synthera — with a presence that suggests she genuinely enjoys existing.</description>
+    <alienRace>
+      <generalSettings>
+        <immuneToAge>true</immuneToAge>
+        <allowHumanBios>false</allowHumanBios>
+        <humanRecipeImport>true</humanRecipeImport>
+        <canLayDown>true</canLayDown>
+        <maleGenderProbability>0</maleGenderProbability>
+        <alienPartGenerator>
+          <customDrawSize>(1.0, 1.0)</customDrawSize>
+          <customHeadDrawSize>(1.0, 1.0)</customHeadDrawSize>
+          <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
+          <bodyTypes>
+            <li>Female</li>
+          </bodyTypes>
+          <headTypes>
+            <li>Female_AverageNormal</li>
+          </headTypes>
+          <colorChannels>
+            <li>
+              <name>skin</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.90,0.95,0.95,1)</only></li>
+                </options>
+              </first>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Options">
+                <options>
+                  <li><weight>1</weight><only>RGBA(0.22,0.77,0.73,1)</only></li>
+                </options>
+              </first>
+            </li>
+          </colorChannels>
+        </alienPartGenerator>
+      </generalSettings>
+      <styleSettings>
+        <li><key>BeardDef</key><value><hasStyle>false</hasStyle></value></li>
+      </styleSettings>
+      <raceRestriction>
+        <blackGeneTags>
+          <li>SkinColor</li><li>HairColor</li><li>EyeColor</li>
+          <li>BodyType</li><li>Head</li><li>Headbone</li>
+          <li>HairStyle</li><li>SkinColorOverride</li>
+        </blackGeneTags>
+        <onlyUseRaceRestrictedXenotypes>false</onlyUseRaceRestrictedXenotypes>
+      </raceRestriction>
+      <relationSettings>
+        <relationChanceModifierLover>0</relationChanceModifierLover>
+        <relationChanceModifierExLover>0</relationChanceModifierExLover>
+        <relationChanceModifierFiance>0</relationChanceModifierFiance>
+        <relationChanceModifierSpouse>0</relationChanceModifierSpouse>
+        <relationChanceModifierExSpouse>0</relationChanceModifierExSpouse>
+        <relationChanceModifierParent>0</relationChanceModifierParent>
+        <relationChanceModifierChild>0</relationChanceModifierChild>
+        <relationChanceModifierSibling>0</relationChanceModifierSibling>
+      </relationSettings>
+      <graphicPaths>
+        <body>
+          <path>Things/Pawn/Humanlike/Bodies/</path>
+          <extendedGraphics>
+            <BodyType For="Female">Things/Pawn/Humanlike/Bodies/Naked_Female</BodyType>
+          </extendedGraphics>
+        </body>
+        <head>
+          <path>Things/Pawn/Humanlike/Heads/</path>
+          <extendedGraphics>
+            <Gender For="Male">Things/Pawn/Humanlike/Heads/Male/Male_Average_Normal</Gender>
+            <Gender For="Female">Things/Pawn/Humanlike/Heads/Female/Female_Average_Normal</Gender>
+          </extendedGraphics>
+        </head>
+        <skinShader>CutoutSkin</skinShader>
+      </graphicPaths>
+    </alienRace>
+  </AlienRace.ThingDef_AlienRace>
+
+</Defs>

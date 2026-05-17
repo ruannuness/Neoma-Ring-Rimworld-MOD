@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <RulePackDef>
+    <defName>NamerPerson_Synthera</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>name->[Syn_First]-[Syn_Serial]</li>
+        <li>Syn_First->Alpha</li>
+        <li>Syn_First->Beta</li>
+        <li>Syn_First->Gamma</li>
+        <li>Syn_First->Delta</li>
+        <li>Syn_First->Epsilon</li>
+        <li>Syn_First->Zeta</li>
+        <li>Syn_First->Eta</li>
+        <li>Syn_First->Theta</li>
+        <li>Syn_First->Iota</li>
+        <li>Syn_First->Kappa</li>
+        <li>Syn_First->Lambda</li>
+        <li>Syn_First->Nova</li>
+        <li>Syn_First->Vega</li>
+        <li>Syn_First->Lyra</li>
+        <li>Syn_First->Orion</li>
+        <li>Syn_Serial->07</li>
+        <li>Syn_Serial->12</li>
+        <li>Syn_Serial->21</li>
+        <li>Syn_Serial->39</li>
+        <li>Syn_Serial->44</li>
+        <li>Syn_Serial->77</li>
+        <li>Syn_Serial->88</li>
+        <li>Syn_Serial->99</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+</Defs>

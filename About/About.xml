@@ -8,9 +8,15 @@
 		<li>1.6</li>
 	</supportedVersions>
 	<modDependencies>
+		<li>
+			<packageId>erdelf.HumanoidAlienRaces</packageId>
+			<displayName>Humanoid Alien Races</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/839005762</steamWorkshopUrl>
+		</li>
 	</modDependencies>
 	<loadAfter>
 		<li>Core</li>
+		<li>erdelf.HumanoidAlienRaces</li>
 	</loadAfter>
 	<description>A standalone device for spawning and managing synthera avatars. The Synthera Core allows you to create sophisticated mechanical avatars that can interact with the world.</description>
 </ModMetaData>

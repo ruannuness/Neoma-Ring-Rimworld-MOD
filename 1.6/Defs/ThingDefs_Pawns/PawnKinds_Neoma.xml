@@ -5,7 +5,7 @@
   <PawnKindDef>
     <defName>NeomaPawnTierI</defName>
     <label>SyntheraCore_NeomaPawnTier1_Label</label>
-    <race>Human</race>
+    <race>SyntheraRace</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>50</combatPower>
     <canBeSapper>false</canBeSapper>
@@ -17,13 +17,14 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+
   </PawnKindDef>
 
   <!-- Tier II: Pawn Intermediário -->
   <PawnKindDef>
     <defName>NeomaPawnTierII</defName>
     <label>SyntheraCore_NeomaPawnTier2_Label</label>
-    <race>Human</race>
+    <race>SyntheraRace</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>100</combatPower>
     <canBeSapper>false</canBeSapper>
@@ -35,13 +36,14 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+
   </PawnKindDef>
 
   <!-- Tier III: Pawn Avançado -->
   <PawnKindDef>
     <defName>NeomaPawnTierIII</defName>
     <label>SyntheraCore_NeomaPawnTier3_Label</label>
-    <race>Human</race>
+    <race>SyntheraRace</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>200</combatPower>
     <canBeSapper>false</canBeSapper>
@@ -53,13 +55,14 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+
   </PawnKindDef>
 
   <!-- Tier IV: Pawn Elite -->
   <PawnKindDef>
     <defName>NeomaPawnTierIV</defName>
     <label>SyntheraCore_NeomaPawnTier4_Label</label>
-    <race>Human</race>
+    <race>SyntheraRace</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>400</combatPower>
     <canBeSapper>false</canBeSapper>
@@ -71,6 +74,26 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+
+  </PawnKindDef>
+
+  <!-- Miku: Virtual Diva -->
+  <PawnKindDef>
+    <defName>NeomaPawnMiku</defName>
+    <label>Virtual Diva</label>
+    <race>SyntheraRace</race>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <combatPower>200</combatPower>
+    <canBeSapper>false</canBeSapper>
+    <initialResistanceRange><min>0.7</min><max>1.2</max></initialResistanceRange>
+    <initialWillRange><min>0.7</min><max>1.2</max></initialWillRange>
+    <apparelMoney><min>0</min><max>0</max></apparelMoney>
+    <weaponMoney><min>0</min><max>0</max></weaponMoney>
+    <techHediffsMoney><min>0</min><max>0</max></techHediffsMoney>
+    <backstoryCategories>
+      <li>Civil</li>
+    </backstoryCategories>
+
   </PawnKindDef>
 
   <!-- Neoma: IA Suprema -->
