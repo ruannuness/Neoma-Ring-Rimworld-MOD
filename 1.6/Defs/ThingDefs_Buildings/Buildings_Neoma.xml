@@ -47,6 +47,7 @@
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>1</maxRoleModules>
+        <maxAuxModules>2</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -110,6 +111,7 @@
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>2</maxRoleModules>
+        <maxAuxModules>4</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -174,6 +176,7 @@
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>3</maxRoleModules>
+        <maxAuxModules>6</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -238,6 +241,7 @@
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>4</maxRoleModules>
+        <maxAuxModules>8</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -301,6 +305,7 @@
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>2</maxRoleModules>
+        <maxAuxModules>4</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>

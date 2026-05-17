@@ -520,7 +520,34 @@ namespace SyntheraCore
                     icon = ContentFinder<Texture2D>.Get("UI/Commands/RenameZone", true)
                 };
 
+
             }
+        }
+
+        private string FormatModuleKey(string key)
+        {
+            if (key.StartsWith("SyntheraRole"))
+            {
+                var def = DefDatabase<HediffDef>.GetNamed(key, false);
+                return def != null ? def.label.CapitalizeFirst() : key.Substring("SyntheraRole".Length);
+            }
+            switch (key)
+            {
+                case "CombatAmplifier":     return "Combat amplifier";
+                case "CoreOptimizer":       return "Core optimizer";
+                case "WorkUnlocker":        return "Work unlocker";
+                case "ArmorMatrix":         return "Armor matrix";
+                case "OverclockCore":       return "Overclock core";
+                case "VersatilityProtocol": return "Versatility protocol";
+                default:                    return key;
+            }
+        }
+
+        private string BuildModulesSummary()
+        {
+            if (RegisteredAuxTypes.Count == 0)
+                return "No modules connected.";
+            return string.Join(", ", RegisteredAuxTypes.Select(FormatModuleKey));
         }
 
         public override string CompInspectStringExtra()
@@ -533,26 +560,24 @@ namespace SyntheraCore
 
             if (Consciousness.Spawned)
             {
+                string stressLevel = "Nominal";
                 var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
                 if (stressDef != null)
                 {
                     var h = Consciousness.health.hediffSet.GetFirstHediffOfDef(stressDef);
                     if (h != null)
-                    {
-                        string level = h.Severity < 0.3f ? "Nominal"
-                                     : h.Severity < 0.6f ? "Mild stress"
-                                     : h.Severity < 0.9f ? "High stress"
-                                     : "Critical";
-                        return $"Avatar: {Consciousness.Name.ToStringShort} | System: {level}";
-                    }
+                        stressLevel = h.Severity < 0.3f ? "Nominal"
+                                    : h.Severity < 0.6f ? "Mild stress"
+                                    : h.Severity < 0.9f ? "High stress"
+                                    : "Critical";
                 }
+                string modLine = RegisteredAuxTypes.Count > 0
+                    ? $"\nModules ({RegisteredAuxTypes.Count}/{Props.maxAuxModules}): {BuildModulesSummary()}"
+                    : "";
+                return $"Avatar: {Consciousness.Name.ToStringShort} | System: {stressLevel}{modLine}";
             }
 
-            int activeRoles = RegisteredAuxTypes.Count(k => k.StartsWith("SyntheraRole"));
-            if (Props.maxRoleModules > 1 || activeRoles > 0)
-                return $"Avatar: {Consciousness.Name.ToStringShort} | Role slots: {activeRoles}/{Props.maxRoleModules}";
-
-            return $"Avatar: {Consciousness.Name.ToStringShort}";
+            return $"Avatar: {Consciousness.Name.ToStringShort} [offline]";
         }
     }
 

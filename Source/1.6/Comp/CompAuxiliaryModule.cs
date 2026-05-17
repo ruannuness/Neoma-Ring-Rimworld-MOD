@@ -13,11 +13,12 @@ namespace SyntheraCore
         private bool effectsApplied;
         private List<WorkTypeDef> unlockedByUs = new List<WorkTypeDef>();
 
-        // Transient — rebuilt in PostSpawnSetup
+        // Transient — rebuilt in PostSpawnSetup / CompTick
         private CompSyntheraSpawner linkedSpawner;
         private CompPowerTrader compPower;
         private int lastScanTick;
         private int lastStressTick;
+        private bool capRejected;
 
         public CompProperties_AuxiliaryModule Props => (CompProperties_AuxiliaryModule)props;
 
@@ -39,6 +40,12 @@ namespace SyntheraCore
 
             if (linkedBuilding != null)
                 linkedSpawner = linkedBuilding.TryGetComp<CompSyntheraSpawner>();
+
+            // Repopulate the transient RegisteredAuxTypes set after a save/load.
+            // effectsApplied is saved; without this, the slot key would be missing from
+            // the set until the next ApplyEffects() call, breaking the duplicate/cap checks.
+            if (respawningAfterLoad && effectsApplied && linkedSpawner != null)
+                linkedSpawner.RegisteredAuxTypes.Add(SlotKey);
         }
 
         public override void PostExposeData()
@@ -104,11 +111,62 @@ namespace SyntheraCore
         {
             if (linkedSpawner == null)
                 return "Aux module: no altar in range";
-            string status = effectsApplied ? "active" : (IsActive ? "avatar not deployed" : "no power");
-            string extra = "";
-            if (effectsApplied && Props.stressAddedPerDay > 0f)
-                extra = $" [+{Props.stressAddedPerDay:0.###} stress/day]";
-            return $"Aux module: linked to {linkedBuilding.def.label} [{status}]{extra}";
+            string status = effectsApplied  ? "active"
+                          : capRejected     ? "module limit reached"
+                          : !IsActive       ? "no power"
+                          :                   "avatar not deployed";
+            string detail = BuildDetailLine();
+            string suffix = detail.NullOrEmpty() ? "" : $"\n{detail}";
+            return $"Aux module: linked to {linkedBuilding.def.label} [{status}]{suffix}";
+        }
+
+        private string BuildDetailLine()
+        {
+            switch (Props.moduleType)
+            {
+                case AuxModuleType.CoreOptimizer:
+                {
+                    var parts = new List<string>();
+                    if (Props.respawnTicksMultiplier != 1f)
+                        parts.Add($"Respawn ×{Props.respawnTicksMultiplier:0.##}");
+                    if (Props.recreateCooldownMultiplier != 1f)
+                        parts.Add($"Recreate ×{Props.recreateCooldownMultiplier:0.##}");
+                    if (Props.stressReliefPerDay > 0f)
+                        parts.Add($"-{Props.stressReliefPerDay:0.###} stress/day");
+                    return parts.Count > 0 ? string.Join(" | ", parts) : "";
+                }
+                case AuxModuleType.WorkUnlocker:
+                {
+                    List<string> names;
+                    if (unlockedByUs.Count > 0)
+                        names = unlockedByUs.Select(w => w.label.CapitalizeFirst()).ToList();
+                    else if (Props.unlockedWorkTypes != null)
+                        names = Props.unlockedWorkTypes
+                            .Select(n => DefDatabase<WorkTypeDef>.GetNamed(n, false)?.label.CapitalizeFirst() ?? n)
+                            .ToList();
+                    else
+                        names = new List<string>();
+                    return names.Count > 0 ? "Unlocks: " + string.Join(", ", names) : "";
+                }
+                case AuxModuleType.RoleSpecializer:
+                {
+                    if (Props.pawnBuffHediff.NullOrEmpty()) return "";
+                    var def = DefDatabase<HediffDef>.GetNamed(Props.pawnBuffHediff, false);
+                    return def != null ? $"Role: {def.label.CapitalizeFirst()}" : "";
+                }
+                default:
+                {
+                    string line = "";
+                    if (!Props.pawnBuffHediff.NullOrEmpty())
+                    {
+                        var def = DefDatabase<HediffDef>.GetNamed(Props.pawnBuffHediff, false);
+                        if (def != null) line = def.label.CapitalizeFirst();
+                    }
+                    if (Props.stressAddedPerDay > 0f)
+                        line += (line.Length > 0 ? " | " : "") + $"+{Props.stressAddedPerDay:0.###} stress/day";
+                    return line;
+                }
+            }
         }
 
         // ── Slot key ─────────────────────────────────────────────────────────
@@ -149,6 +207,14 @@ namespace SyntheraCore
             if (linkedSpawner == null) return;
 
             string key = SlotKey;
+
+            if (linkedSpawner.RegisteredAuxTypes.Count >= linkedSpawner.Props.maxAuxModules
+                && !linkedSpawner.RegisteredAuxTypes.Contains(key))
+            {
+                capRejected = true;
+                return;
+            }
+            capRejected = false;
 
             if (Props.moduleType == AuxModuleType.RoleSpecializer)
             {

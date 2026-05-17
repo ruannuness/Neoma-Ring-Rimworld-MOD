@@ -12,6 +12,7 @@ namespace SyntheraCore
         public float explosionRadius = 4.9f;
         public int recreateCooldownTicks = 180000; // 3 in-game days (72 in-game hours)
         public int maxRoleModules = 1;            // how many role specializer nodes can link simultaneously
+        public int maxAuxModules  = 99;           // total auxiliary module slots (all types combined)
 
         public CompProperties_SyntheraSpawner()
         {
