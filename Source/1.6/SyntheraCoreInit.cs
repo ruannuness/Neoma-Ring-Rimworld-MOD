@@ -6,6 +6,9 @@ using Verse;
 
 namespace SyntheraCore
 {
+    // DefModExtension marker — tag any RecipeDef with this to restrict it to NeomaPawn only.
+    public class NeomaCraftExtension : DefModExtension { }
+
     [StaticConstructorOnStartup]
     static class SyntheraCoreInit
     {
@@ -13,6 +16,20 @@ namespace SyntheraCore
         {
             var harmony = new Harmony("StargazeR.SyntheraCore");
             harmony.PatchAll();
+        }
+    }
+
+    // Only the Neoma Ring companion may start bills that carry NeomaCraftExtension.
+    // Must patch Bill (base class) — PawnAllowedToStartAnew is declared there, not on Bill_Production.
+    [HarmonyPatch(typeof(Bill), "PawnAllowedToStartAnew")]
+    static class Patch_Bill_NeomaCraftOnly
+    {
+        static void Postfix(ref bool __result, Pawn p, Bill __instance)
+        {
+            if (!__result) return;
+            if ((__instance as Bill_Production)?.recipe?.HasModExtension<NeomaCraftExtension>() == true)
+                __result = p.kindDef?.defName == "NeomaPawn"
+                        || p.kindDef?.defName == "NeomaPawnTranscendent"; // Phase B pawnkind
         }
     }
 

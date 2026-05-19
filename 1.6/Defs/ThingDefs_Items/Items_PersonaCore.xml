@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef>
+    <defName>SyntheraPersonaCore</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <label>Persona Core</label>
+    <description>A crystallized matrix of artificial consciousness, synthesized by the Neoma Ring's companion through deep archotech resonance. It forms the foundational substrate of every Synthera summoning altar — without it, the projection matrices cannot be initialized. Only the Neoma companion has the cognitive depth required to produce them.</description>
+    <category>Item</category>
+    <graphicData>
+      <texPath>Things/Item/Resource/ArchotechShard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <MarketValue>800</MarketValue>
+      <Mass>0.4</Mass>
+      <Flammability>0.4</Flammability>
+    </statBases>
+    <tradeability>None</tradeability>
+    <stackLimit>20</stackLimit>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <alwaysHaulable>true</alwaysHaulable>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+
+</Defs>

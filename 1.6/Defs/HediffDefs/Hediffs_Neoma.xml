@@ -1,31 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- Biolock do Anel de Neoma -->
+  <!--
+    BioLock do Anel de Neoma.
+    Permanente: não decai, não é imunizável.
+    Só pode ser removido via código quando o portador morre (CompNeomaRing.UnbindFromWearer).
+    Severity gerenciada em C# conforme o nível de ressonância do anel (0–5).
+    Stage ativo muda automaticamente conforme a severity sobe com cada calibração.
+  -->
   <HediffDef>
     <defName>NeomaBiolock</defName>
-    <label>SyntheraCore_NeomaBiolock_Label</label>
-    <description>SyntheraCore_NeomaBiolock_Description</description>
-    <hediffClass>HediffWithComps</hediffClass>
+    <label>neoma biolock</label>
+    <description>A resonance signature permanently impressed on this host's neural architecture by the Neoma Ring. The bond cannot be severed except by the host's death. As the ring's resonance deepens through cultivation, the mark evolves from a subtle constraint into a profound enhancement.</description>
+    <hediffClass>Hediff</hediffClass>
     <defaultLabelColor>(0.8, 0.2, 1.0)</defaultLabelColor>
     <scenarioCanAdd>false</scenarioCanAdd>
     <isBad>false</isBad>
-    <comps>
-      <li Class="HediffCompProperties_Immunizable">
-        <severityPerDayNotImmune>-0.1</severityPerDayNotImmune>
-        <immunityPerDayNotSick>0.5</immunityPerDayNotSick>
-      </li>
-    </comps>
     <stages>
+      <!-- L0 (sev ~0.15): vínculo bruto — leve penalidade cognitiva -->
       <li>
-        <label>SyntheraCore_NeomaBiolock_StageLabel</label>
-        <minSeverity>0.1</minSeverity>
-        <painOffset>0</painOffset>
+        <label>dormant fragment</label>
+        <minSeverity>0.05</minSeverity>
         <capMods>
-          <li>
-            <capacity>Consciousness</capacity>
-            <offset>-0.05</offset>
-          </li>
+          <li><capacity>Consciousness</capacity><offset>-0.05</offset></li>
+        </capMods>
+      </li>
+      <!-- L1 (sev ~0.35): primeiro despertar — penalidade some -->
+      <li>
+        <label>first resonance</label>
+        <minSeverity>0.30</minSeverity>
+      </li>
+      <!-- L2 (sev ~0.55): ponte neural — pequeno bônus cognitivo -->
+      <li>
+        <label>neural bridge</label>
+        <minSeverity>0.50</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.05</offset></li>
+        </capMods>
+      </li>
+      <!-- L3 (sev ~0.70): entrelaçamento — moderado bônus -->
+      <li>
+        <label>entangled</label>
+        <minSeverity>0.65</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.10</offset></li>
+          <li><capacity>Moving</capacity><offset>0.05</offset></li>
+        </capMods>
+      </li>
+      <!-- L4 (sev ~0.85): cristalizado — forte bônus de mobilidade -->
+      <li>
+        <label>crystallized bond</label>
+        <minSeverity>0.80</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.10</offset></li>
+          <li><capacity>Moving</capacity><offset>0.20</offset></li>
+        </capMods>
+      </li>
+      <!-- L5 (sev ~0.97): fusão de alma — bônus máximo, permanente -->
+      <li>
+        <label>soul fusion</label>
+        <minSeverity>0.94</minSeverity>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.10</offset></li>
+          <li><capacity>Moving</capacity><offset>0.20</offset></li>
+          <li><capacity>Manipulation</capacity><offset>0.10</offset></li>
         </capMods>
       </li>
     </stages>

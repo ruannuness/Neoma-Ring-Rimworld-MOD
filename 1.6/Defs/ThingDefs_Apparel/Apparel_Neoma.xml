@@ -9,7 +9,8 @@
     <thingClass>Apparel</thingClass>
     <category>Item</category>
     <graphicData>
-      <texPath>Things/Apparel/Neoma/Ring</texPath>
+      <!-- Placeholder: replace with Things/Apparel/Neoma/Ring once the art exists -->
+      <texPath>Things/Item/Resource/Gold</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <altitudeLayer>Item</altitudeLayer>

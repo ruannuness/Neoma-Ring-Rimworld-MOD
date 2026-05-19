@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Neoma Fabrication Console — only the Neoma Ring companion (NeomaPawn kind) can operate this.
+    Produces Persona Cores required to construct all Synthera altars.
+    Restricted via Harmony patch (NeomaCraftExtension on the recipe).
+  -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NeomaFabricationConsole</defName>
+    <label>Neoma fabrication console</label>
+    <description>A resonance synthesis station calibrated specifically to the consciousness signature of the Neoma Ring's companion. The console reads archotech materials and impresses artificial consciousness matrices onto them, producing Persona Cores. It refuses to respond to any operator other than the ring's bound companion.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Building/Tier01/Tier01</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(2,1)</size>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>0.3</Flammability>
+    </statBases>
+    <costList>
+      <SyntheraArchotechShard>3</SyntheraArchotechShard>
+      <Gold>40</Gold>
+      <Plasteel>60</Plasteel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>NeomaRingCalibrationI</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <designationCategory>Neoma</designationCategory>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(100,200,255,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

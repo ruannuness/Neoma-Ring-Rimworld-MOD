@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Holographic Stage — invoca a Virtual Diva (Miku).
+    Texture: Textures/Things/Building/Miku/MikuStage.png  (Graphic_Single, drawSize 5x5)
+    Requer pesquisa NeomaTierII para construir.
+  -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>MikuHolographicStage</defName>
+    <label>holographic stage</label>
+    <description>A resonance platform that reconstructs the digital soul of a legendary virtual idol, projecting her as a fully-functional Synthera avatar. The stage emits a faint harmonic hum even when idle.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Building/Miku/MikuStage</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5,5)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>1500</WorkToBuild>
+      <Flammability>0.6</Flammability>
+    </statBases>
+    <costList>
+      <Steel>250</Steel>
+      <ComponentIndustrial>50</ComponentIndustrial>
+      <Plasteel>80</Plasteel>
+      <Gold>150</Gold>
+      <SyntheraPersonaCore>3</SyntheraPersonaCore>
+    </costList>
+    <researchPrerequisites>
+      <li>MikuStageResearch</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1500</basePowerConsumption>
+      </li>
+      <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
+        <pawnKind>NeomaPawnMiku</pawnKind>
+        <spawnIntervalDays>0.5</spawnIntervalDays>
+        <maxPawnsToSpawn>1</maxPawnsToSpawn>
+        <spawnSound>Interact_Annihilator</spawnSound>
+        <respawnTicks>30000</respawnTicks>
+        <explosionRadius>3</explosionRadius>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>15</heatPerSecond>
+      </li>
+    </comps>
+    <size>(5,5)</size>
+    <designationCategory>Neoma</designationCategory>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef>
+    <defName>SyntheraMemoryCore</defName>
+    <thingClass>ThingWithComps</thingClass>
+    <label>Synthera memory core</label>
+    <description>A compact resonance vessel that contains the complete consciousness of a Synthera avatar. The digital soul within remains dormant, preserved perfectly, awaiting reinstallation into a compatible altar. Handle with extreme care — destruction of this core means permanent loss of the stored consciousness.</description>
+    <category>Item</category>
+    <graphicData>
+      <texPath>Things/Item/Resource/ArchotechShard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <MarketValue>2500</MarketValue>
+      <Mass>0.5</Mass>
+      <Flammability>0.8</Flammability>
+    </statBases>
+    <stackLimit>1</stackLimit>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <alwaysHaulable>true</alwaysHaulable>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <comps>
+      <li Class="SyntheraCore.CompProperties_ConsciousnessCore" />
+    </comps>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Texture: Textures/Things/Humanlike/Hair/Miku_Twintails.png
+    Formato: grayscale/branco — o jogo tinge automaticamente com HairColor (teal #39C5BB).
+    Resolução recomendada: 128x128. As tranças devem se estender para baixo do rosto.
+  -->
+  <HairDef>
+    <defName>MikuTwintails</defName>
+    <label>twin tails</label>
+    <texPath>Things/Pawn/SynthMiku/Hair/MikuHastune</texPath>
+    <styleTags>
+      <li>MikuHair</li>
+      <li>Feminine</li>
+    </styleTags>
+  </HairDef>
+
+</Defs>

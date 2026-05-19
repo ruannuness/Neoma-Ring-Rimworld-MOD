@@ -19,11 +19,22 @@ namespace SyntheraCore
         private bool SavedDeep = false;
         private CompPowerTrader compPower;
 
+        private int lastEmergencyRecallTick  = -99999;
+        private int lastMaintenancePulseTick = -99999;
+        public  bool SignalBurstActive       = false;
+        private int signalBurstEndTick       = 0;
+
         // Transient fields set by CompAuxiliaryModule — not saved, repopulated within 250 ticks of load.
         public float AuxRespawnMultiplier   = 1f;
         public float AuxRecreateMultiplier  = 1f;
         // String-keyed: non-role modules use moduleType.ToString(), role modules use pawnBuffHediff name.
         public HashSet<string> RegisteredAuxTypes = new HashSet<string>();
+
+        // Transient fields set by CompAltarUpgrade — not saved, repopulated on load.
+        public int   BonusAuxSlots           = 0;
+        public float SpawnIntervalMultiplier = 1f;
+        public float HeatOutputMultiplier    = 1f;
+        public float PowerMultiplier         = 1f;
 
         public bool HasPower => compPower != null && compPower.PowerOn;
 
@@ -41,6 +52,9 @@ namespace SyntheraCore
         };
 
         private static string PickMachineName() => machineNames[Rand.Range(0, machineNames.Length)];
+
+        private static readonly Color MikuTeal     = new Color(0.224f, 0.773f, 0.733f, 1f);
+        private static readonly Color MikuSkinPale = new Color(0.90f,  0.95f,  0.95f,  0.65f);
 
         public override void PostExposeData()
         {
@@ -75,6 +89,10 @@ namespace SyntheraCore
             Scribe_Values.Look(ref RecreateCooldownTick, "RecreateCooldownTick");
             Scribe_Values.Look(ref InHibernation, "InHibernation");
             Scribe_Values.Look(ref HibernationDeathCount, "HibernationDeathCount");
+            Scribe_Values.Look(ref lastEmergencyRecallTick,  "lastEmergencyRecallTick",  -99999);
+            Scribe_Values.Look(ref lastMaintenancePulseTick, "lastMaintenancePulseTick", -99999);
+            Scribe_Values.Look(ref SignalBurstActive,        "SignalBurstActive",         false);
+            Scribe_Values.Look(ref signalBurstEndTick,       "signalBurstEndTick",        0);
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -102,14 +120,17 @@ namespace SyntheraCore
                 DespawnFormgel(false);
 
             // Detect in-world death → enter hibernation.
-            // We immediately resurrect (to extract the pawn from the corpse without destroying it)
-            // and then DeSpawn so the pawn is safely held by this comp until restoration.
+            // We immediately resurrect (to extract the pawn from the corpse without destroying it),
+            // drop all carried items, dissolve the corpse, then DeSpawn.
             if (Consciousness.Dead && !InHibernation)
             {
                 InHibernation = true;
                 HibernationDeathCount++;
                 // Each successive death adds more restoration time: 3×, 5×, 7×, …
                 RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier * (HibernationDeathCount * 2 + 1));
+
+                Corpse corpse   = Consciousness.Corpse;
+                IntVec3 deathPos = corpse?.Position ?? parent.Position;
 
                 if (ResurrectionUtility.TryResurrect(Consciousness))
                 {
@@ -120,6 +141,15 @@ namespace SyntheraCore
                         var sick = Consciousness.health.hediffSet.GetFirstHediffOfDef(sickDef);
                         if (sick != null) Consciousness.health.RemoveHediff(sick);
                     }
+
+                    // Drop apparel and inventory at death location — the digital form dissolves.
+                    Consciousness.apparel?.DropAll(deathPos);
+                    Consciousness.inventory?.DropAllNearPawn(deathPos);
+
+                    // Destroy the corpse — Syntheras leave no physical remains.
+                    if (corpse != null && !corpse.Destroyed)
+                        corpse.Destroy(DestroyMode.Vanish);
+
                     if (Consciousness.Spawned)
                         Consciousness.DeSpawn();
                 }
@@ -129,6 +159,9 @@ namespace SyntheraCore
                     parent,
                     MessageTypeDefOf.NegativeEvent);
             }
+
+            if (SignalBurstActive && Find.TickManager.TicksGame >= signalBurstEndTick)
+                SignalBurstActive = false;
         }
 
         public void GenerateFormgelPawn()
@@ -180,6 +213,9 @@ namespace SyntheraCore
 
             p.apparel?.DestroyAll();
             SetupFormgel();
+
+            if (Props.pawnKind == "NeomaPawnMiku")
+                SetupMiku();
         }
 
         // Must check longer strings first so TierIV doesn't match TierII.
@@ -221,7 +257,7 @@ namespace SyntheraCore
                 1 => BodyTypeDefOf.Thin,
                 2 => BodyTypeDefOf.Male,
                 3 => BodyTypeDefOf.Female,
-                5 => BodyTypeDefOf.Female,
+                5 => DefDatabase<BodyTypeDef>.GetNamed("MikuBody", false) ?? BodyTypeDefOf.Female,
                 _ => BodyTypeDefOf.Hulk
             };
         }
@@ -242,6 +278,25 @@ namespace SyntheraCore
 
                 Consciousness.workSettings.SetPriority(workType, priority);
             }
+        }
+
+        private void SetupMiku()
+        {
+            if (Consciousness == null) return;
+
+            Consciousness.Name = new NameTriple("", "Hatsune Miku", "");
+
+            // Twin tails — override whatever SetupFormgel picked from HairBasic pool
+            HairDef twintails = DefDatabase<HairDef>.GetNamed("MikuTwintails", false);
+            if (twintails != null)
+                Consciousness.story.hairDef = twintails;
+
+            // Reinforce HAR color channel values: teal hair, pale neutral skin
+            Consciousness.story.HairColor         = MikuTeal;
+            Consciousness.story.skinColorOverride  = MikuSkinPale;
+
+            Consciousness.Drawer.renderer.SetAllGraphicsDirty();
+            PortraitsCache.SetDirty(Consciousness);
         }
 
         private void SetupFormgel()
@@ -448,6 +503,41 @@ namespace SyntheraCore
                 if (!HasPower)
                     createBtn.Disable("Requires power.");
                 yield return createBtn;
+
+                // ── Import Consciousness ──────────────────────────────────────
+                var importBtn = new Command_Action
+                {
+                    action = delegate
+                    {
+                        Map map = parent.Map;
+                        var cores = new System.Collections.Generic.List<Thing>();
+                        foreach (Thing t in GenRadial.RadialDistinctThingsAround(
+                                     parent.Position, map, 5f, useCenter: true))
+                        {
+                            var coreComp = t.TryGetComp<CompConsciousnessCore>();
+                            if (coreComp?.StoredConsciousness != null)
+                                cores.Add(t);
+                        }
+                        if (cores.Count == 0)
+                        {
+                            Messages.Message("No memory core within range (5 cells).", MessageTypeDefOf.RejectInput, false);
+                            return;
+                        }
+                        Thing core = cores[0];
+                        var comp = core.TryGetComp<CompConsciousnessCore>();
+                        Consciousness = comp.StoredConsciousness;
+                        comp.StoredConsciousness = null;
+                        core.Destroy(DestroyMode.Deconstruct);
+                        InHibernation = false;
+                        Messages.Message(
+                            $"Consciousness of {Consciousness.Name.ToStringShort} imported. Use 'Spawn avatar' to deploy.",
+                            parent, MessageTypeDefOf.PositiveEvent);
+                    },
+                    defaultLabel = "Import consciousness",
+                    defaultDesc  = "Absorb a nearby memory core into this altar, restoring its stored Synthera.",
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                };
+                yield return importBtn;
             }
             else if (!Consciousness.Spawned)
             {
@@ -497,6 +587,28 @@ namespace SyntheraCore
                     recreateBtn.Disable("Requires power.");
 
                 yield return recreateBtn;
+
+                // ── Export Consciousness ──────────────────────────────────────
+                if (!InHibernation)
+                {
+                    yield return new Command_Action
+                    {
+                        action = delegate
+                        {
+                            Thing core = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("SyntheraMemoryCore"));
+                            var coreComp = core.TryGetComp<CompConsciousnessCore>();
+                            coreComp.StoredConsciousness = Consciousness;
+                            Consciousness = null;
+                            GenPlace.TryPlaceThing(core, parent.Position, parent.Map, ThingPlaceMode.Near);
+                            Messages.Message(
+                                $"Consciousness exported to a memory core. Pick it up and bring it to another altar.",
+                                parent, MessageTypeDefOf.NeutralEvent);
+                        },
+                        defaultLabel = "Export consciousness",
+                        defaultDesc  = "Package the avatar's consciousness into a portable memory core. The avatar will be unavailable until imported into an altar.",
+                        icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    };
+                }
             }
             else
             {
@@ -505,7 +617,7 @@ namespace SyntheraCore
                     action = delegate
                     {
                         DespawnFormgel(false);
-                        RespawnTick = Find.TickManager.TicksGame + (int)(Props.spawnIntervalDays * 60000f * AuxRespawnMultiplier);
+                        RespawnTick = Find.TickManager.TicksGame + (int)(Props.spawnIntervalDays * 60000f * AuxRespawnMultiplier * SpawnIntervalMultiplier);
                     },
                     defaultLabel = "Despawn avatar",
                     defaultDesc  = "Return the avatar to the core. Resets system stress. Available again after cooldown.",
@@ -520,7 +632,91 @@ namespace SyntheraCore
                     icon = ContentFinder<Texture2D>.Get("UI/Commands/RenameZone", true)
                 };
 
+                // ── Active functions ──────────────────────────────────────────
+                int curTick   = Find.TickManager.TicksGame;
+                Map altarMap  = parent.Map;
+                int altarTier = GetBuildingTier();
 
+                var recallBtn = new Command_Action
+                {
+                    action = delegate
+                    {
+                        if (Consciousness.Spawned)
+                            Consciousness.DeSpawn();
+                        GenPlace.TryPlaceThing(Consciousness, parent.Position, altarMap, ThingPlaceMode.Near);
+                        lastEmergencyRecallTick = Find.TickManager.TicksGame;
+                        Messages.Message(
+                            $"{Consciousness.Name.ToStringShort} recalled to the altar.",
+                            parent, MessageTypeDefOf.NeutralEvent);
+                    },
+                    defaultLabel = "Emergency recall",
+                    defaultDesc  = "Instantly teleport the avatar back to the altar. 1-day cooldown.",
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                };
+                if (curTick < lastEmergencyRecallTick + Props.emergencyRecallCooldownTicks)
+                    recallBtn.Disable("Recall on cooldown: " + GenDate.ToStringTicksToPeriod(lastEmergencyRecallTick + Props.emergencyRecallCooldownTicks - curTick));
+                yield return recallBtn;
+
+                if (altarTier >= 2)
+                {
+                    var pulseBtn = new Command_Action
+                    {
+                        action = delegate
+                        {
+                            if (altarMap.resourceCounter.GetCount(ThingDefOf.Steel) < 5)
+                            {
+                                Messages.Message("Maintenance Pulse requires 5× Steel.", MessageTypeDefOf.RejectInput, false);
+                                return;
+                            }
+                            int rem = 5;
+                            foreach (Thing t in altarMap.listerThings.ThingsOfDef(ThingDefOf.Steel).ToList())
+                            {
+                                if (rem <= 0) break;
+                                int take = System.Math.Min(rem, t.stackCount);
+                                t.SplitOff(take).Destroy();
+                                rem -= take;
+                            }
+                            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
+                            if (stressDef != null)
+                            {
+                                var stress = Consciousness.health.hediffSet.GetFirstHediffOfDef(stressDef);
+                                if (stress != null)
+                                    stress.Severity = Mathf.Max(0f, stress.Severity - 0.25f);
+                            }
+                            lastMaintenancePulseTick = Find.TickManager.TicksGame;
+                            Messages.Message(
+                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. System stress reduced.",
+                                parent, MessageTypeDefOf.PositiveEvent);
+                        },
+                        defaultLabel = "Maintenance pulse",
+                        defaultDesc  = "Perform a maintenance cycle, reducing system stress by 0.25. Costs 5× Steel. 3-day cooldown.",
+                        icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    };
+                    if (curTick < lastMaintenancePulseTick + Props.maintenancePulseCooldownTicks)
+                        pulseBtn.Disable("Pulse on cooldown: " + GenDate.ToStringTicksToPeriod(lastMaintenancePulseTick + Props.maintenancePulseCooldownTicks - curTick));
+                    yield return pulseBtn;
+                }
+
+                if (altarTier >= 3)
+                {
+                    var burstBtn = new Command_Action
+                    {
+                        action = delegate
+                        {
+                            SignalBurstActive  = true;
+                            signalBurstEndTick = Find.TickManager.TicksGame + 60000;
+                            Messages.Message(
+                                "Signal burst active: linked aux module detection radii doubled for 24 hours.",
+                                parent, MessageTypeDefOf.PositiveEvent);
+                        },
+                        defaultLabel = "Signal burst",
+                        defaultDesc  = "Doubles the detection radius of all linked aux modules for 24 hours.",
+                        icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    };
+                    if (SignalBurstActive)
+                        burstBtn.Disable("Signal burst active: " + GenDate.ToStringTicksToPeriod(signalBurstEndTick - curTick));
+                    yield return burstBtn;
+                }
             }
         }
 
@@ -572,7 +768,7 @@ namespace SyntheraCore
                                     : "Critical";
                 }
                 string modLine = RegisteredAuxTypes.Count > 0
-                    ? $"\nModules ({RegisteredAuxTypes.Count}/{Props.maxAuxModules}): {BuildModulesSummary()}"
+                    ? $"\nModules ({RegisteredAuxTypes.Count}/{Props.maxAuxModules + BonusAuxSlots}): {BuildModulesSummary()}"
                     : "";
                 return $"Avatar: {Consciousness.Name.ToStringShort} | System: {stressLevel}{modLine}";
             }

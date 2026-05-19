@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Only the Neoma Ring companion (NeomaPawn pawn kind) can execute this recipe.
+    Enforced by SyntheraCoreInit.Patch_Bill_NeomaCraftOnly via NeomaCraftExtension.
+  -->
+  <RecipeDef>
+    <defName>NeomaMake_PersonaCore</defName>
+    <label>fabricate persona core</label>
+    <description>Synthesize a Persona Core from archotech materials. The process requires the Neoma companion's unique cognitive architecture — no other operator can perform it.</description>
+    <jobString>fabricating a Persona Core</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <researchPrerequisite>NeomaRingCalibrationI</researchPrerequisite>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>SyntheraArchotechShard</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Gold</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>15</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <li>
+        <thingDef>SyntheraPersonaCore</thingDef>
+        <count>1</count>
+      </li>
+    </products>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+  </RecipeDef>
+
+</Defs>

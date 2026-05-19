@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ALTAR STRUCTURAL UPGRADES (1×1, placed adjacent to altars)          -->
+  <!-- Modifies the altar itself, not the Synthera avatar.                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <!-- Slot Expander — adds +2 aux module slots to the linked altar -->
+  <ThingDef ParentName="SyntheraAuxBase">
+    <defName>AltarSlotExpander</defName>
+    <label>altar slot expander</label>
+    <description>A resonance extender that broadens the altar's uplink matrix, allowing it to accept two additional auxiliary modules simultaneously. Must be placed within 6 cells of the altar it is intended to upgrade.</description>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Flammability>0.4</Flammability>
+    </statBases>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Gold>20</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AltarEnhancementI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="SyntheraCore.CompProperties_AltarUpgrade">
+        <upgradeType>SlotExpander</upgradeType>
+        <detectionRadius>6</detectionRadius>
+        <bonusAuxSlots>2</bonusAuxSlots>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Respawn Booster — reduces backup restoration time by 30% -->
+  <ThingDef ParentName="SyntheraAuxBase">
+    <defName>AltarRespawnBooster</defName>
+    <label>altar respawn booster</label>
+    <description>Accelerates the altar's consciousness reconstruction pipeline, reducing backup restoration and spawn cooldowns by 30%. The altar hums with a faster rhythm when active.</description>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Flammability>0.4</Flammability>
+    </statBases>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Plasteel>30</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AltarEnhancementI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="SyntheraCore.CompProperties_AltarUpgrade">
+        <upgradeType>RespawnBooster</upgradeType>
+        <detectionRadius>6</detectionRadius>
+        <respawnMultiplier>0.7</respawnMultiplier>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Cooling Array — reduces heat output of linked altar by 60% -->
+  <ThingDef ParentName="SyntheraAuxBase">
+    <defName>AltarCoolingArray</defName>
+    <label>altar cooling array</label>
+    <description>A heat-sink lattice that draws thermal energy away from the summoning altar, dramatically reducing ambient heat buildup in the surrounding area. Critical for Tier I altars operating in warm environments.</description>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+      <li>AltarEnhancementI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="SyntheraCore.CompProperties_AltarUpgrade">
+        <upgradeType>CoolingArray</upgradeType>
+        <detectionRadius>6</detectionRadius>
+        <heatReduction>0.6</heatReduction>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Power Condenser — reduces power draw of linked altar by 30% -->
+  <ThingDef ParentName="SyntheraAuxBase">
+    <defName>AltarPowerCondenser</defName>
+    <label>altar power condenser</label>
+    <description>An advanced energy recycler that captures and re-routes waste power from the altar's projection field, reducing its total power draw by 30%. Requires spacer-level engineering knowledge to construct.</description>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>0.3</Flammability>
+    </statBases>
+    <costList>
+      <Plasteel>60</Plasteel>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Gold>40</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>AltarEnhancementII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="SyntheraCore.CompProperties_AltarUpgrade">
+        <upgradeType>PowerCondenser</upgradeType>
+        <detectionRadius>6</detectionRadius>
+        <powerReduction>0.3</powerReduction>
+      </li>
+    </comps>
+  </ThingDef>
+
+</Defs>

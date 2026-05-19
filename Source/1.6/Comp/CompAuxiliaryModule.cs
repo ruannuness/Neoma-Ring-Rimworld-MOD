@@ -182,9 +182,13 @@ namespace SyntheraCore
 
         private void RefreshLinkedSpawner()
         {
+            float radius = Props.detectionRadius;
+            if (linkedSpawner != null && linkedSpawner.SignalBurstActive)
+                radius *= 2f;
+
             CompSyntheraSpawner found = null;
             foreach (Thing t in GenRadial.RadialDistinctThingsAround(
-                         parent.Position, parent.Map, Props.detectionRadius, useCenter: true))
+                         parent.Position, parent.Map, radius, useCenter: true))
             {
                 var spawner = t.TryGetComp<CompSyntheraSpawner>();
                 if (spawner != null) { found = spawner; break; }
@@ -208,7 +212,7 @@ namespace SyntheraCore
 
             string key = SlotKey;
 
-            if (linkedSpawner.RegisteredAuxTypes.Count >= linkedSpawner.Props.maxAuxModules
+            if (linkedSpawner.RegisteredAuxTypes.Count >= linkedSpawner.Props.maxAuxModules + linkedSpawner.BonusAuxSlots
                 && !linkedSpawner.RegisteredAuxTypes.Contains(key))
             {
                 capRejected = true;

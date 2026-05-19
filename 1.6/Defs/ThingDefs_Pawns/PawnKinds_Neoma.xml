@@ -81,19 +81,18 @@
   <PawnKindDef>
     <defName>NeomaPawnMiku</defName>
     <label>Virtual Diva</label>
-    <race>SyntheraRace</race>
+    <race>SyntheraRaceMiku</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
-    <combatPower>200</combatPower>
+    <combatPower>180</combatPower>
     <canBeSapper>false</canBeSapper>
-    <initialResistanceRange><min>0.7</min><max>1.2</max></initialResistanceRange>
-    <initialWillRange><min>0.7</min><max>1.2</max></initialWillRange>
+    <initialResistanceRange><min>0.5</min><max>1.0</max></initialResistanceRange>
+    <initialWillRange><min>0.8</min><max>1.5</max></initialWillRange>
     <apparelMoney><min>0</min><max>0</max></apparelMoney>
     <weaponMoney><min>0</min><max>0</max></weaponMoney>
     <techHediffsMoney><min>0</min><max>0</max></techHediffsMoney>
     <backstoryCategories>
-      <li>Civil</li>
+      <li>SyntheraOnly</li>
     </backstoryCategories>
-
   </PawnKindDef>
 
   <!-- Neoma: IA Suprema -->

@@ -13,6 +13,8 @@ namespace SyntheraCore
         public int recreateCooldownTicks = 180000; // 3 in-game days (72 in-game hours)
         public int maxRoleModules = 1;            // how many role specializer nodes can link simultaneously
         public int maxAuxModules  = 99;           // total auxiliary module slots (all types combined)
+        public int emergencyRecallCooldownTicks  = 60000;   // 1 in-game day
+        public int maintenancePulseCooldownTicks = 180000;  // 3 in-game days
 
         public CompProperties_SyntheraSpawner()
         {

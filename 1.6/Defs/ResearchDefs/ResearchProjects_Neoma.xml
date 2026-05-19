@@ -44,6 +44,21 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef>
+    <defName>MikuStageResearch</defName>
+    <label>holographic resonance</label>
+    <description>Develop the resonance technology required to reconstruct a digital soul as a projected Synthera avatar. Unlocks the Holographic Stage.</description>
+    <baseCost>1500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>1</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
     <defName>NeomaTierIV</defName>
     <label>SyntheraCore_NeomaTier4_Label</label>
     <description>SyntheraCore_NeomaTier4_Description</description>
@@ -58,5 +73,78 @@
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- NEOMA RING CALIBRATION (X=-2) — left of spine                      -->
+  <!-- Unlocks deeper binding protocols for the unique Neoma Ring.        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>NeomaRingCalibrationI</defName>
+    <label>ring calibration I</label>
+    <description>Study the recovered Neoma Ring's internal architecture and develop a calibration protocol. When applied, the ring will establish a backup channel for its bound companion — allowing restoration after death instead of permanent loss of the bond.</description>
+    <baseCost>1500</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>2</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NeomaRingCalibrationII</defName>
+    <label>ring calibration II</label>
+    <description>Push the ring's resonance matrix to its theoretical maximum. The companion's consciousness can now be fully preserved through death and restored with only temporary disorientation — a complete backup-and-restore loop equivalent to the most advanced altar systems.</description>
+    <baseCost>3500</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaRingCalibrationI</li>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>2</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ALTAR ENHANCEMENT (X=1) — between spine and aux modules            -->
+  <!-- Unlocks structural upgrade buildings placed adjacent to altars.    -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AltarEnhancementI</defName>
+    <label>altar enhancement I</label>
+    <description>Develop supplementary hardware modules that improve the physical infrastructure of existing summoning altars. Unlocks slot expanders, respawn boosters, and cooling arrays.</description>
+    <baseCost>1200</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>1</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AltarEnhancementII</defName>
+    <label>altar enhancement II</label>
+    <description>Advanced altar infrastructure research. Unlocks power condensers and higher-tier slot expansion hardware that can dramatically increase altar efficiency.</description>
+    <baseCost>2500</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AltarEnhancementI</li>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>1</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
 
 </Defs>
