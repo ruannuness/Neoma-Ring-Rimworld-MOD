@@ -1,12 +1,6 @@
-# Build artifacts
+﻿# Build artifacts
 Source/1.6/obj/
-Source/1.6/bin/
-*.lscache
-*.user
+Source/1.6/*.lscache
 
-# IDE / tooling
-.vs/
-.claude/
-
-# Optionally keep pdb for debugging
-# Assemblies/*.pdb
+# Claude Code local settings
+.claude/settings.local.json
