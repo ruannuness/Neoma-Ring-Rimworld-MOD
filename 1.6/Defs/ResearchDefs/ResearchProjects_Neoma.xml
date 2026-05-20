@@ -77,7 +77,7 @@
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>0.5</researchViewX>
+    <researchViewX>1</researchViewX>
     <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
@@ -93,7 +93,7 @@
       <li>NeomaTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>0.5</researchViewX>
+    <researchViewX>1</researchViewX>
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>
 
@@ -112,7 +112,7 @@
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>1</researchViewX>
+    <researchViewX>2</researchViewX>
     <researchViewY>1.5</researchViewY>
   </ResearchProjectDef>
 
@@ -128,7 +128,7 @@
       <li>NeomaTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>1</researchViewX>
+    <researchViewX>2</researchViewX>
     <researchViewY>2.5</researchViewY>
   </ResearchProjectDef>
 
@@ -147,7 +147,7 @@
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>1.5</researchViewX>
+    <researchViewX>3</researchViewX>
     <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
