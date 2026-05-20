@@ -54,7 +54,7 @@ namespace SyntheraCore
         private static string PickMachineName() => machineNames[Rand.Range(0, machineNames.Length)];
 
         private static readonly Color MikuTeal     = new Color(0.224f, 0.773f, 0.733f, 1f);
-        private static readonly Color MikuSkinPale = new Color(0.90f,  0.95f,  0.95f,  0.65f);
+        private static readonly Color MikuSkinPale = new Color(0.90f,  0.95f,  0.95f,  1.00f);
 
         public override void PostExposeData()
         {
@@ -257,7 +257,7 @@ namespace SyntheraCore
                 1 => BodyTypeDefOf.Thin,
                 2 => BodyTypeDefOf.Male,
                 3 => BodyTypeDefOf.Female,
-                5 => DefDatabase<BodyTypeDef>.GetNamed("MikuBody", false) ?? BodyTypeDefOf.Female,
+                5 => BodyTypeDefOf.Female,
                 _ => BodyTypeDefOf.Hulk
             };
         }
@@ -407,12 +407,13 @@ namespace SyntheraCore
                         Consciousness.Position, map, Props.explosionRadius, slimeDamage, Consciousness,
                         postExplosionSpawnThingDef: ThingDefOf.Filth_Slime, postExplosionSpawnChance: 1f);
                 }
-                if (goneForGood && !Consciousness.Dead)
-                    Consciousness.Kill(null);
             }
 
             if (Consciousness.Spawned)
                 Consciousness.DeSpawn();
+
+            if (goneForGood && !Consciousness.Destroyed)
+                Consciousness.Destroy(DestroyMode.Vanish);
         }
 
         public void SpawnFormgel()

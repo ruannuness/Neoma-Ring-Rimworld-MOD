@@ -528,17 +528,17 @@
           <customPortraitDrawSize>(1.0, 1.0)</customPortraitDrawSize>
           <customPortraitHeadDrawSize>(1.0, 1.0)</customPortraitHeadDrawSize>
           <bodyTypes>
-            <li>MikuBody</li>
+            <li>Female</li>
           </bodyTypes>
           <headTypes>
-            <li>Female_AverageNormal</li>
+            <li>Female_AveragePointy</li>
           </headTypes>
           <colorChannels>
             <li>
               <name>skin</name>
               <first Class="ColorGenerator_Options">
                 <options>
-                  <li><weight>1</weight><only>RGBA(0.90,0.95,0.95,0.65)</only></li>
+                  <li><weight>1</weight><only>RGBA(0.90,0.95,0.95,1)</only></li>
                 </options>
               </first>
             </li>
@@ -576,17 +576,8 @@
       </relationSettings>
       <graphicPaths>
         <body>
-          <path>Things/Pawn/SynthMiku/Body/</path>
-          <extendedGraphics>
-            <BodyType For="MikuBody">Things/Pawn/SynthMiku/Body/Naked_Female</BodyType>
-          </extendedGraphics>
+          <path>Things/Pawn/SynthMiku/Body/Naked_Female</path>
         </body>
-        <head>
-          <path>Things/Pawn/SynthMiku/Head/</path>
-          <extendedGraphics>
-            <Gender For="Female">Things/Pawn/SynthMiku/Head/Face01</Gender>
-          </extendedGraphics>
-        </head>
         <skinShader>Transparent</skinShader>
       </graphicPaths>
     </alienRace>

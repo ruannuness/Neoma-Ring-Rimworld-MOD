@@ -91,7 +91,7 @@
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>2</researchViewX>
+    <researchViewX>-2</researchViewX>
     <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
@@ -107,7 +107,7 @@
       <li>NeomaTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>2</researchViewX>
+    <researchViewX>-2</researchViewX>
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>
 
