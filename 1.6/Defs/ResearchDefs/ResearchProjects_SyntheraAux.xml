@@ -2,8 +2,7 @@
 <Defs>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- COMBAT AMPLIFIER line  (X=2)                                        -->
-  <!-- Branching from NeomaTierI → II → III                                -->
+  <!-- COMBAT AMPLIFIER (X=2)  — TierI branch, 4 níveis                  -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <ResearchProjectDef>
@@ -53,293 +52,6 @@
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>
 
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- WORK UNLOCKER line  (X=4)                                           -->
-  <!-- Branching from NeomaTierI → II                                       -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-  <ResearchProjectDef>
-    <defName>AuxWorkTierI</defName>
-    <label>work protocol I</label>
-    <description>Upload expanded behavioral protocols to a nearby synthera avatar, granting access to crafting and basic labor work types normally locked at lower tiers.</description>
-    <baseCost>300</baseCost>
-    <techLevel>Industrial</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierI</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>4</researchViewX>
-    <researchViewY>0</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxWorkTierII</defName>
-    <label>work protocol II</label>
-    <description>Extend work protocols to include hunting, medical, and artistic work types, making the avatar nearly indistinguishable from a skilled colonist.</description>
-    <baseCost>700</baseCost>
-    <techLevel>Industrial</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxWorkTierI</li>
-      <li>NeomaTierII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>4</researchViewX>
-    <researchViewY>1</researchViewY>
-  </ResearchProjectDef>
-
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- CORE OPTIMIZER line  (X=6)                                          -->
-  <!-- Branching from NeomaTierII → III → IV                               -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-  <ResearchProjectDef>
-    <defName>AuxOptimizerTierI</defName>
-    <label>core optimizer I</label>
-    <description>Develop a maintenance uplink node that reduces avatar respawn and recreate cooldowns and slows the buildup of system stress.</description>
-    <baseCost>600</baseCost>
-    <techLevel>Industrial</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>6</researchViewX>
-    <researchViewY>1</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxOptimizerTierII</defName>
-    <label>core optimizer II</label>
-    <description>Upgrade the optimizer to a deeper maintenance channel. Cooldowns are halved and system stress dissipates faster.</description>
-    <baseCost>1200</baseCost>
-    <techLevel>Spacer</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxOptimizerTierI</li>
-      <li>NeomaTierIII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>6</researchViewX>
-    <researchViewY>2</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxOptimizerTierIII</defName>
-    <label>core optimizer III</label>
-    <description>The pinnacle maintenance uplink. Near-zero cooldowns and continuous active stress purging keep the avatar at peak operational efficiency indefinitely.</description>
-    <baseCost>2400</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxOptimizerTierII</li>
-      <li>NeomaTierIV</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>6</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- ROLE SPECIALIZER line  (X=8)                                        -->
-  <!-- Branching from NeomaTierII → III → IV                               -->
-  <!-- Each tier unlocks Soldier, Worker, Medic, Scout variants.           -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-  <ResearchProjectDef>
-    <defName>AuxRoleTierI</defName>
-    <label>role specialization I</label>
-    <description>Develop basic role protocol nodes. Each node type uploads a focused behavioral package to a nearby avatar, providing a modest specialization in combat, labor, medicine, or scouting.</description>
-    <baseCost>800</baseCost>
-    <techLevel>Industrial</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>8</researchViewX>
-    <researchViewY>1</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxRoleTierII</defName>
-    <label>role specialization II</label>
-    <description>Upgrade role protocol nodes to a deeper behavioral imprint. The same four specializations are now significantly more potent.</description>
-    <baseCost>1600</baseCost>
-    <techLevel>Spacer</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxRoleTierI</li>
-      <li>NeomaTierIII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>8</researchViewX>
-    <researchViewY>2</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxRoleTierIII</defName>
-    <label>role specialization III</label>
-    <description>Develop pinnacle role protocol nodes that rewrite the avatar's core behavioral matrix. Each specialization reaches its maximum possible effectiveness.</description>
-    <baseCost>3200</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxRoleTierII</li>
-      <li>NeomaTierIV</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>8</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- ARMOR MATRIX line  (X=10)                                           -->
-  <!-- Branching from NeomaTierII → III → IV                               -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-  <ResearchProjectDef>
-    <defName>AuxArmorTierI</defName>
-    <label>armor matrix I</label>
-    <description>Develop an armor matrix node that projects a reinforcement field onto a nearby synthera avatar, reducing all incoming damage by 15%.</description>
-    <baseCost>700</baseCost>
-    <techLevel>Industrial</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
-    <researchViewY>1</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxArmorTierII</defName>
-    <label>armor matrix II</label>
-    <description>Upgrade the armor matrix to a heavier reinforcement field. Incoming damage reduction increases to 30%.</description>
-    <baseCost>1500</baseCost>
-    <techLevel>Spacer</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxArmorTierI</li>
-      <li>NeomaTierIII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
-    <researchViewY>2</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxArmorTierIII</defName>
-    <label>armor matrix III</label>
-    <description>Develop the pinnacle armor matrix node. A maximum-density reinforcement lattice reduces incoming damage by 50%. The avatar becomes extraordinarily difficult to destroy.</description>
-    <baseCost>3000</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxArmorTierII</li>
-      <li>NeomaTierIV</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- OVERCLOCK CORE line  (X=12)                                         -->
-  <!-- Branching from NeomaTierIII → IV → (end)                           -->
-  <!-- Very expensive. High risk, high reward.                             -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-  <ResearchProjectDef>
-    <defName>AuxOverclockTierI</defName>
-    <label>overclock core I</label>
-    <description>Develop an overclock core node that pushes a nearby avatar's combat systems past safe operational limits. Massive combat gains at the cost of doubled stress accumulation.</description>
-    <baseCost>2000</baseCost>
-    <techLevel>Spacer</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierIII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>12</researchViewX>
-    <researchViewY>2</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxOverclockTierII</defName>
-    <label>overclock core II</label>
-    <description>Push the overclock further. Extraordinary combat performance, but the avatar burns through system stress three times as fast. Aggressive recall cycles are required.</description>
-    <baseCost>4000</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxOverclockTierI</li>
-      <li>NeomaTierIV</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>12</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxOverclockTierIII</defName>
-    <label>overclock core III</label>
-    <description>Maximum theoretical overclock. The avatar's combat output borders on mechanical impossibility. System stress accumulates five times faster — treat every deployment as a timed assault.</description>
-    <baseCost>8000</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxOverclockTierII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>12</researchViewX>
-    <researchViewY>4</researchViewY>
-  </ResearchProjectDef>
-
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- VERSATILITY PROTOCOL line  (X=14)                                   -->
-  <!-- Branching from NeomaTierIII → IV                                    -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
-  <ResearchProjectDef>
-    <defName>AuxVersatilityTierI</defName>
-    <label>versatility protocol I</label>
-    <description>Develop a versatility protocol node that uploads broad behavioral enhancements to a nearby avatar, covering research speed, carrying capacity, plant work, and hunting stealth.</description>
-    <baseCost>1200</baseCost>
-    <techLevel>Spacer</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierIII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>14</researchViewX>
-    <researchViewY>2</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>AuxVersatilityTierII</defName>
-    <label>versatility protocol II</label>
-    <description>Upgrade to a deep-spectrum behavioral imprint. The avatar gains dramatic improvements across research, carrying, plant work, stealth, and social effectiveness — approaching universal competency.</description>
-    <baseCost>2500</baseCost>
-    <techLevel>Ultra</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>AuxVersatilityTierI</li>
-      <li>NeomaTierIV</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>14</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- ARCHOTECH TIER — requires SyntheraArchotechTerminal to research    -->
-  <!-- Absurdly powerful. Nodes produce power instead of consuming it.    -->
-  <!-- ═══════════════════════════════════════════════════════════════════ -->
-
   <ResearchProjectDef>
     <defName>AuxCombatArchotech</defName>
     <label>combat uplink archotech</label>
@@ -356,6 +68,41 @@
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- WORK PROTOCOL (X=2.5) — TierI branch, 2 níveis + archotech        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AuxWorkTierI</defName>
+    <label>work protocol I</label>
+    <description>Upload expanded behavioral protocols to a nearby synthera avatar, granting access to crafting and basic labor work types normally locked at lower tiers.</description>
+    <baseCost>300</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierI</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>2.5</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxWorkTierII</defName>
+    <label>work protocol II</label>
+    <description>Extend work protocols to include hunting, medical, and artistic work types, making the avatar nearly indistinguishable from a skilled colonist.</description>
+    <baseCost>700</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxWorkTierI</li>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>2.5</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
   <ResearchProjectDef>
     <defName>AuxWorkArchotech</defName>
     <label>work protocol archotech</label>
@@ -368,8 +115,59 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>4</researchViewX>
+    <researchViewX>2.5</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CORE OPTIMIZER (X=3) — TierII branch, 3 níveis + archotech        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AuxOptimizerTierI</defName>
+    <label>core optimizer I</label>
+    <description>Develop a maintenance uplink node that reduces avatar respawn and recreate cooldowns and slows the buildup of system stress.</description>
+    <baseCost>600</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxOptimizerTierII</defName>
+    <label>core optimizer II</label>
+    <description>Upgrade the optimizer to a deeper maintenance channel. Cooldowns are halved and system stress dissipates faster.</description>
+    <baseCost>1200</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxOptimizerTierI</li>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>3</researchViewX>
     <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxOptimizerTierIII</defName>
+    <label>core optimizer III</label>
+    <description>The pinnacle maintenance uplink. Near-zero cooldowns and continuous active stress purging keep the avatar at peak operational efficiency indefinitely.</description>
+    <baseCost>2400</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxOptimizerTierII</li>
+      <li>NeomaTierIV</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>3</researchViewX>
+    <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -384,8 +182,59 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>6</researchViewX>
+    <researchViewX>3</researchViewX>
     <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ROLE SPECIALIZATION (X=3.5) — TierII branch, 3 níveis + archotech -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AuxRoleTierI</defName>
+    <label>role specialization I</label>
+    <description>Develop basic role protocol nodes. Each node type uploads a focused behavioral package to a nearby avatar, providing a modest specialization in combat, labor, medicine, or scouting.</description>
+    <baseCost>800</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>3.5</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxRoleTierII</defName>
+    <label>role specialization II</label>
+    <description>Upgrade role protocol nodes to a deeper behavioral imprint. The same four specializations are now significantly more potent.</description>
+    <baseCost>1600</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxRoleTierI</li>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>3.5</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxRoleTierIII</defName>
+    <label>role specialization III</label>
+    <description>Develop pinnacle role protocol nodes that rewrite the avatar's core behavioral matrix. Each specialization reaches its maximum possible effectiveness.</description>
+    <baseCost>3200</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxRoleTierII</li>
+      <li>NeomaTierIV</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>3.5</researchViewX>
+    <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -400,8 +249,59 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>8</researchViewX>
+    <researchViewX>3.5</researchViewX>
     <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARMOR MATRIX (X=4) — TierII branch, 3 níveis + archotech          -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AuxArmorTierI</defName>
+    <label>armor matrix I</label>
+    <description>Develop an armor matrix node that projects a reinforcement field onto a nearby synthera avatar, reducing all incoming damage by 15%.</description>
+    <baseCost>700</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>4</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxArmorTierII</defName>
+    <label>armor matrix II</label>
+    <description>Upgrade the armor matrix to a heavier reinforcement field. Incoming damage reduction increases to 30%.</description>
+    <baseCost>1500</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxArmorTierI</li>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>4</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxArmorTierIII</defName>
+    <label>armor matrix III</label>
+    <description>Develop the pinnacle armor matrix node. A maximum-density reinforcement lattice reduces incoming damage by 50%. The avatar becomes extraordinarily difficult to destroy.</description>
+    <baseCost>3000</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxArmorTierII</li>
+      <li>NeomaTierIV</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>4</researchViewX>
+    <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -416,8 +316,59 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
+    <researchViewX>4</researchViewX>
     <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- OVERCLOCK CORE (X=4.5) — TierIII branch, 3 níveis + archotech     -->
+  <!-- OvkIII usa Y=3.5 para comprimir sem ultrapassar Y=4               -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AuxOverclockTierI</defName>
+    <label>overclock core I</label>
+    <description>Develop an overclock core node that pushes a nearby avatar's combat systems past safe operational limits. Massive combat gains at the cost of doubled stress accumulation.</description>
+    <baseCost>2000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>4.5</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxOverclockTierII</defName>
+    <label>overclock core II</label>
+    <description>Push the overclock further. Extraordinary combat performance, but the avatar burns through system stress three times as fast. Aggressive recall cycles are required.</description>
+    <baseCost>4000</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxOverclockTierI</li>
+      <li>NeomaTierIV</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>4.5</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxOverclockTierIII</defName>
+    <label>overclock core III</label>
+    <description>Maximum theoretical overclock. The avatar's combat output borders on mechanical impossibility. System stress accumulates five times faster — treat every deployment as a timed assault.</description>
+    <baseCost>8000</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxOverclockTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>4.5</researchViewX>
+    <researchViewY>3.5</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -432,8 +383,43 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>12</researchViewX>
-    <researchViewY>5</researchViewY>
+    <researchViewX>4.5</researchViewX>
+    <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- VERSATILITY PROTOCOL (X=5) — TierIII branch, 2 níveis + archotech -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>AuxVersatilityTierI</defName>
+    <label>versatility protocol I</label>
+    <description>Develop a versatility protocol node that uploads broad behavioral enhancements to a nearby avatar, covering research speed, carrying capacity, plant work, and hunting stealth.</description>
+    <baseCost>1200</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierIII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>5</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>AuxVersatilityTierII</defName>
+    <label>versatility protocol II</label>
+    <description>Upgrade to a deep-spectrum behavioral imprint. The avatar gains dramatic improvements across research, carrying, plant work, stealth, and social effectiveness — approaching universal competency.</description>
+    <baseCost>2500</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>AuxVersatilityTierI</li>
+      <li>NeomaTierIV</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>5</researchViewX>
+    <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -448,7 +434,7 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>14</researchViewX>
+    <researchViewX>5</researchViewX>
     <researchViewY>4</researchViewY>
   </ResearchProjectDef>
 

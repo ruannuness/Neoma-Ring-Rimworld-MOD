@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- MAIN SPINE (X=0) — altar tier progression                          -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
   <ResearchProjectDef>
     <defName>NeomaTierI</defName>
     <label>SyntheraCore_NeomaTier1_Label</label>
@@ -44,21 +48,6 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef>
-    <defName>MikuStageResearch</defName>
-    <label>holographic resonance</label>
-    <description>Develop the resonance technology required to reconstruct a digital soul as a projected Synthera avatar. Unlocks the Holographic Stage.</description>
-    <baseCost>1500</baseCost>
-    <techLevel>Industrial</techLevel>
-    <tab>NeomaProject</tab>
-    <prerequisites>
-      <li>NeomaTierII</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>1</researchViewX>
-    <researchViewY>1</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
     <defName>NeomaTierIV</defName>
     <label>SyntheraCore_NeomaTier4_Label</label>
     <description>SyntheraCore_NeomaTier4_Description</description>
@@ -73,11 +62,8 @@
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
-
-
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- NEOMA RING CALIBRATION (X=-2) — left of spine                      -->
-  <!-- Unlocks deeper binding protocols for the unique Neoma Ring.        -->
+  <!-- RING CALIBRATION (X=0.5)                                           -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <ResearchProjectDef>
@@ -91,7 +77,7 @@
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>-2</researchViewX>
+    <researchViewX>0.5</researchViewX>
     <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
@@ -107,13 +93,12 @@
       <li>NeomaTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>-2</researchViewX>
+    <researchViewX>0.5</researchViewX>
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- ALTAR ENHANCEMENT (X=1) — between spine and aux modules            -->
-  <!-- Unlocks structural upgrade buildings placed adjacent to altars.    -->
+  <!-- ALTAR ENHANCEMENT (X=1) — Y=1.5 e Y=2.5 entre os tiers            -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <ResearchProjectDef>
@@ -128,7 +113,7 @@
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <researchViewX>1</researchViewX>
-    <researchViewY>2</researchViewY>
+    <researchViewY>1.5</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -144,7 +129,26 @@
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <researchViewX>1</researchViewX>
-    <researchViewY>3</researchViewY>
+    <researchViewY>2.5</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- MIKU (X=1.5)                                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <ResearchProjectDef>
+    <defName>MikuStageResearch</defName>
+    <label>holographic resonance</label>
+    <description>Develop the resonance technology required to reconstruct a digital soul as a projected Synthera avatar. Unlocks the Holographic Stage.</description>
+    <baseCost>1500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaTierII</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>1.5</researchViewX>
+    <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
 </Defs>
