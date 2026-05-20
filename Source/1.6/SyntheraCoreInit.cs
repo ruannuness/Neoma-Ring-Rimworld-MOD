@@ -100,12 +100,33 @@ namespace SyntheraCore
     }
 
     // Synthera pawns (SyntheraRace*) are synthetic — they cannot get wound infections.
-    [HarmonyPatch(typeof(HediffComp_Infecter), "CompPostTick")]
+    // Patched at Pawn_HealthTracker.AddHediff(HediffDef,...) because HediffComp_Infecter's
+    // tick method was renamed in RimWorld 1.6 and cannot be directly targeted by name.
+    [HarmonyPatch]
     static class Patch_SyntheraNoInfection
     {
-        static bool Prefix(HediffComp_Infecter __instance)
+        static readonly FieldInfo FPawn =
+            AccessTools.Field(typeof(Pawn_HealthTracker), "pawn");
+
+        static MethodBase TargetMethod()
         {
-            return __instance.parent?.pawn?.def?.defName?.StartsWith("SyntheraRace") != true;
+            return typeof(Pawn_HealthTracker)
+                .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .FirstOrDefault(m =>
+                {
+                    if (m.Name != "AddHediff") return false;
+                    var ps = m.GetParameters();
+                    return ps.Length > 0 && ps[0].ParameterType == typeof(HediffDef);
+                });
+        }
+
+        static bool Prepare() => TargetMethod() != null;
+
+        static bool Prefix(Pawn_HealthTracker __instance, HediffDef def)
+        {
+            if (def?.defName != "WoundInfection") return true;
+            var pawn = FPawn?.GetValue(__instance) as Pawn;
+            return pawn?.def?.defName?.StartsWith("SyntheraRace") != true;
         }
     }
 
