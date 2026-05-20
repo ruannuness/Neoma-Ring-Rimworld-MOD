@@ -501,7 +501,7 @@ namespace SyntheraCore
                     action = delegate { GenerateFormgelPawn(); SpawnFormgel(); },
                     defaultLabel = "Create avatar",
                     defaultDesc = "Generate a new synthera avatar.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Spawn", true)
                 };
                 if (!HasPower)
                     createBtn.Disable("Requires power.");
@@ -554,7 +554,7 @@ namespace SyntheraCore
                     action       = delegate { SpawnFormgel(); },
                     defaultLabel = spawnLabel,
                     defaultDesc  = spawnDesc,
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Spawn", true)
                 };
 
                 if (Find.TickManager.TicksGame < RespawnTick)
@@ -624,7 +624,7 @@ namespace SyntheraCore
                     },
                     defaultLabel = "Despawn avatar",
                     defaultDesc  = "Return the avatar to the core. Resets system stress. Available again after cooldown.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Despawn", true)
                 };
 
                 yield return new Command_Action
@@ -654,7 +654,7 @@ namespace SyntheraCore
                     },
                     defaultLabel = "Emergency recall",
                     defaultDesc  = "Instantly teleport the avatar back to the altar. 1-day cooldown.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Recall", true)
                 };
                 if (curTick < lastEmergencyRecallTick + Props.emergencyRecallCooldownTicks)
                     recallBtn.Disable("Recall on cooldown: " + GenDate.ToStringTicksToPeriod(lastEmergencyRecallTick + Props.emergencyRecallCooldownTicks - curTick));
