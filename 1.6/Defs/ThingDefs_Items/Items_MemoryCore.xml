@@ -3,7 +3,7 @@
 
   <ThingDef>
     <defName>SyntheraMemoryCore</defName>
-    <thingClass>ThingWithComps</thingClass>
+    <thingClass>SyntheraCore.ThingConsciousnessCore</thingClass>
     <label>Synthera memory core</label>
     <description>A compact resonance vessel that contains the complete consciousness of a Synthera avatar. The digital soul within remains dormant, preserved perfectly, awaiting reinstallation into a compatible altar. Handle with extreme care — destruction of this core means permanent loss of the stored consciousness.</description>
     <category>Item</category>

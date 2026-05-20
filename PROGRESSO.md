@@ -12,7 +12,7 @@
 
 O mod gira em torno de **avatares digitais (Syntheras)** invocados por altares construídos pelo jogador. Syntheras são projeções de consciência artificial — não comem, não dormem, acumulam stress de sistema ao ficarem ativos, e não deixam cadáver ao morrer (o corpo dissolve, apenas equipamentos e inventário são droppados).
 
-**Inspiração central:** O **Neoma Ring** — um item único de masmorra (não craftável) que convoca uma companion IA de alto nível. O Ring pode ser calibrado progressivamente para melhorar a gestão do companion após a morte.
+**Inspiração central:** O **Neoma Ring** — um item único de masmorra (não craftável) que convoca uma companion IA de alto nível. O Ring pode ser calibrado progressivamente para melhorar a gestão do companion.
 
 ---
 
@@ -32,7 +32,7 @@ O mod gira em torno de **avatares digitais (Syntheras)** invocados por altares c
 
 ### Persona Core
 
-- [x] **`SyntheraPersonaCore`** — item consumível necessário para construir todos os altares; não pode ser comprado/vendido; só fabricado pela companion
+- [x] **`SyntheraPersonaCore`** — item consumível necessário para construir todos os altares; não pode ser comprado/vendido; só fabricado pela companion.
 - [x] **`NeomaFabricationConsole`** — bancada 2×1, 400W, desbloqueada por `NeomaRingCalibrationI`; apenas a companion do Ring pode operar
 - [x] **Restrição via Harmony** — `Patch_Bill_NeomaCraftOnly` bloqueia qualquer pawn que não seja `kindDef == "NeomaPawn"` em receitas com `NeomaCraftExtension`
 - [x] **Receita `NeomaMake_PersonaCore`** — 2× ArchotechShard + 20× Ouro + 15× Plasteel → 1× Persona Core; prereq: `NeomaRingCalibrationI`
@@ -242,6 +242,33 @@ FormgelCore/
 - [ ] **Tier V / Archotech Altar** — altar endgame desbloqueado por `NeomaTierIV`
 - [ ] **Synthera Backstories adicionais** — diversificar os textos de Initialization/Deployment
 - [ ] **Sons customizados** — atualmente usa `PsychicPulseGlobal` e `Interact_Annihilator` da vanilla
+
+---
+
+### Fase 2 — Redesign do Loop de Criação de Synthera (Planejado)
+
+**Contexto:** O fluxo atual ("Create avatar" gera o pawn do nada) é funcional mas narrativamente fraco. O redesign torna a consciência um bem físico com peso e risco.
+
+**Renomear estruturas:**
+- "Altar" não combina com supercomputadores que hospedam IAs. Nome candidato: **Nexus** (Nexus Mk.I a Mk.IV) ou **Core Terminal**. Confirmar antes de implementar.
+
+**Novo loop de criação:**
+1. Jogador constrói a estrutura (Nexus)
+2. Fabrica o item de consciência (`SyntheraImprovisedCore` para Tier I/II — craftável na Machining Table com materiais mid-game; `SyntheraPersonaCore` para Tier III/IV — fabricado pela companion)
+3. Clica "Load Core" no gizmo da estrutura → consome o item próximo → gera o pawn
+
+**Core Corrompido (ao destruir a estrutura):**
+- Explosão ou destruição da estrutura → dropa `SyntheraCorruptedCore` (item com pawn preservado)
+- O item corrompido exibe nome + skills degradados no inspect
+- Recipe de restauração (bench especial ou NeomaFabricationConsole): core corrompido + Archotech Shard + Ouro + Plasteel + alto custo de trabalho → core restaurado
+- Balanceia perda acidental sem ser permanentemente frustrante
+
+**Complexidade técnica estimada:**
+- `SyntheraImprovisedCore` ThingDef + Recipe + `NeomaCraftExtension` apenas para `SyntheraPersonaCore`
+- Modificar `GenerateFormgelPawn()` para consumir item de consciência próximo em vez de criar livremente
+- `SyntheraCorruptedCore` ThingDef com `CompConsciousnessCore`
+- `RecipeWorker_RestoreCorruptedCore` customizado para preservar o pawn através da receita
+- Harmony patch em `CompSyntheraSpawner` para gerar core corrompido ao explodir
 
 ---
 

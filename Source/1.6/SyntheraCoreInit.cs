@@ -130,6 +130,53 @@ namespace SyntheraCore
         }
     }
 
+    // Inject consciousness name + skills into the View Information card for SyntheraMemoryCore.
+    [HarmonyPatch(typeof(StatsReportUtility), "StatsToDraw", new[] { typeof(Thing) })]
+    static class Patch_MemoryCoreInfoCard
+    {
+        static void Postfix(Thing thing, ref IEnumerable<StatDrawEntry> __result)
+        {
+            var comp = thing?.TryGetComp<CompConsciousnessCore>();
+            if (comp?.StoredConsciousness == null) return;
+
+            var p = comp.StoredConsciousness;
+            var extra = new List<StatDrawEntry>();
+
+            extra.Add(new StatDrawEntry(
+                StatCategoryDefOf.Basics,
+                "Stored consciousness",
+                p.Name.ToStringFull,
+                "The digital identity encoded in this core.",
+                10000));
+
+            if (p.story?.traits?.allTraits is { Count: > 0 } traits)
+            {
+                string traitStr = string.Join(", ", traits.Select(t => t.LabelCap.ToString()));
+                extra.Add(new StatDrawEntry(
+                    StatCategoryDefOf.Basics,
+                    "Traits",
+                    traitStr,
+                    "Personality traits of the stored consciousness.",
+                    9999));
+            }
+
+            if (p.skills?.skills != null)
+                foreach (var skill in p.skills.skills)
+                {
+                    string passion = skill.passion == Passion.Major ? " ★★" :
+                                     skill.passion == Passion.Minor ? " ★"  : "";
+                    extra.Add(new StatDrawEntry(
+                        StatCategoryDefOf.Basics,
+                        skill.def.label,
+                        skill.levelInt + passion,
+                        skill.def.description ?? "",
+                        8000 - skill.levelInt));
+                }
+
+            __result = __result.Concat(extra);
+        }
+    }
+
     // Scale down hair graphic for Miku (hair texture is user-made and larger than pawn head).
     // Intercepts GetGraphic on the hair worker and returns a 75%-sized version.
     [HarmonyPatch(typeof(PawnRenderNodeWorker), "GetGraphic")]
