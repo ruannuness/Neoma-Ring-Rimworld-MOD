@@ -71,6 +71,44 @@ namespace SyntheraCore
         }
     }
 
+    // Hide the Neoma architect tab until the player has finished at least one Neoma research.
+    // ArchitectCategoryTab.Visible already short-circuits when no designators are visible,
+    // but only if buildings have researchPrerequisites in XML. This patch is the belt-and-
+    // suspenders fallback that hides the tab directly via the category def name.
+    [HarmonyPatch]
+    static class Patch_NeomaTabVisible
+    {
+        static bool Prepare() =>
+            AccessTools.TypeByName("RimWorld.ArchitectCategoryTab") != null;
+
+        static MethodBase TargetMethod()
+        {
+            var type = AccessTools.TypeByName("RimWorld.ArchitectCategoryTab");
+            return AccessTools.PropertyGetter(type, "Visible");
+        }
+
+        static void Postfix(object __instance, ref bool __result)
+        {
+            if (!__result) return;
+            var defField = AccessTools.Field(__instance.GetType(), "def");
+            var categoryDef = defField?.GetValue(__instance) as DesignationCategoryDef;
+            if (categoryDef?.defName != "Neoma") return;
+            foreach (ResearchProjectDef r in DefDatabase<ResearchProjectDef>.AllDefs)
+                if (r?.tab?.defName == "NeomaProject" && r.IsFinished) return;
+            __result = false;
+        }
+    }
+
+    // Synthera pawns (SyntheraRace*) are synthetic — they cannot get wound infections.
+    [HarmonyPatch(typeof(HediffComp_Infecter), "CompPostTick")]
+    static class Patch_SyntheraNoInfection
+    {
+        static bool Prefix(HediffComp_Infecter __instance)
+        {
+            return __instance.parent?.pawn?.def?.defName?.StartsWith("SyntheraRace") != true;
+        }
+    }
+
     // Scale down hair graphic for Miku (hair texture is user-made and larger than pawn head).
     // Intercepts GetGraphic on the hair worker and returns a 75%-sized version.
     [HarmonyPatch(typeof(PawnRenderNodeWorker), "GetGraphic")]

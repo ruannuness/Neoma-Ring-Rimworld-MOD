@@ -142,7 +142,8 @@ namespace SyntheraCore
                         if (sick != null) Consciousness.health.RemoveHediff(sick);
                     }
 
-                    // Drop apparel and inventory at death location — the digital form dissolves.
+                    // Drop equipment, apparel and inventory at death location — the digital form dissolves.
+                    Consciousness.equipment?.DropAllEquipment(deathPos);
                     Consciousness.apparel?.DropAll(deathPos);
                     Consciousness.inventory?.DropAllNearPawn(deathPos);
 
@@ -393,6 +394,7 @@ namespace SyntheraCore
             if (Consciousness.carryTracker?.CarriedThing != null)
                 Consciousness.carryTracker.TryDropCarriedThing(Consciousness.Position, ThingPlaceMode.Near, out _);
 
+            Consciousness.equipment?.DropAllEquipment(Consciousness.Position);
             Consciousness.apparel?.DropAll(Consciousness.Position);
             Consciousness.inventory?.DropAllNearPawn(Consciousness.Position);
 
