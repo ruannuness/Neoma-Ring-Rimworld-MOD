@@ -19,13 +19,13 @@
   <!-- Applied by Need_SyntheraCoherence when level drops below 50%; removed on recall. -->
   <HediffDef>
     <defName>SyntheraCoherenceStrain</defName>
-    <label>coherence strain</label>
-    <description>The synthera's projected form is losing cohesion. Digital systems are degrading as the coherence field weakens. Recalling the avatar to its altar will clear this immediately.</description>
+    <label>cache degrading</label>
+    <description>The synthera avatar's operational cache is running low. Processing bandwidth is being throttled as the data reserve weakens. Recalling the avatar to its altar restores the cache immediately.</description>
     <hediffClass>Hediff</hediffClass>
     <isBad>true</isBad>
     <defaultLabelColor>(1.0, 0.5, 0.1)</defaultLabelColor>
     <stages>
-      <!-- Unstable: 50–25% coherence -->
+      <!-- Unstable: 50–25% cache -->
       <li>
         <label>unstable</label>
         <minSeverity>0</minSeverity>
@@ -34,7 +34,7 @@
           <MoveSpeed>0.95</MoveSpeed>
         </statFactors>
       </li>
-      <!-- Critical: below 25% coherence -->
+      <!-- Critical: below 25% cache -->
       <li>
         <label>critical</label>
         <minSeverity>0.5</minSeverity>

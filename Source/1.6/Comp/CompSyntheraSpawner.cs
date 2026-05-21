@@ -146,7 +146,7 @@ namespace SyntheraCore
                 {
                     int failTicks = GetCoherenceFailTicks();
                     Messages.Message(
-                        $"{Consciousness.Name.ToStringShort}'s coherence collapsed. Avatar recalled — recharging before re-deployment.",
+                        $"{Consciousness.Name.ToStringShort}'s cache depleted. Avatar recalled — restoring cache before re-deployment.",
                         parent, MessageTypeDefOf.NegativeEvent);
                     DespawnFormgel(false);
                     RespawnTick = Find.TickManager.TicksGame + failTicks;
@@ -715,7 +715,7 @@ namespace SyntheraCore
                             cohPulse?.Recharge(0.25f);
                             lastMaintenancePulseTick = Find.TickManager.TicksGame;
                             Messages.Message(
-                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. Coherence restored.",
+                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. Cache restored.",
                                 parent, MessageTypeDefOf.PositiveEvent);
                         },
                         defaultLabel = "Maintenance pulse",
@@ -786,16 +786,16 @@ namespace SyntheraCore
 
             if (Consciousness.Spawned)
             {
-                string cohStr = "Stable";
+                string cacheStr = "Full";
                 var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
                 if (coh != null)
-                    cohStr = coh.CurLevel > 0.66f ? "Stable"
-                           : coh.CurLevel > 0.33f ? "Unstable"
-                           : "Critical";
+                    cacheStr = coh.CurLevel > 0.5f  ? $"Cache: {(int)(coh.CurLevel * 100)}%"
+                             : coh.CurLevel > 0.25f ? $"Cache: {(int)(coh.CurLevel * 100)}% [unstable]"
+                             : $"Cache: {(int)(coh.CurLevel * 100)}% [CRITICAL]";
                 string modLine = RegisteredAuxTypes.Count > 0
                     ? $"\nModules ({RegisteredAuxTypes.Count}/{Props.maxAuxModules + BonusAuxSlots}): {BuildModulesSummary()}"
                     : "";
-                return $"Avatar: {Consciousness.Name.ToStringShort} | Coherence: {cohStr}{modLine}";
+                return $"Avatar: {Consciousness.Name.ToStringShort} | {cacheStr}{modLine}";
             }
 
             return $"Avatar: {Consciousness.Name.ToStringShort} [offline]";

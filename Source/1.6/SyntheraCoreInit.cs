@@ -287,10 +287,10 @@ namespace SyntheraCore
     {
         public Alert_SyntheraLowCoherence()
         {
-            defaultLabel       = "Synthera: coherence critical";
-            defaultExplanation = "One or more Synthera avatars are below 25% coherence. "
+            defaultLabel       = "Synthera: cache critical";
+            defaultExplanation = "One or more Synthera avatars are below 25% cache. "
                                + "At zero the avatar auto-recalls and must recharge before re-deployment. "
-                               + "Recall them manually or place a Coherence Recharger nearby.";
+                               + "Recall them manually or place a Cache Recharger nearby.";
             defaultPriority    = AlertPriority.High;
         }
 

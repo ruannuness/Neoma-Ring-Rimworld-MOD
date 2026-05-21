@@ -37,8 +37,8 @@ namespace SyntheraCore
         public override string CompInspectStringExtra()
         {
             if (compPower != null && !compPower.PowerOn)
-                return "Coherence field: offline";
-            return $"Coherence field: active (r={Props.radius}c)";
+                return "Cache field: offline";
+            return $"Cache field: active (r={Props.radius}c)";
         }
     }
 }

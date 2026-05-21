@@ -267,11 +267,11 @@
   </ThingDef>
 
 
-  <!-- Coherence Recharger: sustains nearby deployed Syntheras, slowing coherence drain -->
+  <!-- Cache Recharger: sustains nearby deployed Syntheras, slowing cache drain -->
   <ThingDef ParentName="BuildingBase">
     <defName>NeomaCoherenceRecharger</defName>
-    <label>Coherence Recharger</label>
-    <description>A resonance emitter that projects a stabilizing field over a small area. Synthera avatars within range drain coherence more slowly, allowing longer continuous deployments. Essential for sustaining high-tier avatars indefinitely.</description>
+    <label>Cache Recharger</label>
+    <description>A resonance emitter that projects a data-sustaining field over a small area. Synthera avatars within range restore cache more quickly, allowing longer continuous deployments. Essential for sustaining high-tier avatars indefinitely.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <tickerType>Normal</tickerType>
