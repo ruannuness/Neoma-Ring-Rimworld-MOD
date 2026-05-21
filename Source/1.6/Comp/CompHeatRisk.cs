@@ -12,7 +12,6 @@ namespace SyntheraCore
         public CompProperties_HeatRisk Props => (CompProperties_HeatRisk)props;
 
         private int lastHeatCheckTick = -1;
-        private const int CHECK_INTERVAL = 2500; // Check every hour (2500 ticks)
 
         public override void CompTick()
         {
@@ -30,7 +29,7 @@ namespace SyntheraCore
             {
                 // Calculate explosion chance based on temperature difference
                 float tempDifference = ambientTemp - Props.heatThreshold;
-                float explosionChance = Props.explosionChancePerHour * (1f + tempDifference / Props.explosionChanceMultiplier); // Higher temp = higher chance
+                float explosionChance = Mathf.Min(1f, Props.explosionChancePerHour * (1f + tempDifference / Props.explosionChanceMultiplier));
 
                 if (Rand.Value < explosionChance)
                 {
@@ -50,7 +49,9 @@ namespace SyntheraCore
             }
 
             // Create explosion
-            DamageDef explosionDamage = DefDatabase<DamageDef>.GetNamed("Flame", false) ?? DefDatabase<DamageDef>.GetNamed("Bomb");
+            DamageDef explosionDamage = DefDatabase<DamageDef>.GetNamed("Flame", false)
+                                     ?? DefDatabase<DamageDef>.GetNamed("Bomb", false)
+                                     ?? DamageDefOf.Burn;
             GenExplosion.DoExplosion(
                 parent.Position,
                 parent.Map,
@@ -77,7 +78,7 @@ namespace SyntheraCore
             if (ambientTemp >= Props.heatThreshold)
             {
                 float tempDifference = ambientTemp - Props.heatThreshold;
-                float explosionChance = Props.explosionChancePerHour * (1f + tempDifference / Props.explosionChanceMultiplier);
+                float explosionChance = Mathf.Min(1f, Props.explosionChancePerHour * (1f + tempDifference / Props.explosionChanceMultiplier));
                 return $"Heat risk: {explosionChance.ToStringPercent()} chance/hour";
             }
 

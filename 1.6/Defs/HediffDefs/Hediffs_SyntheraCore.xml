@@ -50,7 +50,7 @@
   <HediffDef>
     <defName>SyntheraHibernationSyndrome</defName>
     <label>hibernation syndrome</label>
-    <description>Deep system corruption from emergency hibernation. Cognitive and motor functions are impaired while backup data is reintegrated. Fully clears after 24 hours of active deployment.</description>
+    <description>Deep system corruption from an abrupt cache crash. The avatar's projection collapsed before a clean cache release could occur, leaving corrupted data fragments that must be purged and reallocated. Cognitive and motor functions are impaired while the cache is rebuilt from scratch. Fully clears after 24 hours of active deployment.</description>
     <isBad>true</isBad>
     <maxSeverity>1.0</maxSeverity>
     <hediffClass>HediffWithComps</hediffClass>

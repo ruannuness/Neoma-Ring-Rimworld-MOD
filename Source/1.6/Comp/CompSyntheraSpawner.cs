@@ -654,8 +654,8 @@ namespace SyntheraCore
                         DespawnFormgel(false);
                         RespawnTick = Find.TickManager.TicksGame + (int)(Props.spawnIntervalDays * 60000f * AuxRespawnMultiplier * SpawnIntervalMultiplier);
                     },
-                    defaultLabel = "Despawn avatar",
-                    defaultDesc  = "Return the avatar to the core. The avatar releases its cache back to core systems cleanly. Available again after cooldown.",
+                    defaultLabel = "Recall avatar",
+                    defaultDesc  = "Recall the avatar to the core. The avatar releases its cache back to core systems cleanly. Available again after cooldown.",
                     icon = ContentFinder<Texture2D>.Get("UI/Commands/Despawn", true)
                 };
 
