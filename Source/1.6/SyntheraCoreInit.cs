@@ -99,6 +99,31 @@ namespace SyntheraCore
         }
     }
 
+    // Intercept Pawn.Kill for Synthera pawns and redirect to hibernation instead of actual death.
+    // This prevents all vanilla death notifications: burial letters, ideology obligations, death thoughts.
+    // Only fires for SyntheraRace* pawns that are bound to an altar on the same map.
+    [HarmonyPatch(typeof(Pawn), "Kill")]
+    static class Patch_SyntheraInterceptKill
+    {
+        static bool Prefix(Pawn __instance)
+        {
+            if (__instance?.def?.defName?.StartsWith("SyntheraRace") != true) return true;
+            if (__instance.Dead) return true;
+
+            Map map = __instance.Map;
+            if (map == null) return true; // off-map: let vanilla handle, CompTick fallback runs later
+
+            foreach (Building b in map.listerBuildings.allBuildingsColonist)
+            {
+                var s = b.TryGetComp<CompSyntheraSpawner>();
+                if (s == null || s.Consciousness != __instance) continue;
+                s.EnterHibernation(__instance.Position);
+                return false; // skip vanilla Kill entirely
+            }
+            return true; // no altar found, die normally
+        }
+    }
+
     // Synthera pawns (SyntheraRace*) are synthetic — they cannot get wound infections.
     // Patched at Pawn_HealthTracker.AddHediff(HediffDef,...) because HediffComp_Infecter's
     // tick method was renamed in RimWorld 1.6 and cannot be directly targeted by name.

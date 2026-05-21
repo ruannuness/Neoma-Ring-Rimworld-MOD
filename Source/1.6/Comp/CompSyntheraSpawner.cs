@@ -117,44 +117,25 @@ namespace SyntheraCore
             if (Consciousness.Spawned && !HasPower)
                 DespawnFormgel(false);
 
-            // Detect in-world death → enter hibernation.
-            // We immediately resurrect (to extract the pawn from the corpse without destroying it),
-            // drop all carried items, dissolve the corpse, then DeSpawn.
+            // Fallback: runs only when Kill() was not intercepted (e.g. off-map death).
             if (Consciousness.Dead && !InHibernation)
             {
-                InHibernation = true;
-                RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier);
-
-                Corpse corpse   = Consciousness.Corpse;
+                Corpse corpse    = Consciousness.Corpse;
                 IntVec3 deathPos = corpse?.Position ?? parent.Position;
 
                 if (ResurrectionUtility.TryResurrect(Consciousness))
                 {
-                    // Strip resurrection sickness — AIs don't get nauseous.
                     var sickDef = DefDatabase<HediffDef>.GetNamed("ResurrectionSickness", false);
                     if (sickDef != null)
                     {
                         var sick = Consciousness.health.hediffSet.GetFirstHediffOfDef(sickDef);
                         if (sick != null) Consciousness.health.RemoveHediff(sick);
                     }
-
-                    // Drop equipment, apparel and inventory at death location — the digital form dissolves.
-                    Consciousness.equipment?.DropAllEquipment(deathPos);
-                    Consciousness.apparel?.DropAll(deathPos);
-                    Consciousness.inventory?.DropAllNearPawn(deathPos);
-
-                    // Destroy the corpse — Syntheras leave no physical remains.
                     if (corpse != null && !corpse.Destroyed)
                         corpse.Destroy(DestroyMode.Vanish);
-
-                    if (Consciousness.Spawned)
-                        Consciousness.DeSpawn();
                 }
 
-                Messages.Message(
-                    $"{Consciousness.Name.ToStringShort} entered hibernation. Backup restoration available in {GenDate.ToStringTicksToPeriod(RespawnTick - Find.TickManager.TicksGame)}.",
-                    parent,
-                    MessageTypeDefOf.NegativeEvent);
+                EnterHibernation(deathPos);
             }
 
             // Auto-recall on coherence collapse — checked every NeedInterval (150 ticks).
@@ -185,6 +166,29 @@ namespace SyntheraCore
                 case 2: return 5000;   // ~2 h
                 default: return 10000; // ~4 h (Tier I)
             }
+        }
+
+        // Called by Patch_SyntheraInterceptKill (primary) and the CompTick fallback.
+        // Pawn must be alive (or just resurrected) when this runs.
+        public void EnterHibernation(IntVec3 deathPos)
+        {
+            if (InHibernation || Consciousness == null) return;
+            InHibernation = true;
+            RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier);
+
+            var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+            if (coh != null) coh.CurLevel = 1f;
+
+            Consciousness.equipment?.DropAllEquipment(deathPos);
+            Consciousness.apparel?.DropAll(deathPos);
+            Consciousness.inventory?.DropAllNearPawn(deathPos);
+
+            if (Consciousness.Spawned)
+                Consciousness.DeSpawn();
+
+            Messages.Message(
+                $"{Consciousness.Name.ToStringShort} entered hibernation. Backup restoration available in {GenDate.ToStringTicksToPeriod(RespawnTick - Find.TickManager.TicksGame)}.",
+                parent, MessageTypeDefOf.NegativeEvent);
         }
 
         public void GenerateFormgelPawn()
