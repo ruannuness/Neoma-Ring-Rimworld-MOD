@@ -20,7 +20,7 @@
   <HediffDef>
     <defName>SyntheraCoherenceStrain</defName>
     <label>cache degrading</label>
-    <description>The synthera avatar's operational cache is running low. Processing bandwidth is being throttled as the data reserve weakens. Recalling the avatar to its altar restores the cache immediately.</description>
+    <description>The synthera avatar's operational cache is running critically low. Processing bandwidth is being throttled as reserves deplete. Recalling the avatar to its altar triggers a clean cache release, restoring full capacity instantly.</description>
     <hediffClass>Hediff</hediffClass>
     <isBad>true</isBad>
     <defaultLabelColor>(1.0, 0.5, 0.1)</defaultLabelColor>

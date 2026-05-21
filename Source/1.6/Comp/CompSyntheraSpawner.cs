@@ -146,7 +146,7 @@ namespace SyntheraCore
                 {
                     int failTicks = GetCoherenceFailTicks();
                     Messages.Message(
-                        $"{Consciousness.Name.ToStringShort}'s cache depleted. Avatar recalled — restoring cache before re-deployment.",
+                        $"{Consciousness.Name.ToStringShort}'s cache exhausted. Projection collapsed — recovery cycle required before re-deployment.",
                         parent, MessageTypeDefOf.NegativeEvent);
                     DespawnFormgel(false);
                     RespawnTick = Find.TickManager.TicksGame + failTicks;
@@ -655,7 +655,7 @@ namespace SyntheraCore
                         RespawnTick = Find.TickManager.TicksGame + (int)(Props.spawnIntervalDays * 60000f * AuxRespawnMultiplier * SpawnIntervalMultiplier);
                     },
                     defaultLabel = "Despawn avatar",
-                    defaultDesc  = "Return the avatar to the core. Resets system stress. Available again after cooldown.",
+                    defaultDesc  = "Return the avatar to the core. The avatar releases its cache back to core systems cleanly. Available again after cooldown.",
                     icon = ContentFinder<Texture2D>.Get("UI/Commands/Despawn", true)
                 };
 
@@ -715,7 +715,7 @@ namespace SyntheraCore
                             cohPulse?.Recharge(0.25f);
                             lastMaintenancePulseTick = Find.TickManager.TicksGame;
                             Messages.Message(
-                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. Cache restored.",
+                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. Cache bandwidth injected.",
                                 parent, MessageTypeDefOf.PositiveEvent);
                         },
                         defaultLabel = "Maintenance pulse",
