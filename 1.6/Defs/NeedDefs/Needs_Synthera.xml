@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <NeedDef>
+    <defName>NeedSyntheraCoherence</defName>
+    <needClass>SyntheraCore.Need_SyntheraCoherence</needClass>
+    <label>coherence</label>
+    <description>Digital coherence of the synthera avatar's projected consciousness. Drains while deployed; fully restored when recalled to the altar. If it reaches zero, the avatar automatically collapses and must recharge before re-deployment. A Coherence Recharger nearby slows the drain.</description>
+    <listPriority>45</listPriority>
+    <baseLevel>1</baseLevel>
+    <showForCaravanMembers>false</showForCaravanMembers>
+  </NeedDef>
+
+</Defs>

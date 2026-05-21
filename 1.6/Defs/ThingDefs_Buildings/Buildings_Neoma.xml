@@ -45,6 +45,7 @@
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierI</pawnKind>
         <spawnIntervalDays>0.08</spawnIntervalDays>
+        <respawnTicks>180000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>1</maxRoleModules>
@@ -110,6 +111,7 @@
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierII</pawnKind>
         <spawnIntervalDays>0.33</spawnIntervalDays>
+        <respawnTicks>60000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>2</maxRoleModules>
@@ -176,6 +178,7 @@
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierIII</pawnKind>
         <spawnIntervalDays>3</spawnIntervalDays>
+        <respawnTicks>15000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>3</maxRoleModules>
@@ -242,6 +245,7 @@
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierIV</pawnKind>
         <spawnIntervalDays>5</spawnIntervalDays>
+        <respawnTicks>5000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
         <maxRoleModules>4</maxRoleModules>
@@ -259,6 +263,56 @@
       </li>
     </comps>
     <size>(3,3)</size>
+    <designationCategory>Neoma</designationCategory>
+  </ThingDef>
+
+
+  <!-- Coherence Recharger: sustains nearby deployed Syntheras, slowing coherence drain -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NeomaCoherenceRecharger</defName>
+    <label>Coherence Recharger</label>
+    <description>A resonance emitter that projects a stabilizing field over a small area. Synthera avatars within range drain coherence more slowly, allowing longer continuous deployments. Essential for sustaining high-tier avatars indefinitely.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>Things/Building/Tier02/Tier02</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <fillPercent>0.3</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Flammability>0.6</Flammability>
+    </statBases>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <Gold>30</Gold>
+    </costList>
+    <researchPrerequisites>
+      <li>NeomaTierII</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="SyntheraCore.CompProperties_SyntheraRecharger">
+        <rechargePerInterval>0.001</rechargePerInterval>
+        <radius>8</radius>
+      </li>
+    </comps>
+    <size>(1,1)</size>
     <designationCategory>Neoma</designationCategory>
   </ThingDef>
 

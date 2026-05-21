@@ -16,49 +16,6 @@
     </stages>
   </HediffDef>
 
-  <!-- Accumulates while the avatar is active. Reset to zero when recalled for maintenance. -->
-  <HediffDef>
-    <defName>SyntheraSystemStress</defName>
-    <label>system stress</label>
-    <description>Accumulated operational stress on this synthera's projected systems. Recalling the avatar to its core resets this to zero.</description>
-    <isBad>true</isBad>
-    <maxSeverity>1.0</maxSeverity>
-    <hediffClass>HediffWithComps</hediffClass>
-    <comps>
-      <li Class="HediffCompProperties_SeverityPerDay">
-        <severityPerDay>0.033</severityPerDay>
-      </li>
-    </comps>
-    <stages>
-      <li>
-        <label>nominal</label>
-      </li>
-      <li>
-        <minSeverity>0.3</minSeverity>
-        <label>mild stress</label>
-        <statFactors>
-          <WorkSpeedGlobal>0.9</WorkSpeedGlobal>
-        </statFactors>
-      </li>
-      <li>
-        <minSeverity>0.6</minSeverity>
-        <label>high stress</label>
-        <statFactors>
-          <WorkSpeedGlobal>0.75</WorkSpeedGlobal>
-          <MoveSpeed>0.85</MoveSpeed>
-        </statFactors>
-      </li>
-      <li>
-        <minSeverity>0.9</minSeverity>
-        <label>critical stress</label>
-        <statFactors>
-          <WorkSpeedGlobal>0.5</WorkSpeedGlobal>
-          <MoveSpeed>0.7</MoveSpeed>
-        </statFactors>
-      </li>
-    </stages>
-  </HediffDef>
-
   <!-- Applied after restoring a hibernating avatar from backup. Fades over 1 in-game day (24h). -->
   <HediffDef>
     <defName>SyntheraHibernationSyndrome</defName>

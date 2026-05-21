@@ -15,7 +15,6 @@ namespace SyntheraCore
         public int RecreateCooldownTick = 0;
 
         private bool InHibernation = false;
-        private int HibernationDeathCount = 0;
         private bool SavedDeep = false;
         private CompPowerTrader compPower;
 
@@ -88,7 +87,6 @@ namespace SyntheraCore
             Scribe_Values.Look(ref RespawnTick, "RespawnTick");
             Scribe_Values.Look(ref RecreateCooldownTick, "RecreateCooldownTick");
             Scribe_Values.Look(ref InHibernation, "InHibernation");
-            Scribe_Values.Look(ref HibernationDeathCount, "HibernationDeathCount");
             Scribe_Values.Look(ref lastEmergencyRecallTick,  "lastEmergencyRecallTick",  -99999);
             Scribe_Values.Look(ref lastMaintenancePulseTick, "lastMaintenancePulseTick", -99999);
             Scribe_Values.Look(ref SignalBurstActive,        "SignalBurstActive",         false);
@@ -125,9 +123,7 @@ namespace SyntheraCore
             if (Consciousness.Dead && !InHibernation)
             {
                 InHibernation = true;
-                HibernationDeathCount++;
-                // Each successive death adds more restoration time: 3×, 5×, 7×, …
-                RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier * (HibernationDeathCount * 2 + 1));
+                RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier);
 
                 Corpse corpse   = Consciousness.Corpse;
                 IntVec3 deathPos = corpse?.Position ?? parent.Position;
@@ -161,8 +157,34 @@ namespace SyntheraCore
                     MessageTypeDefOf.NegativeEvent);
             }
 
+            // Auto-recall on coherence collapse — checked every NeedInterval (150 ticks).
+            if (Consciousness.Spawned && Find.TickManager.TicksGame % 150 == 0)
+            {
+                var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+                if (coh != null && coh.CurLevel <= 0f)
+                {
+                    int failTicks = GetCoherenceFailTicks();
+                    Messages.Message(
+                        $"{Consciousness.Name.ToStringShort}'s coherence collapsed. Avatar recalled — recharging before re-deployment.",
+                        parent, MessageTypeDefOf.NegativeEvent);
+                    DespawnFormgel(false);
+                    RespawnTick = Find.TickManager.TicksGame + failTicks;
+                }
+            }
+
             if (SignalBurstActive && Find.TickManager.TicksGame >= signalBurstEndTick)
                 SignalBurstActive = false;
+        }
+
+        private int GetCoherenceFailTicks()
+        {
+            switch (GetBuildingTier())
+            {
+                case 4: return 833;    // ~20 min
+                case 3: return 2500;   // ~1 h
+                case 2: return 5000;   // ~2 h
+                default: return 10000; // ~4 h (Tier I)
+            }
         }
 
         public void GenerateFormgelPawn()
@@ -202,7 +224,6 @@ namespace SyntheraCore
 
             Consciousness = p;
             InHibernation = false;
-            HibernationDeathCount = 0;
             RespawnTick = 0;
 
             int tier = GetBuildingTier();
@@ -312,10 +333,6 @@ namespace SyntheraCore
             if (consciousnessDef != null)
                 Consciousness.health.AddHediff(consciousnessDef);
 
-            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-            if (stressDef != null)
-                Consciousness.health.AddHediff(stressDef).Severity = 0.01f;
-
             if (Consciousness.needs == null)
                 Consciousness.needs = new Pawn_NeedsTracker(Consciousness);
 
@@ -324,6 +341,14 @@ namespace SyntheraCore
             var allNeeds = Consciousness.needs.AllNeeds.ToList();
             foreach (Need need in allNeeds)
                 Consciousness.needs.AllNeeds.Remove(need);
+
+            var coherenceNeed = new Need_SyntheraCoherence(Consciousness);
+            coherenceNeed.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
+            if (coherenceNeed.def != null)
+            {
+                coherenceNeed.CurLevel = 1f;
+                Consciousness.needs.AllNeeds.Add(coherenceNeed);
+            }
 
             // SyntheraAdult uses a base LifeStageWorker that bypasses HAR's patched
             // HumanlikeAdult worker. headType and hairDef may remain null after generation.
@@ -383,13 +408,9 @@ namespace SyntheraCore
         {
             if (Consciousness == null || !Consciousness.Spawned) return;
 
-            // Recalling = maintenance; reset system stress so the next deployment starts clean.
-            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-            if (stressDef != null)
-            {
-                var h = Consciousness.health.hediffSet.GetFirstHediffOfDef(stressDef);
-                if (h != null) Consciousness.health.RemoveHediff(h);
-            }
+            // Restore coherence to full on recall — altar maintenance resets digital integrity.
+            var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+            if (coh != null) coh.CurLevel = 1f;
 
             if (Consciousness.carryTracker?.CarriedThing != null)
                 Consciousness.carryTracker.TryDropCarriedThing(Consciousness.Position, ThingPlaceMode.Near, out _);
@@ -457,10 +478,17 @@ namespace SyntheraCore
                         Consciousness.health.AddHediff(syndromeDef).Severity = 1f;
                 }
 
-                // Ensure system stress is present for this deployment cycle.
-                var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-                if (stressDef != null && Consciousness.health.hediffSet.GetFirstHediffOfDef(stressDef) == null)
-                    Consciousness.health.AddHediff(stressDef).Severity = 0.01f;
+                // Ensure coherence need is present (safety net for existing saves).
+                if (Consciousness.needs != null && Consciousness.needs.TryGetNeed<Need_SyntheraCoherence>() == null)
+                {
+                    var safeNeed = new Need_SyntheraCoherence(Consciousness);
+                    safeNeed.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
+                    if (safeNeed.def != null)
+                    {
+                        safeNeed.CurLevel = 1f;
+                        Consciousness.needs.AllNeeds.Add(safeNeed);
+                    }
+                }
 
                 // Ensure base consciousness hediff survived the resurrection.
                 var conDef = DefDatabase<HediffDef>.GetNamed("SyntheraConsciousness", false);
@@ -679,16 +707,11 @@ namespace SyntheraCore
                                 t.SplitOff(take).Destroy();
                                 rem -= take;
                             }
-                            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-                            if (stressDef != null)
-                            {
-                                var stress = Consciousness.health.hediffSet.GetFirstHediffOfDef(stressDef);
-                                if (stress != null)
-                                    stress.Severity = Mathf.Max(0f, stress.Severity - 0.25f);
-                            }
+                            var cohPulse = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+                            cohPulse?.Recharge(0.25f);
                             lastMaintenancePulseTick = Find.TickManager.TicksGame;
                             Messages.Message(
-                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. System stress reduced.",
+                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. Coherence restored.",
                                 parent, MessageTypeDefOf.PositiveEvent);
                         },
                         defaultLabel = "Maintenance pulse",
@@ -759,21 +782,16 @@ namespace SyntheraCore
 
             if (Consciousness.Spawned)
             {
-                string stressLevel = "Nominal";
-                var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-                if (stressDef != null)
-                {
-                    var h = Consciousness.health.hediffSet.GetFirstHediffOfDef(stressDef);
-                    if (h != null)
-                        stressLevel = h.Severity < 0.3f ? "Nominal"
-                                    : h.Severity < 0.6f ? "Mild stress"
-                                    : h.Severity < 0.9f ? "High stress"
-                                    : "Critical";
-                }
+                string cohStr = "Stable";
+                var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+                if (coh != null)
+                    cohStr = coh.CurLevel > 0.66f ? "Stable"
+                           : coh.CurLevel > 0.33f ? "Unstable"
+                           : "Critical";
                 string modLine = RegisteredAuxTypes.Count > 0
                     ? $"\nModules ({RegisteredAuxTypes.Count}/{Props.maxAuxModules + BonusAuxSlots}): {BuildModulesSummary()}"
                     : "";
-                return $"Avatar: {Consciousness.Name.ToStringShort} | System: {stressLevel}{modLine}";
+                return $"Avatar: {Consciousness.Name.ToStringShort} | Coherence: {cohStr}{modLine}";
             }
 
             return $"Avatar: {Consciousness.Name.ToStringShort} [offline]";
