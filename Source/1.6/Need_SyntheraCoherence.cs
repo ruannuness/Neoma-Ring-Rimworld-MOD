@@ -20,6 +20,34 @@ namespace SyntheraCore
             if (!IsSyntheraPawn) return;
             if (!pawn.Spawned) return;
             CurLevel = Mathf.Max(0f, CurLevel - DrainPerInterval());
+            UpdateStrainHediff();
+        }
+
+        private void UpdateStrainHediff()
+        {
+            var strainDef = DefDatabase<HediffDef>.GetNamed("SyntheraCoherenceStrain", false);
+            if (strainDef == null) return;
+
+            if (CurLevel >= 0.5f)
+            {
+                var existing = pawn.health.hediffSet.GetFirstHediffOfDef(strainDef);
+                if (existing != null) pawn.health.RemoveHediff(existing);
+                return;
+            }
+
+            // Severity 0.25 = unstable (50–25%), 0.75 = critical (< 25%)
+            float targetSev = CurLevel < 0.25f ? 0.75f : 0.25f;
+            var strain = pawn.health.hediffSet.GetFirstHediffOfDef(strainDef)
+                         ?? pawn.health.AddHediff(strainDef);
+            strain.Severity = targetSev;
+        }
+
+        public void ClearStrainHediff()
+        {
+            var strainDef = DefDatabase<HediffDef>.GetNamed("SyntheraCoherenceStrain", false);
+            if (strainDef == null) return;
+            var h = pawn.health.hediffSet.GetFirstHediffOfDef(strainDef);
+            if (h != null) pawn.health.RemoveHediff(h);
         }
 
         // Rates chosen so each tier lasts a distinct duration without recharger.

@@ -177,7 +177,7 @@ namespace SyntheraCore
             RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier);
 
             var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
-            if (coh != null) coh.CurLevel = 1f;
+            if (coh != null) { coh.CurLevel = 1f; coh.ClearStrainHediff(); }
 
             Consciousness.equipment?.DropAllEquipment(deathPos);
             Consciousness.apparel?.DropAll(deathPos);
@@ -412,9 +412,9 @@ namespace SyntheraCore
         {
             if (Consciousness == null || !Consciousness.Spawned) return;
 
-            // Restore coherence to full on recall — altar maintenance resets digital integrity.
+            // Restore coherence and clear strain on recall.
             var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
-            if (coh != null) coh.CurLevel = 1f;
+            if (coh != null) { coh.CurLevel = 1f; coh.ClearStrainHediff(); }
 
             if (Consciousness.carryTracker?.CarriedThing != null)
                 Consciousness.carryTracker.TryDropCarriedThing(Consciousness.Position, ThingPlaceMode.Near, out _);

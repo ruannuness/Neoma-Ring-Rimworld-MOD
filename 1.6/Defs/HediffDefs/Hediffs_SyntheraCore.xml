@@ -16,6 +16,36 @@
     </stages>
   </HediffDef>
 
+  <!-- Applied by Need_SyntheraCoherence when level drops below 50%; removed on recall. -->
+  <HediffDef>
+    <defName>SyntheraCoherenceStrain</defName>
+    <label>coherence strain</label>
+    <description>The synthera's projected form is losing cohesion. Digital systems are degrading as the coherence field weakens. Recalling the avatar to its altar will clear this immediately.</description>
+    <hediffClass>Hediff</hediffClass>
+    <isBad>true</isBad>
+    <defaultLabelColor>(1.0, 0.5, 0.1)</defaultLabelColor>
+    <stages>
+      <!-- Unstable: 50–25% coherence -->
+      <li>
+        <label>unstable</label>
+        <minSeverity>0</minSeverity>
+        <statFactors>
+          <WorkSpeedGlobal>0.9</WorkSpeedGlobal>
+          <MoveSpeed>0.95</MoveSpeed>
+        </statFactors>
+      </li>
+      <!-- Critical: below 25% coherence -->
+      <li>
+        <label>critical</label>
+        <minSeverity>0.5</minSeverity>
+        <statFactors>
+          <WorkSpeedGlobal>0.75</WorkSpeedGlobal>
+          <MoveSpeed>0.85</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
   <!-- Applied after restoring a hibernating avatar from backup. Fades over 1 in-game day (24h). -->
   <HediffDef>
     <defName>SyntheraHibernationSyndrome</defName>

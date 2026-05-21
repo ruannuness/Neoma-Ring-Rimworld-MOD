@@ -252,4 +252,59 @@ namespace SyntheraCore
             }
         }
     }
+
+    // Prevent vanilla needs (Food, Sleep, Joy, etc.) from being re-added to Synthera pawns
+    // by any call to AddOrRemoveNeedsAsAppropriate — including the one inside Pawn.SpawnSetup.
+    // This is the root cause of Miku (and other Syntheras) showing a Sleep bar after spawn.
+    [HarmonyPatch(typeof(Pawn_NeedsTracker), "AddOrRemoveNeedsAsAppropriate")]
+    static class Patch_SyntheraStripVanillaNeeds
+    {
+        static readonly FieldInfo FTrackerPawn =
+            AccessTools.Field(typeof(Pawn_NeedsTracker), "pawn");
+
+        static void Postfix(Pawn_NeedsTracker __instance)
+        {
+            Pawn pawn = FTrackerPawn?.GetValue(__instance) as Pawn;
+            if (pawn?.def?.defName?.StartsWith("SyntheraRace") != true) return;
+
+            var toRemove = __instance.AllNeeds
+                .Where(n => !(n is Need_SyntheraCoherence))
+                .ToList();
+            foreach (var n in toRemove)
+                __instance.AllNeeds.Remove(n);
+
+            if (__instance.TryGetNeed<Need_SyntheraCoherence>() == null)
+            {
+                var need = new Need_SyntheraCoherence(pawn);
+                need.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
+                if (need.def != null) { need.CurLevel = 1f; __instance.AllNeeds.Add(need); }
+            }
+        }
+    }
+
+    // Fires an alert in the alerts panel when any deployed Synthera drops below 25% coherence.
+    public class Alert_SyntheraLowCoherence : Alert
+    {
+        public Alert_SyntheraLowCoherence()
+        {
+            defaultLabel       = "Synthera: coherence critical";
+            defaultExplanation = "One or more Synthera avatars are below 25% coherence. "
+                               + "At zero the avatar auto-recalls and must recharge before re-deployment. "
+                               + "Recall them manually or place a Coherence Recharger nearby.";
+            defaultPriority    = AlertPriority.High;
+        }
+
+        public override AlertReport GetReport()
+        {
+            var culprits = new List<Thing>();
+            foreach (Map map in Find.Maps)
+                foreach (Pawn p in map.mapPawns.FreeColonistsSpawned)
+                {
+                    var need = p.needs?.TryGetNeed<Need_SyntheraCoherence>();
+                    if (need != null && need.CurLevel < 0.25f)
+                        culprits.Add(p);
+                }
+            return culprits.Count > 0 ? AlertReport.CulpritsAre(culprits) : AlertReport.Inactive;
+        }
+    }
 }
