@@ -56,7 +56,12 @@
   <ThingDef ParentName="AuxCombatTierIBase">
     <defName>SyntheraAuxCombatTierI</defName>
     <label>combat uplink node I</label>
-    <description>A basic auxiliary uplink that transmits combat enhancement data to any synthera avatar within 5 cells. Slightly increases melee damage, ranged accuracy, and movement speed while powered.</description>
+    <description>A basic auxiliary uplink that transmits combat enhancement data to any synthera avatar within 5 cells while powered. Only one Combat Amplifier per altar.
+
+Effects on avatar:
+  Melee damage +10%
+  Movement speed +5%
+  Ranged accuracy +4%</description>
     <costList>
       <Steel>40</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -82,7 +87,12 @@
   <ThingDef ParentName="AuxCombatTierIIBase">
     <defName>SyntheraAuxCombatTierII</defName>
     <label>combat uplink node II</label>
-    <description>An enhanced auxiliary uplink that transmits a higher-bandwidth combat signal to any synthera avatar within 5 cells. Meaningfully increases melee damage, ranged accuracy, and movement speed while powered.</description>
+    <description>An enhanced auxiliary uplink that transmits a higher-bandwidth combat signal to any synthera avatar within 5 cells while powered. Only one Combat Amplifier per altar.
+
+Effects on avatar:
+  Melee damage +18%
+  Movement speed +10%
+  Ranged accuracy +8%</description>
     <costList>
       <Steel>60</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
@@ -109,7 +119,12 @@
   <ThingDef ParentName="AuxCombatTierIIIBase">
     <defName>SyntheraAuxCombatTierIII</defName>
     <label>combat uplink node III</label>
-    <description>A pinnacle combat auxiliary node transmitting a full-spectrum enhancement signal to any synthera avatar within 5 cells. Dramatically increases melee damage, ranged accuracy, and movement speed while powered.</description>
+    <description>A pinnacle combat auxiliary node transmitting a full-spectrum enhancement signal to any synthera avatar within 5 cells while powered. Only one Combat Amplifier per altar.
+
+Effects on avatar:
+  Melee damage +30%
+  Movement speed +18%
+  Ranged accuracy +14%</description>
     <costList>
       <Steel>80</Steel>
       <ComponentIndustrial>12</ComponentIndustrial>
@@ -141,7 +156,13 @@
   <ThingDef ParentName="AuxWorkTierIBase">
     <defName>SyntheraAuxWorkTierI</defName>
     <label>work protocol node I</label>
-    <description>Uploads basic expanded behavioral protocols to any synthera avatar within 5 cells, unlocking crafting and basic construction work that lower-tier avatars normally cannot perform.</description>
+    <description>Uploads basic expanded behavioral protocols to any synthera avatar within 5 cells, enabling work types that lower-tier avatars cannot perform by default. Only one Work Protocol per altar.
+
+Unlocks on avatar:
+  Crafting
+  Construction
+  Growing
+  Mining</description>
     <costList>
       <Steel>30</Steel>
       <ComponentIndustrial>4</ComponentIndustrial>
@@ -172,7 +193,11 @@
   <ThingDef ParentName="AuxWorkTierIIBase">
     <defName>SyntheraAuxWorkTierII</defName>
     <label>work protocol node II</label>
-    <description>Uploads comprehensive behavioral protocols to any synthera avatar within 5 cells, unlocking hunting, medical, and artistic work in addition to all Tier I work types.</description>
+    <description>Uploads comprehensive behavioral protocols to any synthera avatar within 5 cells, granting access to advanced work disciplines in addition to all Tier I work types. Only one Work Protocol per altar.
+
+Unlocks on avatar:
+  Crafting | Construction | Growing | Mining
+  Hunting | Doctor | Art | Cooking</description>
     <costList>
       <Steel>50</Steel>
       <ComponentIndustrial>7</ComponentIndustrial>
@@ -212,7 +237,11 @@
   <ThingDef ParentName="AuxOptimizerTierIBase">
     <defName>SyntheraAuxOptimizerTierI</defName>
     <label>core optimizer node I</label>
-    <description>A maintenance uplink that services any synthera altar within 5 cells. Reduces respawn and recreate cooldowns by 20% and gently counters system stress accumulation while powered.</description>
+    <description>A maintenance uplink that services any synthera altar within 5 cells while powered. Reduces downtime and counters system stress accumulation. Only one Core Optimizer per altar.
+
+Effects on altar:
+  Respawn cooldown ×0.80 (−20%)
+  Recreate cooldown ×0.80 (−20%)</description>
     <costList>
       <Steel>60</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
@@ -233,7 +262,6 @@
         <scanIntervalTicks>250</scanIntervalTicks>
         <respawnTicksMultiplier>0.80</respawnTicksMultiplier>
         <recreateCooldownMultiplier>0.80</recreateCooldownMultiplier>
-        <stressReliefPerDay>0.015</stressReliefPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -241,7 +269,11 @@
   <ThingDef ParentName="AuxOptimizerTierIIBase">
     <defName>SyntheraAuxOptimizerTierII</defName>
     <label>core optimizer node II</label>
-    <description>An advanced maintenance uplink that services any synthera altar within 5 cells. Halves all respawn and recreate cooldowns and actively reduces system stress accumulation while powered.</description>
+    <description>An advanced maintenance uplink that services any synthera altar within 5 cells while powered. Halves all downtime and actively reduces system stress accumulation. Only one Core Optimizer per altar.
+
+Effects on altar:
+  Respawn cooldown ×0.50 (−50%)
+  Recreate cooldown ×0.50 (−50%)</description>
     <costList>
       <Steel>80</Steel>
       <ComponentIndustrial>12</ComponentIndustrial>
@@ -262,7 +294,6 @@
         <scanIntervalTicks>250</scanIntervalTicks>
         <respawnTicksMultiplier>0.50</respawnTicksMultiplier>
         <recreateCooldownMultiplier>0.50</recreateCooldownMultiplier>
-        <stressReliefPerDay>0.035</stressReliefPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -270,7 +301,11 @@
   <ThingDef ParentName="AuxOptimizerTierIIIBase">
     <defName>SyntheraAuxOptimizerTierIII</defName>
     <label>core optimizer node III</label>
-    <description>A pinnacle maintenance uplink that services any synthera altar within 5 cells. Near-zero cooldowns and continuous active stress purging keep the avatar at peak efficiency indefinitely while powered.</description>
+    <description>A pinnacle maintenance uplink that services any synthera altar within 5 cells while powered. Near-zero cooldowns and continuous stress purging keep the avatar at peak efficiency indefinitely. Only one Core Optimizer per altar.
+
+Effects on altar:
+  Respawn cooldown ×0.25 (−75%)
+  Recreate cooldown ×0.25 (−75%)</description>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>16</ComponentIndustrial>
@@ -292,7 +327,6 @@
         <scanIntervalTicks>250</scanIntervalTicks>
         <respawnTicksMultiplier>0.25</respawnTicksMultiplier>
         <recreateCooldownMultiplier>0.25</recreateCooldownMultiplier>
-        <stressReliefPerDay>0.070</stressReliefPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -305,7 +339,12 @@
   <ThingDef ParentName="AuxRoleTierIBase">
     <defName>SyntheraAuxSoldierTierI</defName>
     <label>soldier role node I</label>
-    <description>Uploads basic combat behavioral protocols to any synthera avatar within 5 cells. Slightly boosts melee damage and ranged performance.</description>
+    <description>Uploads basic combat behavioral protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Melee damage +10%
+  Ranged cooldown −7%
+  Aiming delay −7%</description>
     <costList>
       <Steel>70</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -332,7 +371,12 @@
   <ThingDef ParentName="AuxRoleTierIIBase">
     <defName>SyntheraAuxSoldierTierII</defName>
     <label>soldier role node II</label>
-    <description>Uploads advanced combat protocols to any synthera avatar within 5 cells. Significantly boosts melee damage, ranged cooldown, and aiming speed.</description>
+    <description>Uploads advanced combat protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Melee damage +20%
+  Ranged cooldown −15%
+  Aiming delay −15%</description>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>15</ComponentIndustrial>
@@ -359,7 +403,13 @@
   <ThingDef ParentName="AuxRoleTierIIIBase">
     <defName>SyntheraAuxSoldierTierIII</defName>
     <label>soldier role node III</label>
-    <description>Uploads a full combat behavioral matrix rewrite to any synthera avatar within 5 cells. Dramatically enhances all offensive parameters including movement speed.</description>
+    <description>Uploads a full combat behavioral matrix rewrite to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Melee damage +35%
+  Ranged cooldown −25%
+  Aiming delay −25%
+  Movement speed +10%</description>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -388,7 +438,12 @@
   <ThingDef ParentName="AuxRoleTierIBase">
     <defName>SyntheraAuxWorkerTierI</defName>
     <label>worker role node I</label>
-    <description>Uploads basic labor protocols to any synthera avatar within 5 cells. Slightly boosts global work speed, construction, and mining efficiency.</description>
+    <description>Uploads basic labor protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Global work speed +8%
+  Construction speed +12%
+  Mining speed +10%</description>
     <costList>
       <Steel>70</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -415,7 +470,12 @@
   <ThingDef ParentName="AuxRoleTierIIBase">
     <defName>SyntheraAuxWorkerTierII</defName>
     <label>worker role node II</label>
-    <description>Uploads advanced labor protocols to any synthera avatar within 5 cells. Significantly boosts global work speed, construction, and mining efficiency.</description>
+    <description>Uploads advanced labor protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Global work speed +15%
+  Construction speed +25%
+  Mining speed +20%</description>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>15</ComponentIndustrial>
@@ -442,7 +502,13 @@
   <ThingDef ParentName="AuxRoleTierIIIBase">
     <defName>SyntheraAuxWorkerTierIII</defName>
     <label>worker role node III</label>
-    <description>Uploads a full labor matrix rewrite to any synthera avatar within 5 cells. Greatly enhances work speed, construction, mining, and plant work efficiency.</description>
+    <description>Uploads a full labor matrix rewrite to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Global work speed +25%
+  Construction speed +40%
+  Mining speed +35%
+  Plant work speed +20%</description>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -471,7 +537,12 @@
   <ThingDef ParentName="AuxRoleTierIBase">
     <defName>SyntheraAuxMedicTierI</defName>
     <label>medic role node I</label>
-    <description>Uploads basic medical protocols to any synthera avatar within 5 cells. Slightly improves tending quality, operation speed, and surgery success chance.</description>
+    <description>Uploads basic medical protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Tending quality +12%
+  Operation speed +10%
+  Surgery success chance +8%</description>
     <costList>
       <Steel>70</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -498,7 +569,12 @@
   <ThingDef ParentName="AuxRoleTierIIBase">
     <defName>SyntheraAuxMedicTierII</defName>
     <label>medic role node II</label>
-    <description>Uploads advanced medical protocols to any synthera avatar within 5 cells. Significantly improves tending quality, operation speed, and surgery success chance.</description>
+    <description>Uploads advanced medical protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Tending quality +25%
+  Operation speed +20%
+  Surgery success chance +15%</description>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>15</ComponentIndustrial>
@@ -525,7 +601,12 @@
   <ThingDef ParentName="AuxRoleTierIIIBase">
     <defName>SyntheraAuxMedicTierIII</defName>
     <label>medic role node III</label>
-    <description>Uploads a full medical matrix rewrite to any synthera avatar within 5 cells. Greatly enhances tending, surgery success, and operation speed.</description>
+    <description>Uploads a full medical matrix rewrite to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Tending quality +40%
+  Operation speed +35%
+  Surgery success chance +25%</description>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -554,7 +635,12 @@
   <ThingDef ParentName="AuxRoleTierIBase">
     <defName>SyntheraAuxScoutTierI</defName>
     <label>scout role node I</label>
-    <description>Uploads basic mobility and social protocols to any synthera avatar within 5 cells. Slightly improves movement speed, social impact, and trade prices.</description>
+    <description>Uploads basic mobility and social protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Movement speed +10%
+  Social impact +5%
+  Trade price improvement +5%</description>
     <costList>
       <Steel>70</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -581,7 +667,12 @@
   <ThingDef ParentName="AuxRoleTierIIBase">
     <defName>SyntheraAuxScoutTierII</defName>
     <label>scout role node II</label>
-    <description>Uploads advanced mobility and social protocols to any synthera avatar within 5 cells. Significantly improves movement speed, social impact, and trade prices.</description>
+    <description>Uploads advanced mobility and social protocols to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Movement speed +25%
+  Social impact +10%
+  Trade price improvement +10%</description>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>15</ComponentIndustrial>
@@ -608,7 +699,12 @@
   <ThingDef ParentName="AuxRoleTierIIIBase">
     <defName>SyntheraAuxScoutTierIII</defName>
     <label>scout role node III</label>
-    <description>Uploads a full mobility and social matrix rewrite to any synthera avatar within 5 cells. Greatly enhances movement, social impact, and trade efficiency.</description>
+    <description>Uploads a full mobility and social matrix rewrite to any synthera avatar within 5 cells. Replaces any other active role specialization on the same altar.
+
+Effects on avatar:
+  Movement speed +40%
+  Social impact +20%
+  Trade price improvement +18%</description>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -641,7 +737,10 @@
   <ThingDef ParentName="AuxArmorTierIBase">
     <defName>SyntheraAuxArmorTierI</defName>
     <label>armor matrix node I</label>
-    <description>Projects a basic reinforcement lattice onto any synthera avatar within 5 cells. Reduces all incoming damage by 15% while powered.</description>
+    <description>Projects a basic reinforcement lattice onto any synthera avatar within 5 cells while powered. Only one Armor Matrix per altar.
+
+Effects on avatar:
+  Incoming damage −15%</description>
     <costList>
       <Steel>60</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
@@ -668,7 +767,10 @@
   <ThingDef ParentName="AuxArmorTierIIBase">
     <defName>SyntheraAuxArmorTierII</defName>
     <label>armor matrix node II</label>
-    <description>Projects a dense reinforcement lattice onto any synthera avatar within 5 cells. Reduces all incoming damage by 30% while powered.</description>
+    <description>Projects a dense reinforcement lattice onto any synthera avatar within 5 cells while powered. Only one Armor Matrix per altar.
+
+Effects on avatar:
+  Incoming damage −30%</description>
     <costList>
       <Steel>90</Steel>
       <ComponentIndustrial>14</ComponentIndustrial>
@@ -696,7 +798,10 @@
   <ThingDef ParentName="AuxArmorTierIIIBase">
     <defName>SyntheraAuxArmorTierIII</defName>
     <label>armor matrix node III</label>
-    <description>Projects a maximum-density reinforcement lattice onto any synthera avatar within 5 cells. Reduces all incoming damage by 50% while powered. The avatar becomes extraordinarily difficult to destroy.</description>
+    <description>Projects a maximum-density reinforcement lattice onto any synthera avatar within 5 cells while powered. The avatar becomes extraordinarily difficult to destroy. Only one Armor Matrix per altar.
+
+Effects on avatar:
+  Incoming damage −50%</description>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -730,7 +835,14 @@
   <ThingDef ParentName="AuxOverclockTierIBase">
     <defName>SyntheraAuxOverclockTierI</defName>
     <label>overclock core node I</label>
-    <description>Pushes a nearby avatar's combat systems past safe operational limits. Dramatically enhances melee, ranged, and mobility — but system stress accumulates twice as fast. Recall the avatar more frequently or risk critical failure.</description>
+    <description>Pushes a nearby avatar's combat systems past safe operational limits. Dramatic combat power at the cost of accelerated system stress. Only one Overclock Core per altar.
+
+Effects on avatar:
+  Melee damage +35%
+  Movement speed +20%
+  Ranged cooldown −20%
+  Aiming delay −20%
+  Ranged accuracy +15%</description>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -751,7 +863,6 @@
         <detectionRadius>5</detectionRadius>
         <scanIntervalTicks>250</scanIntervalTicks>
         <pawnBuffHediff>SyntheraOverclockTierI</pawnBuffHediff>
-        <stressAddedPerDay>0.033</stressAddedPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -759,7 +870,14 @@
   <ThingDef ParentName="AuxOverclockTierIIBase">
     <defName>SyntheraAuxOverclockTierII</defName>
     <label>overclock core node II</label>
-    <description>Extreme overclock. The avatar's combat output is extraordinary but system stress accumulates three times faster than normal. Deployment windows are short — plan accordingly.</description>
+    <description>Extreme overclock. Extraordinary combat output at the cost of tripled system stress accumulation. Only one Overclock Core per altar.
+
+Effects on avatar:
+  Melee damage +55%
+  Movement speed +30%
+  Ranged cooldown −30%
+  Aiming delay −30%
+  Ranged accuracy +22%</description>
     <costList>
       <Steel>140</Steel>
       <ComponentIndustrial>30</ComponentIndustrial>
@@ -781,7 +899,6 @@
         <detectionRadius>5</detectionRadius>
         <scanIntervalTicks>250</scanIntervalTicks>
         <pawnBuffHediff>SyntheraOverclockTierII</pawnBuffHediff>
-        <stressAddedPerDay>0.066</stressAddedPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -789,7 +906,14 @@
   <ThingDef ParentName="AuxOverclockTierIIIBase">
     <defName>SyntheraAuxOverclockTierIII</defName>
     <label>overclock core node III</label>
-    <description>Maximum theoretical overclock. Combat performance borders on the impossible. System stress accumulates five times faster — the avatar can sustain less than four hours of deployment before reaching critical stress. A devastating but fragile weapon.</description>
+    <description>Maximum theoretical overclock. Nearly impossible combat performance, but system stress accumulates five times faster. A devastating but fragile weapon. Only one Overclock Core per altar.
+
+Effects on avatar:
+  Melee damage +80%
+  Movement speed +45%
+  Ranged cooldown −45%
+  Aiming delay −45%
+  Ranged accuracy +32%</description>
     <costList>
       <Steel>180</Steel>
       <ComponentIndustrial>40</ComponentIndustrial>
@@ -812,7 +936,6 @@
         <detectionRadius>5</detectionRadius>
         <scanIntervalTicks>250</scanIntervalTicks>
         <pawnBuffHediff>SyntheraOverclockTierIII</pawnBuffHediff>
-        <stressAddedPerDay>0.132</stressAddedPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -824,7 +947,13 @@
   <ThingDef ParentName="AuxVersatilityTierIBase">
     <defName>SyntheraAuxVersatilityTierI</defName>
     <label>versatility protocol node I</label>
-    <description>Uploads broad behavioral enhancements to any synthera avatar within 5 cells. Improves research speed, carry capacity, plant work, and hunting stealth while powered.</description>
+    <description>Uploads broad behavioral enhancements to any synthera avatar within 5 cells while powered. Only one Versatility Protocol per altar.
+
+Effects on avatar:
+  Research speed +25%
+  Carry capacity +30%
+  Plant work speed +20%
+  Hunting stealth +25%</description>
     <costList>
       <Steel>80</Steel>
       <ComponentIndustrial>12</ComponentIndustrial>
@@ -851,7 +980,15 @@
   <ThingDef ParentName="AuxVersatilityTierIIBase">
     <defName>SyntheraAuxVersatilityTierII</defName>
     <label>versatility protocol node II</label>
-    <description>Uploads a deep-spectrum behavioral imprint to any synthera avatar within 5 cells. Dramatically improves research, carrying, plant work, stealth, and social skills while powered. The avatar approaches universal competency.</description>
+    <description>Uploads a deep-spectrum behavioral imprint to any synthera avatar within 5 cells while powered. The avatar approaches universal competency. Only one Versatility Protocol per altar.
+
+Effects on avatar:
+  Research speed +50%
+  Carry capacity +65%
+  Plant work speed +40%
+  Hunting stealth +50%
+  Social impact +15%
+  Trade price improvement +12%</description>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -894,7 +1031,14 @@
   <ThingDef ParentName="AuxCombatArchotechBase">
     <defName>SyntheraAuxCombatArchotech</defName>
     <label>combat uplink node archotech</label>
-    <description>An archotech combat uplink node assembled from recovered shard fragments. It transmits a combat enhancement signal of theoretically impossible density to any synthera avatar within 5 cells. Melee, ranged, and movement performance are pushed far beyond any known limit. As a side effect of its archotech power regulation, the node generates a small amount of electricity.</description>
+    <description>An archotech combat uplink assembled from recovered shard fragments. Transmits a combat enhancement signal of theoretically impossible density to any synthera avatar within 5 cells. As a side effect of its archotech power regulation, the node generates electricity instead of consuming it.
+
+Effects on avatar:
+  Melee damage +150%
+  Movement speed +80%
+  Ranged cooldown −60%
+  Aiming delay −60%
+  Ranged accuracy +60%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -927,7 +1071,10 @@
   <ThingDef ParentName="AuxWorkArchotechBase">
     <defName>SyntheraAuxWorkArchotech</defName>
     <label>work protocol node archotech</label>
-    <description>An archotech work protocol node that uploads every behavioral work package simultaneously to any synthera avatar within 5 cells. The avatar gains access to every possible work type with no remaining restrictions. The node generates a small amount of electricity as a side effect of its operation.</description>
+    <description>An archotech work protocol node that uploads every behavioral work package simultaneously to any synthera avatar within 5 cells. The avatar gains access to every possible work type with no restrictions. Generates electricity as a side effect.
+
+Unlocks on avatar:
+  All work types (no restrictions)</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -971,7 +1118,6 @@
           <li>Cleaning</li>
           <li>Research</li>
           <li>BasicWorker</li>
-          <li>Flicker</li>
         </unlockedWorkTypes>
       </li>
     </comps>
@@ -981,7 +1127,11 @@
   <ThingDef ParentName="AuxOptimizerArchotechBase">
     <defName>SyntheraAuxOptimizerArchotech</defName>
     <label>core optimizer node archotech</label>
-    <description>An archotech maintenance uplink that reduces all avatar respawn and recreate cooldowns to near-zero and continuously purges system stress at a rate that negates even overclock-level accumulation. With this node active, the avatar requires almost no downtime. The node also generates a modest amount of electricity.</description>
+    <description>An archotech maintenance uplink that reduces all avatar cooldowns to near-zero and continuously purges system stress at a rate that negates even overclock-level accumulation. Generates electricity as a side effect.
+
+Effects on altar:
+  Respawn cooldown ×0.01 (−99%)
+  Recreate cooldown ×0.01 (−99%)</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1007,7 +1157,6 @@
         <scanIntervalTicks>250</scanIntervalTicks>
         <respawnTicksMultiplier>0.01</respawnTicksMultiplier>
         <recreateCooldownMultiplier>0.01</recreateCooldownMultiplier>
-        <stressReliefPerDay>0.30</stressReliefPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -1016,7 +1165,10 @@
   <ThingDef ParentName="AuxArmorArchotechBase">
     <defName>SyntheraAuxArmorArchotech</defName>
     <label>armor matrix node archotech</label>
-    <description>An archotech armor matrix node that projects a maximum-density reinforcement lattice onto any synthera avatar within 5 cells. Incoming damage is reduced by 85%. The avatar becomes effectively unkillable by conventional weapons. The lattice generates a small amount of electricity as a side effect.</description>
+    <description>An archotech armor matrix node that projects a maximum-density reinforcement lattice onto any synthera avatar within 5 cells. The avatar becomes effectively unkillable by conventional weapons. Generates electricity as a side effect.
+
+Effects on avatar:
+  Incoming damage −85%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1049,7 +1201,14 @@
   <ThingDef ParentName="AuxOverclockArchotechBase">
     <defName>SyntheraAuxOverclockArchotech</defName>
     <label>overclock core node archotech</label>
-    <description>An archotech overclock node that pushes the avatar's systems into an operational regime that should be physically impossible. Combat performance is barely describable. System stress accumulates ten times faster than normal — every deployment must be treated as a timed strike mission. The node generates a small amount of electricity, though this feels almost like mockery given what it demands in return.</description>
+    <description>An archotech overclock node that pushes the avatar's systems into an operational regime that should be physically impossible. Every deployment must be treated as a timed strike mission. Generates electricity — though this feels like mockery given what it demands in return.
+
+Effects on avatar:
+  Melee damage +220%
+  Movement speed +150%
+  Ranged cooldown −80%
+  Aiming delay −80%
+  Ranged accuracy +100%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1075,7 +1234,6 @@
         <detectionRadius>5</detectionRadius>
         <scanIntervalTicks>250</scanIntervalTicks>
         <pawnBuffHediff>SyntheraOverclockArchotech</pawnBuffHediff>
-        <stressAddedPerDay>0.33</stressAddedPerDay>
       </li>
     </comps>
   </ThingDef>
@@ -1084,7 +1242,16 @@
   <ThingDef ParentName="AuxVersatilityArchotechBase">
     <defName>SyntheraAuxVersatilityArchotech</defName>
     <label>versatility protocol node archotech</label>
-    <description>An archotech versatility node that uploads a deep behavioral enhancement package to any synthera avatar within 5 cells, covering every non-combat capability simultaneously at maximum possible intensity. Research, labor, social interactions, and field work all reach superhuman levels. The node generates a modest amount of electricity.</description>
+    <description>An archotech versatility node that uploads a deep behavioral enhancement package covering every non-combat capability simultaneously at maximum intensity. Generates electricity as a side effect.
+
+Effects on avatar:
+  Research speed +200%
+  Carry capacity +300%
+  Plant work speed +200%
+  Hunting stealth +200%
+  Social impact +150%
+  Trade price improvement +100%
+  Global work speed +100%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1117,7 +1284,14 @@
   <ThingDef ParentName="AuxRoleArchotechBase">
     <defName>SyntheraAuxSoldierArchotech</defName>
     <label>soldier role node archotech</label>
-    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated combat unit. Offensive performance reaches levels no known technology can reproduce. The node generates a small amount of electricity.</description>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated combat unit. Offensive performance reaches levels no known technology can reproduce. Generates electricity as a side effect.
+
+Effects on avatar:
+  Melee damage +120%
+  Ranged cooldown −55%
+  Aiming delay −55%
+  Movement speed +75%
+  Ranged accuracy +40%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1150,7 +1324,13 @@
   <ThingDef ParentName="AuxRoleArchotechBase">
     <defName>SyntheraAuxWorkerArchotech</defName>
     <label>worker role node archotech</label>
-    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated labor unit. Work and construction proceed at a pace that makes biological colonists appear stationary. The node generates a small amount of electricity.</description>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated labor unit. Work and construction proceed at a pace that makes biological colonists appear stationary. Generates electricity as a side effect.
+
+Effects on avatar:
+  Global work speed +150%
+  Construction speed +200%
+  Mining speed +200%
+  Plant work speed +150%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1183,7 +1363,12 @@
   <ThingDef ParentName="AuxRoleArchotechBase">
     <defName>SyntheraAuxMedicArchotech</defName>
     <label>medic role node archotech</label>
-    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated medical unit. Surgical outcomes approach certainty and tending quality far exceeds any biological physician. The node generates a small amount of electricity.</description>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated medical unit. Surgical outcomes approach certainty and tending quality far exceeds any biological physician. Generates electricity as a side effect.
+
+Effects on avatar:
+  Tending quality +150%
+  Operation speed +150%
+  Surgery success chance +100%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -1216,7 +1401,13 @@
   <ThingDef ParentName="AuxRoleArchotechBase">
     <defName>SyntheraAuxScoutArchotech</defName>
     <label>scout role node archotech</label>
-    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated mobility and social unit. Movement speed and social manipulation capabilities reach levels no biological entity can match. The node generates a small amount of electricity.</description>
+    <description>An archotech role node that rewrites the avatar's core behavioral matrix as a dedicated mobility and social unit. Movement speed and social manipulation capabilities reach levels no biological entity can match. Generates electricity as a side effect.
+
+Effects on avatar:
+  Movement speed +150%
+  Social impact +150%
+  Trade price improvement +100%
+  Negotiation ability +100%</description>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>

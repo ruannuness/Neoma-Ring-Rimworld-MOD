@@ -3,7 +3,7 @@
 
   <DesignationCategoryDef>
     <defName>Neoma</defName>
-    <label>SyntheraCore_NeomaDesignationCategory_Label</label>
+    <label>Synthera</label>
     <description>SyntheraCore_NeomaDesignationCategory_Description</description>
     <order>10</order>
   </DesignationCategoryDef>

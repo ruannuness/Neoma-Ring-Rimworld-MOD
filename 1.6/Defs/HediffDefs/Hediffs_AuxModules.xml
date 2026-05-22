@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- COMBAT AMPLIFIER — Tier I / II / III                           -->
-  <!-- Applied by SyntheraAuxCombatTierI/II/III while powered.        -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- COMBAT AMPLIFIER — Tier I / II / III                               -->
+  <!-- Applied by SyntheraAuxCombatTierI/II/III while powered.            -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <HediffDef>
     <defName>SyntheraAmpBuffTierI</defName>
     <label>combat uplink I</label>
-    <description>This avatar is receiving a basic combat enhancement signal from a nearby amplifier node. Reaction speed and targeting are slightly improved.</description>
+    <description>This avatar is receiving a basic combat enhancement signal from a nearby amplifier node.
+
+Active bonuses:
+  Melee damage +10%
+  Movement speed +5%
+  Ranged accuracy +4%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -27,7 +32,12 @@
   <HediffDef>
     <defName>SyntheraAmpBuffTierII</defName>
     <label>combat uplink II</label>
-    <description>This avatar is receiving an enhanced combat signal from a nearby amplifier node. Melee, accuracy, and movement are meaningfully improved.</description>
+    <description>This avatar is receiving an enhanced combat signal from a nearby amplifier node.
+
+Active bonuses:
+  Melee damage +18%
+  Movement speed +10%
+  Ranged accuracy +8%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -45,7 +55,12 @@
   <HediffDef>
     <defName>SyntheraAmpBuffTierIII</defName>
     <label>combat uplink III</label>
-    <description>This avatar is receiving a high-bandwidth combat signal from a nearby amplifier node. Combat performance is substantially enhanced across all parameters.</description>
+    <description>This avatar is receiving a high-bandwidth combat signal from a nearby amplifier node.
+
+Active bonuses:
+  Melee damage +30%
+  Movement speed +18%
+  Ranged accuracy +14%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -60,22 +75,25 @@
     </stages>
   </HediffDef>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- WORK UNLOCKER — no hediff (uses workSettings priority)          -->
-  <!-- Tier I and II differ only in which work types are unlocked.     -->
-  <!-- (No HediffDef needed — handled by WorkUnlocker comp logic.)     -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- WORK UNLOCKER — no hediff (uses workSettings priority)              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- ROLE SPECIALIZER — Tier I / II / III × 4 roles                 -->
-  <!-- Applied by RoleSpecializer modules while powered.               -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ROLE SPECIALIZER — Tier I / II / III × 4 roles                     -->
+  <!-- Applied by RoleSpecializer modules while powered.                   -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <!-- Soldier -->
   <HediffDef>
     <defName>SyntheraRoleSoldierTierI</defName>
     <label>combat specialization I</label>
-    <description>This avatar has been given basic combat specialization by a nearby role module. Offensive capabilities are slightly enhanced.</description>
+    <description>This avatar has been given basic combat specialization by a nearby role module.
+
+Active bonuses:
+  Melee damage +10%
+  Ranged cooldown −7%
+  Aiming delay −7%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -91,7 +109,12 @@
   <HediffDef>
     <defName>SyntheraRoleSoldierTierII</defName>
     <label>combat specialization II</label>
-    <description>This avatar has been specialized for frontline combat by a nearby role module. Offensive capabilities are significantly enhanced.</description>
+    <description>This avatar has been specialized for frontline combat by a nearby role module.
+
+Active bonuses:
+  Melee damage +20%
+  Ranged cooldown −15%
+  Aiming delay −15%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -107,7 +130,13 @@
   <HediffDef>
     <defName>SyntheraRoleSoldierTierIII</defName>
     <label>combat specialization III</label>
-    <description>This avatar has been fully specialized as a combat unit by a nearby role module. Combat performance is greatly enhanced across all offensive parameters.</description>
+    <description>This avatar has been fully specialized as a combat unit by a nearby role module.
+
+Active bonuses:
+  Melee damage +35%
+  Ranged cooldown −25%
+  Aiming delay −25%
+  Movement speed +10%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -125,7 +154,12 @@
   <HediffDef>
     <defName>SyntheraRoleWorkerTierI</defName>
     <label>worker specialization I</label>
-    <description>This avatar has been given basic labor specialization by a nearby role module. Work efficiency is slightly improved.</description>
+    <description>This avatar has been given basic labor specialization by a nearby role module.
+
+Active bonuses:
+  Global work speed +8%
+  Construction speed +12%
+  Mining speed +10%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -141,7 +175,12 @@
   <HediffDef>
     <defName>SyntheraRoleWorkerTierII</defName>
     <label>worker specialization II</label>
-    <description>This avatar has been specialized for labor and production by a nearby role module. Work efficiency is significantly improved.</description>
+    <description>This avatar has been specialized for labor and production by a nearby role module.
+
+Active bonuses:
+  Global work speed +15%
+  Construction speed +25%
+  Mining speed +20%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -157,7 +196,13 @@
   <HediffDef>
     <defName>SyntheraRoleWorkerTierIII</defName>
     <label>worker specialization III</label>
-    <description>This avatar has been fully specialized as a labor unit by a nearby role module. Work, construction, and mining efficiency are greatly enhanced.</description>
+    <description>This avatar has been fully specialized as a labor unit by a nearby role module.
+
+Active bonuses:
+  Global work speed +25%
+  Construction speed +40%
+  Mining speed +35%
+  Plant work speed +20%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -175,7 +220,12 @@
   <HediffDef>
     <defName>SyntheraRoleMedicTierI</defName>
     <label>medic specialization I</label>
-    <description>This avatar has been given basic medical specialization by a nearby role module. Healing outcomes are slightly improved.</description>
+    <description>This avatar has been given basic medical specialization by a nearby role module.
+
+Active bonuses:
+  Tending quality +12%
+  Operation speed +10%
+  Surgery success chance +8%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -191,7 +241,12 @@
   <HediffDef>
     <defName>SyntheraRoleMedicTierII</defName>
     <label>medic specialization II</label>
-    <description>This avatar has been specialized for medical operations by a nearby role module. Healing and surgery outcomes are significantly improved.</description>
+    <description>This avatar has been specialized for medical operations by a nearby role module.
+
+Active bonuses:
+  Tending quality +25%
+  Operation speed +20%
+  Surgery success chance +15%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -207,7 +262,12 @@
   <HediffDef>
     <defName>SyntheraRoleMedicTierIII</defName>
     <label>medic specialization III</label>
-    <description>This avatar has been fully specialized as a medical unit by a nearby role module. Healing, surgery, and operation speeds are greatly enhanced.</description>
+    <description>This avatar has been fully specialized as a medical unit by a nearby role module.
+
+Active bonuses:
+  Tending quality +40%
+  Operation speed +35%
+  Surgery success chance +25%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -224,7 +284,12 @@
   <HediffDef>
     <defName>SyntheraRoleScoutTierI</defName>
     <label>scout specialization I</label>
-    <description>This avatar has been given basic mobility specialization by a nearby role module. Movement and social skills are slightly enhanced.</description>
+    <description>This avatar has been given basic mobility specialization by a nearby role module.
+
+Active bonuses:
+  Movement speed +10%
+  Social impact +5%
+  Trade price improvement +5%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -240,7 +305,12 @@
   <HediffDef>
     <defName>SyntheraRoleScoutTierII</defName>
     <label>scout specialization II</label>
-    <description>This avatar has been specialized for mobility and social interactions by a nearby role module. Movement and persuasion are significantly enhanced.</description>
+    <description>This avatar has been specialized for mobility and social interactions by a nearby role module.
+
+Active bonuses:
+  Movement speed +25%
+  Social impact +10%
+  Trade price improvement +10%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -256,7 +326,12 @@
   <HediffDef>
     <defName>SyntheraRoleScoutTierIII</defName>
     <label>scout specialization III</label>
-    <description>This avatar has been fully specialized as a scout unit by a nearby role module. Movement, social impact, and trade efficiency are greatly enhanced.</description>
+    <description>This avatar has been fully specialized as a scout unit by a nearby role module.
+
+Active bonuses:
+  Movement speed +40%
+  Social impact +20%
+  Trade price improvement +18%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -270,15 +345,17 @@
   </HediffDef>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- ARMOR MATRIX — Tier I / II / III                                -->
-  <!-- IncomingDamageFactor: reduces all incoming damage.              -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARMOR MATRIX — Tier I / II / III                                    -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <HediffDef>
     <defName>SyntheraArmorMatrixTierI</defName>
     <label>armor matrix I</label>
-    <description>This avatar's chassis is reinforced by a nearby armor matrix node. Incoming damage is reduced by 15%.</description>
+    <description>This avatar's chassis is reinforced by a nearby armor matrix node.
+
+Active bonuses:
+  Incoming damage −15%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -292,7 +369,10 @@
   <HediffDef>
     <defName>SyntheraArmorMatrixTierII</defName>
     <label>armor matrix II</label>
-    <description>This avatar's chassis is heavily reinforced by a nearby armor matrix node. Incoming damage is reduced by 30%.</description>
+    <description>This avatar's chassis is heavily reinforced by a nearby armor matrix node.
+
+Active bonuses:
+  Incoming damage −30%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -306,7 +386,10 @@
   <HediffDef>
     <defName>SyntheraArmorMatrixTierIII</defName>
     <label>armor matrix III</label>
-    <description>This avatar's chassis is maximally reinforced by a pinnacle armor matrix node. Incoming damage is reduced by 50%. The avatar is extremely difficult to destroy.</description>
+    <description>This avatar's chassis is maximally reinforced by a pinnacle armor matrix node. The avatar is extremely difficult to destroy.
+
+Active bonuses:
+  Incoming damage −50%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -317,16 +400,21 @@
     </stages>
   </HediffDef>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- OVERCLOCK CORE — Tier I / II / III                              -->
-  <!-- Massive combat buffs at the cost of accelerated stress.         -->
-  <!-- stressAddedPerDay is handled by CompAuxiliaryModule directly.   -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- OVERCLOCK CORE — Tier I / II / III                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <HediffDef>
     <defName>SyntheraOverclockTierI</defName>
     <label>combat overclocked I</label>
-    <description>This avatar's combat systems are being overclocked by a nearby core node. Combat performance is dramatically enhanced, but system stress accumulates significantly faster.</description>
+    <description>This avatar's combat systems are being overclocked by a nearby core node. System stress accumulates twice as fast — recall more frequently.
+
+Active bonuses:
+  Melee damage +35%
+  Movement speed +20%
+  Ranged cooldown −20%
+  Aiming delay −20%
+  Ranged accuracy +15%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -346,7 +434,14 @@
   <HediffDef>
     <defName>SyntheraOverclockTierII</defName>
     <label>combat overclocked II</label>
-    <description>This avatar's combat systems are running at extreme overclock. Combat capabilities are extraordinary, but the avatar burns through system stress at triple the normal rate. Recall frequently.</description>
+    <description>This avatar's combat systems are running at extreme overclock. System stress accumulates three times faster — deployment windows are short.
+
+Active bonuses:
+  Melee damage +55%
+  Movement speed +30%
+  Ranged cooldown −30%
+  Aiming delay −30%
+  Ranged accuracy +22%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -366,7 +461,14 @@
   <HediffDef>
     <defName>SyntheraOverclockTierIII</defName>
     <label>combat overclocked III</label>
-    <description>This avatar's systems are at maximum theoretical overclock. Its combat performance borders on superhuman. System stress accumulates five times faster than normal — deployment windows are extremely short.</description>
+    <description>This avatar's systems are at maximum theoretical overclock. Combat performance borders on superhuman. System stress accumulates five times faster — deployment windows are extremely short.
+
+Active bonuses:
+  Melee damage +80%
+  Movement speed +45%
+  Ranged cooldown −45%
+  Aiming delay −45%
+  Ranged accuracy +32%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -383,15 +485,20 @@
     </stages>
   </HediffDef>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- VERSATILITY PROTOCOL — Tier I / II                              -->
-  <!-- General-purpose utility boost: research, carrying, stealth.     -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- VERSATILITY PROTOCOL — Tier I / II                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <HediffDef>
     <defName>SyntheraVersatilityTierI</defName>
     <label>versatility protocol I</label>
-    <description>A broad behavioral enhancement uploaded by a nearby versatility node. Improves research speed, carry capacity, plant work, and hunting stealth.</description>
+    <description>A broad behavioral enhancement uploaded by a nearby versatility node.
+
+Active bonuses:
+  Research speed +25%
+  Carry capacity +30%
+  Plant work speed +20%
+  Hunting stealth +25%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -408,7 +515,15 @@
   <HediffDef>
     <defName>SyntheraVersatilityTierII</defName>
     <label>versatility protocol II</label>
-    <description>A deep-spectrum behavioral imprint from a pinnacle versatility node. Dramatically improves research, carrying, plant work, stealth, and social effectiveness. The avatar becomes an all-purpose powerhouse.</description>
+    <description>A deep-spectrum behavioral imprint from a pinnacle versatility node. The avatar becomes an all-purpose powerhouse.
+
+Active bonuses:
+  Research speed +50%
+  Carry capacity +65%
+  Plant work speed +40%
+  Hunting stealth +50%
+  Social impact +15%
+  Trade price improvement +12%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -424,16 +539,22 @@
     </stages>
   </HediffDef>
 
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- ARCHOTECH TIER — transcendent power, absurdly broken           -->
-  <!-- Materials and research require the Archotech Synthesis Terminal -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARCHOTECH TIER                                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <!-- Combat Archotech -->
   <HediffDef>
     <defName>SyntheraAmpBuffArchotech</defName>
     <label>combat uplink archotech</label>
-    <description>This avatar's combat systems are being fed a continuous archotech signal of impossible density. Melee strikes tear through enemies with machine-precise efficiency, ranged accuracy approaches mechanical perfection, and movement speed defies biological limits. This is not enhancement — it is transcendence.</description>
+    <description>This avatar's combat systems are being fed a continuous archotech signal of impossible density. This is not enhancement — it is transcendence.
+
+Active bonuses:
+  Melee damage +150%
+  Movement speed +80%
+  Ranged cooldown −60%
+  Aiming delay −60%
+  Ranged accuracy +60%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -454,7 +575,10 @@
   <HediffDef>
     <defName>SyntheraArmorMatrixArchotech</defName>
     <label>armor matrix archotech</label>
-    <description>A maximum-density archotech reinforcement lattice encases this avatar. Incoming damage is reduced by 85%. The avatar is nearly impossible to destroy by conventional means — sustained fire from entire raiding parties will fail to put it down.</description>
+    <description>A maximum-density archotech reinforcement lattice encases this avatar. The avatar is nearly impossible to destroy by conventional means.
+
+Active bonuses:
+  Incoming damage −85%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -469,7 +593,14 @@
   <HediffDef>
     <defName>SyntheraOverclockArchotech</defName>
     <label>combat overclocked archotech</label>
-    <description>This avatar's systems are running at archotech overclock. Combat output is barely describable in conventional terms. System stress accumulates ten times faster than normal — deployment windows are measured in minutes. Do not leave unattended.</description>
+    <description>This avatar's systems are running at archotech overclock. Combat output is barely describable in conventional terms. System stress accumulates ten times faster — deployment windows are measured in minutes. Do not leave unattended.
+
+Active bonuses:
+  Melee damage +220%
+  Movement speed +150%
+  Ranged cooldown −80%
+  Aiming delay −80%
+  Ranged accuracy +100%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -490,7 +621,16 @@
   <HediffDef>
     <defName>SyntheraVersatilityArchotech</defName>
     <label>versatility protocol archotech</label>
-    <description>A deep archotech behavioral imprint covering every aspect of avatar capability. Research proceeds at impossible speed, carrying capacity far exceeds any biological limit, all field work is performed with breathtaking efficiency, and social manipulation approaches machine-level precision.</description>
+    <description>A deep archotech behavioral imprint covering every aspect of avatar capability. Research proceeds at impossible speed, carrying capacity far exceeds any biological limit.
+
+Active bonuses:
+  Research speed +200%
+  Carry capacity +300%
+  Plant work speed +200%
+  Hunting stealth +200%
+  Social impact +150%
+  Trade price improvement +100%
+  Global work speed +100%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -511,7 +651,14 @@
   <HediffDef>
     <defName>SyntheraRoleSoldierArchotech</defName>
     <label>combat specialization archotech</label>
-    <description>This avatar has been rewritten at the archotech level as a dedicated combat unit. Offensive performance is effectively without ceiling. A single avatar with this imprint can route entire raiding parties.</description>
+    <description>This avatar has been rewritten at the archotech level as a dedicated combat unit. Offensive performance is effectively without ceiling.
+
+Active bonuses:
+  Melee damage +120%
+  Ranged cooldown −55%
+  Aiming delay −55%
+  Movement speed +75%
+  Ranged accuracy +40%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -532,7 +679,13 @@
   <HediffDef>
     <defName>SyntheraRoleWorkerArchotech</defName>
     <label>worker specialization archotech</label>
-    <description>This avatar has been rewritten at the archotech level as a dedicated labor unit. Work, construction, mining, and crafting are performed at a pace that makes biological colonists appear to be standing still.</description>
+    <description>This avatar has been rewritten at the archotech level as a dedicated labor unit. Work proceeds at a pace that makes biological colonists appear to be standing still.
+
+Active bonuses:
+  Global work speed +150%
+  Construction speed +200%
+  Mining speed +200%
+  Plant work speed +150%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -550,7 +703,12 @@
   <HediffDef>
     <defName>SyntheraRoleMedicArchotech</defName>
     <label>medic specialization archotech</label>
-    <description>This avatar has been rewritten at the archotech level as a dedicated medical unit. Tending quality, operation speed, and surgery success rates reach values no biological surgeon could approach. Patients treated by this avatar nearly always survive.</description>
+    <description>This avatar has been rewritten at the archotech level as a dedicated medical unit. Patients treated by this avatar nearly always survive.
+
+Active bonuses:
+  Tending quality +150%
+  Operation speed +150%
+  Surgery success chance +100%</description>
     <isBad>false</isBad>
     <stages>
       <li>
@@ -567,7 +725,13 @@
   <HediffDef>
     <defName>SyntheraRoleScoutArchotech</defName>
     <label>scout specialization archotech</label>
-    <description>This avatar has been rewritten at the archotech level as a dedicated mobility and social unit. Movement is impossibly fast, and the avatar's social interaction capabilities exceed anything achievable through biological persuasion. Trade negotiations conducted by this avatar are almost always favorable.</description>
+    <description>This avatar has been rewritten at the archotech level as a dedicated mobility and social unit. Trade negotiations conducted by this avatar are almost always favorable.
+
+Active bonuses:
+  Movement speed +150%
+  Social impact +150%
+  Trade price improvement +100%
+  Negotiation ability +100%</description>
     <isBad>false</isBad>
     <stages>
       <li>

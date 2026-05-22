@@ -23,8 +23,7 @@
       <needsRest>false</needsRest>
       <hasGenders>true</hasGenders>
       <lifeExpectancy>80</lifeExpectancy>
-      <bloodDef>Filth_Blood</bloodDef>
-      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+      <bloodDef>Filth_MachineBits</bloodDef>
       <nameCategory>HumanStandard</nameCategory>
       <makesFootprints>true</makesFootprints>
       <baseBodySize>1</baseBodySize>
@@ -122,8 +121,7 @@
       <renderTree>Humanlike</renderTree>
       <makesFootprints>true</makesFootprints>
       <lifeExpectancy>80</lifeExpectancy>
-      <bloodDef>Filth_Blood</bloodDef>
-      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+      <bloodDef>Filth_MachineBits</bloodDef>
       <nameCategory>HumanStandard</nameCategory>
       <hasGenders>true</hasGenders>
       <baseBodySize>1</baseBodySize>

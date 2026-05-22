@@ -83,7 +83,7 @@
       <li>NeomaTierI</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
+    <researchViewX>5</researchViewX>
     <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 
@@ -99,7 +99,7 @@
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
+    <researchViewX>5</researchViewX>
     <researchViewY>1</researchViewY>
   </ResearchProjectDef>
 
@@ -115,7 +115,7 @@
       <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
-    <researchViewX>10</researchViewX>
+    <researchViewX>5</researchViewX>
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
@@ -179,7 +179,6 @@
     <tab>NeomaProject</tab>
     <prerequisites>
       <li>AuxOptimizerTierIII</li>
-      <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
     <researchViewX>6</researchViewX>
@@ -246,7 +245,6 @@
     <tab>NeomaProject</tab>
     <prerequisites>
       <li>AuxRoleTierIII</li>
-      <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
     <researchViewX>7</researchViewX>
@@ -313,7 +311,6 @@
     <tab>NeomaProject</tab>
     <prerequisites>
       <li>AuxArmorTierIII</li>
-      <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
     <researchViewX>8</researchViewX>
@@ -380,7 +377,6 @@
     <tab>NeomaProject</tab>
     <prerequisites>
       <li>AuxOverclockTierIII</li>
-      <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
     <researchViewX>9</researchViewX>
@@ -431,7 +427,6 @@
     <tab>NeomaProject</tab>
     <prerequisites>
       <li>AuxVersatilityTierII</li>
-      <li>NeomaTierIV</li>
     </prerequisites>
     <requiredResearchBuilding>SyntheraArchotechTerminal</requiredResearchBuilding>
     <researchViewX>10</researchViewX>

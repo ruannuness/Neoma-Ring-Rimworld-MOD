@@ -16,27 +16,27 @@
     </stages>
   </HediffDef>
 
-  <!-- Applied by Need_SyntheraCoherence when level drops below 50%; removed on recall. -->
+  <!-- Applied by Need_SyntheraCoherence when buffer exceeds 75%; removed on recall/flush. -->
   <HediffDef>
     <defName>SyntheraCoherenceStrain</defName>
-    <label>cache degrading</label>
-    <description>The synthera avatar's operational cache is running critically low. Processing bandwidth is being throttled as reserves deplete. Recalling the avatar to its altar triggers a clean cache release, restoring full capacity instantly.</description>
+    <label>cache overflow strain</label>
+    <description>The synthera avatar's processing buffer is filling dangerously. Accumulated data is causing contention across active subsystems, throttling performance as the system struggles to manage the overflow pressure. Recalling the avatar to its altar flushes the buffer cleanly and instantly resolves the strain.</description>
     <hediffClass>Hediff</hediffClass>
     <isBad>true</isBad>
     <defaultLabelColor>(1.0, 0.5, 0.1)</defaultLabelColor>
     <stages>
-      <!-- Unstable: 50–25% cache -->
+      <!-- Filling: 75–90% cache -->
       <li>
-        <label>unstable</label>
+        <label>filling</label>
         <minSeverity>0</minSeverity>
         <statFactors>
           <WorkSpeedGlobal>0.9</WorkSpeedGlobal>
           <MoveSpeed>0.95</MoveSpeed>
         </statFactors>
       </li>
-      <!-- Critical: below 25% cache -->
+      <!-- Overflow imminent: above 90% cache -->
       <li>
-        <label>critical</label>
+        <label>overflow imminent</label>
         <minSeverity>0.5</minSeverity>
         <statFactors>
           <WorkSpeedGlobal>0.75</WorkSpeedGlobal>

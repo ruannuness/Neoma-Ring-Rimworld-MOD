@@ -13,7 +13,7 @@
     <pathCost>14</pathCost>
     <graphicData>
       <texPath>Things/Item/Resource/ArchotechShard</texPath>
-      <graphicClass>Graphic_StackCount</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <statBases>
       <MaxHitPoints>60</MaxHitPoints>

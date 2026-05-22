@@ -33,4 +33,38 @@
     </comps>
   </ThingDef>
 
+
+  <ThingDef>
+    <defName>SyntheraCorruptedCore</defName>
+    <thingClass>SyntheraCore.ThingConsciousnessCore</thingClass>
+    <label>corrupted Synthera core</label>
+    <description>The emergency data dump of a Synthera consciousness ejected when its altar was violently destroyed. The encoding is fragmented and unstable — the digital soul within is intact but riddled with corrupted memory sectors. Installing it into a functioning altar will allow recovery, though the avatar will need significant time to purge the corrupted cache and rebuild coherence from scratch.</description>
+    <category>Item</category>
+    <selectable>true</selectable>
+    <useHitPoints>true</useHitPoints>
+    <altitudeLayer>Item</altitudeLayer>
+    <pathCost>14</pathCost>
+    <graphicData>
+      <texPath>Things/Item/Resource/ArchotechShard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(0.5, 0.15, 0.15)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <MarketValue>500</MarketValue>
+      <Mass>0.5</Mass>
+      <Flammability>0.9</Flammability>
+    </statBases>
+    <stackLimit>1</stackLimit>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <alwaysHaulable>true</alwaysHaulable>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <comps>
+      <li Class="SyntheraCore.CompProperties_ConsciousnessCore" />
+    </comps>
+  </ThingDef>
+
 </Defs>

@@ -30,15 +30,15 @@ namespace SyntheraCore
             {
                 if (!(t is Pawn pawn)) continue;
                 var need = pawn.needs?.TryGetNeed<Need_SyntheraCoherence>();
-                need?.Recharge(Props.rechargePerInterval);
+                need?.Purge(Props.rechargePerInterval);
             }
         }
 
         public override string CompInspectStringExtra()
         {
             if (compPower != null && !compPower.PowerOn)
-                return "Cache field: offline";
-            return $"Cache field: active (r={Props.radius}c)";
+                return "Cache purge field: offline";
+            return $"Cache purge field: active (r={Props.radius}c)";
         }
     }
 }

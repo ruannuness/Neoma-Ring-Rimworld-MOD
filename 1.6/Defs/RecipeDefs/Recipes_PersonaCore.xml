@@ -52,10 +52,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <li>
-        <thingDef>SyntheraPersonaCore</thingDef>
-        <count>1</count>
-      </li>
+      <SyntheraPersonaCore>1</SyntheraPersonaCore>
     </products>
     <modExtensions>
       <li Class="SyntheraCore.NeomaCraftExtension"/>

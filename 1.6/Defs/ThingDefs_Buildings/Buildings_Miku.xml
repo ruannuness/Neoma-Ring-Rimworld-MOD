@@ -54,6 +54,7 @@
         <spawnSound>Interact_Annihilator</spawnSound>
         <respawnTicks>30000</respawnTicks>
         <explosionRadius>3</explosionRadius>
+        <maxAuxModules>4</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>

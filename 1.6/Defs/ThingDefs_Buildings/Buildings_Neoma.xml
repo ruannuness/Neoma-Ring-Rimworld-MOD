@@ -48,7 +48,7 @@
         <respawnTicks>180000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
-        <maxRoleModules>1</maxRoleModules>
+
         <maxAuxModules>2</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -114,7 +114,7 @@
         <respawnTicks>60000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
-        <maxRoleModules>2</maxRoleModules>
+
         <maxAuxModules>4</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -181,7 +181,7 @@
         <respawnTicks>15000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
-        <maxRoleModules>3</maxRoleModules>
+
         <maxAuxModules>6</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -248,7 +248,7 @@
         <respawnTicks>5000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
-        <maxRoleModules>4</maxRoleModules>
+
         <maxAuxModules>8</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -267,11 +267,11 @@
   </ThingDef>
 
 
-  <!-- Cache Recharger: sustains nearby deployed Syntheras, slowing cache drain -->
+  <!-- Cache Purger: drains the processing buffer of nearby deployed Syntheras -->
   <ThingDef ParentName="BuildingBase">
     <defName>NeomaCoherenceRecharger</defName>
-    <label>Cache Recharger</label>
-    <description>A resonance emitter that projects a data-sustaining field over a small area. Synthera avatars within range restore cache more quickly, allowing longer continuous deployments. Essential for sustaining high-tier avatars indefinitely.</description>
+    <label>Cache Purger</label>
+    <description>A high-throughput data condenser that projects a buffer-purging field over a small area. Synthera avatars within range have their accumulated cache actively drained and processed, delaying the inevitable overflow and extending continuous deployment time. Essential for sustaining high-tier avatars in lower-tier altars or for indefinite deployments.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <tickerType>Normal</tickerType>

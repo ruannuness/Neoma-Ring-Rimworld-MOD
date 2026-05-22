@@ -93,6 +93,7 @@ namespace SyntheraCore
             var defField = AccessTools.Field(__instance.GetType(), "def");
             var categoryDef = defField?.GetValue(__instance) as DesignationCategoryDef;
             if (categoryDef?.defName != "Neoma") return;
+            if (DebugSettings.godMode) return;
             foreach (ResearchProjectDef r in DefDatabase<ResearchProjectDef>.AllDefs)
                 if (r?.tab?.defName == "NeomaProject" && r.IsFinished) return;
             __result = false;
@@ -174,6 +175,48 @@ namespace SyntheraCore
                 "The digital identity encoded in this core.",
                 10000));
 
+            // Tier
+            string kind = p.kindDef?.defName ?? "";
+            string tier = kind.Contains("Miku")    ? "Special (Virtual Diva)"
+                        : kind.Contains("TierIV")  ? "IV"
+                        : kind.Contains("TierIII") ? "III"
+                        : kind.Contains("TierII")  ? "II"
+                        : kind.Contains("TierI")   ? "I"
+                        : "—";
+            extra.Add(new StatDrawEntry(
+                StatCategoryDefOf.Basics,
+                "Tier",
+                tier,
+                "The operational tier this avatar was running at.",
+                9999));
+
+            // Corruption / hibernation syndrome
+            var syndromeDef = DefDatabase<HediffDef>.GetNamed("SyntheraHibernationSyndrome", false);
+            if (syndromeDef != null)
+            {
+                var syndrome = p.health.hediffSet.GetFirstHediffOfDef(syndromeDef);
+                if (syndrome != null)
+                {
+                    string severity = syndrome.Severity > 0.66f ? "heavy"
+                                    : syndrome.Severity > 0.33f ? "moderate" : "light";
+                    extra.Add(new StatDrawEntry(
+                        StatCategoryDefOf.Basics,
+                        "Cache corruption",
+                        $"{(int)(syndrome.Severity * 100)}% ({severity})",
+                        "Degree of cache fragmentation. Degrades automatically once the avatar is deployed into a functioning altar.",
+                        9998));
+                }
+                else
+                {
+                    extra.Add(new StatDrawEntry(
+                        StatCategoryDefOf.Basics,
+                        "Cache corruption",
+                        "None — clean export",
+                        "No corruption detected. Avatar will deploy without recovery penalty.",
+                        9998));
+                }
+            }
+
             if (p.story?.traits?.allTraits is { Count: > 0 } traits)
             {
                 string traitStr = string.Join(", ", traits.Select(t => t.LabelCap.ToString()));
@@ -182,7 +225,7 @@ namespace SyntheraCore
                     "Traits",
                     traitStr,
                     "Personality traits of the stored consciousness.",
-                    9999));
+                    9997));
             }
 
             if (p.skills?.skills != null)
@@ -268,7 +311,10 @@ namespace SyntheraCore
             if (pawn?.def?.defName?.StartsWith("SyntheraRace") != true) return;
 
             var toRemove = __instance.AllNeeds
-                .Where(n => !(n is Need_SyntheraCoherence))
+                .Where(n => !(n is Need_SyntheraCoherence)
+                         && n.def?.defName != "Joy"
+                         && n.def?.defName != "Comfort"
+                         && n.def?.defName != "Social")
                 .ToList();
             foreach (var n in toRemove)
                 __instance.AllNeeds.Remove(n);
@@ -277,21 +323,21 @@ namespace SyntheraCore
             {
                 var need = new Need_SyntheraCoherence(pawn);
                 need.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
-                if (need.def != null) { need.CurLevel = 1f; __instance.AllNeeds.Add(need); }
+                if (need.def != null) { need.CurLevel = 0f; __instance.AllNeeds.Add(need); }
             }
         }
     }
 
-    // Fires an alert in the alerts panel when any deployed Synthera drops below 25% coherence.
-    public class Alert_SyntheraLowCoherence : Alert
+    // Fires when any deployed Synthera's cache exceeds 95% — overflow is seconds away.
+    public class Alert_SyntheraHighCache : Alert
     {
-        public Alert_SyntheraLowCoherence()
+        public Alert_SyntheraHighCache()
         {
-            defaultLabel       = "Synthera: cache critical";
-            defaultExplanation = "One or more Synthera avatars are below 25% cache. "
-                               + "At zero the avatar auto-recalls and must recharge before re-deployment. "
-                               + "Recall them manually or place a Cache Recharger nearby.";
-            defaultPriority    = AlertPriority.High;
+            defaultLabel       = "Synthera: cache overflow imminent";
+            defaultExplanation = "One or more Synthera avatars are above 95% cache capacity. "
+                               + "Overflow is imminent — the projection will collapse and require a recovery cycle. "
+                               + "Recall immediately to flush the cache, or activate a Cache Purger nearby.";
+            defaultPriority    = AlertPriority.Critical;
         }
 
         public override AlertReport GetReport()
@@ -301,7 +347,7 @@ namespace SyntheraCore
                 foreach (Pawn p in map.mapPawns.FreeColonistsSpawned)
                 {
                     var need = p.needs?.TryGetNeed<Need_SyntheraCoherence>();
-                    if (need != null && need.CurLevel < 0.25f)
+                    if (need != null && need.CurLevel > 0.95f)
                         culprits.Add(p);
                 }
             return culprits.Count > 0 ? AlertReport.CulpritsAre(culprits) : AlertReport.Inactive;

@@ -3,7 +3,7 @@
 
   <ResearchTabDef>
     <defName>NeomaProject</defName>
-    <label>SyntheraCore_NeomaProjectTab_Label</label>
+    <label>SyntheraCore</label>
     <description>SyntheraCore_NeomaProjectTab_Description</description>
   </ResearchTabDef>
 

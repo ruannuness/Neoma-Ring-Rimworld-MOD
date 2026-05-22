@@ -17,7 +17,6 @@ namespace SyntheraCore
         private CompSyntheraSpawner linkedSpawner;
         private CompPowerTrader compPower;
         private int lastScanTick;
-        private int lastStressTick;
         private bool capRejected;
 
         public CompProperties_AuxiliaryModule Props => (CompProperties_AuxiliaryModule)props;
@@ -35,8 +34,7 @@ namespace SyntheraCore
         {
             base.PostSpawnSetup(respawningAfterLoad);
             compPower = parent.TryGetComp<CompPowerTrader>();
-            lastScanTick  = parent.thingIDNumber % Props.scanIntervalTicks;
-            lastStressTick = parent.thingIDNumber % 2500;
+            lastScanTick = parent.thingIDNumber % Props.scanIntervalTicks;
 
             if (linkedBuilding != null)
                 linkedSpawner = linkedBuilding.TryGetComp<CompSyntheraSpawner>();
@@ -77,16 +75,6 @@ namespace SyntheraCore
                     RemoveEffects();
             }
 
-            // Stress modification — relief (Optimizer) or addition (Overclock) every 2500 ticks
-            if (effectsApplied && (Props.stressReliefPerDay > 0f || Props.stressAddedPerDay > 0f))
-            {
-                if (tick - lastStressTick >= 2500)
-                {
-                    lastStressTick = tick;
-                    if (Props.stressReliefPerDay > 0f) TickStressRelief();
-                    if (Props.stressAddedPerDay  > 0f) TickStressAdd();
-                }
-            }
         }
 
         public override void ReceiveCompSignal(string signal)
@@ -131,21 +119,16 @@ namespace SyntheraCore
                         parts.Add($"Respawn ×{Props.respawnTicksMultiplier:0.##}");
                     if (Props.recreateCooldownMultiplier != 1f)
                         parts.Add($"Recreate ×{Props.recreateCooldownMultiplier:0.##}");
-                    if (Props.stressReliefPerDay > 0f)
-                        parts.Add($"-{Props.stressReliefPerDay:0.###} stress/day");
                     return parts.Count > 0 ? string.Join(" | ", parts) : "";
                 }
                 case AuxModuleType.WorkUnlocker:
                 {
-                    List<string> names;
-                    if (unlockedByUs.Count > 0)
-                        names = unlockedByUs.Select(w => w.label.CapitalizeFirst()).ToList();
-                    else if (Props.unlockedWorkTypes != null)
-                        names = Props.unlockedWorkTypes
-                            .Select(n => DefDatabase<WorkTypeDef>.GetNamed(n, false)?.label.CapitalizeFirst() ?? n)
-                            .ToList();
-                    else
-                        names = new List<string>();
+                    if (unlockedByUs.Count == 0) return "";
+                    var names = unlockedByUs
+                        .Where(w => w != null)
+                        .Select(w => w.label?.CapitalizeFirst())
+                        .Where(s => !s.NullOrEmpty())
+                        .ToList();
                     return names.Count > 0 ? "Unlocks: " + string.Join(", ", names) : "";
                 }
                 case AuxModuleType.RoleSpecializer:
@@ -156,15 +139,9 @@ namespace SyntheraCore
                 }
                 default:
                 {
-                    string line = "";
-                    if (!Props.pawnBuffHediff.NullOrEmpty())
-                    {
-                        var def = DefDatabase<HediffDef>.GetNamed(Props.pawnBuffHediff, false);
-                        if (def != null) line = def.label.CapitalizeFirst();
-                    }
-                    if (Props.stressAddedPerDay > 0f)
-                        line += (line.Length > 0 ? " | " : "") + $"+{Props.stressAddedPerDay:0.###} stress/day";
-                    return line;
+                    if (Props.pawnBuffHediff.NullOrEmpty()) return "";
+                    var def = DefDatabase<HediffDef>.GetNamed(Props.pawnBuffHediff, false);
+                    return def != null ? def.label.CapitalizeFirst() : "";
                 }
             }
         }
@@ -226,14 +203,6 @@ namespace SyntheraCore
                 {
                     Messages.Message(
                         $"This role specialization is already active on {linkedBuilding.def.label}.",
-                        parent, MessageTypeDefOf.RejectInput, false);
-                    return;
-                }
-                int activeRoles = linkedSpawner.RegisteredAuxTypes.Count(k => k.StartsWith("SyntheraRole"));
-                if (activeRoles >= linkedSpawner.Props.maxRoleModules)
-                {
-                    Messages.Message(
-                        $"{linkedBuilding.def.label} can support at most {linkedSpawner.Props.maxRoleModules} role module(s). Upgrade the altar to unlock more slots.",
                         parent, MessageTypeDefOf.RejectInput, false);
                     return;
                 }
@@ -312,30 +281,6 @@ namespace SyntheraCore
                 linkedSpawner.AuxRespawnMultiplier  = 1f;
                 linkedSpawner.AuxRecreateMultiplier = 1f;
             }
-        }
-
-        private void TickStressRelief()
-        {
-            var pawn = linkedSpawner?.Consciousness;
-            if (pawn == null || !pawn.Spawned || pawn.Dead) return;
-            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-            if (stressDef == null) return;
-            var stress = pawn.health.hediffSet.GetFirstHediffOfDef(stressDef);
-            if (stress == null) return;
-            float relief = Props.stressReliefPerDay * 2500f / 60000f;
-            stress.Severity = Mathf.Max(0f, stress.Severity - relief);
-        }
-
-        private void TickStressAdd()
-        {
-            var pawn = linkedSpawner?.Consciousness;
-            if (pawn == null || !pawn.Spawned || pawn.Dead) return;
-            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
-            if (stressDef == null) return;
-            var stress = pawn.health.hediffSet.GetFirstHediffOfDef(stressDef);
-            if (stress == null) return;
-            float addition = Props.stressAddedPerDay * 2500f / 60000f;
-            stress.Severity = Mathf.Min(1f, stress.Severity + addition);
         }
 
         // ── RoleSpecializer ──────────────────────────────────────────────────

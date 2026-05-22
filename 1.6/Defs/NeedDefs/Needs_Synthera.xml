@@ -5,9 +5,9 @@
     <defName>NeedSyntheraCoherence</defName>
     <needClass>SyntheraCore.Need_SyntheraCoherence</needClass>
     <label>cache</label>
-    <description>Active memory cache allocated to this synthera's projected consciousness. The projection continuously consumes cache as it processes the world around it. When recalled to the altar, the avatar gracefully releases all allocated cache back to the core systems — a clean flush. If the cache is fully exhausted before recall, the projection collapses abruptly and a recovery cycle is required before the cache can be reallocated. A Cache Recharger nearby injects bandwidth during active deployment, extending operational time.</description>
+    <description>Active processing buffer accumulated by this synthera's projected consciousness. As the avatar operates, it continuously generates data that fills the cache. When recalled to the altar, all accumulated cache is flushed cleanly back to core systems. If the buffer reaches capacity before recall, it overflows — the projection collapses abruptly and a recovery cycle is required before re-deployment. A Cache Purger nearby actively drains the buffer during active deployment, significantly extending continuous deployment time.</description>
     <listPriority>45</listPriority>
-    <baseLevel>1</baseLevel>
+    <baseLevel>0</baseLevel>
     <showForCaravanMembers>false</showForCaravanMembers>
   </NeedDef>
 

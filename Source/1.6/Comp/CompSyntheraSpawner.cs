@@ -138,23 +138,62 @@ namespace SyntheraCore
                 EnterHibernation(deathPos);
             }
 
-            // Auto-recall on coherence collapse — checked every NeedInterval (150 ticks).
+            // Every NeedInterval: push altar multiplier to the need, then check for overflow.
             if (Consciousness.Spawned && Find.TickManager.TicksGame % 150 == 0)
             {
                 var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
-                if (coh != null && coh.CurLevel <= 0f)
+                if (coh != null)
                 {
-                    int failTicks = GetCoherenceFailTicks();
-                    Messages.Message(
-                        $"{Consciousness.Name.ToStringShort}'s cache exhausted. Projection collapsed — recovery cycle required before re-deployment.",
-                        parent, MessageTypeDefOf.NegativeEvent);
-                    DespawnFormgel(false);
-                    RespawnTick = Find.TickManager.TicksGame + failTicks;
+                    coh.AltarMultiplier = CalcAltarMultiplier();
+
+                    if (coh.CurLevel >= 1f)
+                    {
+                        int failTicks = GetCoherenceFailTicks();
+                        Messages.Message(
+                            $"{Consciousness.Name.ToStringShort}'s cache overflowed. Projection collapsed — recovery cycle required before re-deployment.",
+                            parent, MessageTypeDefOf.NegativeEvent);
+                        DespawnFormgel(false);
+                        RespawnTick = Find.TickManager.TicksGame + failTicks;
+                    }
                 }
             }
 
             if (SignalBurstActive && Find.TickManager.TicksGame >= signalBurstEndTick)
                 SignalBurstActive = false;
+        }
+
+        // Altar tier slows cache fill; mismatch between pawn tier and altar tier accelerates it.
+        private float CalcAltarMultiplier()
+        {
+            float altarBase = GetBuildingTier() switch
+            {
+                5 => 0.35f, // Miku building
+                4 => 0.35f,
+                3 => 0.50f,
+                2 => 0.75f,
+                _ => 1.00f  // Tier I
+            };
+
+            int gap = GetPawnTier() - GetBuildingTier();
+            if (gap <= 0) return altarBase;
+
+            float bottleneck = gap switch
+            {
+                1 => 2f,
+                2 => 4f,
+                _ => 8f
+            };
+            return altarBase * bottleneck;
+        }
+
+        private int GetPawnTier()
+        {
+            string kind = Consciousness?.kindDef?.defName ?? "";
+            if (kind.Contains("Miku"))    return 4;
+            if (kind.Contains("TierIV")) return 4;
+            if (kind.Contains("TierIII")) return 3;
+            if (kind.Contains("TierII")) return 2;
+            return 1;
         }
 
         private int GetCoherenceFailTicks()
@@ -177,7 +216,7 @@ namespace SyntheraCore
             RespawnTick = Find.TickManager.TicksGame + (int)(Props.respawnTicks * AuxRespawnMultiplier);
 
             var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
-            if (coh != null) { coh.CurLevel = 1f; coh.ClearStrainHediff(); }
+            if (coh != null) { coh.CurLevel = 0f; coh.ClearStrainHediff(); }
 
             Consciousness.equipment?.DropAllEquipment(deathPos);
             Consciousness.apparel?.DropAll(deathPos);
@@ -342,16 +381,25 @@ namespace SyntheraCore
 
             Consciousness.needs.AddOrRemoveNeedsAsAppropriate();
 
-            var allNeeds = Consciousness.needs.AllNeeds.ToList();
-            foreach (Need need in allNeeds)
+            // Strip biological needs; keep Joy, Comfort, and Social (conscious-AI appropriate).
+            var toStrip = Consciousness.needs.AllNeeds
+                .Where(n => !(n is Need_SyntheraCoherence)
+                         && n.def?.defName != "Joy"
+                         && n.def?.defName != "Comfort"
+                         && n.def?.defName != "Social")
+                .ToList();
+            foreach (Need need in toStrip)
                 Consciousness.needs.AllNeeds.Remove(need);
 
-            var coherenceNeed = new Need_SyntheraCoherence(Consciousness);
-            coherenceNeed.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
-            if (coherenceNeed.def != null)
+            if (Consciousness.needs.TryGetNeed<Need_SyntheraCoherence>() == null)
             {
-                coherenceNeed.CurLevel = 1f;
-                Consciousness.needs.AllNeeds.Add(coherenceNeed);
+                var coherenceNeed = new Need_SyntheraCoherence(Consciousness);
+                coherenceNeed.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
+                if (coherenceNeed.def != null)
+                {
+                    coherenceNeed.CurLevel = 0f;
+                    Consciousness.needs.AllNeeds.Add(coherenceNeed);
+                }
             }
 
             // SyntheraAdult uses a base LifeStageWorker that bypasses HAR's patched
@@ -388,12 +436,10 @@ namespace SyntheraCore
 
                 if (ModsConfig.IdeologyActive)
                 {
-                    if (Consciousness.style.BodyTattoo == null)
-                        Consciousness.style.BodyTattoo = DefDatabase<TattooDef>.GetNamed("NoTattoo_Body", false)
-                            ?? DefDatabase<TattooDef>.AllDefs.FirstOrDefault();
-                    if (Consciousness.style.FaceTattoo == null)
-                        Consciousness.style.FaceTattoo = DefDatabase<TattooDef>.GetNamed("NoTattoo_Face", false)
-                            ?? DefDatabase<TattooDef>.AllDefs.FirstOrDefault();
+                    Consciousness.style.BodyTattoo = DefDatabase<TattooDef>.GetNamed("NoTattoo_Body", false)
+                        ?? DefDatabase<TattooDef>.AllDefs.FirstOrDefault();
+                    Consciousness.style.FaceTattoo = DefDatabase<TattooDef>.GetNamed("NoTattoo_Face", false)
+                        ?? DefDatabase<TattooDef>.AllDefs.FirstOrDefault();
                 }
             }
 
@@ -414,7 +460,7 @@ namespace SyntheraCore
 
             // Restore coherence and clear strain on recall.
             var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
-            if (coh != null) { coh.CurLevel = 1f; coh.ClearStrainHediff(); }
+            if (coh != null) { coh.CurLevel = 0f; coh.ClearStrainHediff(); }
 
             if (Consciousness.carryTracker?.CarriedThing != null)
                 Consciousness.carryTracker.TryDropCarriedThing(Consciousness.Position, ThingPlaceMode.Near, out _);
@@ -489,10 +535,14 @@ namespace SyntheraCore
                     safeNeed.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
                     if (safeNeed.def != null)
                     {
-                        safeNeed.CurLevel = 1f;
+                        safeNeed.CurLevel = 0f;
                         Consciousness.needs.AllNeeds.Add(safeNeed);
                     }
                 }
+
+                // Always reset cache to 0 on spawn — clears any stale value from saves or old system.
+                var cohSpawn = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+                if (cohSpawn != null) { cohSpawn.CurLevel = 0f; cohSpawn.ClearStrainHediff(); }
 
                 // Ensure base consciousness hediff survived the resurrection.
                 var conDef = DefDatabase<HediffDef>.GetNamed("SyntheraConsciousness", false);
@@ -518,8 +568,78 @@ namespace SyntheraCore
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
             base.PostDestroy(mode, previousMap);
-            if (mode == DestroyMode.Deconstruct || mode == DestroyMode.KillFinalize)
-                DespawnFormgel(true, true);
+
+            if (Consciousness == null || Consciousness.Destroyed) return;
+
+            string pawnName = Consciousness.Name?.ToStringShort ?? "The avatar";
+            IntVec3 dropPos = Consciousness.Spawned ? Consciousness.Position : parent.Position;
+
+            // Drop carried items before despawning.
+            if (Consciousness.Spawned)
+            {
+                Consciousness.equipment?.DropAllEquipment(dropPos);
+                Consciousness.apparel?.DropAll(dropPos);
+                Consciousness.inventory?.DropAllNearPawn(dropPos);
+            }
+
+            if (mode == DestroyMode.KillFinalize)
+            {
+                // Violent destruction: explosion + dump into corrupted core.
+                var slimeDamage = DefDatabase<DamageDef>.GetNamed("Slime", false) ?? DamageDefOf.Burn;
+                GenExplosion.DoExplosion(dropPos, previousMap, 2f, slimeDamage, null,
+                    postExplosionSpawnThingDef: ThingDefOf.Filth_Slime, postExplosionSpawnChance: 1f);
+
+                // Mark consciousness as corrupted so the player sees a recovery penalty on restore.
+                var syndromeDef = DefDatabase<HediffDef>.GetNamed("SyntheraHibernationSyndrome", false);
+                if (syndromeDef != null)
+                {
+                    var existing = Consciousness.health.hediffSet.GetFirstHediffOfDef(syndromeDef);
+                    if (existing == null) Consciousness.health.AddHediff(syndromeDef).Severity = 1f;
+                    else existing.Severity = 1f;
+                }
+
+                // Cache is trashed on violent shutdown.
+                var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
+                if (coh != null) coh.CurLevel = 0f;
+
+                DropCore("SyntheraCorruptedCore", dropPos, previousMap, pawnName, corrupted: true);
+            }
+            else if (mode == DestroyMode.Deconstruct)
+            {
+                // Clean deconstruct: consciousness safely transferred to a standard memory core.
+                DropCore("SyntheraMemoryCore", dropPos, previousMap, pawnName, corrupted: false);
+            }
+            else
+            {
+                // Any other mode (Vanish, etc.): permanent loss.
+                if (Consciousness.Spawned) Consciousness.DeSpawn();
+                if (!Consciousness.Destroyed) Consciousness.Destroy(DestroyMode.Vanish);
+            }
+        }
+
+        private void DropCore(string defName, IntVec3 pos, Map map, string pawnName, bool corrupted)
+        {
+            if (Consciousness.Spawned) Consciousness.DeSpawn();
+
+            var coreDef = DefDatabase<ThingDef>.GetNamed(defName, false);
+            if (coreDef == null)
+            {
+                if (!Consciousness.Destroyed) Consciousness.Destroy(DestroyMode.Vanish);
+                return;
+            }
+
+            Thing core = ThingMaker.MakeThing(coreDef);
+            var comp = core.TryGetComp<CompConsciousnessCore>();
+            if (comp != null) comp.StoredConsciousness = Consciousness;
+            Consciousness = null;
+
+            GenPlace.TryPlaceThing(core, pos, map, ThingPlaceMode.Near);
+
+            Messages.Message(
+                corrupted
+                    ? $"{pawnName}'s consciousness was emergency-dumped into a corrupted core. The altar's destruction left cache fragments — recovery is possible but the avatar will need time to stabilise."
+                    : $"The altar was deconstructed. {pawnName}'s consciousness was safely transferred to a memory core.",
+                MessageTypeDefOf.NegativeEvent, false);
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -692,61 +812,9 @@ namespace SyntheraCore
                     recallBtn.Disable("Recall on cooldown: " + GenDate.ToStringTicksToPeriod(lastEmergencyRecallTick + Props.emergencyRecallCooldownTicks - curTick));
                 yield return recallBtn;
 
-                if (altarTier >= 2)
-                {
-                    var pulseBtn = new Command_Action
-                    {
-                        action = delegate
-                        {
-                            if (altarMap.resourceCounter.GetCount(ThingDefOf.Steel) < 5)
-                            {
-                                Messages.Message("Maintenance Pulse requires 5× Steel.", MessageTypeDefOf.RejectInput, false);
-                                return;
-                            }
-                            int rem = 5;
-                            foreach (Thing t in altarMap.listerThings.ThingsOfDef(ThingDefOf.Steel).ToList())
-                            {
-                                if (rem <= 0) break;
-                                int take = System.Math.Min(rem, t.stackCount);
-                                t.SplitOff(take).Destroy();
-                                rem -= take;
-                            }
-                            var cohPulse = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
-                            cohPulse?.Recharge(0.25f);
-                            lastMaintenancePulseTick = Find.TickManager.TicksGame;
-                            Messages.Message(
-                                $"Maintenance pulse applied to {Consciousness.Name.ToStringShort}. Cache bandwidth injected.",
-                                parent, MessageTypeDefOf.PositiveEvent);
-                        },
-                        defaultLabel = "Maintenance pulse",
-                        defaultDesc  = "Perform a maintenance cycle, reducing system stress by 0.25. Costs 5× Steel. 3-day cooldown.",
-                        icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
-                    };
-                    if (curTick < lastMaintenancePulseTick + Props.maintenancePulseCooldownTicks)
-                        pulseBtn.Disable("Pulse on cooldown: " + GenDate.ToStringTicksToPeriod(lastMaintenancePulseTick + Props.maintenancePulseCooldownTicks - curTick));
-                    yield return pulseBtn;
-                }
-
-                if (altarTier >= 3)
-                {
-                    var burstBtn = new Command_Action
-                    {
-                        action = delegate
-                        {
-                            SignalBurstActive  = true;
-                            signalBurstEndTick = Find.TickManager.TicksGame + 60000;
-                            Messages.Message(
-                                "Signal burst active: linked aux module detection radii doubled for 24 hours.",
-                                parent, MessageTypeDefOf.PositiveEvent);
-                        },
-                        defaultLabel = "Signal burst",
-                        defaultDesc  = "Doubles the detection radius of all linked aux modules for 24 hours.",
-                        icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
-                    };
-                    if (SignalBurstActive)
-                        burstBtn.Disable("Signal burst active: " + GenDate.ToStringTicksToPeriod(signalBurstEndTick - curTick));
-                    yield return burstBtn;
-                }
+                // Maintenance Pulse and Signal Burst are temporarily disabled — not yet practical.
+                // if (altarTier >= 2) { ... pulseBtn ... yield return pulseBtn; }
+                // if (altarTier >= 3) { ... burstBtn ... yield return burstBtn; }
             }
         }
 
@@ -786,12 +854,12 @@ namespace SyntheraCore
 
             if (Consciousness.Spawned)
             {
-                string cacheStr = "Full";
+                string cacheStr = "Cache: 0%";
                 var coh = Consciousness.needs?.TryGetNeed<Need_SyntheraCoherence>();
                 if (coh != null)
-                    cacheStr = coh.CurLevel > 0.5f  ? $"Cache: {(int)(coh.CurLevel * 100)}%"
-                             : coh.CurLevel > 0.25f ? $"Cache: {(int)(coh.CurLevel * 100)}% [unstable]"
-                             : $"Cache: {(int)(coh.CurLevel * 100)}% [CRITICAL]";
+                    cacheStr = coh.CurLevel < 0.75f ? $"Cache: {(int)(coh.CurLevel * 100)}%"
+                             : coh.CurLevel < 0.9f  ? $"Cache: {(int)(coh.CurLevel * 100)}% [filling]"
+                             : $"Cache: {(int)(coh.CurLevel * 100)}% [OVERFLOW IMMINENT]";
                 string modLine = RegisteredAuxTypes.Count > 0
                     ? $"\nModules ({RegisteredAuxTypes.Count}/{Props.maxAuxModules + BonusAuxSlots}): {BuildModulesSummary()}"
                     : "";

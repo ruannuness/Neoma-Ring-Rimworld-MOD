@@ -35,10 +35,6 @@ namespace SyntheraCore
         // CoreOptimizer
         public float respawnTicksMultiplier     = 1f;
         public float recreateCooldownMultiplier = 1f;
-        public float stressReliefPerDay         = 0f;
-
-        // OverclockCore — positive value accelerates SyntheraSystemStress accumulation
-        public float stressAddedPerDay          = 0f;
 
         // RoleSpecializer
         public AvatarRole role = AvatarRole.None;
