@@ -574,8 +574,14 @@
       </relationSettings>
       <graphicPaths>
         <body>
-          <path>Things/Pawn/SynthMiku/Body/Naked_Female</path>
+          <path>Things/Pawn/SynthMiku/Body/Hatsune</path>
         </body>
+        <head>
+          <path>Things/Pawn/SynthMiku/Head/Face01</path>
+          <extendedGraphics>
+            <Gender For="Female">Things/Pawn/SynthMiku/Head/Face01</Gender>
+          </extendedGraphics>
+        </head>
         <skinShader>Transparent</skinShader>
       </graphicPaths>
     </alienRace>

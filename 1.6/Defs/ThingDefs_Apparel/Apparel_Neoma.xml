@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- Roupa da Hatsune Miku -->
+  <ThingDef ParentName="ApparelBase">
+    <defName>MikuHatsuneOutfit</defName>
+    <label>Hatsune's outfit</label>
+    <description>The iconic stage outfit of the Virtual Diva — a teal and black ensemble broadcast across star systems for generations. It is somehow both ancient and timeless.</description>
+    <thingClass>Apparel</thingClass>
+    <category>Item</category>
+    <graphicData>
+      <texPath>Things/Pawn/SynthMiku/Clouth/Hatsune_Cloth_south</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>0.5</Mass>
+      <MarketValue>5000</MarketValue>
+      <Flammability>0</Flammability>
+    </statBases>
+    <generateCommonality>0</generateCommonality>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>Middle</li>
+      </layers>
+      <wornGraphicPath>Things/Pawn/SynthMiku/Clouth/Hatsune_Cloth</wornGraphicPath>
+    </apparel>
+    <smeltable>false</smeltable>
+  </ThingDef>
+
   <!-- Anel de Neoma -->
   <ThingDef ParentName="ApparelBase">
     <defName>NeomaRing</defName>

@@ -14,7 +14,7 @@
     <category>Building</category>
     <tickerType>Normal</tickerType>
     <graphicData>
-      <texPath>Things/Building/Tier01/Tier01</texPath>
+      <texPath>Things/Building/NeomaFabrication/FabricationConsole</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
     </graphicData>

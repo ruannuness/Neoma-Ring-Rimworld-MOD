@@ -3,8 +3,8 @@
 
   <!--
     Holographic Stage — invoca a Virtual Diva (Miku).
-    Texture: Textures/Things/Building/Miku/MikuStage.png  (Graphic_Single, drawSize 5x5)
-    Requer pesquisa NeomaTierII para construir.
+    Texture: Textures/Things/Building/Miku/MikuStage.png  (Graphic_Single, drawSize 3x3)
+    Requer pesquisa MikuStageResearch para construir.
   -->
   <ThingDef ParentName="BuildingBase">
     <defName>MikuHolographicStage</defName>
@@ -16,7 +16,7 @@
     <graphicData>
       <texPath>Things/Building/Miku/MikuStage</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(5,5)</drawSize>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
@@ -24,16 +24,17 @@
     <fillPercent>0.4</fillPercent>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
-      <MaxHitPoints>350</MaxHitPoints>
-      <WorkToBuild>1500</WorkToBuild>
-      <Flammability>0.6</Flammability>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>0.5</Flammability>
+      <Beauty>35</Beauty>
     </statBases>
     <costList>
-      <Steel>250</Steel>
-      <ComponentIndustrial>50</ComponentIndustrial>
-      <Plasteel>80</Plasteel>
-      <Gold>150</Gold>
-      <SyntheraPersonaCore>3</SyntheraPersonaCore>
+      <Steel>200</Steel>
+      <ComponentIndustrial>40</ComponentIndustrial>
+      <Plasteel>60</Plasteel>
+      <Gold>120</Gold>
+      <SyntheraPersonaCore>2</SyntheraPersonaCore>
     </costList>
     <researchPrerequisites>
       <li>MikuStageResearch</li>
@@ -45,23 +46,28 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>1500</basePowerConsumption>
+        <basePowerConsumption>900</basePowerConsumption>
       </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnMiku</pawnKind>
-        <spawnIntervalDays>0.5</spawnIntervalDays>
+        <spawnIntervalDays>1</spawnIntervalDays>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
         <spawnSound>Interact_Annihilator</spawnSound>
-        <respawnTicks>30000</respawnTicks>
-        <explosionRadius>3</explosionRadius>
-        <maxAuxModules>4</maxAuxModules>
+        <respawnTicks>60000</respawnTicks>
+        <explosionRadius>2</explosionRadius>
+        <maxAuxModules>3</maxAuxModules>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>15</heatPerSecond>
+        <heatPerSecond>8</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(30,140,255,0)</glowColor>
       </li>
     </comps>
-    <size>(5,5)</size>
+    <size>(3,3)</size>
     <designationCategory>Neoma</designationCategory>
   </ThingDef>
 

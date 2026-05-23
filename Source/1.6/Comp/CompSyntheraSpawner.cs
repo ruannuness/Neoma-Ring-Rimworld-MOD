@@ -298,24 +298,58 @@ namespace SyntheraCore
         private void SetupPawnStatsForTier(int tier)
         {
             if (Consciousness.skills == null) return;
-            int baseLevel = tier == 5 ? 11 : Mathf.Min(5 + (tier - 1) * 3, 20);
-            foreach (SkillRecord skill in Consciousness.skills.skills)
-            {
-                skill.passion = Passion.Minor;
-                skill.levelInt = baseLevel;
-            }
-            Consciousness.skills.Notify_SkillDisablesChanged();
 
-            // Tier 5 (NeomaCoreMiku) is a Hatsune Miku easter egg — forced name and skill boosts.
             if (tier == 5)
             {
+                // Hatsune Miku — Virtual Diva: performer profile.
+                foreach (SkillRecord s in Consciousness.skills.skills)
+                { s.levelInt = 2; s.passion = Passion.None; }
+
+                void Set(SkillDef def, int level, Passion passion)
+                {
+                    var s = Consciousness.skills.GetSkill(def);
+                    if (s != null) { s.levelInt = level; s.passion = passion; }
+                }
+
+                // Fixos: identidade da personagem
+                Set(SkillDefOf.Artistic,    16, Passion.Major);
+                Set(SkillDefOf.Social,      14, Passion.Major);
+                Set(SkillDefOf.Intellectual, 10, Passion.Minor);
+
+                // Aleatórios: variam a cada geração
+                Set(SkillDefOf.Cooking,      Rand.Range(5, 10), Passion.Minor);
+                Set(SkillDefOf.Animals,      Rand.Range(5, 10), Passion.Minor);
+                Set(SkillDefOf.Medicine,     Rand.Range(4,  8), Passion.None);
+                Set(SkillDefOf.Plants,       Rand.Range(3,  7), Passion.None);
+                Set(SkillDefOf.Crafting,     Rand.Range(3,  6), Passion.None);
+                Set(SkillDefOf.Shooting,     Rand.Range(2,  6), Passion.None);
+                Set(SkillDefOf.Construction, Rand.Range(2,  5), Passion.None);
+                Set(SkillDefOf.Melee,        Rand.Range(1,  5), Passion.None);
+                Set(SkillDefOf.Mining,       Rand.Range(0,  4), Passion.None);
+
                 Consciousness.Name = new NameTriple("", "Hatsune Miku", "");
-                Consciousness.skills.GetSkill(SkillDefOf.Social).levelInt   = 16;
-                Consciousness.skills.GetSkill(SkillDefOf.Artistic).levelInt = 14;
-                var kindTrait = DefDatabase<TraitDef>.GetNamed("Kind", false);
-                if (kindTrait != null && !Consciousness.story.traits.HasTrait(kindTrait))
-                    Consciousness.story.traits.GainTrait(new Trait(kindTrait));
+
+                void AddTrait(string defName)
+                {
+                    var def = DefDatabase<TraitDef>.GetNamed(defName, false);
+                    if (def != null && !Consciousness.story.traits.HasTrait(def))
+                        Consciousness.story.traits.GainTrait(new Trait(def));
+                }
+                AddTrait("Kind");
+                AddTrait("Optimist");
+                AddTrait("Industrious");
             }
+            else
+            {
+                int baseLevel = Mathf.Min(5 + (tier - 1) * 3, 20);
+                foreach (SkillRecord skill in Consciousness.skills.skills)
+                {
+                    skill.passion = Passion.Minor;
+                    skill.levelInt = baseLevel;
+                }
+            }
+
+            Consciousness.skills.Notify_SkillDisablesChanged();
 
             Consciousness.story.bodyType = tier switch
             {

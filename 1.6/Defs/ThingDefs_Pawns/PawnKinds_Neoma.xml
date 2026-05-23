@@ -83,16 +83,33 @@
     <label>Virtual Diva</label>
     <race>SyntheraRaceMiku</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
-    <combatPower>180</combatPower>
+    <combatPower>100</combatPower>
     <canBeSapper>false</canBeSapper>
     <initialResistanceRange><min>0.5</min><max>1.0</max></initialResistanceRange>
-    <initialWillRange><min>0.8</min><max>1.5</max></initialWillRange>
+    <initialWillRange><min>0.6</min><max>1.0</max></initialWillRange>
     <apparelMoney><min>0</min><max>0</max></apparelMoney>
     <weaponMoney><min>0</min><max>0</max></weaponMoney>
     <techHediffsMoney><min>0</min><max>0</max></techHediffsMoney>
     <backstoryCategories>
       <li>SyntheraOnly</li>
     </backstoryCategories>
+    <skills>
+      <li><skill>Artistic</skill><range>12~18</range></li>
+      <li><skill>Social</skill><range>10~16</range></li>
+      <li><skill>Intellectual</skill><range>6~12</range></li>
+      <li><skill>Cooking</skill><range>4~8</range></li>
+      <li><skill>Animals</skill><range>4~8</range></li>
+      <li><skill>Medicine</skill><range>3~7</range></li>
+      <li><skill>Plants</skill><range>3~6</range></li>
+      <li><skill>Crafting</skill><range>2~6</range></li>
+      <li><skill>Construction</skill><range>2~5</range></li>
+      <li><skill>Shooting</skill><range>2~6</range></li>
+      <li><skill>Melee</skill><range>1~5</range></li>
+      <li><skill>Mining</skill><range>0~4</range></li>
+    </skills>
+    <apparelRequired>
+      <li>MikuHatsuneOutfit</li>
+    </apparelRequired>
   </PawnKindDef>
 
   <!-- Neoma: IA Suprema -->
