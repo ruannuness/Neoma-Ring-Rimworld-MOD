@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ─── Projectile ─── -->
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_NeomaWeapon_PulseRifle</defName>
+    <label>apex pulse</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+    <thingClass>Bullet</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>35</damageAmountBase>
+      <armorPenetrationBase>0.85</armorPenetrationBase>
+      <speed>90</speed>
+      <stoppingPower>1.2</stoppingPower>
+    </projectile>
+  </ThingDef>
+
+  <!-- ─── Ranged weapon ─── -->
+
+  <ThingDef>
+    <defName>NeomaWeapon_PulseRifle</defName>
+    <label>Neoma pulse rifle</label>
+    <description>A precision energy rifle assembled from Apex Crystal components. Each pulse carries enough kinetic force to penetrate marine-grade armor, while the recoil dampeners allow for near-instant follow-up shots. The grip is biometrically fused to Neoma's neural signature and will not function in another's hands.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <techLevel>Archotech</techLevel>
+    <tradeability>None</tradeability>
+    <generateCommonality>0</generateCommonality>
+    <useHitPoints>true</useHitPoints>
+    <equipmentType>Primary</equipmentType>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/ChargeRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <Mass>4</Mass>
+      <Flammability>0</Flammability>
+      <AccuracyTouch>0.99</AccuracyTouch>
+      <AccuracyShort>0.98</AccuracyShort>
+      <AccuracyMedium>0.95</AccuracyMedium>
+      <AccuracyLong>0.90</AccuracyLong>
+      <RangedWeapon_Cooldown>1.8</RangedWeapon_Cooldown>
+      <MarketValue>5000</MarketValue>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_NeomaWeapon_PulseRifle</defaultProjectile>
+        <warmupTime>0.8</warmupTime>
+        <range>30</range>
+        <burstShotCount>1</burstShotCount>
+        <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+        <soundCast>Shot_ChargeRifle</soundCast>
+        <soundCastTail>GunTail_Medium</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>barrel</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+    <weaponTags>
+      <li>SpacerGun</li>
+    </weaponTags>
+    <thingCategories>
+      <li>WeaponsRanged</li>
+    </thingCategories>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaExclusiveExtension"/>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ─── Melee weapon ─── -->
+
+  <ThingDef>
+    <defName>NeomaWeapon_CrystalEdge</defName>
+    <label>Neoma crystal edge</label>
+    <description>A blade of solidified Apex Crystal, grown in a single unbroken lattice. Its edge resonates at a frequency that disrupts molecular bonds on contact — no armor consistently deflects it. A second, heavier strike mode delivers a concussive pulse that can stagger any target regardless of protection. Biometrically keyed to Neoma.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <techLevel>Archotech</techLevel>
+    <tradeability>None</tradeability>
+    <generateCommonality>0</generateCommonality>
+    <equipmentType>Primary</equipmentType>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponMelee/Longsword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Mass>2</Mass>
+      <Flammability>0</Flammability>
+      <MarketValue>3500</MarketValue>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_MeleeAttack</verbClass>
+        <defaultProjectile/>
+        <hasStandardCommand>true</hasStandardCommand>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>edge</label>
+        <capacities><li>Cut</li><li>Stab</li></capacities>
+        <power>35</power>
+        <armorPenetration>0.9</armorPenetration>
+        <cooldownTime>1.5</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>crystal pulse</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>15</power>
+        <armorPenetration>0.5</armorPenetration>
+        <cooldownTime>2.5</cooldownTime>
+        <surpriseAttack>
+          <extraMeleeDamages>
+            <li>
+              <def>Stun</def>
+              <amount>20</amount>
+            </li>
+          </extraMeleeDamages>
+        </surpriseAttack>
+      </li>
+    </tools>
+    <weaponTags>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+    <thingCategories>
+      <li>WeaponsMelee</li>
+    </thingCategories>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaExclusiveExtension"/>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

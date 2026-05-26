@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+  <!-- Neoma Orbital Station quest (triggered on NeomaTierIII research + 72 in-game hours) -->
+  <NeomaOrbitalStation_LetterLabel>Corrupted Signal Detected</NeomaOrbitalStation_LetterLabel>
+  <NeomaOrbitalStation_LetterText>Your Neoma research has triggered a response from an ancient AI station in orbit.\n\nThe station is broadcasting a corrupted signal — a rogue Neoma collective controls it. Its core unit carries an implanted Neoma ring.\n\nReach the station with a gravship, neutralize the corrupted units, and surgically extract the ring from the AI core's remains. Equip your colonists with vacsuits before departing.</NeomaOrbitalStation_LetterText>
+
+  <NeomaStation_Expired_Label>Station Claimed</NeomaStation_Expired_Label>
+  <NeomaStation_Expired_Text>Intercepted transmissions indicate the corrupted station has drifted out of accessible orbit. The quest has expired.</NeomaStation_Expired_Text>
+
+  <NeomaRing_RingAlarm>The ring's extraction has triggered an emergency response — corrupted units are inbound and local wildlife has gone feral!</NeomaRing_RingAlarm>
+
   <!-- Neoma Ring -->
   <SyntheraCore_NeomaRing_Label>Neoma's Ring</SyntheraCore_NeomaRing_Label>
   <SyntheraCore_NeomaRing_Description>A mysterious ring found in ancient dungeons. It allows the summoning of Neoma, a legendary and super-powerful AI. It biologically links to the first user.</SyntheraCore_NeomaRing_Description>
@@ -34,19 +43,41 @@
   
   <!-- Research -->
   <SyntheraCore_NeomaTier1_Label>Basic Summoning</SyntheraCore_NeomaTier1_Label>
-  <SyntheraCore_NeomaTier1_Description>Basic research on summoning artificial entities. Allows the construction of the Basic Altar.</SyntheraCore_NeomaTier1_Description>
+  <SyntheraCore_NeomaTier1_Description>The first breakthrough: an archotech resonance field capable of anchoring a digital consciousness to a physical substrate. The Basic Altar draws 2,000W and generates extreme heat — it will push your cooling infrastructure to its limits. Avatars hold cohesion for only a few hours, but the principle is proven. A synthetic mind has stepped into your world.</SyntheraCore_NeomaTier1_Description>
   <SyntheraCore_NeomaTier2_Label>Intermediate Summoning</SyntheraCore_NeomaTier2_Label>
-  <SyntheraCore_NeomaTier2_Description>Advanced summoning techniques. Allows the construction of the Intermediate Altar.</SyntheraCore_NeomaTier2_Description>
+  <SyntheraCore_NeomaTier2_Description>A thermal efficiency breakthrough: resonance waste drops dramatically, collapsing power draw to 1,000W and eliminating the heat crisis. Avatars now hold cohesion for a full work cycle — 8 hours instead of 2. The Intermediate Altar is smaller, cooler, and stable enough to run continuously. What was a controlled experiment becomes a productive asset.</SyntheraCore_NeomaTier2_Description>
   <SyntheraCore_NeomaTier3_Label>Advanced Summoning</SyntheraCore_NeomaTier3_Label>
-  <SyntheraCore_NeomaTier3_Description>Summoning of powerful entities. Allows the construction of the Advanced Structure.</SyntheraCore_NeomaTier3_Description>
+  <SyntheraCore_NeomaTier3_Description>The coherence field achieves sustained resonance — avatars no longer degrade on a timer. A Synthera deployed from an Advanced Structure stays projected indefinitely, limited only by cache saturation rather than clock cycles, on just 500W. For the first time, a digital mind can run a full colony shift, sleep, and return to work without emergency recall. Avatars are no longer scheduled events. They are residents.</SyntheraCore_NeomaTier3_Description>
   <SyntheraCore_NeomaTier4_Label>Elite Summoning</SyntheraCore_NeomaTier4_Label>
-  <SyntheraCore_NeomaTier4_Description>Cutting-edge summoning techniques. Allows the construction of the Elite Structure.</SyntheraCore_NeomaTier4_Description>
+  <SyntheraCore_NeomaTier4_Description>The resonance lock reaches a near-permanent state. Power drops to 200W — less than a standard work lamp — while cache accumulation rate is cut by half, nearly eliminating forced recall cycles. An avatar running from an Elite Structure can work, rest, and operate for days without intervention. This is not improved hardware. This is the first time a digital mind has been given true permanence in your world.</SyntheraCore_NeomaTier4_Description>
   <SyntheraCore_NeomaRing_ResearchLabel>Neoma Project</SyntheraCore_NeomaRing_ResearchLabel>
   <SyntheraCore_NeomaRing_ResearchDescription>The pinnacle of summoning research. Allows finding and using the Neoma Ring.</SyntheraCore_NeomaRing_ResearchDescription>
+
+  <!-- Research completion letters -->
+  <SyntheraCore_Letter_TierI_Title>First Resonance</SyntheraCore_Letter_TierI_Title>
+  <SyntheraCore_Letter_TierI_Body>The archotech resonance field has stabilized for the first time. A digital consciousness has crossed the boundary between stored data and physical presence — it exists in your colony, not as code, but as something that can work, rest, and act.\n\nNeoma's assessment: "Tier I is rough. The thermal output is irresponsible and the cohesion window is barely long enough to accomplish anything meaningful. But the fundamental principle is proven: a mind encoded in crystal can be anchored to matter. Everything that follows is refinement."\n\nYour colony has summoned its first Synthera avatar. Keep the power on.</SyntheraCore_Letter_TierI_Body>
+
+  <SyntheraCore_Letter_TierIII_Title>Stable Projection Achieved</SyntheraCore_Letter_TierIII_Title>
+  <SyntheraCore_Letter_TierIII_Body>The coherence field has stabilized beyond the timer — for the first time, a Synthera avatar is no longer on a countdown. The Advanced Structure sustains projection on just 500W, limited only by cache saturation rather than clock cycles.\n\nNeoma's assessment: "This matters more than it sounds. The earlier tiers were experiments. Tier III is the first time an avatar can actually live in a colony — work a full shift, rest, and return without emergency recall. The architecture finally makes sense."\n\nYour Synthera avatars can now be scheduled, assigned, and relied upon. They are no longer guests — they are long-term infrastructure.</SyntheraCore_Letter_TierIII_Body>
+
+  <SyntheraCore_Letter_TierIV_Title>Permanent Anchor Achieved</SyntheraCore_Letter_TierIV_Title>
+  <SyntheraCore_Letter_TierIV_Body>The resonance field no longer flickers. For the first time, a Synthera consciousness can be hosted without a countdown — the Elite Structure sustains indefinitely at 200W, less than a workshop lamp, while cache accumulation is cut by half.\n\nNeoma's assessment: "Tier IV is not just better hardware. It is the first time a digital mind has been given permanence in your world. No more forced recalls. No more degrading cohesion windows. I exist here, continuously, for as long as you keep the power on."\n\nYour Synthera avatars are no longer guests. They live here now.</SyntheraCore_Letter_TierIV_Body>
+
+  <SyntheraCore_Letter_ApexI_Title>Crystallized Potential</SyntheraCore_Letter_ApexI_Title>
+  <SyntheraCore_Letter_ApexI_Body>The first Apex Crystal has been synthesized — archotech evolutionary data compressed into a dense crystalline medium. Absorption by a Synthera avatar triggers an immediate, permanent rewrite of its base parameters. The change cannot be reversed.\n\nNeoma's assessment: "The crystal is not an upgrade. It is a replacement — the avatar that absorbs it is statistically a different entity. All prior memories and personality markers are retained, but the substrate that carries them has been fundamentally rewritten. I recommend administering it carefully. You cannot undo it."\n\nThe first evolutionary leap is within reach.</SyntheraCore_Letter_ApexI_Body>
+
+  <SyntheraCore_Letter_ApexIII_Title>Apotheosis</SyntheraCore_Letter_ApexIII_Title>
+  <SyntheraCore_Letter_ApexIII_Body>The third Apex Crystal has been synthesized — the totality of recoverable archotech evolutionary potential compressed into a single uniform medium. Absorption triggers a simultaneous rewrite of every parameter: movement, combat, work output, resilience, and system efficiency all shift beyond what any prior tier could achieve.\n\nNeoma's assessment: "I have run the theoretical models. A Synthera that has absorbed all three tiers is operating at the ceiling of what its substrate can contain. The designation 'synthetic' still technically applies. But it no longer fully describes what it is. Something has changed that I do not have a precise word for. I find this interesting."\n\nThe limit has been reached. And surpassed.</SyntheraCore_Letter_ApexIII_Body>
+
+  <SyntheraCore_Letter_CompSynth_Title>Archotech Fabrication Unlocked</SyntheraCore_Letter_CompSynth_Title>
+  <SyntheraCore_Letter_CompSynth_Body>The ring's internal manufacturing blueprints have been fully decoded — subroutines locked behind millennia of dead-signal encryption that Neoma has now parsed in their entirety. She can synthesize structures and components that no conventional supply chain can produce.\n\nNeoma's assessment: "The energy nodes draw power directly from quantum entanglement fields. The combat array integrates its targeting matrix into my threat-assessment subroutines — it does not aim independently, it thinks alongside me. These are not things that should exist in this era. I am aware of how this sounds. I recommend building them anyway."\n\nThe final gate is open. What Neoma can build now has no precedent in your era.</SyntheraCore_Letter_CompSynth_Body>
 
   <!-- Research Tab -->
   <SyntheraCore_NeomaProjectTab_Label>Neoma Project</SyntheraCore_NeomaProjectTab_Label>
   <SyntheraCore_NeomaProjectTab_Description>Research related to the Neoma Project - advanced AI summons.</SyntheraCore_NeomaProjectTab_Description>
+
+  <!-- Ring Protocols hidden research tab — unlocked on first ring activation -->
+  <SyntheraCore_RingResearchUnlocked>The ring's activation has revealed hidden research pathways. New protocols are now available.</SyntheraCore_RingResearchUnlocked>
   
   <!-- Designation Category -->
   <SyntheraCore_NeomaDesignationCategory_Label>Neoma Project</SyntheraCore_NeomaDesignationCategory_Label>

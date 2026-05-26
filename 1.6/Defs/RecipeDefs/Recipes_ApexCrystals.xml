@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CRAFT RECIPES — fabricated at the Neoma Console by Neoma only.     -->
+  <!-- NeomaCraftExtension restricts each bill to NeomaPawn / Transcendent -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <RecipeDef>
+    <defName>NeomaMake_ApexCrystalBasic</defName>
+    <label>synthesize apex crystal I</label>
+    <description>Compress raw archotech data into a dense crystalline medium. The process requires Neoma's unique cognitive architecture — only she can perform it.</description>
+    <jobString>synthesizing apex crystal I</jobString>
+    <workAmount>4000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <researchPrerequisite>NeomaApex_I</researchPrerequisite>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Gold</li></thingDefs></filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Plasteel</li></thingDefs></filter>
+        <count>100</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <SyntheraApexCrystal_Basic>1</SyntheraApexCrystal_Basic>
+    </products>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NeomaMake_ApexCrystalAdvanced</defName>
+    <label>synthesize apex crystal II</label>
+    <description>Compress a higher-density archotech dataset into a fractal crystalline structure. Requires significant archotech components.</description>
+    <jobString>synthesizing apex crystal II</jobString>
+    <workAmount>8000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <researchPrerequisite>NeomaApex_II</researchPrerequisite>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Gold</li></thingDefs></filter>
+        <count>200</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <SyntheraApexCrystal_Advanced>1</SyntheraApexCrystal_Advanced>
+    </products>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NeomaMake_ApexCrystalPure</defName>
+    <label>synthesize apex crystal III — pure</label>
+    <description>Compress the totality of an archotech evolutionary dataset into a single uniform crystal. This process consumes multiple AI persona cores as substrate material.</description>
+    <jobString>synthesizing apex crystal III</jobString>
+    <workAmount>16000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <researchPrerequisite>NeomaApex_III</researchPrerequisite>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>50</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Gold</li></thingDefs></filter>
+        <count>500</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>AIPersonaCore</li></thingDefs></filter>
+        <count>5</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+        <li>ComponentSpacer</li>
+        <li>AIPersonaCore</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <SyntheraApexCrystal_Pure>1</SyntheraApexCrystal_Pure>
+    </products>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+  </RecipeDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ABSORPTION SURGERY — performed at any medical surface by any doctor. -->
+  <!-- AvailableOnNow() in Recipe_AbsorbApexCrystal filters target + level. -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <RecipeDef>
+    <defName>AbsorbApexCrystal_I</defName>
+    <label>absorb apex crystal I</label>
+    <description>Administer a Synthetic Apex Crystal I to the subject, triggering an immediate archotech-level evolutionary rewrite of their base parameters.</description>
+    <workerClass>SyntheraCore.Recipe_AbsorbApexCrystal</workerClass>
+    <jobString>absorbing apex crystal I</jobString>
+    <workAmount>2000</workAmount>
+    <surgerySuccessChanceFactor>99999</surgerySuccessChanceFactor>
+    <researchPrerequisite>NeomaApex_I</researchPrerequisite>
+    <recipeUsers>
+      <li>Human</li>
+      <li>SyntheraRaceTierI</li>
+      <li>SyntheraRaceTierII</li>
+      <li>SyntheraRaceTierIII</li>
+      <li>SyntheraRaceTierIV</li>
+      <li>SyntheraRaceMiku</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Basic</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Basic</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <modExtensions>
+      <li Class="SyntheraCore.ApexCrystalRecipeExtension">
+        <apexLevelTarget>1</apexLevelTarget>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>AbsorbApexCrystal_II</defName>
+    <label>absorb apex crystal II</label>
+    <description>Administer a Synthetic Apex Crystal II to the subject, triggering a second-tier archotech evolutionary rewrite.</description>
+    <workerClass>SyntheraCore.Recipe_AbsorbApexCrystal</workerClass>
+    <jobString>absorbing apex crystal II</jobString>
+    <workAmount>2000</workAmount>
+    <surgerySuccessChanceFactor>99999</surgerySuccessChanceFactor>
+    <researchPrerequisite>NeomaApex_II</researchPrerequisite>
+    <recipeUsers>
+      <li>Human</li>
+      <li>SyntheraRaceTierI</li>
+      <li>SyntheraRaceTierII</li>
+      <li>SyntheraRaceTierIII</li>
+      <li>SyntheraRaceTierIV</li>
+      <li>SyntheraRaceMiku</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Advanced</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Advanced</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <modExtensions>
+      <li Class="SyntheraCore.ApexCrystalRecipeExtension">
+        <apexLevelTarget>2</apexLevelTarget>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>AbsorbApexCrystal_III</defName>
+    <label>absorb apex crystal III — transcendent</label>
+    <description>Administer the Pure Synthetic Apex Crystal to the subject. The totality of archotech evolutionary potential compressed into a single moment of transcendence.</description>
+    <workerClass>SyntheraCore.Recipe_AbsorbApexCrystal</workerClass>
+    <jobString>absorbing apex crystal III</jobString>
+    <workAmount>2000</workAmount>
+    <surgerySuccessChanceFactor>99999</surgerySuccessChanceFactor>
+    <researchPrerequisite>NeomaApex_III</researchPrerequisite>
+    <recipeUsers>
+      <li>Human</li>
+      <li>SyntheraRaceTierI</li>
+      <li>SyntheraRaceTierII</li>
+      <li>SyntheraRaceTierIII</li>
+      <li>SyntheraRaceTierIV</li>
+      <li>SyntheraRaceMiku</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Pure</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Pure</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Brain</li>
+    </appliedOnFixedBodyParts>
+    <modExtensions>
+      <li Class="SyntheraCore.ApexCrystalRecipeExtension">
+        <apexLevelTarget>3</apexLevelTarget>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+</Defs>

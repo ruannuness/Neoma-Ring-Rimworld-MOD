@@ -54,13 +54,23 @@ TemporaryDependencyNodeTargetIdentifier=net472
 
 [sourceFiles]
 Comp/
+ CompAltarUpgrade.cs
+ CompAuxiliaryModule.cs
+ CompConsciousnessCore.cs
  CompHeatRisk.cs
  CompNeomaRing.cs
+ CompSyntheraRecharger.cs
  CompSyntheraSpawner.cs
 CompProps/
+ CompProperties_AltarUpgrade.cs
+ CompProperties_AuxiliaryModule.cs
+ CompProperties_ConsciousnessCore.cs
+ CompProperties_SyntheraRecharger.cs
  CompProperties_SyntheraSpawner.cs
  CompProps_HeatRisk.cs
  CompProps_NeomaRing.cs
+LifeStageWorker_SyntheraAdult.cs
+Need_SyntheraCoherence.cs
 obj/Debug/
  .NETFramework,Version=v4.7.2.AssemblyAttributes.cs
  SyntheraCore.AssemblyInfo.cs
@@ -71,6 +81,7 @@ Utils/SyntheraUtils.cs
 ../../../../RimWorldWin64_Data/Managed/
  Assembly-CSharp.dll
  UnityEngine.CoreModule.dll
+../../../1127530465/1.6/Assemblies/0Harmony.dll
 <NUGET>/microsoft.netframework.referenceassemblies.net472/1.0.3/build/.NETFramework/v4.7.2/
  Facades/netstandard.dll
  mscorlib.dll

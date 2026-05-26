@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>SyntheraApexCrystal_Basic</defName>
+    <label>synthetic apex crystal I</label>
+    <description>A dense shard formed by compressing archotech data into a solid crystalline medium — it looks like a fragment of solid light. Absorbing it means taking a complete evolutionary leap in a single moment.
+
+This is the first tier. It can elevate a Synthera or the Neoma companion to Apex I.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Neoma/Ring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(0.3, 0.85, 1.0)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>0.2</Mass>
+      <MarketValue>3000</MarketValue>
+      <Flammability>0</Flammability>
+    </statBases>
+    <stackLimit>3</stackLimit>
+    <generateCommonality>0</generateCommonality>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <smeltable>false</smeltable>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>SyntheraApexCrystal_Advanced</defName>
+    <label>synthetic apex crystal II</label>
+    <description>A denser, more radiant shard pulsing with violet-tinted archotech resonance. Its interior structure is fractal — each layer compressed from the one above it.
+
+This is the second tier. It can elevate a Synthera or the Neoma companion to Apex II.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Neoma/Ring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(0.6, 0.4, 1.0)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>0.2</Mass>
+      <MarketValue>8000</MarketValue>
+      <Flammability>0</Flammability>
+    </statBases>
+    <stackLimit>3</stackLimit>
+    <generateCommonality>0</generateCommonality>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <smeltable>false</smeltable>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>SyntheraApexCrystal_Pure</defName>
+    <label>synthetic apex crystal III — pure</label>
+    <description>A perfect crystalline apex — no visible interior structure, just a uniform glow of compressed transcendence. It radiates faint warmth even in vacuum. Archotech researchers have no explanation for this.
+
+This is the third and final tier. It can elevate a Synthera or the Neoma companion to Apex III — transcendent.</description>
+    <graphicData>
+      <texPath>Things/Apparel/Neoma/Ring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(0.97, 0.70, 1.0)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>0.2</Mass>
+      <MarketValue>20000</MarketValue>
+      <Flammability>0</Flammability>
+    </statBases>
+    <stackLimit>3</stackLimit>
+    <generateCommonality>0</generateCommonality>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <smeltable>false</smeltable>
+  </ThingDef>
+
+</Defs>

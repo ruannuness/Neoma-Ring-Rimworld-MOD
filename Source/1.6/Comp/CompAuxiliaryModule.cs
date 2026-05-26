@@ -18,6 +18,7 @@ namespace SyntheraCore
         private CompPowerTrader compPower;
         private int lastScanTick;
         private bool capRejected;
+        private bool typeRejected;
 
         public CompProperties_AuxiliaryModule Props => (CompProperties_AuxiliaryModule)props;
 
@@ -61,20 +62,21 @@ namespace SyntheraCore
             if (!parent.Spawned) return;
 
             int tick = Find.TickManager.TicksGame;
-            if (tick - lastScanTick >= Props.scanIntervalTicks)
-            {
-                lastScanTick = tick;
-                RefreshLinkedSpawner();
-            }
+            if (tick - lastScanTick < Props.scanIntervalTicks) return;
+            lastScanTick = tick;
 
-            if (linkedSpawner != null)
-            {
-                if (IsActive && AvatarReady && !effectsApplied)
-                    ApplyEffects();
-                else if ((!IsActive || !AvatarReady) && effectsApplied)
-                    RemoveEffects();
-            }
+            RefreshLinkedSpawner();
 
+            if (linkedSpawner == null) return;
+
+            // If previously rejected as duplicate, re-check whether the conflict was removed.
+            if (typeRejected && !linkedSpawner.RegisteredAuxTypes.Contains(SlotKey))
+                typeRejected = false;
+
+            if (IsActive && AvatarReady && !effectsApplied && !typeRejected)
+                ApplyEffects();
+            else if ((!IsActive || !AvatarReady) && effectsApplied)
+                RemoveEffects();
         }
 
         public override void ReceiveCompSignal(string signal)
@@ -179,6 +181,8 @@ namespace SyntheraCore
 
             linkedSpawner  = found;
             linkedBuilding = found?.parent;
+            typeRejected   = false;
+            capRejected    = false;
         }
 
         // ── Effect dispatch ──────────────────────────────────────────────────
@@ -197,21 +201,17 @@ namespace SyntheraCore
             }
             capRejected = false;
 
-            if (Props.moduleType == AuxModuleType.RoleSpecializer)
+            if (linkedSpawner.RegisteredAuxTypes.Contains(key))
             {
-                if (linkedSpawner.RegisteredAuxTypes.Contains(key))
+                if (!typeRejected)
                 {
-                    Messages.Message(
-                        $"This role specialization is already active on {linkedBuilding.def.label}.",
-                        parent, MessageTypeDefOf.RejectInput, false);
-                    return;
+                    string msg = Props.moduleType == AuxModuleType.RoleSpecializer
+                        ? $"This role specialization is already active on {linkedBuilding.def.label}."
+                        : $"A {Props.moduleType} module is already active on {linkedBuilding.def.label}. Only one of each type is allowed per altar.";
+                    Messages.Message(msg, parent, MessageTypeDefOf.RejectInput, false);
                 }
-            }
-            else if (linkedSpawner.RegisteredAuxTypes.Contains(key))
-            {
-                Messages.Message(
-                    $"A {Props.moduleType} module is already active on {linkedBuilding.def.label}. Only one of each type is allowed per altar.",
-                    parent, MessageTypeDefOf.RejectInput, false);
+                typeRejected = true;
+                capRejected  = true;
                 return;
             }
 

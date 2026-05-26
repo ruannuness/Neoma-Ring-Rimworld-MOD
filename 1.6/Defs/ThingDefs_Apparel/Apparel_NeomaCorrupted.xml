@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Under-layer enviro-suit worn by all NeomaCorrupted raid units.
+       OnSkin layer — fits under FlakVest or Power Armor without conflict.
+       Insulation_Cold: 200 covers space vacuum temperatures (~-100 °C to -200 °C on orbital maps). -->
+  <ThingDef ParentName="ApparelBase">
+    <defName>Apparel_NeomaCorruptedSuit</defName>
+    <label>corrupted enviro-suit</label>
+    <description>A form-fitting environmental isolation layer worn by corrupted Neoma AI units. Bonded to the wearer's neural implants, it maintains a stable internal atmosphere even in hard vacuum. The material is unlike anything produced by known factions.</description>
+    <thingClass>Apparel</thingClass>
+    <category>Item</category>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Things/Pawn/Humanlike/Apparel/FlakVest/FlakVest</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Mass>1.5</Mass>
+      <Flammability>0.1</Flammability>
+      <ArmorRating_Sharp>0.06</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.06</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.20</ArmorRating_Heat>
+      <Insulation_Cold>200</Insulation_Cold>
+      <Insulation_Heat>50</Insulation_Heat>
+      <MarketValue>800</MarketValue>
+    </statBases>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+    </apparel>
+    <generateCommonality>0</generateCommonality>
+    <smeltable>false</smeltable>
+    <thingCategories>
+      <li>Apparel</li>
+    </thingCategories>
+  </ThingDef>
+
+</Defs>

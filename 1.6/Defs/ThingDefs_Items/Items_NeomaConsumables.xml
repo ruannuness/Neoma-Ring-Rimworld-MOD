@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>NeomaKit_Repair</defName>
+    <label>Neoma repair kit</label>
+    <description>A sealed injector filled with Apex Crystal nano-repair agents. When administered, the agents propagate through the target's body and dissolve accumulated physical damage at the molecular level. Production requires Neoma's precise neural calibration — no one else can synthesize it.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <techLevel>Archotech</techLevel>
+    <graphicData>
+      <texPath>Things/Item/Resource/ArchotechShard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(100, 220, 255)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>0.2</Mass>
+      <Flammability>0</Flammability>
+      <MarketValue>800</MarketValue>
+    </statBases>
+    <stackLimit>10</stackLimit>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Medicine</li>
+    </thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>NeomaKit_CachePurge</defName>
+    <label>Neoma cache purge kit</label>
+    <description>A pressurized canister that delivers a targeted electromagnetic discharge through the Synthera interface layer, instantly flushing accumulated system stress from the pawn's active cache. The purge is violent but harmless — Neoma describes it as "like a hard reboot, but you stay awake the whole time."</description>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <techLevel>Archotech</techLevel>
+    <graphicData>
+      <texPath>Things/Item/Resource/ArchotechShard</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(200, 120, 255)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <Mass>0.2</Mass>
+      <Flammability>0</Flammability>
+      <MarketValue>500</MarketValue>
+    </statBases>
+    <stackLimit>10</stackLimit>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>Medicine</li>
+    </thingCategories>
+  </ThingDef>
+
+</Defs>

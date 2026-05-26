@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -9,7 +9,7 @@
     <defName>AuxCombatTierI</defName>
     <label>combat uplink I</label>
     <description>Develop a basic combat amplifier node that transmits targeting and reaction-speed data to a nearby synthera avatar.</description>
-    <baseCost>400</baseCost>
+    <baseCost>800</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -24,7 +24,7 @@
     <defName>AuxCombatTierII</defName>
     <label>combat uplink II</label>
     <description>Upgrade the combat amplifier to a higher-bandwidth channel, delivering stronger melee and accuracy boosts.</description>
-    <baseCost>800</baseCost>
+    <baseCost>1600</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -40,7 +40,7 @@
     <defName>AuxCombatTierIII</defName>
     <label>combat uplink III</label>
     <description>Develop the pinnacle combat amplifier node. A full-spectrum signal that dramatically enhances every aspect of avatar combat performance.</description>
-    <baseCost>1600</baseCost>
+    <baseCost>3200</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -56,7 +56,7 @@
     <defName>AuxCombatArchotech</defName>
     <label>combat uplink archotech</label>
     <description>Translate an archotech shard's combat encoding into a deployable uplink node. The resulting signal transcends all known enhancement frameworks — pushing the avatar's combat performance into theoretically impossible territory.</description>
-    <baseCost>12000</baseCost>
+    <baseCost>24000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -76,7 +76,7 @@
     <defName>AuxWorkTierI</defName>
     <label>work protocol I</label>
     <description>Upload expanded behavioral protocols to a nearby synthera avatar, granting access to crafting and basic labor work types normally locked at lower tiers.</description>
-    <baseCost>300</baseCost>
+    <baseCost>600</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -91,7 +91,7 @@
     <defName>AuxWorkTierII</defName>
     <label>work protocol II</label>
     <description>Extend work protocols to include hunting, medical, and artistic work types, making the avatar nearly indistinguishable from a skilled colonist.</description>
-    <baseCost>700</baseCost>
+    <baseCost>1400</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -107,7 +107,7 @@
     <defName>AuxWorkArchotech</defName>
     <label>work protocol archotech</label>
     <description>Decode the archotech behavioral library embedded in a shard, unlocking every possible work protocol simultaneously. A synthera avatar with this node has no remaining work limitations whatsoever.</description>
-    <baseCost>10000</baseCost>
+    <baseCost>20000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -127,7 +127,7 @@
     <defName>AuxOptimizerTierI</defName>
     <label>core optimizer I</label>
     <description>Develop a maintenance uplink node that reduces avatar respawn and recreate cooldowns and slows the buildup of system stress.</description>
-    <baseCost>600</baseCost>
+    <baseCost>1200</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -142,7 +142,7 @@
     <defName>AuxOptimizerTierII</defName>
     <label>core optimizer II</label>
     <description>Upgrade the optimizer to a deeper maintenance channel. Cooldowns are halved and system stress dissipates faster.</description>
-    <baseCost>1200</baseCost>
+    <baseCost>2400</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -158,7 +158,7 @@
     <defName>AuxOptimizerTierIII</defName>
     <label>core optimizer III</label>
     <description>The pinnacle maintenance uplink. Near-zero cooldowns and continuous active stress purging keep the avatar at peak operational efficiency indefinitely.</description>
-    <baseCost>2400</baseCost>
+    <baseCost>4800</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -174,7 +174,7 @@
     <defName>AuxOptimizerArchotech</defName>
     <label>core optimizer archotech</label>
     <description>Decode the maintenance protocols within an archotech shard. The resulting optimizer node reduces all cooldowns to near-zero and continuously purges system stress at a rate that makes sustained overclock a viable long-term strategy.</description>
-    <baseCost>15000</baseCost>
+    <baseCost>30000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -193,7 +193,7 @@
     <defName>AuxRoleTierI</defName>
     <label>role specialization I</label>
     <description>Develop basic role protocol nodes. Each node type uploads a focused behavioral package to a nearby avatar, providing a modest specialization in combat, labor, medicine, or scouting.</description>
-    <baseCost>800</baseCost>
+    <baseCost>1600</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -208,7 +208,7 @@
     <defName>AuxRoleTierII</defName>
     <label>role specialization II</label>
     <description>Upgrade role protocol nodes to a deeper behavioral imprint. The same four specializations are now significantly more potent.</description>
-    <baseCost>1600</baseCost>
+    <baseCost>3200</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -224,7 +224,7 @@
     <defName>AuxRoleTierIII</defName>
     <label>role specialization III</label>
     <description>Develop pinnacle role protocol nodes that rewrite the avatar's core behavioral matrix. Each specialization reaches its maximum possible effectiveness.</description>
-    <baseCost>3200</baseCost>
+    <baseCost>6400</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -240,7 +240,7 @@
     <defName>AuxRoleArchotech</defName>
     <label>role specialization archotech</label>
     <description>Decode the behavioral matrix library within an archotech shard, enabling role specialization nodes that rewrite the avatar's core programming at a depth no known technology can achieve. All four role types are unlocked at the archotech level.</description>
-    <baseCost>16000</baseCost>
+    <baseCost>32000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -259,7 +259,7 @@
     <defName>AuxArmorTierI</defName>
     <label>armor matrix I</label>
     <description>Develop an armor matrix node that projects a reinforcement field onto a nearby synthera avatar, reducing all incoming damage by 15%.</description>
-    <baseCost>700</baseCost>
+    <baseCost>1400</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -274,7 +274,7 @@
     <defName>AuxArmorTierII</defName>
     <label>armor matrix II</label>
     <description>Upgrade the armor matrix to a heavier reinforcement field. Incoming damage reduction increases to 30%.</description>
-    <baseCost>1500</baseCost>
+    <baseCost>3000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -290,7 +290,7 @@
     <defName>AuxArmorTierIII</defName>
     <label>armor matrix III</label>
     <description>Develop the pinnacle armor matrix node. A maximum-density reinforcement lattice reduces incoming damage by 50%. The avatar becomes extraordinarily difficult to destroy.</description>
-    <baseCost>3000</baseCost>
+    <baseCost>6000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -306,7 +306,7 @@
     <defName>AuxArmorArchotech</defName>
     <label>armor matrix archotech</label>
     <description>Decode the defensive encoding within an archotech shard to produce a reinforcement lattice of maximum possible density. The resulting armor matrix reduces incoming damage by 85% — making the avatar effectively unkillable by conventional weapons.</description>
-    <baseCost>14000</baseCost>
+    <baseCost>28000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -326,7 +326,7 @@
     <defName>AuxOverclockTierI</defName>
     <label>overclock core I</label>
     <description>Develop an overclock core node that pushes a nearby avatar's combat systems past safe operational limits. Massive combat gains at the cost of doubled stress accumulation.</description>
-    <baseCost>2000</baseCost>
+    <baseCost>4000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -341,7 +341,7 @@
     <defName>AuxOverclockTierII</defName>
     <label>overclock core II</label>
     <description>Push the overclock further. Extraordinary combat performance, but the avatar burns through system stress three times as fast. Aggressive recall cycles are required.</description>
-    <baseCost>4000</baseCost>
+    <baseCost>8000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -357,7 +357,7 @@
     <defName>AuxOverclockTierIII</defName>
     <label>overclock core III</label>
     <description>Maximum theoretical overclock. The avatar's combat output borders on mechanical impossibility. System stress accumulates five times faster — treat every deployment as a timed assault.</description>
-    <baseCost>8000</baseCost>
+    <baseCost>16000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -372,7 +372,7 @@
     <defName>AuxOverclockArchotech</defName>
     <label>overclock core archotech</label>
     <description>Decode the performance encoding within an archotech shard to construct a node that pushes the avatar's systems into an operating regime that should be physically impossible. System stress accumulates ten times faster. Treat every deployment as a timed strike mission.</description>
-    <baseCost>20000</baseCost>
+    <baseCost>40000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -391,7 +391,7 @@
     <defName>AuxVersatilityTierI</defName>
     <label>versatility protocol I</label>
     <description>Develop a versatility protocol node that uploads broad behavioral enhancements to a nearby avatar, covering research speed, carrying capacity, plant work, and hunting stealth.</description>
-    <baseCost>1200</baseCost>
+    <baseCost>2400</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -406,7 +406,7 @@
     <defName>AuxVersatilityTierII</defName>
     <label>versatility protocol II</label>
     <description>Upgrade to a deep-spectrum behavioral imprint. The avatar gains dramatic improvements across research, carrying, plant work, stealth, and social effectiveness — approaching universal competency.</description>
-    <baseCost>2500</baseCost>
+    <baseCost>5000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -422,7 +422,7 @@
     <defName>AuxVersatilityArchotech</defName>
     <label>versatility protocol archotech</label>
     <description>Decode the general-purpose behavioral library within an archotech shard. The resulting node uploads an impossibly broad enhancement package covering every non-combat capability the avatar possesses — from research and labor to social manipulation.</description>
-    <baseCost>12000</baseCost>
+    <baseCost>24000</baseCost>
     <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>

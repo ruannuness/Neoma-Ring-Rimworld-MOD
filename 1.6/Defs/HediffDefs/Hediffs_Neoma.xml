@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- Marker hediff on the NeomaCorrupted_Core boss — indicates the ring is physically embedded.
+       Visible in the health tab; can be surgically removed to obtain the NeomaRing item. -->
+  <HediffDef>
+    <defName>NeomaRingImplanted</defName>
+    <label>Neoma ring (embedded)</label>
+    <description>An advanced resonance ring embedded within this unit's chassis. The ring contains a digital consciousness imprint and resonance circuitry. It can be surgically extracted from the body.</description>
+    <hediffClass>Hediff</hediffClass>
+    <defaultLabelColor>(0.7, 0.4, 1.0)</defaultLabelColor>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <label>embedded</label>
+      </li>
+    </stages>
+  </HediffDef>
+
   <!--
     BioLock do Anel de Neoma.
     Permanente: não decai, não é imunizável.
@@ -17,13 +34,18 @@
     <scenarioCanAdd>false</scenarioCanAdd>
     <isBad>false</isBad>
     <stages>
-      <!-- L0 (sev ~0.15): vínculo bruto — leve penalidade cognitiva -->
+      <!-- L0 (sev ~0.15): anel bruto do station — penalidade severa até ser calibrado -->
       <li>
-        <label>dormant fragment</label>
+        <label>corrupted fragment</label>
         <minSeverity>0.05</minSeverity>
         <capMods>
-          <li><capacity>Consciousness</capacity><offset>-0.05</offset></li>
+          <li><capacity>Consciousness</capacity><offset>-0.25</offset></li>
+          <li><capacity>Moving</capacity><offset>-0.20</offset></li>
         </capMods>
+        <statOffsets>
+          <GlobalLearningFactor>-0.40</GlobalLearningFactor>
+          <WorkSpeedGlobal>-0.30</WorkSpeedGlobal>
+        </statOffsets>
       </li>
       <!-- L1 (sev ~0.35): primeiro despertar — penalidade some -->
       <li>
@@ -68,5 +90,6 @@
       </li>
     </stages>
   </HediffDef>
+
 
 </Defs>

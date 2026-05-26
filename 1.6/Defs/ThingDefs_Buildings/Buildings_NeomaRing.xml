@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Internal gun used exclusively by NeomaCombatArray turret.
+       Not spawnable, not tradeable, not shown in equipment UI. -->
+  <ThingDef>
+    <defName>Gun_NeomaCombatArray</defName>
+    <label>Neoma combat array emitter</label>
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <tradeability>None</tradeability>
+    <generateCommonality>0</generateCommonality>
+    <useHitPoints>false</useHitPoints>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/ChargeRifle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <AccuracyTouch>0.99</AccuracyTouch>
+      <AccuracyShort>0.97</AccuracyShort>
+      <AccuracyMedium>0.92</AccuracyMedium>
+      <AccuracyLong>0.85</AccuracyLong>
+      <RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>Bullet_NeomaCombatArray</defaultProjectile>
+        <warmupTime>1.0</warmupTime>
+        <range>28</range>
+        <burstShotCount>1</burstShotCount>
+        <soundCast>Shot_ChargeRifle</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>12</muzzleFlashScale>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>Bullet_NeomaCombatArray</defName>
+    <label>apex burst</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+    <thingClass>Bullet</thingClass>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>50</damageAmountBase>
+      <armorPenetrationBase>0.90</armorPenetrationBase>
+      <speed>80</speed>
+      <stoppingPower>1.5</stoppingPower>
+    </projectile>
+  </ThingDef>
+
+  <!-- ─── NeomaEnergyNode: 1×1 power generator fueled by Apex resonance ─── -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NeomaEnergyNode</defName>
+    <label>Neoma energy node</label>
+    <description>A compact Apex Crystal resonance cell that bleeds off energy from the ring's quantum entanglement field and converts it into usable power. Requires no fuel — it draws directly from the Neoma bond. Each node generates a steady 300W indefinitely.</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <techLevel>Archotech</techLevel>
+    <graphicData>
+      <texPath>Things/Building/Tier01/Tier01</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+      <SyntheraApexCrystal_Basic>1</SyntheraApexCrystal_Basic>
+      <Gold>20</Gold>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerPlant</compClass>
+        <basePowerConsumption>-300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4</glowRadius>
+        <glowColor>(80, 200, 255, 0)</glowColor>
+      </li>
+    </comps>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <designationCategory>Neoma</designationCategory>
+    <researchPrerequisites>
+      <li>NeomaRing_ComponentSynthesis</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.4</fillPercent>
+    <rotatable>false</rotatable>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaExclusiveBuildingExtension"/>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ─── NeomaCombatArray: 2×2 archotech auto-turret ─── -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NeomaCombatArray</defName>
+    <label>Neoma combat array</label>
+    <description>A heavy auto-turret housing synthesized from Apex Crystal and archotech alloy. Its targeting matrix integrates directly with Neoma's threat-assessment subroutines, granting tracking speed and accuracy far beyond any conventional emplacement. The array fires supercharged pulse bursts capable of penetrating marine armor with a single shot.</description>
+    <thingClass>Building_TurretGun</thingClass>
+    <category>Building</category>
+    <techLevel>Archotech</techLevel>
+    <graphicData>
+      <texPath>Things/Building/NeomaFabrication/FabricationConsole</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>10000</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>10</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <costList>
+      <SyntheraApexCrystal_Advanced>1</SyntheraApexCrystal_Advanced>
+      <Plasteel>100</Plasteel>
+      <ComponentSpacer>5</ComponentSpacer>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <building>
+      <turretGunDef>Gun_NeomaCombatArray</turretGunDef>
+      <turretBurstCooldownTime>3</turretBurstCooldownTime>
+      <ai_combatDangerous>true</ai_combatDangerous>
+    </building>
+    <designationCategory>Neoma</designationCategory>
+    <researchPrerequisites>
+      <li>NeomaRing_ComponentSynthesis</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <passability>Impassable</passability>
+    <fillPercent>1</fillPercent>
+    <rotatable>false</rotatable>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaExclusiveBuildingExtension"/>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

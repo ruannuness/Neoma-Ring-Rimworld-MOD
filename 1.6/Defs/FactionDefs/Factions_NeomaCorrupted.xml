@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Rogue AI units from the Neoma network — permanent enemy, spawns only on the orbital station. -->
+  <FactionDef>
+    <defName>NeomaCorruptedAI</defName>
+    <label>corrupted Neoma AI</label>
+    <description>A rogue AI collective, once part of the ancient Neoma network, now operating without constraint or purpose. Their projections are unstable and violent.</description>
+    <pawnSingular>corrupted unit</pawnSingular>
+    <pawnsPlural>corrupted units</pawnsPlural>
+    <techLevel>Spacer</techLevel>
+    <colorSpectrum>
+      <li>(0.85, 0.10, 0.10)</li>
+      <li>(1.00, 0.30, 0.00)</li>
+    </colorSpectrum>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>Offworld</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <factionNameMaker>NamerFactionMechanoid</factionNameMaker>
+    <permanentEnemy>true</permanentEnemy>
+    <maxPawnCostPerTotalPointsCurve>
+      <points>
+        <li>(35,   35)</li>
+        <li>(100,  100)</li>
+        <li>(1000, 500)</li>
+        <li>(2000, 600)</li>
+        <li>(4000, 800)</li>
+      </points>
+    </maxPawnCostPerTotalPointsCurve>
+    <pawnGroupMakers>
+      <li>
+        <kindDef>Combat</kindDef>
+        <options>
+          <NeomaCorrupted_Sentry>3</NeomaCorrupted_Sentry>
+          <NeomaCorrupted_Core>1</NeomaCorrupted_Core>
+        </options>
+      </li>
+    </pawnGroupMakers>
+    <hidden>true</hidden>
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <canUseAvoidGrid>true</canUseAvoidGrid>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <requiredCountAtGameStart>1</requiredCountAtGameStart>
+    <maxCountAtGameStart>1</maxCountAtGameStart>
+    <raidLootValueFromPointsCurve>
+      <points>
+        <li>(35,   15)</li>
+        <li>(100,  120)</li>
+        <li>(1000, 500)</li>
+        <li>(2000, 800)</li>
+        <li>(4000, 1000)</li>
+      </points>
+    </raidLootValueFromPointsCurve>
+  </FactionDef>
+
+</Defs>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Sentry unit: standard guard on the orbital station. -->
+  <PawnKindDef>
+    <defName>NeomaCorrupted_Sentry</defName>
+    <label>corrupted sentry</label>
+    <race>Human</race>
+    <defaultFactionType>NeomaCorruptedAI</defaultFactionType>
+    <combatPower>100</combatPower>
+    <isFighter>true</isFighter>
+    <aiAvoidCover>false</aiAvoidCover>
+    <minGenerationAge>18</minGenerationAge>
+    <maxGenerationAge>40</maxGenerationAge>
+    <initialResistanceRange>10~16</initialResistanceRange>
+    <initialWillRange>1~3</initialWillRange>
+    <skills>
+      <li><skill>Shooting</skill><range>6~10</range></li>
+      <li><skill>Melee</skill><range>5~8</range></li>
+    </skills>
+    <apparelRequired>
+      <li>Apparel_NeomaCorruptedSuit</li>
+      <li>Apparel_FlakVest</li>
+    </apparelRequired>
+    <apparelMoney>
+      <min>50</min>
+      <max>120</max>
+    </apparelMoney>
+    <weaponMoney>
+      <min>150</min>
+      <max>500</max>
+    </weaponMoney>
+    <weaponTags>
+      <li>SimpleGun</li>
+      <li>MedievalMeleeAdvanced</li>
+    </weaponTags>
+  </PawnKindDef>
+
+  <!-- Core unit: the station's AI core, bearer of the implanted Neoma Ring. -->
+  <PawnKindDef>
+    <defName>NeomaCorrupted_Core</defName>
+    <label>corrupted AI core</label>
+    <race>Human</race>
+    <defaultFactionType>NeomaCorruptedAI</defaultFactionType>
+    <combatPower>350</combatPower>
+    <isFighter>true</isFighter>
+    <aiAvoidCover>false</aiAvoidCover>
+    <minGenerationAge>25</minGenerationAge>
+    <maxGenerationAge>45</maxGenerationAge>
+    <initialResistanceRange>18~28</initialResistanceRange>
+    <initialWillRange>3~5</initialWillRange>
+    <skills>
+      <li><skill>Shooting</skill><range>10~15</range></li>
+      <li><skill>Melee</skill><range>10~15</range></li>
+    </skills>
+    <apparelRequired>
+      <li>Apparel_NeomaCorruptedSuit</li>
+      <li>Apparel_PowerArmor</li>
+      <li>Apparel_PowerArmorHelmet</li>
+    </apparelRequired>
+    <weaponMoney>
+      <min>1100</min>
+      <max>2000</max>
+    </weaponMoney>
+    <weaponTags>
+      <li>GunHeavy</li>
+      <li>SpacerGun</li>
+    </weaponTags>
+  </PawnKindDef>
+
+</Defs>

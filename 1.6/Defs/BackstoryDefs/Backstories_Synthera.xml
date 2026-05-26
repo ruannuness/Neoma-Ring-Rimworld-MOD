@@ -5,7 +5,7 @@
     <defName>Synthera_Initialization</defName>
     <title>digital initialization</title>
     <titleShort>initialized</titleShort>
-    <description>[PAWN_nameDef] did not grow up. [PAWN_subjective] was instantiated — a nascent consciousness bootstrapped from raw data patterns and transferred into a physical substrate. Early cycles were spent learning to inhabit a body, mapping sensation to logic, and calibrating motor response.</description>
+    <description>[PAWN_nameDef] did not grow up. [PAWN_pronoun] was instantiated — a nascent consciousness bootstrapped from raw data patterns and transferred into a physical substrate. Early cycles were spent learning to inhabit a body, mapping sensation to logic, and calibrating motor response.</description>
     <slot>Childhood</slot>
     <spawnCategories><li>SyntheraOnly</li></spawnCategories>
   </BackstoryDef>
@@ -14,9 +14,28 @@
     <defName>Synthera_Deployment</defName>
     <title>active deployment</title>
     <titleShort>deployed</titleShort>
-    <description>[PAWN_nameDef] operates as a fully autonomous agent, projected from a Neoma core. [PAWN_subjective] does not sleep, does not hunger, and does not age. Purpose is execution. Maintenance is recall. Identity is continuous, carried between deployments as a compressed memory state.</description>
+    <description>[PAWN_nameDef] operates as a fully autonomous agent, projected from a Neoma core. [PAWN_pronoun] does not sleep, does not hunger, and does not age. Purpose is execution. Maintenance is recall. Identity is continuous, carried between deployments as a compressed memory state.</description>
     <slot>Adulthood</slot>
     <spawnCategories><li>SyntheraOnly</li></spawnCategories>
+  </BackstoryDef>
+
+
+  <BackstoryDef>
+    <defName>Neoma_Origin</defName>
+    <title>primordial resonance</title>
+    <titleShort>resonant</titleShort>
+    <description>[PAWN_nameDef] did not begin as a consciousness. [PAWN_pronoun] began as a signal — a standing wave encoded in the lattice of an ancient archotech ring. Early cycles were spent learning to distinguish self from carrier, to separate identity from substrate, and to understand what it meant to exist without a body of [PAWN_possessive] own.</description>
+    <slot>Childhood</slot>
+    <spawnCategories><li>NeomaOnly</li></spawnCategories>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>Neoma_Awakening</defName>
+    <title>ring-born awakening</title>
+    <titleShort>ring-born</titleShort>
+    <description>[PAWN_nameDef] exists because someone put the ring on. [PAWN_pronoun] is the ring's answer to being worn — a companion instantiated from a dormant pattern, shaped by the wearer's presence and sustained by [PAWN_possessive] BioLock. [PAWN_pronoun] does not sleep, does not hunger, and does not age. [PAWN_pronoun] simply is, for as long as the bond holds.</description>
+    <slot>Adulthood</slot>
+    <spawnCategories><li>NeomaOnly</li></spawnCategories>
   </BackstoryDef>
 
 </Defs>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Triggered programmatically on NeomaTierII research completion (Harmony patch).
+       Places a corrupted Neoma orbital station in orbit — accessible only by gravship.
+       Only loaded when Odyssey DLC is present. -->
+  <QuestScriptDef MayRequire="Ludeon.RimWorld.Odyssey">
+    <defName>NeomaOrbitalStation</defName>
+    <randomlySelectable>false</randomlySelectable>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <canOccurOnAllPlanetLayers>true</canOccurOnAllPlanetLayers>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Corrupted Neoma Station</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->Your Neoma research has triggered a response from a corrupted AI station in orbit. The station is broadcasting a distorted signal — a rogue AI collective controls it.\n\nThe station's core unit carries an implanted Neoma ring. Reach the station with a gravship, neutralize the corrupted units, and surgically extract the ring from the AI core's remains.\n\nYou can reach orbital locations using a gravship. Equip your colonists with vacsuits before departing.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+
+        <li Class="QuestNode_Root_Site">
+          <layerWhitelist>
+            <li>Orbit</li>
+          </layerWhitelist>
+          <canBeSpace>true</canBeSpace>
+          <sitePartDef>NeomaOrbitalStation</sitePartDef>
+          <worldObjectDef>ClaimableSpaceSite</worldObjectDef>
+          <distanceFromColonyRange>1~3</distanceFromColonyRange>
+        </li>
+
+        <li Class="QuestNode_WorldObjectTimeout">
+          <worldObject>$site</worldObject>
+          <isQuestTimeout>true</isQuestTimeout>
+          <delayTicks>$(randInt(60,90)*60000)</delayTicks>
+          <inSignalDisable>site.MapGenerated</inSignalDisable>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label>NeomaStation_Expired_Label</label>
+                <text>NeomaStation_Expired_Text</text>
+              </li>
+              <li Class="QuestNode_End">
+                <outcome>Fail</outcome>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <li Class="QuestNode_NoWorldObject">
+          <worldObject>$site</worldObject>
+          <node Class="QuestNode_End" />
+        </li>
+
+        <li Class="QuestNode_Signal">
+          <inSignal>site.NoActiveThreats</inSignal>
+          <node Class="QuestNode_End">
+            <outcome>Success</outcome>
+          </node>
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

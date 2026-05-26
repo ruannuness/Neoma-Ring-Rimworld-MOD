@@ -4,13 +4,20 @@ namespace SyntheraCore
 {
     public class CompProperties_NeomaRing : CompProperties
     {
-        public string pawnKind;
-        public int respawnTicks     = 120000; // calibration I: 2-day hibernation
-        public int fastRespawnTicks = 60000;  // calibration II: 1-day hibernation
+        public string pawnKind = "NeomaPawn";
+
+        // Hibernation duration per ring level (0=no backup, 1=2d, 2=12h, 3=2h).
+        public int[] respawnTicksByLevel = { 0, 120000, 30000, 5000 };
 
         public CompProperties_NeomaRing()
         {
             compClass = typeof(CompNeomaRing);
+        }
+
+        public int GetRespawnTicks(int level)
+        {
+            if (level <= 0 || level >= respawnTicksByLevel.Length) return 0;
+            return respawnTicksByLevel[level];
         }
     }
 }

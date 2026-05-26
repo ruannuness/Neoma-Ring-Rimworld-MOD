@@ -12,7 +12,7 @@
     <graphicData>
       <texPath>Things/Building/Tier01/Tier01</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(5,5)</drawSize>
+      <drawSize>(4,4)</drawSize>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
@@ -42,12 +42,15 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>2000</basePowerConsumption>
       </li>
+      <li Class="SyntheraCore.CompProperties_SwitchGraphic">
+        <graphicPathOff>Things/Building/Tier01/Tier01_Off</graphicPathOff>
+      </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierI</pawnKind>
         <spawnIntervalDays>0.08</spawnIntervalDays>
         <respawnTicks>180000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
-        <spawnSound>Interact_Annihilator</spawnSound>
+        <spawnSound>MechanoidsWakeUp</spawnSound>
 
         <maxAuxModules>2</maxAuxModules>
       </li>
@@ -61,8 +64,13 @@
         <heatThreshold>40</heatThreshold>
         <explosionChancePerHour>0.1</explosionChancePerHour>
       </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(30,140,255,0)</glowColor>
+      </li>
     </comps>
-    <size>(5,5)</size>
+    <size>(4,4)</size>
     <designationCategory>Neoma</designationCategory>
   </ThingDef>
 
@@ -108,12 +116,15 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>1000</basePowerConsumption>
       </li>
+      <li Class="SyntheraCore.CompProperties_SwitchGraphic">
+        <graphicPathOff>Things/Building/Tier02/Tier02_Off</graphicPathOff>
+      </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierII</pawnKind>
         <spawnIntervalDays>0.33</spawnIntervalDays>
         <respawnTicks>60000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
-        <spawnSound>Interact_Annihilator</spawnSound>
+        <spawnSound>MechanoidsWakeUp</spawnSound>
 
         <maxAuxModules>4</maxAuxModules>
       </li>
@@ -126,6 +137,11 @@
         <explosionRadius>3</explosionRadius>
         <heatThreshold>40</heatThreshold>
         <explosionChancePerHour>0.1</explosionChancePerHour>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(30,140,255,0)</glowColor>
       </li>
     </comps>
     <size>(2,2)</size>
@@ -175,12 +191,15 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>500</basePowerConsumption>
       </li>
+      <li Class="SyntheraCore.CompProperties_SwitchGraphic">
+        <graphicPathOff>Things/Building/Tier03/Tier03_Off</graphicPathOff>
+      </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierIII</pawnKind>
         <spawnIntervalDays>3</spawnIntervalDays>
         <respawnTicks>15000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
-        <spawnSound>Interact_Annihilator</spawnSound>
+        <spawnSound>MechanoidsWakeUp</spawnSound>
 
         <maxAuxModules>6</maxAuxModules>
       </li>
@@ -193,6 +212,11 @@
         <explosionRadius>3</explosionRadius>
         <heatThreshold>40</heatThreshold>
         <explosionChancePerHour>0.1</explosionChancePerHour>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>7</glowRadius>
+        <glowColor>(30,140,255,0)</glowColor>
       </li>
     </comps>
     <size>(3,3)</size>
@@ -242,12 +266,15 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
+      <li Class="SyntheraCore.CompProperties_SwitchGraphic">
+        <graphicPathOff>Things/Building/Tier04/Tier04_Off</graphicPathOff>
+      </li>
       <li Class="SyntheraCore.CompProperties_SyntheraSpawner">
         <pawnKind>NeomaPawnTierIV</pawnKind>
         <spawnIntervalDays>5</spawnIntervalDays>
         <respawnTicks>5000</respawnTicks>
         <maxPawnsToSpawn>1</maxPawnsToSpawn>
-        <spawnSound>Interact_Annihilator</spawnSound>
+        <spawnSound>MechanoidsWakeUp</spawnSound>
 
         <maxAuxModules>8</maxAuxModules>
       </li>
@@ -260,6 +287,11 @@
         <explosionRadius>3</explosionRadius>
         <heatThreshold>40</heatThreshold>
         <explosionChancePerHour>0.1</explosionChancePerHour>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>8</glowRadius>
+        <glowColor>(30,140,255,0)</glowColor>
       </li>
     </comps>
     <size>(3,3)</size>

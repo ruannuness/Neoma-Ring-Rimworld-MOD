@@ -42,8 +42,7 @@
     <thingClass>Apparel</thingClass>
     <category>Item</category>
     <graphicData>
-      <!-- Placeholder: replace with Things/Apparel/Neoma/Ring once the art exists -->
-      <texPath>Things/Item/Resource/Gold</texPath>
+      <texPath>Things/Apparel/Neoma/Ring</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <altitudeLayer>Item</altitudeLayer>
@@ -51,8 +50,7 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <Mass>0.1</Mass>
-      <Bulk>0.1</Bulk>
-      <MarketValue>10000</MarketValue>
+<MarketValue>10000</MarketValue>
       <Flammability>0</Flammability>
     </statBases>
     <generateCommonality>0</generateCommonality>

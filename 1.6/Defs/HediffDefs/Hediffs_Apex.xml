@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- APEX LEVELS — applied via Cristal de Apex Sintético absorption.    -->
+  <!-- Universal: works on all Synthera races AND the Neoma companion.    -->
+  <!-- Each level replaces the previous. Intentionally powerful.         -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <HediffDef>
+    <defName>SyntheraApex_I</defName>
+    <label>apex evolution I</label>
+    <description>This consciousness has absorbed a Synthetic Apex Crystal — a dense shard of compressed archotech data representing a complete evolutionary leap. The avatar's base parameters have been permanently rewritten at a fundamental level.
+
+Active enhancements:
+  Global work speed +30%
+  Movement speed +25%
+  Melee damage +20%
+  Ranged accuracy +15%</description>
+    <hediffClass>Hediff</hediffClass>
+    <defaultLabelColor>(0.3, 0.85, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>1.30</WorkSpeedGlobal>
+          <MoveSpeed>1.25</MoveSpeed>
+          <MeleeDamageFactor>1.20</MeleeDamageFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.15</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraApex_II</defName>
+    <label>apex evolution II</label>
+    <description>A second crystalline evolutionary leap has been absorbed — the consciousness operates at parameters far beyond its original design ceiling. Structural integrity has been dramatically reinforced.
+
+Active enhancements:
+  Global work speed +70%
+  Movement speed +55%
+  Melee damage +60%
+  Ranged accuracy +40%
+  Incoming damage −20%</description>
+    <hediffClass>Hediff</hediffClass>
+    <defaultLabelColor>(0.6, 0.4, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>1.70</WorkSpeedGlobal>
+          <MoveSpeed>1.55</MoveSpeed>
+          <MeleeDamageFactor>1.60</MeleeDamageFactor>
+          <IncomingDamageFactor>0.80</IncomingDamageFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.40</ShootingAccuracyPawn>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>SyntheraApex_III</defName>
+    <label>apex evolution III — transcendent</label>
+    <description>The consciousness has absorbed three Synthetic Apex Crystals — an accumulation of archotech evolutionary data that rewrites every parameter simultaneously. What remains is no longer merely synthetic. It is transcendent.
+
+Active enhancements:
+  Global work speed +150%
+  Movement speed +120%
+  Melee damage +150%
+  Ranged accuracy +80%
+  Incoming damage −40%
+  Consciousness +50%</description>
+    <hediffClass>Hediff</hediffClass>
+    <defaultLabelColor>(0.97, 0.70, 1.0)</defaultLabelColor>
+    <isBad>false</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <statFactors>
+          <WorkSpeedGlobal>2.50</WorkSpeedGlobal>
+          <MoveSpeed>2.20</MoveSpeed>
+          <MeleeDamageFactor>2.50</MeleeDamageFactor>
+          <IncomingDamageFactor>0.60</IncomingDamageFactor>
+        </statFactors>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.80</ShootingAccuracyPawn>
+        </statOffsets>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.50</offset></li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

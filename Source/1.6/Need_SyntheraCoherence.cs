@@ -6,7 +6,41 @@ namespace SyntheraCore
 {
     public class Need_SyntheraCoherence : Need
     {
+        private static readonly Color BarColorLow  = new Color(0.20f, 0.60f, 1.00f); // blue
+        private static readonly Color BarColorMid  = new Color(1.00f, 0.80f, 0.00f); // yellow
+        private static readonly Color BarColorHigh = new Color(1.00f, 0.18f, 0.10f); // red
+        private static readonly Color BarBg        = new Color(0.10f, 0.10f, 0.12f);
+        private static readonly Color BarBorder    = new Color(0.25f, 0.25f, 0.28f);
+
         public Need_SyntheraCoherence(Pawn pawn) : base(pawn) { }
+
+        public override void DrawOnGUI(Rect rect, int maxThresholdMarkers = 8, float customMargin = -1f,
+            bool drawArrows = true, bool doTooltip = true, Rect? rectForTooltip = null, bool drawLabel = true)
+        {
+            // Let vanilla handle the label, background and tooltip
+            base.DrawOnGUI(rect, maxThresholdMarkers, customMargin, drawArrows, doTooltip, rectForTooltip, drawLabel);
+
+            // Recalculate the fill rect using the same layout vanilla uses
+            if (rect.height != 28f)
+            {
+                int trim = Mathf.RoundToInt((rect.height - 28f) / 2f);
+                rect.yMin += trim;
+                rect.yMax -= trim;
+            }
+            float margin = customMargin >= 0f ? customMargin : 6f;
+            Rect barRect = new Rect(rect.xMax - rect.width * 0.55f, rect.y + margin, rect.width * 0.55f - 4f, rect.height - margin * 2f);
+
+            // Overdraw the fill area with our gradient colour
+            float fill = Mathf.Clamp01(CurLevel / MaxLevel);
+            if (fill > 0f)
+            {
+                Rect fillRect = new Rect(barRect.x + 1f, barRect.y + 1f, (barRect.width - 2f) * fill, barRect.height - 2f);
+                Color c = fill < 0.5f
+                    ? Color.Lerp(BarColorLow, BarColorMid, fill * 2f)
+                    : Color.Lerp(BarColorMid, BarColorHigh, (fill - 0.5f) * 2f);
+                Widgets.DrawBoxSolid(fillRect, c);
+            }
+        }
 
         public override float MaxLevel => 1f;
 

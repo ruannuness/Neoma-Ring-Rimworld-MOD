@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       APPAREL — gated behind NeomaRing_Calibration
+       ═══════════════════════════════════════════════════════════════ -->
+
+  <RecipeDef>
+    <defName>NeomaMake_Synthsuit</defName>
+    <label>craft Neoma synthsuit</label>
+    <description>Synthesize an Apex Crystal exo-suit keyed to Neoma's biometric signature.</description>
+    <jobString>Synthesizing Neoma synthsuit.</jobString>
+    <workAmount>8000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_Calibration</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Basic</li></thingDefs></filter>
+        <count>2</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Plasteel</li></thingDefs></filter>
+        <count>80</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Basic</li>
+        <li>SyntheraArchotechShard</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Apparel_NeomaSynthsuit>1</Apparel_NeomaSynthsuit>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NeomaMake_Crown</defName>
+    <label>craft Neoma crown</label>
+    <description>Grow and tune a neural amplifier crown from pure Apex Crystal filaments.</description>
+    <jobString>Growing Neoma crown.</jobString>
+    <workAmount>6000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_Calibration</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Basic</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>15</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Gold</li></thingDefs></filter>
+        <count>50</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Basic</li>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Apparel_NeomaCrown>1</Apparel_NeomaCrown>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NeomaMake_Cloak</defName>
+    <label>craft Neoma mantle</label>
+    <description>Weave a reactive outer mantle from Apex resonance fibres.</description>
+    <jobString>Weaving Neoma mantle.</jobString>
+    <workAmount>5000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_Calibration</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Basic</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Plasteel</li></thingDefs></filter>
+        <count>40</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Basic</li>
+        <li>SyntheraArchotechShard</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Apparel_NeomaCloak>1</Apparel_NeomaCloak>
+    </products>
+  </RecipeDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       WEAPONS — gated behind NeomaRing_ApexOverload
+       ═══════════════════════════════════════════════════════════════ -->
+
+  <RecipeDef>
+    <defName>NeomaMake_PulseRifle</defName>
+    <label>craft Neoma pulse rifle</label>
+    <description>Assemble a precision Apex Crystal pulse rifle.</description>
+    <jobString>Assembling Neoma pulse rifle.</jobString>
+    <workAmount>12000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_ApexOverload</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Advanced</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>30</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>ComponentSpacer</li></thingDefs></filter>
+        <count>8</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Advanced</li>
+        <li>SyntheraArchotechShard</li>
+        <li>ComponentSpacer</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NeomaWeapon_PulseRifle>1</NeomaWeapon_PulseRifle>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NeomaMake_CrystalEdge</defName>
+    <label>craft Neoma crystal edge</label>
+    <description>Grow a single-lattice Apex Crystal blade tuned to Neoma's combat subroutines.</description>
+    <jobString>Growing Neoma crystal edge.</jobString>
+    <workAmount>10000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_ApexOverload</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraApexCrystal_Advanced</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>25</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Plasteel</li></thingDefs></filter>
+        <count>50</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraApexCrystal_Advanced</li>
+        <li>SyntheraArchotechShard</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NeomaWeapon_CrystalEdge>1</NeomaWeapon_CrystalEdge>
+    </products>
+  </RecipeDef>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CONSUMABLES — gated behind NeomaRing_NeuralBond (craft recipes)
+       Administration surgery recipes are in the same file for clarity.
+       ═══════════════════════════════════════════════════════════════ -->
+
+  <RecipeDef>
+    <defName>NeomaMake_RepairKit</defName>
+    <label>synthesize repair kit</label>
+    <description>Synthesize a sealed injector of Apex Crystal nano-repair agents.</description>
+    <jobString>Synthesizing repair kit.</jobString>
+    <workAmount>3000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_NeuralBond</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Gold</li></thingDefs></filter>
+        <count>30</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NeomaKit_Repair>1</NeomaKit_Repair>
+    </products>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NeomaMake_CachePurgeKit</defName>
+    <label>synthesize cache purge kit</label>
+    <description>Synthesize a pressurized electromagnetic discharge canister for Synthera cache maintenance.</description>
+    <jobString>Synthesizing cache purge kit.</jobString>
+    <workAmount>2500</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workSkillLearnFactor>0.5</workSkillLearnFactor>
+    <recipeUsers>
+      <li>NeomaFabricationConsole</li>
+    </recipeUsers>
+    <researchPrerequisite>NeomaRing_NeuralBond</researchPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaCraftExtension"/>
+    </modExtensions>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>SyntheraArchotechShard</li></thingDefs></filter>
+        <count>3</count>
+      </li>
+      <li>
+        <filter><thingDefs><li>Gold</li></thingDefs></filter>
+        <count>20</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>SyntheraArchotechShard</li>
+        <li>Gold</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <NeomaKit_CachePurge>1</NeomaKit_CachePurge>
+    </products>
+  </RecipeDef>
+
+  <!-- ─── Surgery / administration recipes for kits ─── -->
+
+  <RecipeDef>
+    <defName>Administer_NeomaKit_Repair</defName>
+    <label>apply Neoma repair kit</label>
+    <description>Inject Apex Crystal nano-agents to dissolve accumulated physical damage.</description>
+    <jobString>Applying repair kit.</jobString>
+    <workerClass>Recipe_Surgery</workerClass>
+    <workAmount>600</workAmount>
+    <workSkill>Medicine</workSkill>
+    <isViolation>false</isViolation>
+    <surgerySuccessChanceFactor>99999</surgerySuccessChanceFactor>
+    <deathOnFailedSurgeryChance>0</deathOnFailedSurgeryChance>
+    <addsHediff>NeomaRepairEffect</addsHediff>
+    <appliedOnFixedBodyParts/>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>NeomaKit_Repair</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>NeomaKit_Repair</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>Administer_NeomaKit_CachePurge</defName>
+    <label>apply cache purge kit</label>
+    <description>Deliver a targeted electromagnetic discharge to flush Synthera system stress.</description>
+    <jobString>Applying cache purge kit.</jobString>
+    <workerClass>Recipe_Surgery</workerClass>
+    <workAmount>400</workAmount>
+    <workSkill>Medicine</workSkill>
+    <isViolation>false</isViolation>
+    <surgerySuccessChanceFactor>99999</surgerySuccessChanceFactor>
+    <deathOnFailedSurgeryChance>0</deathOnFailedSurgeryChance>
+    <addsHediff>NeomaCachePurgeEffect</addsHediff>
+    <appliedOnFixedBodyParts/>
+    <ingredients>
+      <li>
+        <filter><thingDefs><li>NeomaKit_CachePurge</li></thingDefs></filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>NeomaKit_CachePurge</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+</Defs>

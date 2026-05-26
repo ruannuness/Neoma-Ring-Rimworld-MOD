@@ -12,38 +12,56 @@ namespace SyntheraCore
         public CompProperties_NeomaRing Props => (CompProperties_NeomaRing)props;
 
         private Pawn neomaPawn;
-        private int  ringCalibration = 0; // 0–2; will become resonanceLevel 0–5 in Phase B
-        private bool inHibernation   = false;
-        private int  respawnTick     = 0;
+        private int  ringLevel    = 0; // 0–3; advances via Apex Crystal absorption
+        private bool inHibernation = false;
+        private int  respawnTick   = 0;
+        private int  emergencyRecallCooldownTick = 0;
 
-        // Phase A: track wearer for permanent BioLock + death detection
         private Pawn _wearer;
         private bool isBound = false;
 
-        // Severity table: maps ring calibration level → BioLock severity.
-        // Phase B will extend this to 6 entries (0–5).
-        private static readonly float[] BiolockSeverityByLevel = { 0.15f, 0.35f, 0.55f };
+        // Maps ringLevel 0–3 to NeomaBiolock hediff severity.
+        // Level 0 = dormant fragment (0.15)
+        // Level 1 = neural bridge    (0.55) — Apex I
+        // Level 2 = crystallized bond(0.85) — Apex II
+        // Level 3 = soul fusion      (0.97) — Apex III
+        private static readonly float[] BiolockSeverityByLevel = { 0.15f, 0.55f, 0.85f, 0.97f };
+
+        public Pawn NeomaPawn => neomaPawn;
+
+        // True when the ring is bound to a different living pawn — used by the equip-block patch.
+        public bool IsBoundToOther(Pawn pawn) =>
+            isBound && _wearer != null && !_wearer.Dead && _wearer != pawn;
+
+        // Called by Recipe_AbsorbApexCrystal after a successful crystal absorption on Neoma.
+        public void AdvanceLevel()
+        {
+            if (ringLevel >= 3) return;
+            ringLevel++;
+            UpdateBiolockSeverity(_wearer);
+        }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_References.Look(ref neomaPawn, "neomaPawn");
-            Scribe_References.Look(ref _wearer,   "_wearer");
-            Scribe_Values.Look(ref ringCalibration, "ringCalibration", 0);
-            Scribe_Values.Look(ref inHibernation,   "inHibernation",   false);
-            Scribe_Values.Look(ref respawnTick,      "respawnTick",     0);
-            Scribe_Values.Look(ref isBound,          "isBound",         false);
+            Scribe_References.Look(ref neomaPawn,  "neomaPawn");
+            Scribe_References.Look(ref _wearer,    "_wearer");
+            Scribe_Values.Look(ref ringLevel,                   "ringLevel",                   0);
+            Scribe_Values.Look(ref inHibernation,               "inHibernation",               false);
+            Scribe_Values.Look(ref respawnTick,                 "respawnTick",                 0);
+            Scribe_Values.Look(ref emergencyRecallCooldownTick, "emergencyRecallCooldownTick", 0);
+            Scribe_Values.Look(ref isBound,                     "isBound",                     false);
         }
 
         public override void CompTick()
         {
             base.CompTick();
 
-            // ── Detect wearer death → release BioLock ──────────────────────
+            // Release BioLock if the wearer has died.
             if (isBound && _wearer != null && _wearer.Dead)
                 UnbindFromWearer();
 
-            // ── Companion death → always hibernate (never permanent death) ──
+            // Handle companion death.
             if (neomaPawn == null || !neomaPawn.Dead || inHibernation) return;
 
             Corpse  corpse   = neomaPawn.Corpse;
@@ -51,8 +69,19 @@ namespace SyntheraCore
                             ?? (parent as Apparel)?.Wearer?.Position
                             ?? IntVec3.Invalid;
 
+            if (ringLevel == 0)
+            {
+                DropAndDestroyCorpse(deathPos, corpse);
+                Messages.Message(
+                    "The Neoma Ring's backup system is dormant. The companion is lost — absorb an Apex Crystal to unlock the backup channel.",
+                    MessageTypeDefOf.NegativeEvent, false);
+                neomaPawn = null;
+                return;
+            }
+
+            // Level 1–3: enter hibernation with the appropriate delay.
             inHibernation = true;
-            int delay = ringCalibration >= 2 ? Props.fastRespawnTicks : Props.respawnTicks;
+            int delay   = Props.GetRespawnTicks(ringLevel);
             respawnTick = Find.TickManager.TicksGame + delay;
 
             if (ResurrectionUtility.TryResurrect(neomaPawn))
@@ -63,74 +92,51 @@ namespace SyntheraCore
                     var sick = neomaPawn.health.hediffSet.GetFirstHediffOfDef(sickDef);
                     if (sick != null) neomaPawn.health.RemoveHediff(sick);
                 }
-
-                if (deathPos.IsValid)
-                {
-                    neomaPawn.apparel?.DropAll(deathPos);
-                    neomaPawn.inventory?.DropAllNearPawn(deathPos);
-                }
-
-                if (corpse != null && !corpse.Destroyed)
-                    corpse.Destroy(DestroyMode.Vanish);
-
-                if (neomaPawn.Spawned)
-                    neomaPawn.DeSpawn();
+                DropAndDestroyCorpse(deathPos, corpse);
+                if (neomaPawn.Spawned) neomaPawn.DeSpawn();
             }
 
             Messages.Message(
-                $"The Neoma Ring's companion has entered hibernation. Restoration available in {GenDate.ToStringTicksToPeriod(respawnTick - Find.TickManager.TicksGame)}.",
+                $"The Neoma Ring's companion has entered hibernation. Restoration available in {GenDate.ToStringTicksToPeriod(delay)}.",
                 MessageTypeDefOf.NegativeEvent, false);
         }
 
-        // Called when the ring is equipped by a pawn.
+        private static void DropAndDestroyCorpse(IntVec3 pos, Corpse corpse)
+        {
+            if (pos.IsValid && corpse?.InnerPawn is Pawn p)
+            {
+                p.apparel?.DropAll(pos);
+                p.inventory?.DropAllNearPawn(pos);
+            }
+            if (corpse != null && !corpse.Destroyed)
+                corpse.Destroy(DestroyMode.Vanish);
+        }
+
         public override void Notify_Equipped(Pawn pawn)
         {
             base.Notify_Equipped(pawn);
 
-            // If the previous wearer died, handle unbind before allowing a new bind.
             if (isBound && _wearer != null && _wearer.Dead)
                 UnbindFromWearer();
 
             HediffDef biolockDef = HediffDef.Named("NeomaBiolock");
 
-            // Reject equip if the ring is already bound to a living colonist.
-            foreach (Map map in Find.Maps)
-            {
-                foreach (Pawn colonist in map.mapPawns.FreeColonists)
-                {
-                    if (colonist != pawn && colonist.health.hediffSet.HasHediff(biolockDef))
-                    {
-                        Messages.Message(
-                            $"The Neoma Ring is biologically locked to {colonist.LabelShort}. It does not respond to {pawn.LabelShort}.",
-                            MessageTypeDefOf.RejectInput, false);
-                        return;
-                    }
-                }
-            }
-
-            // Bind to this pawn.
             _wearer = pawn;
             isBound = true;
 
             if (!pawn.health.hediffSet.HasHediff(biolockDef))
                 pawn.health.AddHediff(biolockDef);
 
-            // Sync BioLock severity to current calibration level.
             UpdateBiolockSeverity(pawn);
 
-            if (neomaPawn == null || neomaPawn.Dead || neomaPawn.Destroyed)
-            {
-                if (!inHibernation)
-                    SpawnNeoma(pawn);
-            }
-            else if (!neomaPawn.Spawned && !inHibernation)
+            // Re-deploy already-existing live companion.
+            if (neomaPawn != null && !neomaPawn.Dead && !neomaPawn.Destroyed
+                && !neomaPawn.Spawned && !inHibernation)
             {
                 GenPlace.TryPlaceThing(neomaPawn, pawn.Position, pawn.Map, ThingPlaceMode.Near);
             }
         }
 
-        // Called when the ring is removed from the pawn.
-        // BioLock is intentionally NOT removed here — it is permanent.
         public override void Notify_Unequipped(Pawn pawn)
         {
             base.Notify_Unequipped(pawn);
@@ -138,7 +144,7 @@ namespace SyntheraCore
                 neomaPawn.DeSpawn();
         }
 
-        // ── BioLock severity management ──────────────────────────────────────
+        // ── BioLock ──────────────────────────────────────────────────────────
 
         private void UpdateBiolockSeverity(Pawn wearer)
         {
@@ -146,18 +152,15 @@ namespace SyntheraCore
             HediffDef biolockDef = HediffDef.Named("NeomaBiolock");
             var biolock = wearer.health.hediffSet.GetFirstHediffOfDef(biolockDef);
             if (biolock == null) return;
-            int idx = System.Math.Min(ringCalibration, BiolockSeverityByLevel.Length - 1);
+            int idx = System.Math.Min(ringLevel, BiolockSeverityByLevel.Length - 1);
             biolock.Severity = BiolockSeverityByLevel[idx];
         }
-
-        // ── Wearer-death unbind ───────────────────────────────────────────────
 
         private void UnbindFromWearer()
         {
             HediffDef biolockDef = HediffDef.Named("NeomaBiolock");
             var biolock = _wearer?.health.hediffSet.GetFirstHediffOfDef(biolockDef);
-            if (biolock != null)
-                _wearer.health.RemoveHediff(biolock);
+            if (biolock != null) _wearer.health.RemoveHediff(biolock);
 
             if (neomaPawn != null && neomaPawn.Spawned)
                 neomaPawn.DeSpawn();
@@ -181,21 +184,18 @@ namespace SyntheraCore
                 return;
             }
 
+            int ancientAge = Rand.Range(6000, 12000);
+
             PawnGenerationRequest req = new PawnGenerationRequest(
-                neomaKind,
-                Faction.OfPlayer,
-                PawnGenerationContext.NonPlayer,
+                neomaKind, Faction.OfPlayer, PawnGenerationContext.NonPlayer,
                 -1, true, false, false, false, true, 0,
-                allowFood: false,
-                allowAddictions: false,
-                forceNoIdeo: true,
-                forbidAnyTitle: true,
-                fixedBiologicalAge: 25,
-                fixedChronologicalAge: 25,
-                forceNoBackstory: true
-            );
+                allowFood: false, allowAddictions: false,
+                forceNoIdeo: true, forbidAnyTitle: true,
+                fixedBiologicalAge: 25, fixedChronologicalAge: ancientAge,
+                forceNoBackstory: true);
 
             Pawn neoma = PawnGenerator.GeneratePawn(req);
+            neoma.gender = Gender.Female;
             neoma.Name = new NameTriple("Neoma", "", "");
 
             if (neoma.relations    == null) neoma.relations    = new Pawn_RelationsTracker(neoma);
@@ -204,17 +204,56 @@ namespace SyntheraCore
             while (neoma.story.traits.allTraits.Count > 0)
                 neoma.story.traits.allTraits.RemoveLast();
 
-            SyntheraUtils.SetupPawn(neoma);
+            SyntheraUtils.SetupNeomaCompanion(neoma);
+
+            // Ancient AI — extremely capable across all disciplines.
+            if (neoma.skills != null)
+            {
+                foreach (var skill in neoma.skills.skills)
+                { skill.Level = Rand.RangeInclusive(14, 18); skill.xpSinceLastLevel = 0; }
+
+                static void Max(Pawn p, SkillDef d)
+                { var s = p.skills?.GetSkill(d); if (s != null) { s.Level = 20; s.xpSinceLastLevel = 0; } }
+                Max(neoma, SkillDefOf.Shooting);
+                Max(neoma, SkillDefOf.Intellectual);
+            }
+
+            // OP traits befitting a transcendent AI construct.
+            static void Trait(Pawn p, string defName, int degree = 0)
+            {
+                var def = DefDatabase<TraitDef>.GetNamed(defName, false);
+                if (def == null || p.story?.traits == null) return;
+                if (!p.story.traits.HasTrait(def))
+                    p.story.traits.GainTrait(new Trait(def, degree));
+            }
+            Trait(neoma, "Industrious");           // works 25% faster
+            Trait(neoma, "ShootingAccuracy",  2);  // Crack Shot
+            Trait(neoma, "NaturalMood",       2);  // Sanguine
 
             GenPlace.TryPlaceThing(neoma, wearer.Position, wearer.Map, ThingPlaceMode.Near);
             neomaPawn = neoma;
 
             SoundDefOf.PsychicPulseGlobal.PlayOneShotOnCamera(wearer.Map);
             FleckMaker.Static(wearer.Position, wearer.Map, FleckDefOf.PsycastAreaEffect, 5f);
+
+            // Unlock hidden ring research tab on first ever summon.
+            // NeomaRing_Unlock is the invisible trigger that makes NeomaRing_Gate visible.
+            // Both are completed here so the 4 research nodes appear immediately.
+            var unlock = DefDatabase<ResearchProjectDef>.GetNamed("NeomaRing_Unlock", false);
+            if (unlock != null && !unlock.IsFinished)
+                Find.ResearchManager.FinishProject(unlock, doCompletionDialog: false);
+
+            var gate = DefDatabase<ResearchProjectDef>.GetNamed("NeomaRing_Gate", false);
+            if (gate != null && !gate.IsFinished)
+            {
+                Find.ResearchManager.FinishProject(gate, doCompletionDialog: false);
+                Messages.Message("SyntheraCore_RingResearchUnlocked".Translate(), MessageTypeDefOf.SilentInput);
+            }
+
             Messages.Message("The Neoma Ring has summoned its bound companion.", MessageTypeDefOf.PositiveEvent);
         }
 
-        // ── Companion restoration from hibernation ────────────────────────────
+        // ── Restore from hibernation ──────────────────────────────────────────
 
         private void RestoreCompanion()
         {
@@ -224,12 +263,9 @@ namespace SyntheraCore
             inHibernation = false;
             GenPlace.TryPlaceThing(neomaPawn, wearer.Position, wearer.Map, ThingPlaceMode.Near);
 
-            if (ringCalibration >= 2)
-            {
-                var syndromeDef = DefDatabase<HediffDef>.GetNamed("SyntheraHibernationSyndrome", false);
-                if (syndromeDef != null)
-                    neomaPawn.health.AddHediff(syndromeDef).Severity = 1f;
-            }
+            var syndromeDef = DefDatabase<HediffDef>.GetNamed("SyntheraHibernationSyndrome", false);
+            if (syndromeDef != null)
+                neomaPawn.health.AddHediff(syndromeDef).Severity = 1f;
 
             var conDef = DefDatabase<HediffDef>.GetNamed("SyntheraConsciousness", false);
             if (conDef != null && neomaPawn.health.hediffSet.GetFirstHediffOfDef(conDef) == null)
@@ -240,101 +276,109 @@ namespace SyntheraCore
             Messages.Message("The Neoma Ring's companion has been restored from backup.", MessageTypeDefOf.PositiveEvent);
         }
 
-        // ── Calibration material consumption ─────────────────────────────────
+        // ── Emergency Recall (Apex I+, 6 h cooldown = 15 000 ticks) ─────────
 
-        private bool TryConsumeCalibrationMaterials(int calibLevel)
+        private void DoEmergencyRecall()
         {
             Pawn wearer = _wearer ?? (parent as Apparel)?.Wearer;
-            Map  map    = wearer?.Map ?? Find.AnyPlayerHomeMap;
-            if (map == null) return false;
+            if (wearer == null || !wearer.Spawned) return;
 
-            ThingDefCountClass[] costs = calibLevel == 1
-                ? new[]
-                  {
-                      new ThingDefCountClass(DefDatabase<ThingDef>.GetNamed("SyntheraArchotechShard"), 5),
-                      new ThingDefCountClass(ThingDefOf.Gold,     50),
-                      new ThingDefCountClass(ThingDefOf.Plasteel, 100),
-                  }
-                : new[]
-                  {
-                      new ThingDefCountClass(DefDatabase<ThingDef>.GetNamed("SyntheraArchotechShard"), 10),
-                      new ThingDefCountClass(ThingDefOf.Gold,            100),
-                      new ThingDefCountClass(ThingDefOf.ComponentSpacer,   5),
-                  };
-
-            foreach (var cost in costs)
+            if (inHibernation)
             {
-                if (cost.thingDef == null) continue;
-                if (map.resourceCounter.GetCount(cost.thingDef) < cost.count)
-                {
-                    Messages.Message(
-                        $"Calibration requires {cost.count}× {cost.thingDef.label} but only {map.resourceCounter.GetCount(cost.thingDef)} available.",
-                        MessageTypeDefOf.RejectInput, false);
-                    return false;
-                }
+                respawnTick = Find.TickManager.TicksGame;
+                RestoreCompanion();
+            }
+            else if (neomaPawn != null && !neomaPawn.Dead)
+            {
+                if (neomaPawn.Spawned) neomaPawn.DeSpawn();
+                GenPlace.TryPlaceThing(neomaPawn, wearer.Position, wearer.Map, ThingPlaceMode.Near);
+                Messages.Message("Emergency recall: companion teleported to ring wearer.", MessageTypeDefOf.NeutralEvent);
             }
 
-            foreach (var cost in costs)
-            {
-                if (cost.thingDef == null) continue;
-                int remaining = cost.count;
-                foreach (Thing t in map.listerThings.ThingsOfDef(cost.thingDef).ToList())
-                {
-                    if (remaining <= 0) break;
-                    int take = System.Math.Min(remaining, t.stackCount);
-                    t.SplitOff(take).Destroy();
-                    remaining -= take;
-                }
-            }
-            return true;
+            emergencyRecallCooldownTick = Find.TickManager.TicksGame + 15000;
+        }
+
+        // ── Display helpers ───────────────────────────────────────────────────
+
+        private static string LevelName(int level)
+        {
+            if (level == 1) return "Apex I";
+            if (level == 2) return "Apex II";
+            if (level == 3) return "Apex III — Transcendent";
+            return "Dormant";
+        }
+
+        private static string BiolockStageName(int level)
+        {
+            if (level == 1) return "neural bridge";
+            if (level == 2) return "crystallized bond";
+            if (level == 3) return "soul fusion";
+            return "dormant fragment";
         }
 
         // ── Gizmos ────────────────────────────────────────────────────────────
 
-        public override IEnumerable<Gizmo> CompGetGizmosExtra()
+        // CompGetGizmosExtra is intentionally empty — gizmos are injected via Patch_Pawn_NeomaRingGizmos
+        // so they appear exactly once on the wearer's bar (apparel comps are not included by vanilla).
+        public override IEnumerable<Gizmo> CompGetGizmosExtra() =>
+            base.CompGetGizmosExtra();
+
+        // Called by Patch_Pawn_NeomaRingGizmos when the wearer is selected.
+        public IEnumerable<Gizmo> GetRingGizmos()
         {
-            foreach (Gizmo g in base.CompGetGizmosExtra()) yield return g;
+            // ── Invoke gizmo (no companion yet, or lost at level 0) ──
+            if (neomaPawn == null && !inHibernation)
+            {
+                Pawn wearer = _wearer ?? (parent as Apparel)?.Wearer;
+                if (wearer != null && wearer.Spawned)
+                {
+                    yield return new Command_Action
+                    {
+                        action       = () => SpawnNeoma(wearer),
+                        defaultLabel = "Invoke Neoma",
+                        defaultDesc  = "Summon the Neoma AI companion bound to this ring.",
+                        icon         = ContentFinder<Texture2D>.Get("UI/Commands/Spawn", true)
+                    };
+                }
+                yield break;
+            }
 
-            if (neomaPawn == null && !inHibernation) yield break;
-
-            // Hibernation restore button
+            // ── Restore button (shown only while hibernating) ──
             if (inHibernation)
             {
                 var restoreBtn = new Command_Action
                 {
                     action       = RestoreCompanion,
                     defaultLabel = "Restore companion",
-                    defaultDesc  = ringCalibration >= 2
-                        ? "Restore the companion from backup. Temporary hibernation syndrome will be applied."
-                        : "Restore the companion from backup.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    defaultDesc  = "Restore the companion from backup. Temporary hibernation syndrome will be applied.",
+                    icon         = ContentFinder<Texture2D>.Get("UI/Commands/Spawn", true)
                 };
                 if (Find.TickManager.TicksGame < respawnTick)
-                    restoreBtn.Disable("Restoring backup: " + GenDate.ToStringTicksToPeriod(respawnTick - Find.TickManager.TicksGame));
+                    restoreBtn.Disable("Restoring backup: " +
+                        GenDate.ToStringTicksToPeriod(respawnTick - Find.TickManager.TicksGame));
                 yield return restoreBtn;
                 yield break;
             }
 
-            // Status gizmo
-            string status = neomaPawn.Dead    ? "deceased" :
-                            neomaPawn.Spawned ? $"active at {neomaPawn.Position}" :
-                                                "recalled";
-            string calLabel = ringCalibration == 0 ? "uncalibrated"
-                            : ringCalibration == 1 ? "calibration I"
-                                                   : "calibration II";
-
+            // ── Status gizmo ──
+            string compStatus = neomaPawn == null    ? "lost"
+                              : neomaPawn.Dead        ? "deceased"
+                              : neomaPawn.Spawned     ? $"active at {neomaPawn.Position}"
+                                                      : "recalled";
             yield return new Command_Action
             {
                 action = () => Messages.Message(
-                    $"Neoma Ring — companion: {status} | {calLabel}.",
+                    $"Neoma Ring — level: {LevelName(ringLevel)} | BioLock: {BiolockStageName(ringLevel)} | companion: {compStatus}",
                     MessageTypeDefOf.NeutralEvent),
-                defaultLabel = "Ring status",
-                defaultDesc  = $"Companion: {status} | {calLabel}",
-                icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                defaultLabel = $"Ring status [{LevelName(ringLevel)}]",
+                defaultDesc  = $"Companion: {compStatus} | BioLock: {BiolockStageName(ringLevel)}",
+                icon         = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
             };
 
-            // Recall gizmo
-            if (neomaPawn.Spawned && !neomaPawn.Dead)
+            if (neomaPawn == null || neomaPawn.Dead) yield break;
+
+            // ── Recall (normal) ──
+            if (neomaPawn.Spawned)
             {
                 Pawn wearer = _wearer ?? (parent as Apparel)?.Wearer;
                 yield return new Command_Action
@@ -343,72 +387,35 @@ namespace SyntheraCore
                     {
                         if (wearer == null || !wearer.Spawned)
                         {
-                            Messages.Message("Cannot recall: ring wearer is not present.", MessageTypeDefOf.RejectInput, false);
+                            Messages.Message("Cannot recall: ring wearer is not present.",
+                                MessageTypeDefOf.RejectInput, false);
                             return;
                         }
                         neomaPawn.DeSpawn();
                         GenPlace.TryPlaceThing(neomaPawn, wearer.Position, wearer.Map, ThingPlaceMode.Near);
-                        Messages.Message("Companion recalled to the ring wearer's location.", MessageTypeDefOf.NeutralEvent);
+                        Messages.Message("Companion recalled to the ring wearer's location.",
+                            MessageTypeDefOf.NeutralEvent);
                     },
                     defaultLabel = "Recall companion",
                     defaultDesc  = "Teleport the companion back to the ring wearer.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    icon         = ContentFinder<Texture2D>.Get("UI/Commands/Despawn", true)
                 };
             }
 
-            // Calibration gizmos (Phase A keeps the existing 2-level system)
-            if (ringCalibration == 0 && ResearchProjectDef.Named("NeomaRingCalibrationI")?.IsFinished == true)
+            // ── Emergency Recall (Apex I+) ──
+            if (ringLevel >= 1)
             {
-                yield return new Command_Action
+                var emergencyBtn = new Command_Action
                 {
-                    action = delegate
-                    {
-                        Find.WindowStack.Add(new Dialog_MessageBox(
-                            "Calibration I will consume 5× Archotech Shards, 50× Gold, and 100× Plasteel. " +
-                            "The companion can be restored after death instead of the bond being severed. Proceed?",
-                            "Calibrate", () =>
-                            {
-                                if (TryConsumeCalibrationMaterials(1))
-                                {
-                                    ringCalibration = 1;
-                                    UpdateBiolockSeverity(_wearer);
-                                    Messages.Message("The Neoma Ring hums with new resonance. Calibration I complete.", MessageTypeDefOf.PositiveEvent);
-                                }
-                            },
-                            "Cancel", null,
-                            title: "Calibrate Ring I"));
-                    },
-                    defaultLabel = "Calibrate ring I",
-                    defaultDesc  = "Unlock the ring's backup system. Costs 5× Archotech Shard, 50× Gold, 100× Plasteel.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
+                    action       = DoEmergencyRecall,
+                    defaultLabel = "Emergency recall",
+                    defaultDesc  = "Force-recall the companion instantly, even from hibernation. 6-hour cooldown.",
+                    icon         = ContentFinder<Texture2D>.Get("UI/Commands/Recall", true)
                 };
-            }
-
-            if (ringCalibration == 1 && ResearchProjectDef.Named("NeomaRingCalibrationII")?.IsFinished == true)
-            {
-                yield return new Command_Action
-                {
-                    action = delegate
-                    {
-                        Find.WindowStack.Add(new Dialog_MessageBox(
-                            "Calibration II will consume 10× Archotech Shards, 100× Gold, and 5× Spacer Components. " +
-                            "The ring achieves full resonance — complete backup with faster restore. Proceed?",
-                            "Calibrate", () =>
-                            {
-                                if (TryConsumeCalibrationMaterials(2))
-                                {
-                                    ringCalibration = 2;
-                                    UpdateBiolockSeverity(_wearer);
-                                    Messages.Message("The Neoma Ring pulses with deep resonance. Calibration II complete.", MessageTypeDefOf.PositiveEvent);
-                                }
-                            },
-                            "Cancel", null,
-                            title: "Calibrate Ring II"));
-                    },
-                    defaultLabel = "Calibrate ring II",
-                    defaultDesc  = "Unlock full backup resonance. Costs 10× Archotech Shard, 100× Gold, 5× Spacer Component.",
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/Trade", true)
-                };
+                if (Find.TickManager.TicksGame < emergencyRecallCooldownTick)
+                    emergencyBtn.Disable("Emergency recall cooling down: " +
+                        GenDate.ToStringTicksToPeriod(emergencyRecallCooldownTick - Find.TickManager.TicksGame));
+                yield return emergencyBtn;
             }
         }
 
@@ -416,10 +423,6 @@ namespace SyntheraCore
         {
             if (neomaPawn == null && !inHibernation)
                 return "Neoma Ring: no companion summoned";
-
-            string calLabel = ringCalibration == 0 ? "uncalibrated"
-                            : ringCalibration == 1 ? "calibration I"
-                                                   : "calibration II";
 
             string boundInfo = isBound && _wearer != null
                 ? $" | bound to {_wearer.LabelShort}"
@@ -430,11 +433,11 @@ namespace SyntheraCore
                 string eta = Find.TickManager.TicksGame < respawnTick
                     ? $" ({GenDate.ToStringTicksToPeriod(respawnTick - Find.TickManager.TicksGame)})"
                     : " (ready)";
-                return $"Ring [{calLabel}]: companion hibernating{eta}{boundInfo}";
+                return $"Ring [{LevelName(ringLevel)}]: companion hibernating{eta}{boundInfo}";
             }
 
-            string compStatus = neomaPawn.Spawned ? "deployed" : "recalled";
-            return $"Ring [{calLabel}]: companion {compStatus}{boundInfo}";
+            string status = neomaPawn != null && neomaPawn.Spawned ? "deployed" : "recalled";
+            return $"Ring [{LevelName(ringLevel)}]: companion {status}{boundInfo}";
         }
     }
 }

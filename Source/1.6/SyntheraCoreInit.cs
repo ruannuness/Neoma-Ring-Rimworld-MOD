@@ -6,11 +6,24 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace SyntheraCore
 {
     // DefModExtension marker — tag any RecipeDef with this to restrict it to NeomaPawn only.
     public class NeomaCraftExtension : DefModExtension { }
+
+    // DefModExtension marker — tag any ThingDef (apparel, weapon) with this to restrict
+    // equip/pickup to NeomaPawn only. Enforced by Patch_NeomaRingWearBlock and Patch_NeomaWeaponPickupBlock.
+    public class NeomaExclusiveExtension : DefModExtension { }
+
+    // DefModExtension marker — tag any building ThingDef with this to restrict construction to NeomaPawn.
+    // Enforced by Patch_NeomaExclusiveBuilding (WorkGiver_ConstructFinishFrames).
+    public class NeomaExclusiveBuildingExtension : DefModExtension { }
+
+    // DefModExtension marker — tag any ResearchProjectDef with this to restrict research to NeomaPawn.
+    // Enforced by Patch_NeomaResearchOnly (WorkGiver_Researcher).
+    public class NeomaResearchExtension : DefModExtension { }
 
     [StaticConstructorOnStartup]
     static class SyntheraCoreInit
@@ -296,9 +309,8 @@ namespace SyntheraCore
         }
     }
 
-    // Prevent vanilla needs (Food, Sleep, Joy, etc.) from being re-added to Synthera pawns
-    // by any call to AddOrRemoveNeedsAsAppropriate — including the one inside Pawn.SpawnSetup.
-    // This is the root cause of Miku (and other Syntheras) showing a Sleep bar after spawn.
+    // Strip needs after AddOrRemoveNeedsAsAppropriate for both Synthera race pawns and Neoma.
+    // SyntheraRace* keeps Cache + Joy/Comfort/Social; NeomaPawn gets all needs stripped.
     [HarmonyPatch(typeof(Pawn_NeedsTracker), "AddOrRemoveNeedsAsAppropriate")]
     static class Patch_SyntheraStripVanillaNeeds
     {
@@ -308,8 +320,22 @@ namespace SyntheraCore
         static void Postfix(Pawn_NeedsTracker __instance)
         {
             Pawn pawn = FTrackerPawn?.GetValue(__instance) as Pawn;
-            if (pawn?.def?.defName?.StartsWith("SyntheraRace") != true) return;
+            if (pawn == null) return;
 
+            bool isSynthera = pawn.def?.defName?.StartsWith("SyntheraRace") == true;
+            bool isNeoma    = pawn.kindDef?.defName == "NeomaPawn";
+
+            if (!isSynthera && !isNeoma) return;
+
+            if (isNeoma)
+            {
+                // Neoma has no biological needs — BioLock sustains her entirely.
+                var all = __instance.AllNeeds.ToList();
+                foreach (var n in all) __instance.AllNeeds.Remove(n);
+                return;
+            }
+
+            // SyntheraRace: keep Cache + social needs, strip everything else.
             var toRemove = __instance.AllNeeds
                 .Where(n => !(n is Need_SyntheraCoherence)
                          && n.def?.defName != "Joy"
@@ -324,6 +350,155 @@ namespace SyntheraCore
                 var need = new Need_SyntheraCoherence(pawn);
                 need.def = DefDatabase<NeedDef>.GetNamed("NeedSyntheraCoherence", false);
                 if (need.def != null) { need.CurLevel = 0f; __instance.AllNeeds.Add(need); }
+            }
+        }
+    }
+
+    // Right-click "Extract Neoma Ring" on corpses carrying the NeomaRingImplanted hediff.
+    // GetFloatMenuOptions is defined on Thing, not Corpse — patch the base class and filter.
+    [HarmonyPatch(typeof(Thing), nameof(Thing.GetFloatMenuOptions))]
+    static class Patch_Corpse_NeomaRingFloatMenu
+    {
+        static IEnumerable<FloatMenuOption> Postfix(IEnumerable<FloatMenuOption> __result,
+            Thing __instance, Pawn selPawn)
+        {
+            foreach (var opt in __result) yield return opt;
+
+            if (__instance is not Corpse corpse) yield break;
+
+            var implantDef = DefDatabase<HediffDef>.GetNamed("NeomaRingImplanted", false);
+            if (implantDef == null) yield break;
+            if (corpse.InnerPawn == null) yield break;
+            if (!corpse.InnerPawn.health.hediffSet.HasHediff(implantDef)) yield break;
+
+            const string label = "Extract Neoma Ring";
+
+            if (!selPawn.CanReach(corpse, PathEndMode.Touch, Danger.Deadly))
+            {
+                yield return new FloatMenuOption($"{label} (no path)", null);
+                yield break;
+            }
+
+            yield return new FloatMenuOption(label, () =>
+            {
+                var jobDef = DefDatabase<JobDef>.GetNamed("SyntheraExtractNeomaRing", false);
+                if (jobDef == null) return;
+                selPawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(jobDef, corpse), JobTag.Misc);
+            });
+        }
+    }
+
+    // Quest triggers on NeomaTierIII research AND after 72 in-game hours.
+    // Deferred firing is handled by WorldComponent_NeomaQuestTracker.
+    // Also sends narrative completion letters for key research milestones.
+    [HarmonyPatch(typeof(ResearchManager), "FinishProject")]
+    static class Patch_NeomaOrbitalQuestTrigger
+    {
+        static void Postfix(ResearchProjectDef proj)
+        {
+            if (proj == null) return;
+            if (proj.defName == "NeomaTierIII")
+                WorldComponent_NeomaQuestTracker.Instance?.OnTierIIIResearched();
+            SendResearchLetter(proj.defName);
+        }
+
+        static void SendResearchLetter(string defName)
+        {
+            string labelKey, bodyKey;
+            switch (defName)
+            {
+                case "NeomaTierI":
+                    labelKey = "SyntheraCore_Letter_TierI_Title";
+                    bodyKey  = "SyntheraCore_Letter_TierI_Body";
+                    break;
+                case "NeomaTierIII":
+                    labelKey = "SyntheraCore_Letter_TierIII_Title";
+                    bodyKey  = "SyntheraCore_Letter_TierIII_Body";
+                    break;
+                case "NeomaTierIV":
+                    labelKey = "SyntheraCore_Letter_TierIV_Title";
+                    bodyKey  = "SyntheraCore_Letter_TierIV_Body";
+                    break;
+                case "NeomaApex_I":
+                    labelKey = "SyntheraCore_Letter_ApexI_Title";
+                    bodyKey  = "SyntheraCore_Letter_ApexI_Body";
+                    break;
+                case "NeomaApex_III":
+                    labelKey = "SyntheraCore_Letter_ApexIII_Title";
+                    bodyKey  = "SyntheraCore_Letter_ApexIII_Body";
+                    break;
+                case "NeomaRing_ComponentSynthesis":
+                    labelKey = "SyntheraCore_Letter_CompSynth_Title";
+                    bodyKey  = "SyntheraCore_Letter_CompSynth_Body";
+                    break;
+                default: return;
+            }
+            Find.LetterStack.ReceiveLetter(
+                labelKey.Translate(),
+                bodyKey.Translate(),
+                LetterDefOf.PositiveEvent);
+        }
+    }
+
+    // Block equipping the Neoma Ring when it is already biologically locked to another living pawn.
+    // Prefix on Wear (called before Notify_Equipped) so the ring never enters the apparel slot.
+    [HarmonyPatch(typeof(Pawn_ApparelTracker), "Wear")]
+    static class Patch_NeomaRingWearBlock
+    {
+        static bool Prefix(Pawn_ApparelTracker __instance, Apparel newApparel)
+        {
+            var ring = newApparel?.TryGetComp<CompNeomaRing>();
+            if (ring != null && ring.IsBoundToOther(__instance.pawn))
+            {
+                Messages.Message(
+                    $"The Neoma Ring is biologically locked to another host. {__instance.pawn.LabelShort} cannot wear it.",
+                    MessageTypeDefOf.RejectInput, false);
+                return false;
+            }
+            if (newApparel?.def?.GetModExtension<NeomaExclusiveExtension>() != null
+                && __instance.pawn?.kindDef?.defName != "NeomaPawn")
+            {
+                Messages.Message(
+                    $"This item is biometrically keyed to Neoma. {__instance.pawn.LabelShort} cannot wear it.",
+                    MessageTypeDefOf.RejectInput, false);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    // Block non-Neoma pawns from equipping weapons tagged with NeomaExclusiveExtension.
+    [HarmonyPatch(typeof(Pawn_EquipmentTracker), "AddEquipment")]
+    static class Patch_NeomaWeaponPickupBlock
+    {
+        static bool Prefix(Pawn_EquipmentTracker __instance, ThingWithComps newEq)
+        {
+            if (newEq?.def?.GetModExtension<NeomaExclusiveExtension>() == null) return true;
+            if (__instance.pawn?.kindDef?.defName == "NeomaPawn") return true;
+            Messages.Message(
+                $"This weapon is biometrically keyed to Neoma. {__instance.pawn.LabelShort} cannot equip it.",
+                MessageTypeDefOf.RejectInput, false);
+            return false;
+        }
+    }
+
+    // Expose CompNeomaRing gizmos on the wearer's gizmo bar.
+    // Pawn.GetGizmos() in RimWorld 1.6 does not include CompGetGizmosExtra from worn apparel comps.
+    // We call GetRingGizmos() directly to avoid any double-yield if vanilla ever adds this.
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.GetGizmos))]
+    static class Patch_Pawn_NeomaRingGizmos
+    {
+        static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Pawn __instance)
+        {
+            foreach (var g in __result) yield return g;
+
+            if (__instance.apparel == null) yield break;
+            foreach (Apparel apparel in __instance.apparel.WornApparel)
+            {
+                var ring = apparel.TryGetComp<CompNeomaRing>();
+                if (ring == null) continue;
+                foreach (var g in ring.GetRingGizmos())
+                    yield return g;
             }
         }
     }
@@ -353,4 +528,97 @@ namespace SyntheraCore
             return culprits.Count > 0 ? AlertReport.CulpritsAre(culprits) : AlertReport.Inactive;
         }
     }
+
+    // Block non-Neoma pawns from finishing construction frames on NeomaExclusiveBuildingExtension buildings.
+    [HarmonyPatch]
+    static class Patch_NeomaExclusiveBuilding
+    {
+        static bool Prepare() =>
+            AccessTools.Method(typeof(WorkGiver_ConstructFinishFrames), "JobOnThing") != null;
+
+        static MethodBase TargetMethod() =>
+            AccessTools.Method(typeof(WorkGiver_ConstructFinishFrames), "JobOnThing");
+
+        static void Postfix(Pawn pawn, Thing t, ref Job __result)
+        {
+            if (__result == null) return;
+            if (pawn.kindDef?.defName == "NeomaPawn") return;
+            var frame = t as Frame;
+            if (frame?.def?.entityDefToBuild?.GetModExtension<NeomaExclusiveBuildingExtension>() == null) return;
+            __result = null;
+        }
+    }
+
+    // Block non-Neoma pawns from researching projects marked with NeomaResearchExtension.
+    [HarmonyPatch]
+    static class Patch_NeomaResearchOnly
+    {
+        // ResearchManager.currentProj was renamed in 1.6 — locate it by type at startup.
+        static readonly FieldInfo FCurrentProj =
+            typeof(ResearchManager)
+                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .FirstOrDefault(f => f.FieldType == typeof(ResearchProjectDef));
+
+        static bool Prepare() =>
+            FCurrentProj != null
+            && AccessTools.Method(typeof(WorkGiver_Researcher), "ShouldSkip",
+                   new[] { typeof(Pawn), typeof(bool) }) != null;
+
+        static MethodBase TargetMethod() =>
+            AccessTools.Method(typeof(WorkGiver_Researcher), "ShouldSkip",
+                new[] { typeof(Pawn), typeof(bool) });
+
+        static void Postfix(Pawn pawn, ref bool __result)
+        {
+            if (__result) return;
+            var proj = FCurrentProj.GetValue(Find.ResearchManager) as ResearchProjectDef;
+            if (proj?.GetModExtension<NeomaResearchExtension>() == null) return;
+            if (pawn.kindDef?.defName == "NeomaPawn") return;
+            __result = true;
+        }
+    }
+
+    // Removes all Hediff_Injury instances from the pawn on first tick, then self-removes.
+    // Referenced by NeomaRepairEffect hediff in Hediffs_NeomaConsumables.xml.
+    public class HediffCompProperties_ClearInjuries : HediffCompProperties
+    {
+        public HediffCompProperties_ClearInjuries() => compClass = typeof(HediffComp_ClearInjuries);
+    }
+
+    public class HediffComp_ClearInjuries : HediffComp
+    {
+        public override void CompPostTick(ref float severityAdjustment)
+        {
+            if (!parent.pawn.Spawned) return;
+            var injuries = parent.pawn.health.hediffSet.hediffs
+                .OfType<Hediff_Injury>()
+                .ToList();
+            foreach (var h in injuries)
+                parent.pawn.health.RemoveHediff(h);
+            parent.pawn.health.RemoveHediff(parent);
+        }
+    }
+
+    // Removes SyntheraSystemStress hediff from the pawn on first tick, then self-removes.
+    // Referenced by NeomaCachePurgeEffect hediff in Hediffs_NeomaConsumables.xml.
+    public class HediffCompProperties_ClearSyntheraStress : HediffCompProperties
+    {
+        public HediffCompProperties_ClearSyntheraStress() => compClass = typeof(HediffComp_ClearSyntheraStress);
+    }
+
+    public class HediffComp_ClearSyntheraStress : HediffComp
+    {
+        public override void CompPostTick(ref float severityAdjustment)
+        {
+            if (!parent.pawn.Spawned) return;
+            var stressDef = DefDatabase<HediffDef>.GetNamed("SyntheraSystemStress", false);
+            if (stressDef != null)
+            {
+                var stress = parent.pawn.health.hediffSet.GetFirstHediffOfDef(stressDef);
+                if (stress != null) parent.pawn.health.RemoveHediff(stress);
+            }
+            parent.pawn.health.RemoveHediff(parent);
+        }
+    }
+
 }

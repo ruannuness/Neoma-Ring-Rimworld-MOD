@@ -17,6 +17,20 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+    <skills>
+      <li><skill>Shooting</skill><range>0~8</range></li>
+      <li><skill>Melee</skill><range>0~8</range></li>
+      <li><skill>Construction</skill><range>0~8</range></li>
+      <li><skill>Mining</skill><range>0~8</range></li>
+      <li><skill>Cooking</skill><range>0~8</range></li>
+      <li><skill>Plants</skill><range>0~8</range></li>
+      <li><skill>Animals</skill><range>0~8</range></li>
+      <li><skill>Crafting</skill><range>0~8</range></li>
+      <li><skill>Artistic</skill><range>0~8</range></li>
+      <li><skill>Medicine</skill><range>0~8</range></li>
+      <li><skill>Social</skill><range>0~8</range></li>
+      <li><skill>Intellectual</skill><range>0~8</range></li>
+    </skills>
 
   </PawnKindDef>
 
@@ -36,6 +50,20 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+    <skills>
+      <li><skill>Shooting</skill><range>2~10</range></li>
+      <li><skill>Melee</skill><range>2~10</range></li>
+      <li><skill>Construction</skill><range>2~10</range></li>
+      <li><skill>Mining</skill><range>2~10</range></li>
+      <li><skill>Cooking</skill><range>2~10</range></li>
+      <li><skill>Plants</skill><range>2~10</range></li>
+      <li><skill>Animals</skill><range>2~10</range></li>
+      <li><skill>Crafting</skill><range>2~10</range></li>
+      <li><skill>Artistic</skill><range>2~10</range></li>
+      <li><skill>Medicine</skill><range>2~10</range></li>
+      <li><skill>Social</skill><range>2~10</range></li>
+      <li><skill>Intellectual</skill><range>2~10</range></li>
+    </skills>
 
   </PawnKindDef>
 
@@ -55,6 +83,20 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+    <skills>
+      <li><skill>Shooting</skill><range>4~14</range></li>
+      <li><skill>Melee</skill><range>4~14</range></li>
+      <li><skill>Construction</skill><range>4~14</range></li>
+      <li><skill>Mining</skill><range>4~14</range></li>
+      <li><skill>Cooking</skill><range>4~14</range></li>
+      <li><skill>Plants</skill><range>4~14</range></li>
+      <li><skill>Animals</skill><range>4~14</range></li>
+      <li><skill>Crafting</skill><range>4~14</range></li>
+      <li><skill>Artistic</skill><range>4~14</range></li>
+      <li><skill>Medicine</skill><range>4~14</range></li>
+      <li><skill>Social</skill><range>4~14</range></li>
+      <li><skill>Intellectual</skill><range>4~14</range></li>
+    </skills>
 
   </PawnKindDef>
 
@@ -74,6 +116,20 @@
     <backstoryCategories>
       <li>Civil</li>
     </backstoryCategories>
+    <skills>
+      <li><skill>Shooting</skill><range>6~18</range></li>
+      <li><skill>Melee</skill><range>6~18</range></li>
+      <li><skill>Construction</skill><range>6~18</range></li>
+      <li><skill>Mining</skill><range>6~18</range></li>
+      <li><skill>Cooking</skill><range>6~18</range></li>
+      <li><skill>Plants</skill><range>6~18</range></li>
+      <li><skill>Animals</skill><range>6~18</range></li>
+      <li><skill>Crafting</skill><range>6~18</range></li>
+      <li><skill>Artistic</skill><range>6~18</range></li>
+      <li><skill>Medicine</skill><range>6~18</range></li>
+      <li><skill>Social</skill><range>6~18</range></li>
+      <li><skill>Intellectual</skill><range>6~18</range></li>
+    </skills>
 
   </PawnKindDef>
 
@@ -112,22 +168,19 @@
     </apparelRequired>
   </PawnKindDef>
 
-  <!-- Neoma: IA Suprema -->
+  <!-- Neoma: IA Suprema — usa SyntheraRace para visual sintético e imunidade ao vácuo. -->
   <PawnKindDef>
     <defName>NeomaPawn</defName>
     <label>SyntheraCore_NeomaPawn_Label</label>
-    <race>Human</race>
+    <race>SyntheraRace</race>
     <defaultFactionType>PlayerColony</defaultFactionType>
     <combatPower>1000</combatPower>
-    <canBeSapper>true</canBeSapper>
+    <canBeSapper>false</canBeSapper>
     <initialResistanceRange><min>1.0</min><max>2.0</max></initialResistanceRange>
     <initialWillRange><min>1.0</min><max>2.0</max></initialWillRange>
     <apparelMoney><min>0</min><max>0</max></apparelMoney>
     <weaponMoney><min>0</min><max>0</max></weaponMoney>
     <techHediffsMoney><min>0</min><max>0</max></techHediffsMoney>
-    <backstoryCategories>
-      <li>Civil</li>
-    </backstoryCategories>
   </PawnKindDef>
 
 </Defs>

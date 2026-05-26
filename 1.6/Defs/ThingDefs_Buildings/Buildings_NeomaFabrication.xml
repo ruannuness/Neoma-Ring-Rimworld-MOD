@@ -36,9 +36,12 @@
       <ComponentIndustrial>20</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
-      <li>NeomaRingCalibrationI</li>
+      <li>NeomaRing_Gate</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaExclusiveBuildingExtension"/>
+    </modExtensions>
     <building>
       <isEdifice>false</isEdifice>
     </building>

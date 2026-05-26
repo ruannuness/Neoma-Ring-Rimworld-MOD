@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Surgery bill that extracts the embedded NeomaRing from a NeomaCorrupted_Core corpse.
+       Appears in the health tab only when NeomaRingImplanted hediff is present on a dead pawn. -->
+  <RecipeDef>
+    <defName>ExtractNeomaRing</defName>
+    <label>extract Neoma ring</label>
+    <description>Carefully extract the Neoma resonance ring embedded in this unit's chassis. The ring contains an intact consciousness imprint and can be used as a fully functional Neoma ring.</description>
+    <workerClass>SyntheraCore.Recipe_ExtractNeomaRing</workerClass>
+    <jobString>Extracting Neoma ring.</jobString>
+    <workAmount>1200</workAmount>
+    <skillRequirements>
+      <Medicine>3</Medicine>
+    </skillRequirements>
+    <surgerySuccessChanceFactor>1.0</surgerySuccessChanceFactor>
+    <anesthetize>false</anesthetize>
+    <recipeUsers>
+      <li>Human</li>
+    </recipeUsers>
+    <ingredients />
+    <fixedIngredientFilter>
+      <categories />
+    </fixedIngredientFilter>
+    <researchPrerequisite>NeomaTierII</researchPrerequisite>
+  </RecipeDef>
+
+</Defs>

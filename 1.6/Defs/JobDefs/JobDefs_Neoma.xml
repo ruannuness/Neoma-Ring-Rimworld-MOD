@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>SyntheraExtractNeomaRing</defName>
+    <driverClass>SyntheraCore.JobDriver_ExtractNeomaRing</driverClass>
+    <reportString>extracting Neoma ring.</reportString>
+  </JobDef>
+
+</Defs>

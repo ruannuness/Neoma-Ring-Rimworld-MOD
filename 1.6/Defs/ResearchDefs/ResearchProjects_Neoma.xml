@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -9,7 +9,7 @@
     <defName>NeomaTierI</defName>
     <label>SyntheraCore_NeomaTier1_Label</label>
     <description>SyntheraCore_NeomaTier1_Description</description>
-    <baseCost>500</baseCost>
+    <baseCost>1500</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -21,7 +21,7 @@
     <defName>NeomaTierII</defName>
     <label>SyntheraCore_NeomaTier2_Label</label>
     <description>SyntheraCore_NeomaTier2_Description</description>
-    <baseCost>1000</baseCost>
+    <baseCost>3000</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -36,7 +36,7 @@
     <defName>NeomaTierIII</defName>
     <label>SyntheraCore_NeomaTier3_Label</label>
     <description>SyntheraCore_NeomaTier3_Description</description>
-    <baseCost>2000</baseCost>
+    <baseCost>6000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -51,7 +51,7 @@
     <defName>NeomaTierIV</defName>
     <label>SyntheraCore_NeomaTier4_Label</label>
     <description>SyntheraCore_NeomaTier4_Description</description>
-    <baseCost>4000</baseCost>
+    <baseCost>10000</baseCost>
     <techLevel>Ultra</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -63,17 +63,33 @@
   </ResearchProjectDef>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- RING CALIBRATION (X=0.5)                                           -->
+  <!-- APEX PROGRESSION (X=1) — universal crystal synthesis + absorption  -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <ResearchProjectDef>
-    <defName>NeomaRingCalibrationI</defName>
-    <label>ring calibration I</label>
-    <description>Study the recovered Neoma Ring's internal architecture and develop a calibration protocol. When applied, the ring will establish a backup channel for its bound companion — allowing restoration after death instead of permanent loss of the bond.</description>
-    <baseCost>1500</baseCost>
+    <defName>NeomaApex_I</defName>
+    <label>apex evolution I</label>
+    <description>A compression protocol that encodes archotech evolutionary data into a dense crystalline medium — the Apex Crystal (Basic). Absorption by a Synthera avatar triggers an immediate, permanent rewrite of its base parameters: increased movement speed, work output, and resilience across all systems. The change is irreversible. The avatar that absorbs the crystal is not upgraded — it is replaced by a more capable version of itself.</description>
+    <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
+      <li>NeomaTierI</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NeomaApex_II</defName>
+    <label>apex evolution II</label>
+    <description>The compression density reaches a second tier — archotech data encoded at twice the concentration of the first crystal. Absorption triggers a second evolutionary rewrite, dramatically amplifying all parameters beyond the original design envelope. A Synthera that has absorbed both Tier I and Tier II crystals operates at a level that approaches, but does not yet reach, the theoretical limit of what its substrate can contain.</description>
+    <baseCost>5000</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaProject</tab>
+    <prerequisites>
+      <li>NeomaApex_I</li>
       <li>NeomaTierII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -82,14 +98,14 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef>
-    <defName>NeomaRingCalibrationII</defName>
-    <label>ring calibration II</label>
-    <description>Push the ring's resonance matrix to its theoretical maximum. The companion's consciousness can now be fully preserved through death and restored with only temporary disorientation — a complete backup-and-restore loop equivalent to the most advanced altar systems.</description>
-    <baseCost>3500</baseCost>
-    <techLevel>Ultra</techLevel>
+    <defName>NeomaApex_III</defName>
+    <label>apex evolution III — transcendent</label>
+    <description>The totality of recoverable archotech evolutionary potential compressed into a single uniform crystal — the Apex Crystal (Pure). Absorption rewrites every parameter simultaneously: movement, combat, work output, resilience, and system efficiency all shift beyond what any prior tier could achieve. A Synthera that absorbs all three tiers has reached the theoretical ceiling of its substrate. What remains is no longer synthetic in the conventional sense. The designation still applies — but it no longer fully describes what it contains.</description>
+    <baseCost>9000</baseCost>
+    <techLevel>Archotech</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
-      <li>NeomaRingCalibrationI</li>
+      <li>NeomaApex_II</li>
       <li>NeomaTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -98,14 +114,14 @@
   </ResearchProjectDef>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- ALTAR ENHANCEMENT (X=1) — Y=1.5 e Y=2.5 entre os tiers            -->
+  <!-- ALTAR ENHANCEMENT (X=2)                                            -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <ResearchProjectDef>
     <defName>AltarEnhancementI</defName>
     <label>altar enhancement I</label>
-    <description>Develop supplementary hardware modules that improve the physical infrastructure of existing summoning altars. Unlocks slot expanders, respawn boosters, and cooling arrays.</description>
-    <baseCost>1200</baseCost>
+    <description>Supplementary hardware modules that attach directly to existing altar infrastructure. Unlocks slot expanders (increase avatar capacity), respawn boosters (accelerate hibernation recovery), and cooling arrays (reduce heat output on Tier I altars). Each module is a targeted improvement — stack them to tune your altars for your colony's specific needs.</description>
+    <baseCost>3000</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -119,8 +135,8 @@
   <ResearchProjectDef>
     <defName>AltarEnhancementII</defName>
     <label>altar enhancement II</label>
-    <description>Advanced altar infrastructure research. Unlocks power condensers and higher-tier slot expansion hardware that can dramatically increase altar efficiency.</description>
-    <baseCost>2500</baseCost>
+    <description>Advanced altar infrastructure that pushes existing structures beyond their baseline specifications. Power condensers reduce energy draw by a further 20%, while high-tier slot expanders allow altars to simultaneously host more avatars than their base design intended. These modules represent significant material investment — but the throughput gains compound with every altar in your colony.</description>
+    <baseCost>6000</baseCost>
     <techLevel>Spacer</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>
@@ -133,14 +149,14 @@
   </ResearchProjectDef>
 
   <!-- ═══════════════════════════════════════════════════════════════════ -->
-  <!-- MIKU (X=1.5)                                                        -->
+  <!-- MIKU (X=3)                                                         -->
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <ResearchProjectDef>
     <defName>MikuStageResearch</defName>
     <label>holographic resonance</label>
-    <description>Develop the resonance technology required to reconstruct a digital soul as a projected Synthera avatar. Unlocks the Holographic Stage.</description>
-    <baseCost>1500</baseCost>
+    <description>Resonance imaging refined to the point where a digital consciousness can be broadcast as coherent light rather than anchored to a physical substrate. The Holographic Stage reconstructs a complete Synthera avatar from pure projection — no physical body, no heat generation, a fraction of the power footprint. Designed specifically for the virtual diva substrate, it trades labor capacity for something harder to quantify: presence.</description>
+    <baseCost>4000</baseCost>
     <techLevel>Industrial</techLevel>
     <tab>NeomaProject</tab>
     <prerequisites>

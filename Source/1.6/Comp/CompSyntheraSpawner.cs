@@ -341,12 +341,33 @@ namespace SyntheraCore
             }
             else
             {
-                int baseLevel = Mathf.Min(5 + (tier - 1) * 3, 20);
+                int minLevel = Mathf.Min(2 + (tier - 1) * 3, 17);
+                int maxLevel = Mathf.Min(8 + (tier - 1) * 3, 20);
+
+                // Base skill levels — all start at None passion
                 foreach (SkillRecord skill in Consciousness.skills.skills)
                 {
-                    skill.passion = Passion.Minor;
-                    skill.levelInt = baseLevel;
+                    skill.levelInt = Rand.Range(minLevel, maxLevel + 1);
+                    skill.passion  = Passion.None;
                 }
+
+                // Specialty: 1-2 random skills boosted above tier ceiling — defines the synthera's role
+                int specialtyCount = Rand.Range(1, 3);
+                foreach (SkillRecord s in Consciousness.skills.skills.InRandomOrder().Take(specialtyCount))
+                    s.levelInt = Mathf.Min(s.levelInt + Rand.Range(3, 7), 20);
+
+                // Passion budget — distributed across random skills (Major costs 2, Minor costs 1)
+                int passionBudget = tier switch { 1 => 2, 2 => 3, 3 => 4, _ => 5 };
+                foreach (SkillRecord s in Consciousness.skills.skills.InRandomOrder())
+                {
+                    if (passionBudget <= 0) break;
+                    if (passionBudget >= 2 && Rand.Value < 0.35f)
+                    { s.passion = Passion.Major; passionBudget -= 2; }
+                    else
+                    { s.passion = Passion.Minor; passionBudget -= 1; }
+                }
+
+                AssignRandomTraits(tier);
             }
 
             Consciousness.skills.Notify_SkillDisablesChanged();
@@ -359,6 +380,63 @@ namespace SyntheraCore
                 5 => BodyTypeDefOf.Female,
                 _ => BodyTypeDefOf.Hulk
             };
+        }
+
+        private static readonly string[] PositiveTraits =
+        {
+            "Industrious", "Kind", "Optimist", "Tough", "Nimble",
+            "FastLearner", "Transhumanist", "Careful", "QuickSleeper"
+        };
+
+        private static readonly string[] NegativeTraits =
+        {
+            "Nervous", "Volatile", "Abrasive", "Pessimist",
+            "Wimp", "Pyromaniac", "Depressive", "Jealous"
+        };
+
+        private void AssignRandomTraits(int tier)
+        {
+            // Tier I: 1 trait. Tier II: 1–2. Tier III: 2. Tier IV: 2–3.
+            int count = tier switch
+            {
+                1 => 1,
+                2 => Rand.Range(1, 3),
+                3 => 2,
+                _ => Rand.Range(2, 4)
+            };
+
+            // Negative chance per slot: Tier I=65%, II=45%, III=25%, IV=10%
+            float negativeChance = tier switch
+            {
+                1 => 0.65f,
+                2 => 0.45f,
+                3 => 0.25f,
+                _ => 0.10f
+            };
+
+            var story = Consciousness.story.traits;
+            var pool = PositiveTraits.ToList().InRandomOrder().ToList();
+            var negPool = NegativeTraits.ToList().InRandomOrder().ToList();
+            int negIdx = 0, posIdx = 0;
+
+            for (int i = 0; i < count; i++)
+            {
+                bool pickNeg = Rand.Value < negativeChance;
+                string defName = null;
+
+                if (pickNeg && negIdx < negPool.Count)
+                    defName = negPool[negIdx++];
+                else if (posIdx < pool.Count)
+                    defName = pool[posIdx++];
+
+                if (defName == null) break;
+
+                var def = DefDatabase<TraitDef>.GetNamed(defName, false);
+                if (def == null || story.HasTrait(def)) continue;
+                if (story.allTraits.Any(t => t.def.ConflictsWith(def))) continue;
+
+                story.GainTrait(new Trait(def));
+            }
         }
 
         private void ConfigureWorkForTier(int tier)
@@ -376,6 +454,18 @@ namespace SyntheraCore
                     priority = 0;
 
                 Consciousness.workSettings.SetPriority(workType, priority);
+            }
+
+            // Lower tiers have random hardware limitations — 1 extra work type disabled
+            if (effectiveTier <= 2)
+            {
+                var blockable = DefDatabase<WorkTypeDef>.AllDefs
+                    .Where(w => Consciousness.workSettings.GetPriority(w) > 0
+                             && w != WorkTypeDefOf.Hauling
+                             && w != WorkTypeDefOf.Cleaning)
+                    .ToList();
+                if (blockable.Count > 0)
+                    Consciousness.workSettings.SetPriority(blockable.RandomElement(), 0);
             }
         }
 
@@ -591,10 +681,8 @@ namespace SyntheraCore
 
         private void PlaySpawnEffects()
         {
-            if (Props.spawnSound != null)
-                Props.spawnSound.PlayOneShotOnCamera(parent.Map);
-            else
-                SoundDefOf.PsychicPulseGlobal.PlayOneShotOnCamera(parent.Map);
+            SoundDef sound = Props.spawnSound ?? SoundDefOf.PsychicPulseGlobal;
+            sound.PlayOneShot(new TargetInfo(parent.Position, parent.Map));
 
             FleckMaker.Static(parent.Position, parent.Map, FleckDefOf.PsycastAreaEffect, 5f);
         }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Orbital station site — only loaded when Odyssey DLC is active.
+       Accessible by gravship. Contains corrupted AI units guarding an implanted Neoma ring. -->
+
+  <SitePartDef MayRequire="Ludeon.RimWorld.Odyssey" ParentName="SpaceSiteBase">
+    <defName>NeomaOrbitalStation</defName>
+    <label>corrupted Neoma station</label>
+    <description>An ancient orbital station running a corrupted Neoma AI collective. The station's AI core unit carries an implanted Neoma resonance ring that can be surgically extracted.</description>
+    <expandingIconTexture>World/WorldObjects/Expanding/AbandonedPlatform</expandingIconTexture>
+    <workerClass>SyntheraCore.SitePartWorker_NeomaOrbitalStation</workerClass>
+    <wantsThreatPoints>true</wantsThreatPoints>
+    <gravShipsCanLandOn>true</gravShipsCanLandOn>
+    <disallowsAutomaticDetectionTimerStart>true</disallowsAutomaticDetectionTimerStart>
+    <minMapSize>(200, 0, 200)</minMapSize>
+    <tags>
+      <li>NeomaOrbitalStation</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef MayRequire="Ludeon.RimWorld.Odyssey">
+    <defName>NeomaOrbitalStation</defName>
+    <linkWithSite>NeomaOrbitalStation</linkWithSite>
+    <order>200</order>
+    <genStep Class="GenStep_OrbitalPlatform">
+      <factionDef>NeomaCorruptedAI</factionDef>
+      <platformTerrain>OrbitalPlatform</platformTerrain>
+      <layoutDef>OrbitalAncientPlatform</layoutDef>
+      <orbitalDebrisDef>Manmade</orbitalDebrisDef>
+      <temperature>15</temperature>
+      <spawnSentryDrones>false</spawnSentryDrones>
+      <exteriorPrefabs>
+        <CrashedShuttle>0~1</CrashedShuttle>
+      </exteriorPrefabs>
+    </genStep>
+  </GenStepDef>
+
+</Defs>

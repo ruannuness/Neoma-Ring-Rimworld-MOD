@@ -13,6 +13,9 @@
     <defName>SyntheraRace</defName>
     <label>Synthera</label>
     <description>A synthetic AI consciousness projected into physical form. It operates on digital logic, not biology.</description>
+    <statBases>
+      <VacuumResistance>1</VacuumResistance>
+    </statBases>
     <race>
       <intelligence>Humanlike</intelligence>
       <thinkTreeMain>Humanlike</thinkTreeMain>
@@ -113,6 +116,10 @@
   <!-- ═══════════════════════════════════════════════════════════════════ -->
 
   <AlienRace.ThingDef_AlienRace Name="Synthera_BasePawn" ParentName="BasePawn" Abstract="True">
+    <statBases>
+      <Fertility>0</Fertility>
+      <VacuumResistance>1</VacuumResistance>
+    </statBases>
     <race>
       <thinkTreeMain>Humanlike</thinkTreeMain>
       <thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
@@ -582,7 +589,7 @@
             <Gender For="Female">Things/Pawn/SynthMiku/Head/Face01</Gender>
           </extendedGraphics>
         </head>
-        <skinShader>Transparent</skinShader>
+        <skinShader>CutoutSkin</skinShader>
       </graphicPaths>
     </alienRace>
   </AlienRace.ThingDef_AlienRace>

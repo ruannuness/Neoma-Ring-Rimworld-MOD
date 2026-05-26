@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Applied by "Apply Repair Kit" surgery. HediffComp_ClearInjuries (C#)
+       removes all Hediff_Injury instances on the first tick, then self-removes. -->
+  <HediffDef>
+    <defName>NeomaRepairEffect</defName>
+    <label>nano-repair active</label>
+    <description>Apex Crystal nano-agents are actively dissolving physical damage throughout the body.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>1.0</initialSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="SyntheraCore.HediffCompProperties_ClearInjuries"/>
+    </comps>
+    <stages>
+      <li>
+        <label>repairing</label>
+        <painFactor>0</painFactor>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Applied by "Apply Cache Purge Kit" surgery. HediffComp_ClearSyntheraStress (C#)
+       removes SyntheraSystemStress from the pawn, then self-removes. -->
+  <HediffDef>
+    <defName>NeomaCachePurgeEffect</defName>
+    <label>cache purge active</label>
+    <description>A targeted electromagnetic discharge is flushing accumulated system stress from the Synthera cache layer.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <initialSeverity>1.0</initialSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="SyntheraCore.HediffCompProperties_ClearSyntheraStress"/>
+    </comps>
+    <stages>
+      <li>
+        <label>purging</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

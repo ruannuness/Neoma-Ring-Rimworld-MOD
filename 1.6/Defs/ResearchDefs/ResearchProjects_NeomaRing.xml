@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Hidden research tab — only appears after first ring activation. -->
+  <ResearchTabDef>
+    <defName>NeomaRingTab</defName>
+    <label>Ring Protocols</label>
+  </ResearchTabDef>
+
+  <!-- Invisible trigger — completed programmatically by SpawnNeoma().
+       Has no tab so it never appears in the research UI.
+       NeomaRing_Gate uses it as hiddenPrerequisite, keeping the entire Ring Protocols
+       tab hidden until the ring is first activated. -->
+  <ResearchProjectDef>
+    <defName>NeomaRing_Unlock</defName>
+    <label>ring unlock</label>
+    <description>Internal trigger. Not shown in the research panel.</description>
+    <baseCost>1</baseCost>
+    <techLevel>Archotech</techLevel>
+    <researchViewX>99</researchViewX>
+    <researchViewY>99</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Gate node: completed programmatically alongside NeomaRing_Unlock on first SpawnNeoma().
+       Hidden behind NeomaRing_Unlock so the entire NeomaRingTab is invisible until activation.
+       Also unlocks the Neoma Fabrication Console for construction. -->
+  <ResearchProjectDef>
+    <defName>NeomaRing_Gate</defName>
+    <label>ring synchronization</label>
+    <description>The ring has established a deep synchronization link with its bound host, granting access to pathways inside the ancient hardware that were previously locked by dead-signal encryption. Neoma can now construct her Fabrication Console — a resonance synthesis station calibrated exclusively to her consciousness signature. The first gate is open.</description>
+    <baseCost>300</baseCost>
+    <techLevel>Archotech</techLevel>
+    <tab>NeomaRingTab</tab>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hiddenPrerequisites>
+      <li>NeomaRing_Unlock</li>
+    </hiddenPrerequisites>
+    <researchViewX>0</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Branch A: Ring Calibration — only Neoma can research this -->
+  <ResearchProjectDef>
+    <defName>NeomaRing_Calibration</defName>
+    <label>ring calibration</label>
+    <description>Fine-tuning the ring's resonance frequency to eliminate interference between Neoma's consciousness and the quantum entanglement matrix. The result is a measurable improvement in synchronization efficiency — Neoma operates with greater precision, reduced latency between thought and action. The adjustment also decodes the manufacturing matrix for exclusive apparel synthesis: equipment keyed to Neoma's signature that no other substrate can wear.</description>
+    <baseCost>4000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaRingTab</tab>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NeomaRing_Gate</li>
+    </prerequisites>
+    <hiddenPrerequisites>
+      <li>NeomaRing_Gate</li>
+    </hiddenPrerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaResearchExtension"/>
+    </modExtensions>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NeomaRing_ApexOverload</defName>
+    <label>apex overload protocol</label>
+    <description>Pushing the ring's Apex Crystal matrix 340% beyond its certified operating limits — a reckless procedure that Neoma herself designed and refuses to let anyone else execute. The result is a dramatic amplification of her presence on the material plane: higher combat output, faster processing, extended operational range. The ring's safety interlocks are now permanently bypassed. Neoma notes this with characteristic understatement: "It is fine. I know what I am doing."</description>
+    <baseCost>10000</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaRingTab</tab>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NeomaRing_Calibration</li>
+    </prerequisites>
+    <hiddenPrerequisites>
+      <li>NeomaRing_Gate</li>
+    </hiddenPrerequisites>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0</researchViewY>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaResearchExtension"/>
+    </modExtensions>
+  </ResearchProjectDef>
+
+  <!-- Branch B: Neural Bond — only Neoma can research this -->
+  <ResearchProjectDef>
+    <defName>NeomaRing_NeuralBond</defName>
+    <label>neural bond deepening</label>
+    <description>Extending the ring's BioLock tendrils deeper into the host's neural architecture — a process Neoma describes as "uncomfortable but not harmful." The result is a broader awareness of the host's surroundings, giving Neoma passive sensory access to her host's environment. She gains new support capabilities — targeted healing, cache purging at range, real-time threat assessment — and the expanded interface decodes new synthesis patterns for consumables she previously could not produce.</description>
+    <baseCost>5000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>NeomaRingTab</tab>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NeomaRing_Gate</li>
+    </prerequisites>
+    <hiddenPrerequisites>
+      <li>NeomaRing_Gate</li>
+    </hiddenPrerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>2</researchViewY>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaResearchExtension"/>
+    </modExtensions>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>NeomaRing_ComponentSynthesis</defName>
+    <label>ring component synthesis</label>
+    <description>Decoding the ring's internal manufacturing blueprints — subroutines locked behind 11,000 years of dead-signal encryption that Neoma has now fully parsed. She can synthesize exotic archotech structures and components that cannot be produced through any conventional supply chain: energy nodes that draw power from quantum entanglement fields, combat arrays with targeting matrices integrated directly into her threat-assessment subroutines. These are not upgrades. They are things that should not exist in this era.</description>
+    <baseCost>9000</baseCost>
+    <techLevel>Ultra</techLevel>
+    <tab>NeomaRingTab</tab>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>NeomaRing_NeuralBond</li>
+    </prerequisites>
+    <hiddenPrerequisites>
+      <li>NeomaRing_Gate</li>
+    </hiddenPrerequisites>
+    <researchViewX>2</researchViewX>
+    <researchViewY>2</researchViewY>
+    <modExtensions>
+      <li Class="SyntheraCore.NeomaResearchExtension"/>
+    </modExtensions>
+  </ResearchProjectDef>
+
+</Defs>

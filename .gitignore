@@ -4,3 +4,17 @@ Source/1.6/*.lscache
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# RimWorld / Unity reference DLLs (não fazem parte do mod)
+Assemblies/Assembly-CSharp.dll
+Assemblies/Assembly-CSharp-firstpass.dll
+Assemblies/UnityEngine.*.dll
+Assemblies/Unity.*.dll
+Assemblies/ISharpZipLib.dll
+Assemblies/NAudio.dll
+Assemblies/NVorbis.dll
+Assemblies/com.rlabrecque.steamworks.net.dll
+Assemblies/netstandard.dll
+Assemblies/0Harmony.dll
+Assemblies/0Harmony.pdb
+Assemblies/0Harmony.xml

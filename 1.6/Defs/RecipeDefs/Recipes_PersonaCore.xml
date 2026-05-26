@@ -14,7 +14,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Smelt</soundWorking>
-    <researchPrerequisite>NeomaRingCalibrationI</researchPrerequisite>
+    <researchPrerequisite>NeomaApex_I</researchPrerequisite>
     <recipeUsers>
       <li>NeomaFabricationConsole</li>
     </recipeUsers>
